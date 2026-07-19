@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <title>DevRelCon NYC · Workshop</title>
+    <link rel="preload" href="assets/render-logo.svg" as="image" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=7">
+    <script defer src="config.js"></script>
+    <script defer src="vendor/qrcode.js"></script>
+    <script defer src="deck.js?v=4"></script>
+  </head>
+  <body>
+    <div class="viewport" id="viewport">
+      <main class="stage" id="stage" aria-label="DevRelCon NYC workshop slides" aria-live="polite">
+        <section class="slide slide--title" data-slide="1" aria-label="What Makes Developers Actually Ship?">
+          <div class="title-stack">
+            <p class="eyebrow">DEVRELCON NYC · JULY 22, 2026</p>
+            <h1>What Makes Developers Actually Ship?</h1>
+            <p class="subhead">Removing friction in the first mile</p>
+            <div class="byline-row">
+              <p class="byline">Ojus Save · Render</p>
+              <img class="render-logo" src="assets/render-logo.svg" alt="Render">
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide--odyssey" data-slide="2" aria-label="Troy to Ithaca" hidden>
+          <div class="statement">
+            <h1>Troy to Ithaca.</h1>
+            <p class="subhead">565 nautical miles. About two weeks under sail.</p>
+          </div>
+          <div class="odyssey-art-layer" aria-hidden="true">
+            <img class="odyssey-art" src="assets/illustrations/odyssey-ship.png" alt="" style="--art-x: 220px; --art-y: 690px; --art-w: 340px;">
+            <img class="odyssey-art" src="assets/illustrations/ithaca-headland.png" alt="" style="--art-x: 1450px; --art-y: 715px; --art-w: 310px;">
+          </div>
+          <div class="route" data-route="departure" aria-hidden="true"></div>
+        </section>
+
+        <section class="slide slide--odyssey" data-slide="3" aria-label="Ten years" hidden>
+          <div class="statement">
+            <h1>It took Odysseus ten years.</h1>
+          </div>
+          <div class="odyssey-art-layer" aria-hidden="true">
+            <img class="odyssey-art" src="assets/illustrations/odyssey-ship.png" alt="" style="--art-x: 810px; --art-y: 690px; --art-w: 300px;">
+          </div>
+          <div class="route" data-route="attrition" aria-hidden="true"></div>
+        </section>
+
+        <section class="slide slide--odyssey" data-slide="4" aria-label="What happened to the crew" hidden>
+          <div class="fragment-stack fragment-stack--equal">
+            <p class="fragment statement-line" data-fragment>Some of his men were eaten.</p>
+            <p class="fragment statement-line" data-fragment>Some were turned into pigs.</p>
+            <p class="fragment statement-line" data-fragment>One fell off a roof.</p>
+          </div>
+          <div class="odyssey-art-layer" aria-hidden="true">
+            <img class="odyssey-art" data-art-fragment="1" src="assets/illustrations/fate-cyclops.png" alt="" style="--art-x: 300px; --art-y: 690px; --art-w: 250px;">
+            <img class="odyssey-art" data-art-fragment="2" src="assets/illustrations/fate-circe.png" alt="" style="--art-x: 835px; --art-y: 690px; --art-w: 250px;">
+            <img class="odyssey-art" data-art-fragment="3" src="assets/illustrations/fate-elpenor.png" alt="" style="--art-x: 1370px; --art-y: 690px; --art-w: 250px;">
+          </div>
+          <div class="route" data-route="losses" aria-hidden="true"></div>
+        </section>
+
+        <section class="slide slide--odyssey" data-slide="5" aria-label="The wrong bag" hidden>
+          <div class="fragment-stack">
+            <p class="fragment statement-line" data-fragment>At one point, Ithaca was in sight.</p>
+            <p class="fragment statement-line" data-fragment>Then someone opened the wrong bag.</p>
+          </div>
+          <div class="odyssey-art-layer" aria-hidden="true">
+            <img class="odyssey-art" data-art-fragment="1" src="assets/illustrations/ithaca-headland.png" alt="" style="--art-x: 1450px; --art-y: 715px; --art-w: 310px;">
+            <img class="odyssey-art" data-art-fragment="2" src="assets/illustrations/aeolus-bag.png" alt="" style="--art-x: 1210px; --art-y: 720px; --art-w: 220px;">
+            <img class="odyssey-art odyssey-art--winds" data-art-fragment="2" src="assets/illustrations/aeolus-winds.png" alt="" style="--art-x: 1080px; --art-y: 720px; --art-w: 430px;">
+          </div>
+          <div class="route" data-route="return" aria-hidden="true"></div>
+        </section>
+
+        <section class="slide slide--odyssey" data-slide="6" aria-label="One survivor" hidden>
+          <div class="fragment-stack">
+            <p class="fragment statement-line" data-fragment>He left with 12 ships and around 600 men.</p>
+            <p class="fragment statement-line" data-fragment>He came home alone.</p>
+          </div>
+          <div class="odyssey-art-layer" aria-hidden="true">
+            <img class="odyssey-art" data-art-fragment="2" src="assets/illustrations/odysseus-alone.png" alt="" style="--art-x: 1530px; --art-y: 690px; --art-w: 250px;">
+          </div>
+          <div class="route" data-route="survivor" aria-hidden="true"></div>
+        </section>
+
+        <section class="slide slide--handoff" data-slide="7" aria-label="Let's build something" hidden>
+          <h1>Let's build something.</h1>
+          <div class="qr-frame qr-frame--primary" data-qr-frame="fakegpt" aria-live="off"></div>
+          <p class="qr-caption is-empty" data-qr-caption="fakegpt" aria-hidden="true"></p>
+        </section>
+
+        <section class="slide slide--holding" data-slide="8" aria-label="Build time" hidden>
+          <div class="holding-message">
+            <p>Go build. We'll regroup in a few minutes.</p>
+            <p class="holding-timer" data-trap-timer hidden></p>
+          </div>
+          <div class="holding-qr">
+            <div class="qr-frame qr-frame--holding" data-qr-frame="fakegpt" data-qr-size="260" aria-live="off"></div>
+            <p class="qr-caption qr-caption--holding is-empty" data-qr-caption="fakegpt" aria-hidden="true"></p>
+          </div>
+        </section>
+
+        <section class="slide slide--title slide--fake-ending" data-slide="9" aria-label="And that's the workshop" hidden>
+          <div class="title-stack">
+            <div class="fragment fake-ending-main" data-fragment>
+              <h1>And that's the workshop.</h1>
+              <p class="subhead">Thanks for coming.</p>
+            </div>
+            <p class="fragment fake-ending-detail" data-fragment>Feedback forms are by the door.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--statement" data-slide="10" aria-label="Okay, no" hidden>
+          <h1>Okay, no.</h1>
+        </section>
+
+        <section class="slide slide--statement" data-slide="11" aria-label="The reveal" hidden>
+          <div class="fragment-stack fragment-stack--reveal">
+            <p class="fragment statement-line" data-fragment>Nothing you just used was real.</p>
+            <p class="fragment statement-line" data-fragment>Everything you just did was tracked.</p>
+            <p class="fragment assurance" data-fragment>Positions only. Never what you typed.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--dashboard" data-slide="12" aria-label="Dashboard" hidden>
+          <div class="dashboard-placeholder asset-placeholder" data-dashboard-placeholder>
+            <span>DASHBOARD EMBEDS HERE</span>
+            <span>set CONFIG.dashboardUrl</span>
+          </div>
+        </section>
+
+        <section class="slide slide--statement" data-slide="13" aria-label="Remember the bag of winds" hidden>
+          <div class="fragment-stack">
+            <p class="fragment statement-line" data-fragment>Remember the bag of winds?</p>
+            <p class="fragment statement-line" data-fragment>That was the token screen.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--research" data-slide="14" aria-label="The research" hidden>
+          <div class="research-content">
+            <p class="eyebrow">THE RESEARCH</p>
+            <h1 class="fragment" data-fragment>We studied the onboarding of 200 developer platforms.</h1>
+            <p class="subhead fragment" data-fragment>What you just went through is the greatest hits.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--stats" data-slide="15" aria-label="Research statistics" hidden>
+          <div class="stats-grid" data-stats></div>
+        </section>
+
+        <section class="slide slide--statement" data-slide="16" aria-label="Activation is a DevRel problem" hidden>
+          <div class="fragment-stack">
+            <p class="fragment statement-line" data-fragment>Activation is a DevRel problem.</p>
+            <p class="fragment statement-sub" data-fragment>If developers don't ship, eventually neither do you.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--takeaway" data-slide="17" aria-label="Takeaway one" hidden>
+          <div class="takeaway-layout">
+            <div class="takeaway-copy">
+              <p class="eyebrow">TAKEAWAY 1 / 3</p>
+              <h1>firstmile</h1>
+              <p class="takeaway-body">Open source journey instrumentation. Point your coding agent at your own flow, then show your product team where developers actually stop.</p>
+            </div>
+            <div class="takeaway-qr">
+              <div class="qr-frame qr-frame--takeaway" data-qr-frame="firstmile" data-qr-size="336" aria-live="off"></div>
+              <p class="qr-caption is-empty" data-qr-caption="firstmile" aria-hidden="true"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide--takeaway" data-slide="18" aria-label="Takeaway two" hidden>
+          <div class="takeaway-layout">
+            <div class="takeaway-copy">
+              <p class="eyebrow">TAKEAWAY 2 / 3</p>
+              <h1>The fakesaaspi kit</h1>
+              <p class="takeaway-body">Fork the frontend, rebuild it as your onboarding, and hand it to a few champions. Skip the feedback survey. Watch what they actually do.</p>
+            </div>
+            <div class="takeaway-qr">
+              <div class="qr-frame qr-frame--takeaway" data-qr-frame="fakesaaspiKit" data-qr-size="336" aria-live="off"></div>
+              <p class="qr-caption is-empty" data-qr-caption="fakesaaspiKit" aria-hidden="true"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide--takeaway" data-slide="19" aria-label="Takeaway three" hidden>
+          <div class="takeaway-layout">
+            <div class="takeaway-copy takeaway-copy--dense">
+              <p class="eyebrow">TAKEAWAY 3 / 3</p>
+              <h1>[comparison site name]</h1>
+              <p class="takeaway-kicker">Built from the 200-platform research.</p>
+              <p class="takeaway-body fragment" data-fragment>Search your platform. It benchmarks your onboarding against all 200, including your competitors, and shows where you stand and what to fix.</p>
+              <p class="takeaway-aside fragment" data-fragment>Show it to leadership. You're due for a promotion.</p>
+            </div>
+            <div class="takeaway-qr">
+              <div class="qr-frame qr-frame--takeaway" data-qr-frame="comparison" data-qr-size="336" aria-live="off"></div>
+              <p class="qr-caption is-empty" data-qr-caption="comparison" aria-hidden="true"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide--closing" data-slide="20" aria-label="Closing" hidden>
+          <div class="closing-copy">
+            <h1 class="fragment" data-fragment>Go find your first mile.</h1>
+            <p class="subhead fragment" data-fragment>It shouldn't take ten years.</p>
+            <p class="contact" data-contact></p>
+          </div>
+          <div class="closing-qr-row">
+            <div class="closing-qr">
+              <div class="qr-frame qr-frame--closing" data-qr-frame="firstmile" data-qr-size="160" aria-live="off"></div>
+              <p class="qr-caption qr-caption--closing is-empty" data-qr-caption="firstmile" aria-hidden="true"></p>
+            </div>
+            <div class="closing-qr">
+              <div class="qr-frame qr-frame--closing" data-qr-frame="fakesaaspiKit" data-qr-size="160" aria-live="off"></div>
+              <p class="qr-caption qr-caption--closing is-empty" data-qr-caption="fakesaaspiKit" aria-hidden="true"></p>
+            </div>
+            <div class="closing-qr">
+              <div class="qr-frame qr-frame--closing" data-qr-frame="comparison" data-qr-size="160" aria-live="off"></div>
+              <p class="qr-caption qr-caption--closing is-empty" data-qr-caption="comparison" aria-hidden="true"></p>
+            </div>
+          </div>
+          <div class="closing-footer">
+            <div class="route route--closing" data-route="closing" aria-hidden="true"></div>
+            <img class="render-logo" src="assets/render-logo.svg" alt="Render">
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="blackout" id="blackout" aria-hidden="true" hidden></div>
+  </body>
+</html>
