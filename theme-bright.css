@@ -218,6 +218,11 @@ body {
   gap: 0;
 }
 
+[data-slide="5"] .fragment-stack {
+  left: 20px;
+  width: 600px;
+}
+
 .slide--odyssey .fragment-stack .fragment {
   grid-area: 1 / 1;
   transition: none;
