@@ -3,7 +3,7 @@
 
   const STAGE_WIDTH = 1920;
   const STAGE_HEIGHT = 1080;
-  const DASHBOARD_SLIDE = 12;
+  const DASHBOARD_SLIDE = 9;
   const HOLDING_SLIDE = 8;
   const QR_QUIET_ZONE_MODULES = 4;
 
