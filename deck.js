@@ -6,7 +6,6 @@
   const DASHBOARD_SLIDE = 12;
   const HOLDING_SLIDE = 8;
   const QR_QUIET_ZONE_MODULES = 4;
-  const SVG_NS = "http://www.w3.org/2000/svg";
 
   const root = document.documentElement;
   const blackout = document.getElementById("blackout");
@@ -36,42 +35,17 @@
     return getFragments(slide).filter((fragment) => fragment.classList.contains("is-visible")).length;
   }
 
-  function syncRouteState(slide, fragmentCount) {
+  function syncSlideArtwork(slide, fragmentCount) {
     slide.querySelectorAll("[data-art-fragment]").forEach((art) => {
       const trigger = Number(art.dataset.artFragment || 0);
       art.classList.toggle("is-visible", trigger <= fragmentCount);
       art.classList.toggle("is-current", trigger === fragmentCount);
     });
-
-    const route = slide.querySelector(".route");
-    if (!route) {
-      return;
-    }
-
-    const animatedDots = Array.from(route.querySelectorAll("[data-route-motion]"));
-    animatedDots.forEach((dot) => {
-      dot.classList.remove("is-falling", "is-returning");
-    });
-
-    void route.offsetWidth;
-
-    animatedDots.forEach((dot) => {
-      const trigger = Number(dot.dataset.routeFragment || 0);
-      if (trigger > fragmentCount) {
-        return;
-      }
-
-      if (dot.dataset.routeMotion === "fall") {
-        dot.classList.add("is-falling");
-      } else if (dot.dataset.routeMotion === "return") {
-        dot.classList.add("is-returning");
-      }
-    });
   }
 
   function setFragmentCount(slide, count) {
     const fragments = getFragments(slide);
-    const minimumCount = slide.classList.contains("slide--odyssey") && fragments.length > 0 ? 1 : 0;
+    const minimumCount = fragments.length > 0 ? 1 : 0;
     const safeCount = Math.max(minimumCount, Math.min(count, fragments.length));
 
     fragments.forEach((fragment, index) => {
@@ -82,7 +56,7 @@
     });
 
     slide.dataset.fragmentsShown = String(safeCount);
-    syncRouteState(slide, safeCount);
+    syncSlideArtwork(slide, safeCount);
   }
 
   function updateHash(slideId) {
@@ -173,7 +147,7 @@
   function reverse() {
     const currentSlide = slides[currentIndex];
     const shown = visibleFragmentCount(currentSlide);
-    const minimumCount = currentSlide.classList.contains("slide--odyssey") && getFragments(currentSlide).length > 0 ? 1 : 0;
+    const minimumCount = getFragments(currentSlide).length > 0 ? 1 : 0;
 
     if (shown > minimumCount) {
       setFragmentCount(currentSlide, shown - 1);
@@ -387,116 +361,6 @@
     document.querySelector("[data-contact]").textContent = CONFIG.contact;
   }
 
-  function svgElement(name, attributes) {
-    const element = document.createElementNS(SVG_NS, name);
-    Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, String(value)));
-    return element;
-  }
-
-  function addDot(svg, x, y, options) {
-    const dot = svgElement("circle", { cx: x, cy: y, r: options.radius || 11, class: "route-dot" });
-    if (options.motion) {
-      dot.dataset.routeMotion = options.motion;
-      dot.dataset.routeFragment = String(options.fragment || 0);
-    }
-    if (options.delay) {
-      dot.style.animationDelay = `${options.delay}ms`;
-    }
-    if (options.returnDistance) {
-      dot.style.setProperty("--return-distance", `${options.returnDistance}px`);
-    }
-    svg.append(dot);
-  }
-
-  function journeyPoint(progress) {
-    return {
-      x: 50 + 660 * progress,
-      y: 174 - Math.sin(Math.PI * progress) * 118,
-    };
-  }
-
-  function addJourneyDot(svg, progress, options) {
-    const point = journeyPoint(progress);
-    addDot(svg, point.x, point.y, options);
-  }
-
-  function addRouteLabel(svg, x, y, anchor, value) {
-    const label = svgElement("text", { x, y, class: "route-label", "text-anchor": anchor });
-    label.textContent = value;
-    svg.append(label);
-  }
-
-  function renderRoute(route) {
-    const type = route.dataset.route;
-    const isClosing = type === "closing";
-    const svg = svgElement("svg", { viewBox: isClosing ? "0 0 1664 270" : "0 0 760 260", focusable: "false" });
-
-    if (isClosing) {
-      const y = 54;
-      const endX = 1580;
-      svg.append(svgElement("line", { x1: 72, y1: y, x2: endX, y2: y, class: "route-line" }));
-      svg.append(svgElement("circle", { cx: 72, cy: y, r: 9, class: "route-marker" }));
-      svg.append(svgElement("circle", { cx: endX, cy: y, r: 9, class: "route-marker" }));
-      addDot(svg, endX, y, { radius: 12 });
-      route.replaceChildren(svg);
-      return;
-    }
-
-    const start = journeyPoint(0);
-    const end = journeyPoint(1);
-    svg.append(svgElement("path", {
-      d: "M 50 174 C 228 8, 532 8, 710 174",
-      class: "route-line route-line--odyssey",
-      fill: "none",
-    }));
-    svg.append(svgElement("circle", { cx: start.x, cy: start.y, r: 10, class: "route-marker" }));
-    svg.append(svgElement("circle", { cx: end.x, cy: end.y, r: 10, class: "route-marker" }));
-    addRouteLabel(svg, 50, 224, "start", "TROY");
-    addRouteLabel(svg, 710, 224, "end", "ITHACA");
-
-    if (type === "departure") {
-      for (let index = 0; index < 12; index += 1) {
-        addJourneyDot(svg, 0.04 + index * 0.024, {});
-      }
-    } else if (type === "attrition") {
-      for (let index = 0; index < 10; index += 1) {
-        addJourneyDot(svg, 0.18 + index * 0.058, index % 2 === 0 ? { motion: "fall", delay: index * 110 } : {});
-      }
-    } else if (type === "losses") {
-      for (let index = 0; index < 9; index += 1) {
-        addJourneyDot(svg, 0.24 + index * 0.064, {
-          motion: "fall",
-          fragment: Math.floor(index / 3) + 1,
-          delay: (index % 3) * 90,
-        });
-      }
-    } else if (type === "return") {
-      for (let index = 0; index < 7; index += 1) {
-        addJourneyDot(svg, 0.72 + index * 0.04, {
-          motion: "return",
-          fragment: 2,
-          delay: index * 22,
-          returnDistance: -500,
-        });
-      }
-    } else if (type === "survivor") {
-      for (let index = 0; index < 7; index += 1) {
-        addJourneyDot(svg, 0.62 + index * 0.05, {
-          motion: "fall",
-          fragment: 2,
-          delay: index * 70,
-        });
-      }
-      addJourneyDot(svg, 1, { radius: 14 });
-    }
-
-    route.replaceChildren(svg);
-  }
-
-  function renderRoutes() {
-    document.querySelectorAll("[data-route]").forEach(renderRoute);
-  }
-
   function handleKeydown(event) {
     if (event.altKey || event.ctrlKey || event.metaKey) {
       return;
@@ -588,7 +452,6 @@
   document.addEventListener("touchend", handleTouchEnd, { passive: false });
   blackout.addEventListener("click", (event) => event.stopPropagation());
 
-  renderRoutes();
   renderConfiguredAssets();
   fitStage();
   showFromHash();

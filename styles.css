@@ -211,19 +211,6 @@ h1 {
   z-index: 4;
 }
 
-.slide--odyssey > .route {
-  position: absolute;
-  right: 92px;
-  bottom: 66px;
-  left: auto;
-  width: 780px;
-  height: 300px;
-  opacity: 0.9;
-  transform: rotate(-2.5deg);
-  transform-origin: center;
-  z-index: 1;
-}
-
 .odyssey-art-layer {
   position: absolute;
   top: 130px;
@@ -442,88 +429,6 @@ h1 {
   color: var(--bronze);
   font-size: 36px;
   letter-spacing: 0.03em;
-}
-
-.route {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 270px;
-}
-
-.route svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.route-line {
-  stroke: var(--aegean);
-  stroke-width: 5;
-  stroke-linecap: round;
-  opacity: 0.9;
-}
-
-.slide--odyssey .route-line {
-  stroke-width: 3;
-  stroke-dasharray: 8 13;
-  opacity: 0.64;
-}
-
-.route-marker {
-  fill: var(--bronze);
-}
-
-.route-label {
-  fill: var(--bone);
-  font-family: var(--font-mono);
-  font-size: 20px;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  opacity: 0.7;
-}
-
-.route-dot {
-  fill: var(--aegean);
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.route-dot.is-falling {
-  animation: route-fall 820ms cubic-bezier(0.32, 0, 0.67, 0) forwards;
-}
-
-.route-dot.is-returning {
-  animation: route-return 720ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-@keyframes route-fall {
-  0% {
-    fill: var(--aegean);
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  32% {
-    fill: var(--signal);
-  }
-
-  100% {
-    fill: var(--signal);
-    opacity: 0;
-    transform: translateY(112px);
-  }
-}
-
-@keyframes route-return {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(var(--return-distance));
-  }
 }
 
 .slide--handoff {
@@ -844,11 +749,6 @@ h1 {
   justify-content: space-between;
 }
 
-.route--closing {
-  width: 620px;
-  height: 96px;
-}
-
 .closing-footer .render-logo {
   width: 180px;
   height: 64px;
@@ -889,13 +789,4 @@ h1 {
     animation-iteration-count: 1 !important;
   }
 
-  .route-dot.is-falling {
-    fill: var(--signal);
-    opacity: 0;
-    transform: translateY(112px);
-  }
-
-  .route-dot.is-returning {
-    transform: translateX(var(--return-distance));
-  }
 }
