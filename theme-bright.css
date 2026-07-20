@@ -710,7 +710,7 @@ body {
   width: 300px;
   height: auto;
   min-height: 48px;
-  overflow: visible;
+  overflow: hidden;
   font-size: 20px;
   line-height: 1.2;
   overflow-wrap: anywhere;
@@ -722,7 +722,7 @@ body {
   max-width: 410px;
   height: auto;
   min-height: 52px;
-  overflow: visible;
+  overflow: hidden;
   font-size: 18px;
   line-height: 1.25;
   overflow-wrap: anywhere;
@@ -732,7 +732,7 @@ body {
 .qr-caption--closing {
   height: auto;
   min-height: 48px;
-  overflow: visible;
+  overflow: hidden;
   font-size: 14px;
   line-height: 1.15;
   overflow-wrap: anywhere;
