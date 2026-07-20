@@ -6,7 +6,6 @@
   const DASHBOARD_SLIDE = 12;
   const HOLDING_SLIDE = 8;
   const QR_QUIET_ZONE_MODULES = 4;
-  const SVG_NS = "http://www.w3.org/2000/svg";
 
   const root = document.documentElement;
   const blackout = document.getElementById("blackout");
@@ -36,41 +35,18 @@
     return getFragments(slide).filter((fragment) => fragment.classList.contains("is-visible")).length;
   }
 
-  function syncRouteState(slide, fragmentCount) {
+  function syncSlideArtwork(slide, fragmentCount) {
     slide.querySelectorAll("[data-art-fragment]").forEach((art) => {
       const trigger = Number(art.dataset.artFragment || 0);
       art.classList.toggle("is-visible", trigger <= fragmentCount);
-    });
-
-    const route = slide.querySelector(".route");
-    if (!route) {
-      return;
-    }
-
-    const animatedDots = Array.from(route.querySelectorAll("[data-route-motion]"));
-    animatedDots.forEach((dot) => {
-      dot.classList.remove("is-falling", "is-returning");
-    });
-
-    void route.offsetWidth;
-
-    animatedDots.forEach((dot) => {
-      const trigger = Number(dot.dataset.routeFragment || 0);
-      if (trigger > fragmentCount) {
-        return;
-      }
-
-      if (dot.dataset.routeMotion === "fall") {
-        dot.classList.add("is-falling");
-      } else if (dot.dataset.routeMotion === "return") {
-        dot.classList.add("is-returning");
-      }
+      art.classList.toggle("is-current", trigger === fragmentCount);
     });
   }
 
   function setFragmentCount(slide, count) {
     const fragments = getFragments(slide);
-    const safeCount = Math.max(0, Math.min(count, fragments.length));
+    const minimumCount = fragments.length > 0 ? 1 : 0;
+    const safeCount = Math.max(minimumCount, Math.min(count, fragments.length));
 
     fragments.forEach((fragment, index) => {
       const visible = index < safeCount;
@@ -80,7 +56,7 @@
     });
 
     slide.dataset.fragmentsShown = String(safeCount);
-    syncRouteState(slide, safeCount);
+    syncSlideArtwork(slide, safeCount);
   }
 
   function updateHash(slideId) {
@@ -171,8 +147,9 @@
   function reverse() {
     const currentSlide = slides[currentIndex];
     const shown = visibleFragmentCount(currentSlide);
+    const minimumCount = getFragments(currentSlide).length > 0 ? 1 : 0;
 
-    if (shown > 0) {
+    if (shown > minimumCount) {
       setFragmentCount(currentSlide, shown - 1);
       if (slideIds[currentIndex] !== DASHBOARD_SLIDE) {
         lastNonDashboardState = { index: currentIndex, fragmentCount: shown - 1 };
@@ -384,81 +361,6 @@
     document.querySelector("[data-contact]").textContent = CONFIG.contact;
   }
 
-  function svgElement(name, attributes) {
-    const element = document.createElementNS(SVG_NS, name);
-    Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, String(value)));
-    return element;
-  }
-
-  function addDot(svg, x, y, options) {
-    const dot = svgElement("circle", { cx: x, cy: y, r: options.radius || 11, class: "route-dot" });
-    if (options.motion) {
-      dot.dataset.routeMotion = options.motion;
-      dot.dataset.routeFragment = String(options.fragment || 0);
-    }
-    if (options.delay) {
-      dot.style.animationDelay = `${options.delay}ms`;
-    }
-    if (options.returnDistance) {
-      dot.style.setProperty("--return-distance", `${options.returnDistance}px`);
-    }
-    svg.append(dot);
-  }
-
-  function renderRoute(route) {
-    const type = route.dataset.route;
-    const svg = svgElement("svg", { viewBox: "0 0 1664 270", focusable: "false" });
-    const y = type === "closing" ? 54 : 92;
-    const endX = type === "closing" ? 1580 : 1592;
-    svg.append(svgElement("line", { x1: 72, y1: y, x2: endX, y2: y, class: "route-line" }));
-    svg.append(svgElement("circle", { cx: 72, cy: y, r: 9, class: "route-marker" }));
-    svg.append(svgElement("circle", { cx: endX, cy: y, r: 9, class: "route-marker" }));
-
-    if (type === "departure") {
-      for (let index = 0; index < 12; index += 1) {
-        addDot(svg, 100 + index * 20, y, {});
-      }
-    } else if (type === "attrition") {
-      for (let index = 0; index < 10; index += 1) {
-        addDot(svg, 420 + index * 46, y, index % 2 === 0 ? { motion: "fall", delay: index * 110 } : {});
-      }
-    } else if (type === "losses") {
-      for (let index = 0; index < 9; index += 1) {
-        addDot(svg, 620 + index * 58, y, {
-          motion: "fall",
-          fragment: Math.floor(index / 3) + 1,
-          delay: (index % 3) * 90,
-        });
-      }
-    } else if (type === "return") {
-      for (let index = 0; index < 7; index += 1) {
-        addDot(svg, 1300 + index * 38, y, {
-          motion: "return",
-          fragment: 2,
-          delay: index * 22,
-          returnDistance: -1120,
-        });
-      }
-    } else if (type === "survivor") {
-      for (let index = 0; index < 7; index += 1) {
-        addDot(svg, 1180 + index * 48, y, {
-          motion: "fall",
-          fragment: 2,
-          delay: index * 70,
-        });
-      }
-      addDot(svg, endX, y, { radius: 13 });
-    } else if (type === "closing") {
-      addDot(svg, endX, y, { radius: 12 });
-    }
-
-    route.replaceChildren(svg);
-  }
-
-  function renderRoutes() {
-    document.querySelectorAll("[data-route]").forEach(renderRoute);
-  }
-
   function handleKeydown(event) {
     if (event.altKey || event.ctrlKey || event.metaKey) {
       return;
@@ -550,7 +452,6 @@
   document.addEventListener("touchend", handleTouchEnd, { passive: false });
   blackout.addEventListener("click", (event) => event.stopPropagation());
 
-  renderRoutes();
   renderConfiguredAssets();
   fitStage();
   showFromHash();

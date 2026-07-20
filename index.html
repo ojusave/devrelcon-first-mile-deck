@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="color-scheme" content="dark">
+    <meta name="color-scheme" content="light">
     <title>DevRelCon NYC · Workshop</title>
     <link rel="preload" href="assets/render-logo.svg" as="image" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="theme-bright.css?v=1">
     <script defer src="config.js"></script>
     <script defer src="vendor/qrcode.js"></script>
-    <script defer src="deck.js?v=4"></script>
+    <script defer src="deck.js?v=6"></script>
   </head>
   <body>
     <div class="viewport" id="viewport">
@@ -26,64 +27,58 @@
           </div>
         </section>
 
-        <section class="slide slide--odyssey" data-slide="2" aria-label="Troy to Ithaca" hidden>
+        <section class="slide slide--odyssey" data-slide="2" data-scene="THE ODYSSEY · 01 / 05" aria-label="Troy to Ithaca" hidden>
+          <div class="scene-stack" aria-hidden="true">
+            <img class="scene-image" src="assets/illustrations/bright/odyssey-departure.png" alt="">
+          </div>
           <div class="statement">
-            <h1>Troy to Ithaca.</h1>
-            <p class="subhead">565 nautical miles. About two weeks under sail.</p>
+            <h1>Troy to <span class="odyssey-accent">Ithaca.</span></h1>
+            <p class="subhead"><span class="odyssey-stat">565</span> nautical miles.<br>About two weeks under sail.</p>
           </div>
-          <div class="odyssey-art-layer" aria-hidden="true">
-            <img class="odyssey-art" src="assets/illustrations/odyssey-ship.png" alt="" style="--art-x: 220px; --art-y: 690px; --art-w: 340px;">
-            <img class="odyssey-art" src="assets/illustrations/ithaca-headland.png" alt="" style="--art-x: 1450px; --art-y: 715px; --art-w: 310px;">
-          </div>
-          <div class="route" data-route="departure" aria-hidden="true"></div>
         </section>
 
-        <section class="slide slide--odyssey" data-slide="3" aria-label="Ten years" hidden>
+        <section class="slide slide--odyssey" data-slide="3" data-scene="THE ODYSSEY · 02 / 05" aria-label="Ten years" hidden>
+          <div class="scene-stack" aria-hidden="true">
+            <img class="scene-image" src="assets/illustrations/bright/odyssey-ten-years.png" alt="">
+          </div>
           <div class="statement">
-            <h1>It took Odysseus ten years.</h1>
+            <h1>It took Odysseus <span class="odyssey-accent">ten years.</span></h1>
           </div>
-          <div class="odyssey-art-layer" aria-hidden="true">
-            <img class="odyssey-art" src="assets/illustrations/odyssey-ship.png" alt="" style="--art-x: 810px; --art-y: 690px; --art-w: 300px;">
-          </div>
-          <div class="route" data-route="attrition" aria-hidden="true"></div>
         </section>
 
-        <section class="slide slide--odyssey" data-slide="4" aria-label="What happened to the crew" hidden>
+        <section class="slide slide--odyssey" data-slide="4" data-scene="THE ODYSSEY · 03 / 05" aria-label="What happened to the crew" hidden>
+          <div class="scene-stack" aria-hidden="true">
+            <img class="scene-image" data-art-fragment="1" src="assets/illustrations/bright/odyssey-cyclops.png" alt="">
+            <img class="scene-image" data-art-fragment="2" src="assets/illustrations/bright/odyssey-circe.png" alt="">
+            <img class="scene-image" data-art-fragment="3" src="assets/illustrations/bright/odyssey-roof.png" alt="">
+          </div>
           <div class="fragment-stack fragment-stack--equal">
-            <p class="fragment statement-line" data-fragment>Some of his men were eaten.</p>
-            <p class="fragment statement-line" data-fragment>Some were turned into pigs.</p>
-            <p class="fragment statement-line" data-fragment>One fell off a roof.</p>
+            <p class="fragment statement-line" data-fragment>Some of his men were <span class="odyssey-accent">eaten.</span></p>
+            <p class="fragment statement-line" data-fragment>Some were turned into <span class="odyssey-accent">pigs.</span></p>
+            <p class="fragment statement-line" data-fragment>One fell off a <span class="odyssey-accent">roof.</span></p>
           </div>
-          <div class="odyssey-art-layer" aria-hidden="true">
-            <img class="odyssey-art" data-art-fragment="1" src="assets/illustrations/fate-cyclops.png" alt="" style="--art-x: 300px; --art-y: 690px; --art-w: 250px;">
-            <img class="odyssey-art" data-art-fragment="2" src="assets/illustrations/fate-circe.png" alt="" style="--art-x: 835px; --art-y: 690px; --art-w: 250px;">
-            <img class="odyssey-art" data-art-fragment="3" src="assets/illustrations/fate-elpenor.png" alt="" style="--art-x: 1370px; --art-y: 690px; --art-w: 250px;">
-          </div>
-          <div class="route" data-route="losses" aria-hidden="true"></div>
         </section>
 
-        <section class="slide slide--odyssey" data-slide="5" aria-label="The wrong bag" hidden>
+        <section class="slide slide--odyssey" data-slide="5" data-scene="THE ODYSSEY · 04 / 05" aria-label="The wrong bag" hidden>
+          <div class="scene-stack" aria-hidden="true">
+            <img class="scene-image" data-art-fragment="1" src="assets/illustrations/bright/odyssey-ithaca-sight.png" alt="">
+            <img class="scene-image" data-art-fragment="2" src="assets/illustrations/bright/odyssey-wrong-bag.png" alt="">
+          </div>
           <div class="fragment-stack">
-            <p class="fragment statement-line" data-fragment>At one point, Ithaca was in sight.</p>
-            <p class="fragment statement-line" data-fragment>Then someone opened the wrong bag.</p>
+            <p class="fragment statement-line" data-fragment>At one point, Ithaca was <span class="odyssey-accent">in sight.</span></p>
+            <p class="fragment statement-line" data-fragment>Then someone opened the <span class="odyssey-accent">wrong bag.</span></p>
           </div>
-          <div class="odyssey-art-layer" aria-hidden="true">
-            <img class="odyssey-art" data-art-fragment="1" src="assets/illustrations/ithaca-headland.png" alt="" style="--art-x: 1450px; --art-y: 715px; --art-w: 310px;">
-            <img class="odyssey-art" data-art-fragment="2" src="assets/illustrations/aeolus-bag.png" alt="" style="--art-x: 1210px; --art-y: 720px; --art-w: 220px;">
-            <img class="odyssey-art odyssey-art--winds" data-art-fragment="2" src="assets/illustrations/aeolus-winds.png" alt="" style="--art-x: 1080px; --art-y: 720px; --art-w: 430px;">
-          </div>
-          <div class="route" data-route="return" aria-hidden="true"></div>
         </section>
 
-        <section class="slide slide--odyssey" data-slide="6" aria-label="One survivor" hidden>
+        <section class="slide slide--odyssey" data-slide="6" data-scene="THE ODYSSEY · 05 / 05" aria-label="Odysseus returns disguised as a beggar" hidden>
+          <div class="scene-stack" aria-hidden="true">
+            <img class="scene-image" data-art-fragment="1" src="assets/illustrations/bright/odyssey-fleet.png" alt="">
+            <img class="scene-image" data-art-fragment="2" src="assets/illustrations/bright/odyssey-beggar.png" alt="">
+          </div>
           <div class="fragment-stack">
-            <p class="fragment statement-line" data-fragment>He left with 12 ships and around 600 men.</p>
-            <p class="fragment statement-line" data-fragment>He came home alone.</p>
+            <p class="fragment statement-line" data-fragment>He left with <span class="odyssey-accent">12 ships</span> and around <span class="odyssey-accent">600 men.</span></p>
+            <p class="fragment statement-line" data-fragment>He came home <span class="odyssey-accent">alone, disguised as a beggar.</span></p>
           </div>
-          <div class="odyssey-art-layer" aria-hidden="true">
-            <img class="odyssey-art" data-art-fragment="2" src="assets/illustrations/odysseus-alone.png" alt="" style="--art-x: 1530px; --art-y: 690px; --art-w: 250px;">
-          </div>
-          <div class="route" data-route="survivor" aria-hidden="true"></div>
         </section>
 
         <section class="slide slide--handoff" data-slide="7" aria-label="Let's build something" hidden>
@@ -93,6 +88,7 @@
         </section>
 
         <section class="slide slide--holding" data-slide="8" aria-label="Build time" hidden>
+          <img class="slide-scene" src="assets/illustrations/bright/workshop-build.png" alt="" aria-hidden="true">
           <div class="holding-message">
             <p>Go build. We'll regroup in a few minutes.</p>
             <p class="holding-timer" data-trap-timer hidden></p>
@@ -118,6 +114,7 @@
         </section>
 
         <section class="slide slide--statement" data-slide="11" aria-label="The reveal" hidden>
+          <img class="slide-scene" src="assets/illustrations/bright/tracking-reveal.png" alt="" aria-hidden="true">
           <div class="fragment-stack fragment-stack--reveal">
             <p class="fragment statement-line" data-fragment>Nothing you just used was real.</p>
             <p class="fragment statement-line" data-fragment>Everything you just did was tracked.</p>
@@ -140,6 +137,7 @@
         </section>
 
         <section class="slide slide--research" data-slide="14" aria-label="The research" hidden>
+          <img class="slide-scene" src="assets/illustrations/bright/research-platforms.png" alt="" aria-hidden="true">
           <div class="research-content">
             <p class="eyebrow">THE RESEARCH</p>
             <h1 class="fragment" data-fragment>We studied the onboarding of 200 developer platforms.</h1>
@@ -203,6 +201,7 @@
         </section>
 
         <section class="slide slide--closing" data-slide="20" aria-label="Closing" hidden>
+          <img class="slide-scene" src="assets/illustrations/bright/closing-first-mile.png" alt="" aria-hidden="true">
           <div class="closing-copy">
             <h1 class="fragment" data-fragment>Go find your first mile.</h1>
             <p class="subhead fragment" data-fragment>It shouldn't take ten years.</p>
@@ -223,7 +222,6 @@
             </div>
           </div>
           <div class="closing-footer">
-            <div class="route route--closing" data-route="closing" aria-hidden="true"></div>
             <img class="render-logo" src="assets/render-logo.svg" alt="Render">
           </div>
         </section>
