@@ -9,22 +9,21 @@ const CONFIG = {
 
   // Takeaway links. Same placeholder-to-QR behavior as fakegptUrl.
   takeaways: {
-    firstmile: null,       // open source instrumentation kit repo
-    fakesaaspiKit: null,   // forkable fake-platform frontend repo
-    comparison: null,      // comparison site (may become a waitlist page)
+    firstmile: "https://devrelcon-research.onrender.com/#firstmile",
+    fakesaaspiKit: "https://devrelcon-research.onrender.com/#fakesaaspi",
+    comparison: "https://devrelcon-research.onrender.com",
   },
 
   // Optional countdown on the holding slide. null hides it entirely.
   trapTimerMinutes: null,
 
-  // Research stats. Placeholder values ship as written. The presenter
-  // replaces these with real numbers from the 200-platform research.
+  // Coverage counts generated from the published research dataset.
   stats: [
-    { value: "XX%", label: "placeholder: drop before the first successful API call" },
-    { value: "XX%", label: "placeholder: never finish signup" },
-    { value: "X of Y", label: "placeholder: platforms requiring a card before any value" },
+    { value: "205", label: "platforms with one documented first-success route" },
+    { value: "2,715", label: "documented steps across those routes" },
+    { value: "1,121", label: "official sources inspected" },
   ],
 
   // Contact line for the closing slide.
-  contact: "placeholder: name, handle, url",
+  contact: "Ojus Save · DevRelCon NYC · July 2026",
 };
