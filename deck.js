@@ -40,6 +40,7 @@
     slide.querySelectorAll("[data-art-fragment]").forEach((art) => {
       const trigger = Number(art.dataset.artFragment || 0);
       art.classList.toggle("is-visible", trigger <= fragmentCount);
+      art.classList.toggle("is-current", trigger === fragmentCount);
     });
 
     const route = slide.querySelector(".route");
@@ -70,7 +71,8 @@
 
   function setFragmentCount(slide, count) {
     const fragments = getFragments(slide);
-    const safeCount = Math.max(0, Math.min(count, fragments.length));
+    const minimumCount = slide.classList.contains("slide--odyssey") && fragments.length > 0 ? 1 : 0;
+    const safeCount = Math.max(minimumCount, Math.min(count, fragments.length));
 
     fragments.forEach((fragment, index) => {
       const visible = index < safeCount;
@@ -171,8 +173,9 @@
   function reverse() {
     const currentSlide = slides[currentIndex];
     const shown = visibleFragmentCount(currentSlide);
+    const minimumCount = currentSlide.classList.contains("slide--odyssey") && getFragments(currentSlide).length > 0 ? 1 : 0;
 
-    if (shown > 0) {
+    if (shown > minimumCount) {
       setFragmentCount(currentSlide, shown - 1);
       if (slideIds[currentIndex] !== DASHBOARD_SLIDE) {
         lastNonDashboardState = { index: currentIndex, fragmentCount: shown - 1 };
@@ -405,26 +408,63 @@
     svg.append(dot);
   }
 
+  function journeyPoint(progress) {
+    return {
+      x: 50 + 660 * progress,
+      y: 174 - Math.sin(Math.PI * progress) * 118,
+    };
+  }
+
+  function addJourneyDot(svg, progress, options) {
+    const point = journeyPoint(progress);
+    addDot(svg, point.x, point.y, options);
+  }
+
+  function addRouteLabel(svg, x, y, anchor, value) {
+    const label = svgElement("text", { x, y, class: "route-label", "text-anchor": anchor });
+    label.textContent = value;
+    svg.append(label);
+  }
+
   function renderRoute(route) {
     const type = route.dataset.route;
-    const svg = svgElement("svg", { viewBox: "0 0 1664 270", focusable: "false" });
-    const y = type === "closing" ? 54 : 92;
-    const endX = type === "closing" ? 1580 : 1592;
-    svg.append(svgElement("line", { x1: 72, y1: y, x2: endX, y2: y, class: "route-line" }));
-    svg.append(svgElement("circle", { cx: 72, cy: y, r: 9, class: "route-marker" }));
-    svg.append(svgElement("circle", { cx: endX, cy: y, r: 9, class: "route-marker" }));
+    const isClosing = type === "closing";
+    const svg = svgElement("svg", { viewBox: isClosing ? "0 0 1664 270" : "0 0 760 260", focusable: "false" });
+
+    if (isClosing) {
+      const y = 54;
+      const endX = 1580;
+      svg.append(svgElement("line", { x1: 72, y1: y, x2: endX, y2: y, class: "route-line" }));
+      svg.append(svgElement("circle", { cx: 72, cy: y, r: 9, class: "route-marker" }));
+      svg.append(svgElement("circle", { cx: endX, cy: y, r: 9, class: "route-marker" }));
+      addDot(svg, endX, y, { radius: 12 });
+      route.replaceChildren(svg);
+      return;
+    }
+
+    const start = journeyPoint(0);
+    const end = journeyPoint(1);
+    svg.append(svgElement("path", {
+      d: "M 50 174 C 228 8, 532 8, 710 174",
+      class: "route-line route-line--odyssey",
+      fill: "none",
+    }));
+    svg.append(svgElement("circle", { cx: start.x, cy: start.y, r: 10, class: "route-marker" }));
+    svg.append(svgElement("circle", { cx: end.x, cy: end.y, r: 10, class: "route-marker" }));
+    addRouteLabel(svg, 50, 224, "start", "TROY");
+    addRouteLabel(svg, 710, 224, "end", "ITHACA");
 
     if (type === "departure") {
       for (let index = 0; index < 12; index += 1) {
-        addDot(svg, 100 + index * 20, y, {});
+        addJourneyDot(svg, 0.04 + index * 0.024, {});
       }
     } else if (type === "attrition") {
       for (let index = 0; index < 10; index += 1) {
-        addDot(svg, 420 + index * 46, y, index % 2 === 0 ? { motion: "fall", delay: index * 110 } : {});
+        addJourneyDot(svg, 0.18 + index * 0.058, index % 2 === 0 ? { motion: "fall", delay: index * 110 } : {});
       }
     } else if (type === "losses") {
       for (let index = 0; index < 9; index += 1) {
-        addDot(svg, 620 + index * 58, y, {
+        addJourneyDot(svg, 0.24 + index * 0.064, {
           motion: "fall",
           fragment: Math.floor(index / 3) + 1,
           delay: (index % 3) * 90,
@@ -432,24 +472,22 @@
       }
     } else if (type === "return") {
       for (let index = 0; index < 7; index += 1) {
-        addDot(svg, 1300 + index * 38, y, {
+        addJourneyDot(svg, 0.72 + index * 0.04, {
           motion: "return",
           fragment: 2,
           delay: index * 22,
-          returnDistance: -1120,
+          returnDistance: -500,
         });
       }
     } else if (type === "survivor") {
       for (let index = 0; index < 7; index += 1) {
-        addDot(svg, 1180 + index * 48, y, {
+        addJourneyDot(svg, 0.62 + index * 0.05, {
           motion: "fall",
           fragment: 2,
           delay: index * 70,
         });
       }
-      addDot(svg, endX, y, { radius: 13 });
-    } else if (type === "closing") {
-      addDot(svg, endX, y, { radius: 12 });
+      addJourneyDot(svg, 1, { radius: 14 });
     }
 
     route.replaceChildren(svg);
