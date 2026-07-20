@@ -241,6 +241,65 @@ body {
   font-size: 69px;
 }
 
+.slide--moral {
+  position: relative;
+  overflow: hidden;
+  padding: 150px;
+  isolation: isolate;
+  color: var(--ink);
+  background: var(--sun);
+}
+
+.slide--moral::before,
+.slide--moral::after {
+  position: absolute;
+  border-radius: 50%;
+  content: "";
+  z-index: -1;
+}
+
+.slide--moral::before {
+  top: -260px;
+  right: -180px;
+  width: 720px;
+  height: 720px;
+  background: var(--signal);
+}
+
+.slide--moral::after {
+  bottom: -500px;
+  left: -240px;
+  width: 760px;
+  height: 760px;
+  background: var(--aegean);
+}
+
+.moral-copy {
+  display: grid;
+  gap: 38px;
+  width: min(100%, 1540px);
+  z-index: 1;
+}
+
+.moral-copy p {
+  max-width: 1200px;
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.moral-copy h1 {
+  max-width: 1500px;
+  font-size: 142px;
+  letter-spacing: -0.06em;
+  line-height: 0.94;
+}
+
+.moral-copy h1 span {
+  color: var(--signal);
+}
+
 .slide-scene {
   z-index: 0;
 }
