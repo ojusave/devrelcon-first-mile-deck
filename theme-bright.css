@@ -701,6 +701,44 @@ body {
   height: 64px;
 }
 
+/* Keep long QR destinations inside their visual cards. */
+.slide--holding .holding-qr {
+  width: 300px;
+}
+
+.qr-caption--holding {
+  width: 300px;
+  height: auto;
+  min-height: 48px;
+  overflow: visible;
+  font-size: 20px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.takeaway-qr .qr-caption {
+  width: 100%;
+  max-width: 410px;
+  height: auto;
+  min-height: 52px;
+  overflow: visible;
+  font-size: 18px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.qr-caption--closing {
+  height: auto;
+  min-height: 48px;
+  overflow: visible;
+  font-size: 14px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scene-image[data-art-fragment] {
     transition: none;
