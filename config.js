@@ -20,15 +20,17 @@ const CONFIG = {
   // Counts reproduced from the research repositories on July 21, 2026.
   stats: {
     selectionPrimary: "151 / 205",
+    selectionPolicy: "151",
+    selectionDocs: "54",
     selectionSensitivity: "Sensitivity: 82 / 136 after excluding 69 compact re-researched records",
     boundaries: [
-      { value: "83 / 205", label: "routes with an explicitly named first-success boundary" },
+      { value: "83 / 205", label: "routes with an explicitly named first-success milestone" },
       { value: "122 / 205", label: "routes with a demonstrated terminal state" },
     ],
     ambiguity: [
-      { value: "11", label: "universal reason families mapped to learning/setup or implementation" },
-      { value: "200", label: "reason hypotheses inside those families" },
-      { value: "0 / 790", label: "individual reason cards eligible to diagnose a cause" },
+      { value: "11", label: "universal cause families" },
+      { value: "200", label: "distinct universal candidate reasons before one follow-up question" },
+      { value: "0 / 790", label: "reason cards currently eligible to report as a diagnosed cause" },
     ],
   },
 

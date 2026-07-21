@@ -72,9 +72,19 @@ Then use slide 22 to name the three evidence types before explaining collection 
 
 Use the consequence printed on each slide. Do not add a claim that the counts describe market frequency, developer emotion, conversion, or product quality.
 
+Slide 23 describes route selection inside the documented-route records. Slide 24 describes how those records represent the first-success boundary. Slide 25 switches to a separate blocker hypothesis graph. Do not combine the two datasets.
+
+### Slides 14 through 16
+
+On slide 14, say that the four routes are selected examples, not the most frequent or difficult gates. On slide 15, name the evidence handoff: slides 23 and 24 use the 205 documented-route records, while slide 25 uses a separate hypothesis graph.
+
+On slide 16, say:
+
+> Five people form a bounded pilot, not a representative sample. Route ownership is not causal ownership.
+
 ### Slide 20
 
-End with the four Monday actions. Do not add a grand conclusion or reopen every resource.
+End with the three Monday actions. Do not add a grand conclusion or reopen every resource.
 
 ## Recovery paths
 
@@ -93,7 +103,7 @@ Research counts were reproduced from the two local research repositories on July
 
 - 151 of 205 records explicitly state that the selected route needed the workshop selection policy. The sensitivity count is 82 of 136 after excluding 69 compact re-researched records.
 - 83 of 205 records use an explicitly named first-success boundary. 122 use a demonstrated terminal state. The sensitivity counts are 59 of 136 and 77 of 136.
-- The reason inventory contains 11 universal families and 200 hypotheses mapped to learning/setup or implementation. Zero of 790 individual reason cards are eligible to diagnose a cause.
+- The separate blocker hypothesis graph contains 11 universal cause families and 200 distinct universal candidate reasons for the combined setup and implementation position. Zero of 790 reason cards are currently eligible to report as a diagnosed cause. These are catalog candidates, not observed blockers or prevalence data.
 
 The gate examples use current official pages:
 
@@ -129,9 +139,17 @@ A null URL renders a fixed-size placeholder. Configured QR codes are generated l
 
 Prerequisites: Python 3 for a static server and Node.js for the structural check.
 
+Start the server in one terminal:
+
+```sh
+python3 -m http.server 4173
+```
+
+Run the checks in a second terminal:
+
 ```sh
 node scripts/check-deck.mjs
-python3 -m http.server 4173
+NODE_PATH=/path/to/playwright/node_modules node scripts/check-browser.cjs
 ```
 
 Open `http://localhost:4173`. Test both `1920x1080` and `1280x720`, every direct hash, ArrowRight, ArrowLeft, Home, End, `B`, `D`, click, and one swipe. Confirm the participant app, dashboard iframe, Atlas, and Firstmile destinations load.
