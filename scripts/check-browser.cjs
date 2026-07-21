@@ -115,6 +115,12 @@ function assert(condition, message) {
     await page.touchscreen.tap(viewport.width * 0.2, viewport.height / 2);
     assert((await page.url()).endsWith("#1"), `${viewport.name}: left-side touch did not reverse`);
 
+    await page.goto(`${baseUrl}/#12`, { waitUntil: "networkidle" });
+    await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
+    assert((await page.url()).endsWith("#8"), `${viewport.name}: dashboard right-side click did not advance`);
+    await page.mouse.click(viewport.width * 0.2, viewport.height / 2);
+    assert((await page.url()).endsWith("#12"), `${viewport.name}: dashboard left-side click did not reverse`);
+
     if (viewport.name === "projector") {
       await page.goto(`${baseUrl}/#14`, { waitUntil: "networkidle" });
       const notesPage = await context.newPage();
