@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>DevRelCon speaker notes</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        --ink: #0b1b2a;
+        --panel: #12283c;
+        --line: #38506a;
+        --text: #f7f3e8;
+        --muted: #a9b7ca;
+        --signal: #ff8a66;
+        --sky: #14b8f1;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--ink);
+        color: var(--text);
+      }
+
+      main {
+        display: grid;
+        gap: 14px;
+        width: min(920px, 100%);
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 18px;
+      }
+
+      header,
+      section {
+        border: 2px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 14px 20px;
+      }
+
+      h1,
+      h2,
+      p { margin: 0; }
+
+      h1 { font-size: clamp(28px, 5vw, 44px); }
+      h2 { color: var(--sky); font-size: 16px; letter-spacing: .08em; text-transform: uppercase; }
+      p { font-size: clamp(18px, 2vw, 23px); line-height: 1.35; }
+
+      .status { color: var(--muted); font-size: 15px; }
+      .slide-number { color: var(--signal); }
+
+      section {
+        display: grid;
+        align-content: start;
+        gap: 8px;
+        padding: 16px 20px;
+      }
+
+      .transition { border-color: var(--signal); }
+
+      nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      button {
+        min-height: 52px;
+        border: 2px solid var(--line);
+        border-radius: 14px;
+        color: var(--text);
+        background: #1b3853;
+        font: 700 18px inherit;
+        cursor: pointer;
+      }
+
+      button:focus-visible { outline: 4px solid var(--sky); outline-offset: 3px; }
+    </style>
+    <script defer src="speaker-notes.js?v=1"></script>
+    <script defer src="speaker-notes-view.js?v=1"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="status">SPEAKER NOTES</p>
+          <h1>Slide <span class="slide-number" data-note-slide>1</span></h1>
+        </div>
+        <p class="status" data-note-status>Waiting for deck</p>
+      </header>
+      <section>
+        <h2>Purpose</h2>
+        <p data-note-purpose></p>
+      </section>
+      <section>
+        <h2>Say</h2>
+        <p data-note-say></p>
+      </section>
+      <section class="transition">
+        <h2>Transition</h2>
+        <p data-note-transition></p>
+      </section>
+      <nav aria-label="Slide controls">
+        <button type="button" data-note-previous>Previous</button>
+        <button type="button" data-note-next>Next</button>
+      </nav>
+    </main>
+  </body>
+</html>
