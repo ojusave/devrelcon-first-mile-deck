@@ -14,6 +14,7 @@ Keyboard-driven browser slides for “What Makes Developers Actually Ship?” at
 ## Contents
 
 - [Present the deck](#present-the-deck)
+- [Run the 55-minute workshop](#run-the-55-minute-workshop)
 - [Configure workshop assets](#configure-workshop-assets)
 - [Preview locally](#preview-locally)
 - [Deploy and operate](#deploy-and-operate)
@@ -44,7 +45,7 @@ After revealing “He came home alone and unrecognized,” say:
 
 Advance to “Developers don’t arrive to complete your onboarding. They arrive to build something.” Let the line land, then say:
 
-> But the platform puts all this stuff between wanting to build and actually building. Each confusing step burns a little more of that intent. Some people keep going. Some close the tab. Either way, onboarding is already telling them what working with you will be like.
+> But the platform puts steps between wanting to build and actually building. Each choice, credential, wait, or configuration asks the developer to keep translating intent into setup. The documented route shows those demands. It does not show us where progress stopped, or why.
 
 Then advance to “Let’s build something.” Do not explain the exercise before attendees scan the QR code. Once they have started, advance to the dashboard and leave it up while their progress appears live.
 
@@ -55,6 +56,32 @@ After “Okay, no.” advance to the missing-signal slide. Name the limits of do
 ### Speaker cue: slides 11 and 13
 
 After the reveal, return to the bag-of-winds callback. The room has already seen the dashboard live.
+
+## Run the 55-minute workshop
+
+Plan 47 minutes of material and keep the final eight minutes available for a late start, room transitions, technical recovery, or questions.
+
+| Segment | Slides | Realistic time | What the time includes |
+| --- | --- | --- | --- |
+| Odyssey opening and developer intent | 1–6, 21 | 8 minutes | Story, reveals, and the transition from the Odyssey to onboarding |
+| Exercise setup | 7, 12 | 3 minutes | Instructions, QR scan, start check, and move to the live dashboard |
+| Participant exercise | 8, with 12 via `D` | 10 minutes | Eight minutes to try the flow and two minutes to regroup; completion is not required |
+| False ending, missing signal, and reveal | 9–11, 13 | 8 minutes | Fragments, the evidence boundary, dashboard debrief, and bag-of-winds callback |
+| Research and implication | 14–16 | 9 minutes | Method, counting boundary, limitations, and the handoff to the team that owns that part of the route |
+| Resources and close | 17–20 | 9 minutes | Three practical resources, final QR scan, and close |
+| Recovery and questions | N/A | 8 minutes | Preserved buffer, not planned content |
+
+Use a hard cutoff for the exercise. The point is to observe where progress reached, not to get every person through every step.
+
+### Recovery paths
+
+| Failure mode | Fallback |
+| --- | --- |
+| QR code does not scan | Read out `fakesaaspi.onrender.com` once. If the room still cannot connect, skip participation, keep slide 8 up, and state that room behavior was not observed today. Do not perform the reveal as if it was. |
+| Dashboard does not load | Use slide 8 as the holding screen, end the exercise at the planned cutoff, and debrief only what attendees report seeing. Do not claim aggregate room data. |
+| Few people participate or finish | Continue at the cutoff. Use the progress that exists and say that the dashboard shows position, not motivation or cause. |
+| Someone has no usable device | Invite them to watch the projected room progress. During the debrief, narrate the first three gates and one later failure. Do not require pairing or speaking. |
+| The room is running late | Protect the exercise, evidence boundary, research limitations, and final close. Reduce slides 17–19 to one sentence each before cutting any of those sections. |
 
 ## Configure workshop assets
 
