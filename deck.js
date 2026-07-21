@@ -32,7 +32,7 @@
     slides.forEach((slide) => {
       const mark = document.createElement("img");
       mark.className = "slide-brand";
-      mark.src = "assets/render-mark.svg?v=1";
+      mark.src = "assets/render-logo.svg?v=2";
       mark.alt = "";
       mark.setAttribute("aria-hidden", "true");
       slide.append(mark);

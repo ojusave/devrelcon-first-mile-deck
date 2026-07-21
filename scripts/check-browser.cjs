@@ -98,9 +98,9 @@ function assert(condition, message) {
       assert(state.hasPrimaryText || [12, 13].includes(slideId), `${viewport.name} slide ${slideId}: missing primary slide text`);
       assert(state.brand?.count === 1, `${viewport.name} slide ${slideId}: expected exactly one repeated Render mark`);
       assert(state.brand.inBounds, `${viewport.name} slide ${slideId}: Render brand signature is out of bounds`);
-      assert(state.brand.src === "assets/render-mark.svg?v=1", `${viewport.name} slide ${slideId}: unexpected Render mark asset ${state.brand.src}`);
-      assert(Math.abs(state.brand.size[0] - state.brand.size[1]) < 0.1, `${viewport.name} slide ${slideId}: Render mark is not square`);
-      assert(state.brand.placement.join("|") === "32px|28px|52px|52px", `${viewport.name} slide ${slideId}: inconsistent Render mark placement ${state.brand.placement.join("|")}`);
+      assert(state.brand.src === "assets/render-logo.svg?v=2", `${viewport.name} slide ${slideId}: unexpected Render logo asset ${state.brand.src}`);
+      assert(state.brand.size[0] > state.brand.size[1] * 2, `${viewport.name} slide ${slideId}: Render wordmark has the wrong aspect ratio`);
+      assert(state.brand.placement.join("|") === "32px|28px|144px|48px", `${viewport.name} slide ${slideId}: inconsistent Render logo placement ${state.brand.placement.join("|")}`);
       assert(state.brand.alt === "" && state.brand.ariaHidden === "true", `${viewport.name} slide ${slideId}: decorative Render mark is exposed to assistive technology`);
       assert(state.unnamedMedia.length === 0, `${viewport.name} slide ${slideId}: unnamed media ${state.unnamedMedia.join(", ")}`);
       assert(state.clipped.length === 0, `${viewport.name} slide ${slideId}: clipped ${JSON.stringify(state.clipped)}`);
