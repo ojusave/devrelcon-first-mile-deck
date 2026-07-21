@@ -20,7 +20,7 @@ const CONFIG = {
   // Coverage counts generated from the published research dataset.
   stats: [
     { value: "205", label: "platforms with one documented first-success route" },
-    { value: "2,715", label: "documented steps across those routes" },
+    { value: "2,694", label: "transitions in the selected routes" },
     { value: "1,121", label: "official sources inspected" },
   ],
 
