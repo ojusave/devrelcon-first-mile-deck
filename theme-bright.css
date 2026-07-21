@@ -54,6 +54,32 @@ body {
   filter: none;
 }
 
+.slide-brand {
+  position: absolute;
+  right: 42px;
+  bottom: 32px;
+  z-index: 30;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  opacity: 0.72;
+  pointer-events: none;
+  user-select: none;
+}
+
+.slide--odyssey .slide-brand {
+  filter: brightness(0) invert(1) drop-shadow(0 1px 2px rgb(16 36 58 / 70%));
+  opacity: 0.82;
+}
+
+.slide--dashboard .slide-brand {
+  right: 16px;
+  bottom: 16px;
+  width: 26px;
+  height: 26px;
+  opacity: 0.68;
+}
+
 .slide--title {
   isolation: isolate;
   background: var(--soft-blue);

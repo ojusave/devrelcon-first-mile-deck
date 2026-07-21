@@ -51,6 +51,8 @@ function assert(condition, message) {
         const slide = document.querySelector(`.slide[data-slide="${expectedId}"]`);
         const visible = [...document.querySelectorAll(".slide")].filter((item) => !item.hidden);
         const slideRect = slide.getBoundingClientRect();
+        const brand = slide.querySelector(".slide-brand,.render-logo");
+        const brandRect = brand?.getBoundingClientRect();
         const selectors = "h1,h2,p,li,pre,canvas,iframe";
         const clipped = [...slide.querySelectorAll(selectors)]
           .filter((element) => {
@@ -71,6 +73,14 @@ function assert(condition, message) {
           label: slide.getAttribute("aria-label"),
           backgroundColor: getComputedStyle(slide).backgroundColor,
           hasPrimaryText: Boolean(slide.querySelector("h1,.statement-line")),
+          brand: brand ? {
+            count: slide.querySelectorAll(".slide-brand,.render-logo").length,
+            isMark: brand.classList.contains("slide-brand"),
+            src: brand.getAttribute("src"),
+            alt: brand.getAttribute("alt"),
+            ariaHidden: brand.getAttribute("aria-hidden"),
+            inBounds: brandRect.left >= slideRect.left && brandRect.top >= slideRect.top && brandRect.right <= slideRect.right && brandRect.bottom <= slideRect.bottom,
+          } : null,
           unnamedMedia: [...slide.querySelectorAll("canvas,iframe")]
             .filter((element) => !(element.getAttribute("aria-label") || element.getAttribute("title")))
             .map((element) => element.tagName),
@@ -84,6 +94,13 @@ function assert(condition, message) {
         assert(state.backgroundColor === unifiedPalette.get(slideId), `${viewport.name} slide ${slideId}: palette drifted to ${state.backgroundColor}`);
       }
       assert(state.hasPrimaryText || [12, 13].includes(slideId), `${viewport.name} slide ${slideId}: missing primary slide text`);
+      assert(state.brand?.count === 1, `${viewport.name} slide ${slideId}: expected exactly one Render brand signature`);
+      assert(state.brand.inBounds, `${viewport.name} slide ${slideId}: Render brand signature is out of bounds`);
+      if (![1, 20].includes(slideId)) {
+        assert(state.brand.isMark, `${viewport.name} slide ${slideId}: expected the symbol-only Render mark`);
+        assert(state.brand.src === "assets/render-mark.svg?v=1", `${viewport.name} slide ${slideId}: unexpected Render mark asset ${state.brand.src}`);
+        assert(state.brand.alt === "" && state.brand.ariaHidden === "true", `${viewport.name} slide ${slideId}: decorative Render mark is exposed to assistive technology`);
+      }
       assert(state.unnamedMedia.length === 0, `${viewport.name} slide ${slideId}: unnamed media ${state.unnamedMedia.join(", ")}`);
       assert(state.clipped.length === 0, `${viewport.name} slide ${slideId}: clipped ${JSON.stringify(state.clipped)}`);
       await page.screenshot({ path: join(outputDir, `${viewport.name}-${String(slideId).padStart(2, "0")}.png`) });

@@ -28,6 +28,21 @@
     root.style.setProperty("--stage-top", `${top}px`);
   }
 
+  function addSlideBrandMarks() {
+    slides.forEach((slide) => {
+      if (slide.querySelector(".render-logo")) {
+        return;
+      }
+
+      const mark = document.createElement("img");
+      mark.className = "slide-brand";
+      mark.src = "assets/render-mark.svg?v=1";
+      mark.alt = "";
+      mark.setAttribute("aria-hidden", "true");
+      slide.append(mark);
+    });
+  }
+
   function getFragments(slide) {
     return Array.from(slide.querySelectorAll(".fragment"));
   }
@@ -509,6 +524,7 @@
   });
 
   renderConfiguredAssets();
+  addSlideBrandMarks();
   fitStage();
   showFromHash();
   root.dataset.deckReady = "true";
