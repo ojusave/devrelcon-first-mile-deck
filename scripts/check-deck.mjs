@@ -35,12 +35,12 @@ for (const requiredText of [
   "83 / 205",
   "122 / 205",
   "0 / 790",
-  "DOCUMENTED ROUTE DATA · 205 RECORDS",
-  "BLOCKER HYPOTHESIS GRAPH · SEPARATE DATASET",
+  "ROUTE SELECTION · 205 RECORDS",
+  "SUCCESS BOUNDARIES · 205 RECORDS",
+  "HYPOTHESIS MAP",
   "One documented path to an observable terminal state",
   "Observe five intended developers without rescuing them",
   "Five people form a bounded pilot, not a representative sample",
-  "These are catalog candidates, not observed, common, severe, or causal blockers",
   "No public reuse rights are granted",
 ]) {
   const corpus = Object.values(files).join("\n");
@@ -67,6 +67,7 @@ const forbiddenPatterns = [
   ["old participant wording", /Put five developer champions through it/i],
   ["old handoff wording", /Share aggregate stopping points with the owning team/i],
   ["cross-dataset implication", /205[^\n]{0,80}(?:790|candidate reasons)|790[^\n]{0,80}205/i],
+  ["audit-style source label", /WORKSHOP MEASUREMENT BOUNDARY|DOCUMENTED ROUTE DATA ·|BLOCKER HYPOTHESIS GRAPH · SEPARATE DATASET/i],
   ["generic greatest-hits framing", /greatest hits/i],
   ["slop phrase", /at its core|here(?:'|’)s the thing|now more than ever|let that sink in|game-changing|meaningful impact/i],
 ];

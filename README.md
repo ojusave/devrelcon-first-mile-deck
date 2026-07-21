@@ -139,9 +139,16 @@ A null URL renders a fixed-size placeholder. Configured QR codes are generated l
 
 Prerequisites: Python 3 for a static server and Node.js for the structural check.
 
+Start the server in one terminal:
+
+```sh
+python3 -m http.server 4173
+```
+
+Run the checks in a second terminal:
+
 ```sh
 node scripts/check-deck.mjs
-python3 -m http.server 4173
 NODE_PATH=/path/to/playwright/node_modules node scripts/check-browser.cjs
 ```
 
