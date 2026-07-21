@@ -9,6 +9,12 @@ const viewports = [
   { name: "projector", width: 1920, height: 1080 },
   { name: "laptop", width: 1280, height: 720 },
 ];
+const unifiedPalette = new Map([
+  [22, "rgb(20, 184, 241)"], [23, "rgb(20, 184, 241)"], [24, "rgb(20, 184, 241)"], [16, "rgb(20, 184, 241)"],
+  [11, "rgb(112, 71, 235)"], [17, "rgb(112, 71, 235)"],
+  [14, "rgb(255, 212, 77)"], [19, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [20, "rgb(255, 212, 77)"],
+  [15, "rgb(255, 138, 102)"], [25, "rgb(255, 138, 102)"],
+]);
 const outputDir = mkdtempSync(join(tmpdir(), "devrelcon-deck-"));
 
 function assert(condition, message) {
@@ -59,6 +65,7 @@ function assert(condition, message) {
           visibleCount: visible.length,
           visibleId: visible[0] ? Number(visible[0].dataset.slide) : null,
           label: slide.getAttribute("aria-label"),
+          backgroundColor: getComputedStyle(slide).backgroundColor,
           hasPrimaryText: Boolean(slide.querySelector("h1,.statement-line")),
           unnamedMedia: [...slide.querySelectorAll("canvas,iframe")]
             .filter((element) => !(element.getAttribute("aria-label") || element.getAttribute("title")))
@@ -69,6 +76,9 @@ function assert(condition, message) {
       assert(state.hash === `#${slideId}`, `${viewport.name} slide ${slideId}: wrong hash ${state.hash}`);
       assert(state.visibleCount === 1 && state.visibleId === slideId, `${viewport.name} slide ${slideId}: wrong visible slide`);
       assert(Boolean(state.label), `${viewport.name} slide ${slideId}: missing accessible label`);
+      if (unifiedPalette.has(slideId)) {
+        assert(state.backgroundColor === unifiedPalette.get(slideId), `${viewport.name} slide ${slideId}: palette drifted to ${state.backgroundColor}`);
+      }
       assert(state.hasPrimaryText || slideId === 12, `${viewport.name} slide ${slideId}: missing primary slide text`);
       assert(state.unnamedMedia.length === 0, `${viewport.name} slide ${slideId}: unnamed media ${state.unnamedMedia.join(", ")}`);
       assert(state.clipped.length === 0, `${viewport.name} slide ${slideId}: clipped ${JSON.stringify(state.clipped)}`);

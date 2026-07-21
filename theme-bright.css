@@ -1489,8 +1489,11 @@ body {
 /* Unified live-workshop visual system */
 .slide--unified {
   --orb: var(--aegean);
+  --ring: var(--signal);
   display: grid;
+  grid-template: 1fr / 1fr;
   place-items: center;
+  gap: 0;
   padding: 70px 90px;
   isolation: isolate;
 }
@@ -1514,7 +1517,7 @@ body {
   left: -160px;
   width: 650px;
   height: 650px;
-  border: 30px solid var(--signal);
+  border: 30px solid var(--ring);
   border-radius: 50%;
   content: "";
   z-index: -1;
@@ -1524,13 +1527,15 @@ body {
 .slide--finding,
 .slide--workflow {
   --orb: var(--sun);
-  background: var(--soft-blue);
+  --ring: var(--signal);
+  background: var(--sky);
 }
 
 .slide--scope,
 .slide--firstmile {
   --orb: var(--aegean);
-  background: var(--lavender);
+  --ring: var(--sun);
+  background: var(--signal);
 }
 
 .slide--gates,
@@ -1538,17 +1543,15 @@ body {
 .slide--prototype,
 .slide--closing {
   --orb: var(--aegean);
-  background: var(--soft-yellow);
+  --ring: var(--signal);
+  background: var(--sun);
 }
 
-.slide--method {
-  --orb: var(--sun);
-  background: var(--soft-coral);
-}
-
+.slide--method,
 .slide--ambiguity {
   --orb: var(--sun);
-  background: var(--soft-coral);
+  --ring: var(--signal);
+  background: #ff8a66;
 }
 
 .slide--closing {
@@ -1574,10 +1577,13 @@ body {
 [data-slide="22"] .story-surface,
 [data-slide="11"] .story-surface,
 [data-slide="14"] .story-surface,
-[data-slide="16"] .story-surface,
 [data-slide="24"] .story-surface,
 [data-slide="25"] .story-surface {
   grid-template-rows: auto 1fr auto;
+}
+
+[data-slide="16"] .story-surface {
+  grid-template-rows: auto 1fr;
 }
 
 [data-slide="18"] .story-surface {
@@ -2021,6 +2027,10 @@ body {
 
 .slide[data-slide="16"].slide--workflow::before {
   display: block;
+}
+
+.slide[data-slide="16"].slide--workflow {
+  background: var(--sky);
 }
 
 .story-surface .workflow-list {

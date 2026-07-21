@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310243a'/%3E%3Cpath d='M14 42 42 14l8 8-28 28h-8v-8Z' fill='%23ff704d'/%3E%3C/svg%3E">
     <link rel="preload" href="assets/render-logo.svg?v=2" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=8">
-    <link rel="stylesheet" href="theme-bright.css?v=7">
+    <link rel="stylesheet" href="theme-bright.css?v=8">
     <script defer src="config.js?v=3"></script>
     <script defer src="qrcode.js"></script>
     <script defer src="deck.js?v=10"></script>
@@ -190,10 +190,7 @@
               <article><h2>Airtable</h2><p>Token scopes and resource selection</p></article>
               <article><h2>Ably</h2><p>Four capabilities, plus a production credential warning</p></article>
             </div>
-            <div class="surface-footer">
-              <p>Selected examples, not the most frequent or difficult gates.</p>
-              <p class="source-note">Official pages checked July 21, 2026.</p>
-            </div>
+            <p class="source-note">Selected official-source examples. Pages checked July 21, 2026.</p>
           </div>
         </section>
 
@@ -209,7 +206,7 @@
               <article><p class="card-number">03</p><div><h2>Limit</h2><p>Documentation research, not product telemetry or observed completion time.</p></div></article>
             </div>
             <p class="evidence-handoff">Slides 23 and 24 describe 205 documented-route records. Slide 25 uses a separate blocker hypothesis graph.</p>
-            <p class="source-note">One record means one platform, one selected surface, one documented route, and one research snapshot.</p>
+            <p class="source-note">Record = one platform + one selected surface + one documented route + one research snapshot.</p>
           </div>
         </section>
 
@@ -224,8 +221,7 @@
               <div class="finding-detail">
                 <div class="comparison-row"><strong data-stat="selectionPolicy"></strong><span>research-policy-selected routes</span></div>
                 <div class="comparison-row"><strong data-stat="selectionDocs"></strong><span>documentation-selected routes</span></div>
-                <p class="finding-action">DevRel may need to recommend one route, not only list every option.</p>
-                <p class="source-note" data-stat="selectionSensitivity"></p>
+                <p class="finding-action">Recommend one next route for a specific developer intent.</p>
               </div>
             </div>
             <p class="surface-boundary">This describes route selection in the research records. It does not measure developer preference or abandonment.</p>
@@ -239,11 +235,7 @@
               <h1>Most quickstarts show an ending. Fewer name the milestone.</h1>
             </div>
             <div class="number-grid" data-boundary-stats></div>
-            <div class="finding-footer">
-              <p>Agree where the first mile ends before instrumenting it.</p>
-              <p class="surface-boundary">A demonstrated terminal is not necessarily a poor outcome. The research only records whether the inspected documentation explicitly names the milestone.</p>
-              <p class="source-note">Sensitivity after excluding 69 compact re-researched records: 59 of 136 named, 77 of 136 demonstrated.</p>
-            </div>
+            <p class="surface-boundary">A demonstrated terminal is not necessarily a poor outcome. The research only records whether the inspected documentation explicitly names the milestone.</p>
           </div>
         </section>
 
@@ -288,7 +280,7 @@
               <pre><code>firstmile({ manifest, writeKey, routes })
 fm.error("company_email", "freemail", attempt)
 fm.shipped()</code></pre>
-              <p class="resource-limit">Public Apache-2.0 source. Not published to npm. Node 20+, ESM-only. Review fixed identifiers and credential handling before use.</p>
+              <p class="resource-limit">Public Apache-2.0 source · not on npm · Node 20+ · ESM-only · review identifiers and credential handling before use.</p>
             </div>
             <div class="resource-qr">
               <div class="qr-frame qr-frame--takeaway" data-qr-frame="firstmile" data-qr-size="336" aria-live="off"></div>
@@ -310,7 +302,6 @@ fm.shipped()</code></pre>
               <li><span>4</span>Observe five intended developers without rescuing them.</li>
               <li><span>5</span>Share stopping points, missing evidence, and one next observation with the route owner.</li>
             </ol>
-            <p class="surface-boundary">Five people form a bounded pilot, not a representative sample. Route ownership is not causal ownership.</p>
           </div>
         </section>
 
