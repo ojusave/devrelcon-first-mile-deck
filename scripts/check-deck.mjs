@@ -36,6 +36,11 @@ requireCondition(JSON.stringify(noteIds) === JSON.stringify(expectedOrder), `Spe
 requireCondition((files.notes.match(/purpose:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note purpose");
 requireCondition((files.notes.match(/say:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note delivery cue");
 requireCondition((files.notes.match(/transition:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note transition");
+requireCondition((files.notes.match(/• /g) || []).length >= expectedOrder.length * 3, "Every slide needs detailed speaker-note talking points");
+requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 3, "Purpose, talking points, and transition must be editable");
+requireCondition(files.notesHtml.includes("Save notes"), "Speaker notes need an explicit save action");
+requireCondition(files.notesHtml.includes("Restore defaults"), "Speaker notes need a restore-defaults action");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v1"), "Speaker-note edits must use versioned browser storage");
 
 for (const requiredText of [
   "Completion is not required",

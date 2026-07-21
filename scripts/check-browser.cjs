@@ -158,6 +158,22 @@ function assert(condition, message) {
       await notesPage.screenshot({ path: join(outputDir, "speaker-notes-23.png") });
     }
   }
+
+  await notesPage.goto(`${baseUrl}/speaker-notes.html?edit-check=1#14`, { waitUntil: "networkidle" });
+  const talkingPoints = notesPage.getByLabel("Talking points");
+  const defaultTalkingPoints = await talkingPoints.inputValue();
+  const editedTalkingPoints = `${defaultTalkingPoints}\n• Browser-local edit test.`;
+  await talkingPoints.fill(editedTalkingPoints);
+  await notesPage.getByRole("status").getByText("Unsaved edits").waitFor();
+  await notesPage.getByRole("button", { name: "Save notes" }).click();
+  await notesPage.getByRole("status").getByText("Saved in this browser").waitFor();
+  await notesPage.reload({ waitUntil: "networkidle" });
+  assert(await notesPage.getByLabel("Talking points").inputValue() === editedTalkingPoints, "speaker notes: saved edit did not survive reload");
+  notesPage.once("dialog", (dialog) => dialog.accept());
+  await notesPage.getByRole("button", { name: "Restore defaults" }).click();
+  assert(await notesPage.getByLabel("Talking points").inputValue() === defaultTalkingPoints, "speaker notes: restore defaults did not restore source note");
+  await notesPage.reload({ waitUntil: "networkidle" });
+  assert(await notesPage.getByLabel("Talking points").inputValue() === defaultTalkingPoints, "speaker notes: restored default did not survive reload");
   await notesContext.close();
 
   const requestContext = await request.newContext();

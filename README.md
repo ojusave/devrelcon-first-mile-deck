@@ -26,6 +26,8 @@ The URL hash stores the slide ID. Fragment state resets after refresh.
 
 Open `speaker-notes.html` on the presenter display, or press `N` from the deck. The notes page follows the current slide and can move the deck with its Previous and Next controls when both windows share the same origin.
 
+Purpose, Talking points, and Transition are editable. Select **Save notes** or press `Ctrl+S` or `Cmd+S` to store changes in that browser. Unsaved changes are saved before the notes page moves to another slide. **Restore defaults** removes the saved override for the current slide after confirmation. Browser-saved notes do not change `speaker-notes.js` and do not follow you to another browser or device.
+
 ### Slide sequence
 
 `1, 2, 3, 4, 5, 6, 21, 7, 12, 8, 13, 22, 11, 14, 15, 23, 24, 25, 19, 17, 16, 18, 20`
@@ -173,8 +175,8 @@ After deployment, verify the exact deployed commit, the root page, `/#7`, `/#12`
 | `index.html` | Slide content and semantic structure |
 | `deck.js` | Navigation, fragments, QR codes, dashboard mode, and configuration rendering |
 | `config.js` | Workshop URLs, evidence counts, timer, and contact text |
-| `speaker-notes.js` | Purpose, delivery cue, and transition for every slide ID |
-| `speaker-notes.html` and `speaker-notes-view.js` | Separate synchronized presenter-notes window |
+| `speaker-notes.js` | Default purpose, detailed talking points, and transition for every slide ID |
+| `speaker-notes.html` and `speaker-notes-view.js` | Editable synchronized presenter-notes window with browser-local saved overrides |
 | `styles.css` and `theme-bright.css` | Fixed 1920 by 1080 stage and visual theme |
 | `scripts/check-deck.mjs` | Structural, wording, and configuration checks |
 | `assets/` | Local visual assets |
