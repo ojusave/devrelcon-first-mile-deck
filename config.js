@@ -9,20 +9,28 @@ const CONFIG = {
 
   // Takeaway links. Same placeholder-to-QR behavior as fakegptUrl.
   takeaways: {
-    firstmile: "https://devrelcon-research.onrender.com/#firstmile",
-    fakesaaspiKit: "https://devrelcon-research.onrender.com/#fakesaaspi",
+    firstmile: "https://github.com/ojusave/firstmile",
+    fakesaaspiKit: "https://github.com/ojusave/fakesaaspi",
     comparison: "https://devrelcon-research.onrender.com",
   },
 
   // Optional countdown on the holding slide. null hides it entirely.
   trapTimerMinutes: null,
 
-  // Coverage counts generated from the published research dataset.
-  stats: [
-    { value: "205", label: "platforms with one documented first-success route" },
-    { value: "2,694", label: "transitions in the selected routes" },
-    { value: "1,121", label: "official sources inspected" },
-  ],
+  // Counts reproduced from the research repositories on July 21, 2026.
+  stats: {
+    selectionPrimary: "151 / 205",
+    selectionSensitivity: "Sensitivity: 82 / 136 after excluding 69 compact re-researched records",
+    boundaries: [
+      { value: "83 / 205", label: "routes with an explicitly named first-success boundary" },
+      { value: "122 / 205", label: "routes with a demonstrated terminal state" },
+    ],
+    ambiguity: [
+      { value: "11", label: "universal reason families mapped to learning/setup or implementation" },
+      { value: "200", label: "reason hypotheses inside those families" },
+      { value: "0 / 790", label: "individual reason cards eligible to diagnose a cause" },
+    ],
+  },
 
   // Contact line for the closing slide.
   contact: "Ojus Save · DevRelCon NYC · July 2026",

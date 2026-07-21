@@ -312,23 +312,34 @@
     dashboardSlide.replaceChildren(iframe);
   }
 
-  function renderStats() {
-    const container = document.querySelector("[data-stats]");
-    const stats = Array.isArray(CONFIG.stats) ? CONFIG.stats.slice(0, 3) : [];
+  function renderNumberCards(selector, stats) {
+    const container = document.querySelector(selector);
+    if (!container) {
+      return;
+    }
     container.replaceChildren();
 
     stats.forEach((stat) => {
       const block = document.createElement("div");
       const value = document.createElement("p");
       const label = document.createElement("p");
-      block.className = "stat-block";
-      value.className = "stat-value";
-      label.className = "stat-label";
+      block.className = "number-card";
+      value.className = "number-value";
+      label.className = "number-label";
       value.textContent = stat.value;
       label.textContent = stat.label;
       block.append(value, label);
       container.append(block);
     });
+  }
+
+  function renderStats() {
+    const stats = CONFIG.stats || {};
+    document.querySelectorAll("[data-stat]").forEach((element) => {
+      element.textContent = stats[element.dataset.stat] || "";
+    });
+    renderNumberCards("[data-boundary-stats]", Array.isArray(stats.boundaries) ? stats.boundaries : []);
+    renderNumberCards("[data-ambiguity-stats]", Array.isArray(stats.ambiguity) ? stats.ambiguity : []);
   }
 
   function renderTimer() {

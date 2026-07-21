@@ -8,10 +8,10 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310243a'/%3E%3Cpath d='M14 42 42 14l8 8-28 28h-8v-8Z' fill='%23ff704d'/%3E%3C/svg%3E">
     <link rel="preload" href="assets/render-logo.svg?v=2" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=8">
-    <link rel="stylesheet" href="theme-bright.css?v=5">
-    <script defer src="config.js"></script>
+    <link rel="stylesheet" href="theme-bright.css?v=6">
+    <script defer src="config.js?v=2"></script>
     <script defer src="qrcode.js"></script>
-    <script defer src="deck.js?v=8"></script>
+    <script defer src="deck.js?v=9"></script>
   </head>
   <body>
     <div class="viewport" id="viewport">
@@ -89,169 +89,237 @@
           </div>
         </section>
 
-        <section class="slide slide--handoff" data-slide="7" aria-label="Let's build something" hidden>
-          <h1>Let's build something.</h1>
-          <div class="qr-frame qr-frame--primary" data-qr-frame="fakegpt" aria-live="off"></div>
-          <p class="qr-caption is-empty" data-qr-caption="fakegpt" aria-hidden="true"></p>
+        <section class="slide slide--exercise" data-slide="7" aria-label="Try the onboarding route" hidden>
+          <div class="slide-heading">
+            <p class="eyebrow">8 MINUTES · Completion is not required.</p>
+            <h1>Try to reach the first usable result.</h1>
+          </div>
+          <div class="exercise-grid">
+            <div class="exercise-qr">
+              <div class="qr-frame qr-frame--primary" data-qr-frame="fakegpt" aria-live="off"></div>
+              <p class="qr-caption is-empty" data-qr-caption="fakegpt" aria-hidden="true"></p>
+            </div>
+            <div class="instruction-card">
+              <ol>
+                <li>Use fake details only.</li>
+                <li>Stop when time is called, or when the next step is no longer worth it.</li>
+                <li>Keep your last screen open.</li>
+              </ol>
+              <p class="privacy-note">Do not enter personal, company, customer, card, or secret information.</p>
+              <p class="device-note">No device? Watch the room route on screen.</p>
+            </div>
+          </div>
         </section>
 
-        <section class="slide slide--dashboard" data-slide="12" aria-label="Dashboard" hidden>
+        <section class="slide slide--dashboard" data-slide="12" aria-label="Live room route" hidden>
           <div class="dashboard-placeholder asset-placeholder" data-dashboard-placeholder>
-            <span>DASHBOARD EMBEDS HERE</span>
+            <span>LIVE ROOM ROUTE EMBEDS HERE</span>
             <span>set CONFIG.dashboardUrl</span>
           </div>
         </section>
 
-        <section class="slide slide--holding" data-slide="8" aria-label="Build time" hidden>
-          <img class="slide-scene" src="assets/illustrations/bright/workshop-build.png" alt="" aria-hidden="true">
-          <div class="holding-message">
-            <p>Go build. We'll regroup in a few minutes.</p>
-            <p class="holding-timer" data-trap-timer hidden></p>
-          </div>
-          <div class="holding-qr">
-            <div class="qr-frame qr-frame--holding" data-qr-frame="fakegpt" data-qr-size="260" aria-live="off"></div>
-            <p class="qr-caption qr-caption--holding is-empty" data-qr-caption="fakegpt" aria-hidden="true"></p>
+        <section class="slide slide--regroup" data-slide="8" aria-label="Stop and keep the last screen open" hidden>
+          <div class="regroup-card">
+            <p class="eyebrow">TIME</p>
+            <h1>Stop where you are.</h1>
+            <p>Keep the last screen open.</p>
+            <p class="regroup-limit">The projector shows position and timing. It does not tell us why.</p>
           </div>
         </section>
 
-        <section class="slide slide--title slide--fake-ending" data-slide="9" aria-label="And that's the workshop" hidden>
-          <div class="title-stack">
-            <div class="fragment fake-ending-main" data-fragment>
-              <h1>And that's the workshop.</h1>
-              <p class="subhead">Thanks for coming.</p>
+        <section class="slide slide--evidence" data-slide="22" aria-label="Three evidence boundaries" hidden>
+          <div class="slide-heading">
+            <p class="eyebrow">THREE DIFFERENT THINGS</p>
+            <h1>Keep the evidence separate.</h1>
+          </div>
+          <div class="evidence-grid">
+            <article class="evidence-card evidence-card--docs">
+              <p class="card-number">01</p>
+              <h2>Documented route</h2>
+              <p>What official docs ask someone to do.</p>
+            </article>
+            <article class="evidence-card evidence-card--room">
+              <p class="card-number">02</p>
+              <h2>Observed behavior</h2>
+              <p>Where this room reached, retried, and recorded bounded errors.</p>
+            </article>
+            <article class="evidence-card evidence-card--missing">
+              <p class="card-number">03</p>
+              <h2>Missing evidence</h2>
+              <p>Why someone stopped, what they intended, and whether this happens elsewhere.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="slide slide--scope" data-slide="11" aria-label="What the exercise recorded" hidden>
+          <div class="slide-heading">
+            <p class="eyebrow">WHAT THIS EXERCISE RECORDED</p>
+            <h1>Positions, bounded events, and time.</h1>
+          </div>
+          <div class="scope-grid">
+            <div class="scope-card scope-card--yes">
+              <h2>Sent to the projector</h2>
+              <ul>
+                <li>Named route positions</li>
+                <li>Bounded machine error codes</li>
+                <li>Retries, timing, and terminal completion</li>
+              </ul>
             </div>
-            <p class="fragment fake-ending-detail" data-fragment>Feedback forms are by the door.</p>
-          </div>
-        </section>
-
-        <section class="slide slide--statement slide--denial" data-slide="10" aria-label="Okay, no" hidden>
-          <h1>Okay, no.</h1>
-        </section>
-
-        <section class="slide slide--statement slide--signal-gap" data-slide="22" aria-label="The missing signal" hidden>
-          <div class="signal-gap-copy">
-            <p class="eyebrow">THE MISSING SIGNAL</p>
-            <div class="fragment-stack">
-              <p class="fragment statement-sub" data-fragment>A documented route shows the expected path.</p>
-              <p class="fragment statement-sub signal-gap-punchline" data-fragment>It does not show where progress stopped, or why.</p>
-            </div>
-          </div>
-          <div class="signal-gap-map" aria-hidden="true">
-            <p class="signal-gap-label">DOCUMENTED PATH</p>
-            <div class="signal-gap-route">
-              <div class="signal-gap-step"><span>01</span><span>STEP</span></div>
-              <div class="signal-gap-step"><span>02</span><span>STEP</span></div>
-              <div class="signal-gap-step"><span>03</span><span>STEP</span></div>
-              <div class="signal-gap-step"><span>04</span><span>STEP</span></div>
-            </div>
-            <div class="signal-gap-cutoff">
-              <span></span>
-              <strong>NO SIGNAL</strong>
-            </div>
-          </div>
-        </section>
-
-        <section class="slide slide--statement slide--reveal" data-slide="11" aria-label="The reveal" hidden>
-          <img class="slide-scene" src="assets/illustrations/bright/tracking-reveal.png" alt="" aria-hidden="true">
-          <div class="fragment-stack fragment-stack--reveal">
-            <p class="fragment statement-line" data-fragment>The product you just used was fake.</p>
-            <p class="fragment statement-line" data-fragment>The workshop recorded step IDs, error codes, and timing.</p>
-            <p class="fragment assurance" data-fragment>It did not collect the fake account or card details you entered.</p>
-          </div>
-        </section>
-
-        <section class="slide slide--statement" data-slide="13" aria-label="Remember the bag of winds" hidden>
-          <div class="fragment-stack">
-            <p class="fragment statement-line" data-fragment>Remember the bag of winds?</p>
-            <p class="fragment statement-line" data-fragment>That was the token screen.</p>
-          </div>
-        </section>
-
-        <section class="slide slide--research" data-slide="14" aria-label="The research" hidden>
-          <img class="slide-scene" src="assets/illustrations/bright/research-platforms.png" alt="" aria-hidden="true">
-          <div class="research-content">
-            <p class="eyebrow">THE RESEARCH</p>
-            <h1 class="fragment" data-fragment>We mapped a documented first-success route for 205 developer platforms.</h1>
-            <p class="subhead fragment" data-fragment>What you just went through is the greatest hits.</p>
-          </div>
-        </section>
-
-        <section class="slide slide--stats" data-slide="15" aria-label="Research statistics" hidden>
-          <div class="stats-grid" data-stats></div>
-        </section>
-
-        <section class="slide slide--statement" data-slide="16" aria-label="Take the route and evidence to the team that owns it" hidden>
-          <div class="fragment-stack">
-            <p class="fragment statement-line" data-fragment>The docs show the route.</p>
-            <p class="fragment statement-line" data-fragment>The dashboard shows how far the room reached.</p>
-            <p class="fragment statement-sub" data-fragment>DevRel can take both to the team that owns that part of the route.</p>
-          </div>
-        </section>
-
-        <section class="slide slide--takeaway" data-slide="17" aria-label="Takeaway one" hidden>
-          <div class="takeaway-layout">
-            <div class="takeaway-copy">
-              <p class="eyebrow">TAKEAWAY 1 / 3</p>
-              <h1>firstmile</h1>
-              <p class="takeaway-body">See the step, error, and timing events used in this workshop, plus the architecture and private-beta limits.</p>
-            </div>
-            <div class="takeaway-qr">
-              <div class="qr-frame qr-frame--takeaway" data-qr-frame="firstmile" data-qr-size="336" aria-live="off"></div>
-              <p class="qr-caption is-empty" data-qr-caption="firstmile" aria-hidden="true"></p>
+            <div class="scope-card scope-card--no">
+              <h2>Not sent</h2>
+              <ul>
+                <li>Fake account or card values</li>
+                <li>Form contents or page text</li>
+              </ul>
+              <p>The test token is sent for verification. The source code comes later.</p>
             </div>
           </div>
         </section>
 
-        <section class="slide slide--takeaway" data-slide="18" aria-label="Takeaway two" hidden>
-          <div class="takeaway-layout">
-            <div class="takeaway-copy">
-              <p class="eyebrow">TAKEAWAY 2 / 3</p>
-              <h1>The FakeSaaSPI exercise</h1>
-              <p class="takeaway-body">Replay the bad onboarding flow. Then open the projector view to see aggregate room progress without participants' fake account or card details.</p>
+        <section class="slide slide--gates" data-slide="14" aria-label="Examples of documented gates" hidden>
+          <div class="slide-heading">
+            <p class="eyebrow">FOUR DOCUMENTED ROUTES</p>
+            <h1>The setup work takes different forms.</h1>
+          </div>
+          <div class="gate-grid">
+            <article><h2>Airwallex</h2><p>Business email and sandbox account</p></article>
+            <article><h2>Akamai Cloud</h2><p>SMS verification and payment method</p></article>
+            <article><h2>Airtable</h2><p>Token scopes and resource selection</p></article>
+            <article><h2>Ably</h2><p>Four capabilities, plus a production credential warning</p></article>
+          </div>
+          <p class="source-note">Selected documented routes. Official pages checked July 21, 2026.</p>
+        </section>
+
+        <section class="slide slide--method" data-slide="15" aria-label="Research method" hidden>
+          <div class="slide-heading">
+            <p class="eyebrow">METHOD</p>
+            <h1>205 platforms. One selected route each.</h1>
+          </div>
+          <div class="method-grid">
+            <article><p class="card-number">01</p><h2>Source</h2><p>Official documentation for each platform.</p></article>
+            <article><p class="card-number">02</p><h2>Boundary</h2><p>One documented path to a first usable result.</p></article>
+            <article><p class="card-number">03</p><h2>Limit</h2><p>Documentation research, not product telemetry or observed completion time.</p></article>
+          </div>
+          <p class="source-note">Use the records for conditional comparison, not a platform ranking.</p>
+        </section>
+
+        <section class="slide slide--finding" data-slide="23" aria-label="Route selection finding" hidden>
+          <div class="finding-layout">
+            <div>
+              <p class="eyebrow">ROUTE SELECTION</p>
+              <p class="finding-number" data-stat="selectionPrimary"></p>
+              <h1>routes needed the workshop selection policy.</h1>
             </div>
-            <div class="takeaway-qr">
-              <div class="qr-frame qr-frame--takeaway" data-qr-frame="fakesaaspiKit" data-qr-size="336" aria-live="off"></div>
-              <p class="qr-caption is-empty" data-qr-caption="fakesaaspiKit" aria-hidden="true"></p>
+            <div class="finding-detail">
+              <p class="sensitivity" data-stat="selectionSensitivity"></p>
+              <p>DevRel may need to recommend one route, not only list every option.</p>
+              <p class="source-note">Direct field count. The derived phrase detector undercounts wording variants.</p>
             </div>
           </div>
         </section>
 
-        <section class="slide slide--takeaway" data-slide="19" aria-label="Takeaway three" hidden>
-          <div class="takeaway-layout">
-            <div class="takeaway-copy takeaway-copy--dense">
-              <p class="eyebrow">TAKEAWAY 3 / 3</p>
-              <h1>First-Mile Atlas</h1>
-              <p class="takeaway-kicker">Built from the 205-platform research.</p>
-              <p class="takeaway-body fragment" data-fragment>Search 205 platforms and compare their documented steps, gates, and first-success boundaries. Docs complexity is not the same as real-world activation.</p>
-              <p class="takeaway-aside fragment" data-fragment>Use it to decide which first-mile gates your team should investigate.</p>
+        <section class="slide slide--finding" data-slide="24" aria-label="Success boundary finding" hidden>
+          <div class="slide-heading">
+            <p class="eyebrow">WHERE DOES THE FIRST MILE END?</p>
+            <h1>Two boundary types in the 205 routes.</h1>
+          </div>
+          <div class="number-grid" data-boundary-stats></div>
+          <div class="finding-footer">
+            <p>Agree where the first mile ends before instrumenting it.</p>
+            <p class="source-note">Sensitivity after excluding 69 compact re-researched records: 59 of 136 named, 77 of 136 demonstrated.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--ambiguity" data-slide="25" aria-label="Observed position does not diagnose cause" hidden>
+          <div class="slide-heading">
+            <p class="eyebrow">POSITION IS NOT CAUSE</p>
+            <h1>“Learning/setup” or “implementation” still leaves many explanations.</h1>
+          </div>
+          <div class="ambiguity-grid" data-ambiguity-stats></div>
+          <p class="ambiguity-action">Use the inventory to choose the next evidence, not the answer.</p>
+        </section>
+
+        <section class="slide slide--atlas" data-slide="19" aria-label="Use the First-Mile Atlas" hidden>
+          <div class="resource-layout">
+            <div class="resource-copy">
+              <p class="eyebrow">3 TO 4 MINUTES</p>
+              <h1>Check a documented comparison.</h1>
+              <ol>
+                <li>Find your platform, category, or nearest comparison.</li>
+                <li>Choose one documented condition worth checking.</li>
+                <li>If your platform is missing, write down the mismatch.</li>
+              </ol>
+              <p class="resource-limit">The Atlas suggests what to investigate. It does not diagnose behavior.</p>
             </div>
-            <div class="takeaway-qr">
+            <div class="resource-qr">
               <div class="qr-frame qr-frame--takeaway" data-qr-frame="comparison" data-qr-size="336" aria-live="off"></div>
               <p class="qr-caption is-empty" data-qr-caption="comparison" aria-hidden="true"></p>
             </div>
           </div>
         </section>
 
-        <section class="slide slide--closing" data-slide="20" aria-label="Closing" hidden>
-          <img class="slide-scene" src="assets/illustrations/bright/closing-first-mile.png" alt="" aria-hidden="true">
-          <div class="closing-copy">
-            <h1 class="fragment" data-fragment>Go find your first mile.</h1>
-            <p class="subhead fragment" data-fragment>It shouldn't take ten years.</p>
-            <p class="contact" data-contact></p>
+        <section class="slide slide--firstmile" data-slide="17" aria-label="Firstmile instrumentation SDK" hidden>
+          <div class="resource-layout">
+            <div class="resource-copy">
+              <p class="eyebrow">FIRSTMILE</p>
+              <h1>Record named positions, not form contents.</h1>
+              <pre><code>firstmile({ manifest, writeKey, routes })
+fm.error("company_email", "freemail", attempt)
+fm.shipped()</code></pre>
+              <p class="resource-limit">Public Apache-2.0 source. Not published to npm. Node 20+, ESM-only. Review fixed identifiers and credential handling before use.</p>
+            </div>
+            <div class="resource-qr">
+              <div class="qr-frame qr-frame--takeaway" data-qr-frame="firstmile" data-qr-size="336" aria-live="off"></div>
+              <p class="qr-caption is-empty" data-qr-caption="firstmile" aria-hidden="true"></p>
+            </div>
           </div>
-          <div class="closing-qr-row">
-            <div class="closing-qr">
-              <div class="qr-frame qr-frame--closing" data-qr-frame="firstmile" data-qr-size="160" aria-live="off"></div>
-              <p class="qr-caption qr-caption--closing is-empty" data-qr-caption="firstmile" aria-hidden="true"></p>
+        </section>
+
+        <section class="slide slide--workflow" data-slide="16" aria-label="Engineering workflow" hidden>
+          <div class="slide-heading">
+            <p class="eyebrow">A SMALL ENGINEERING ASK</p>
+            <h1>Bring a route and evidence, not a verdict.</h1>
+          </div>
+          <ol class="workflow-list">
+            <li><span>1</span>Define the first-success outcome.</li>
+            <li><span>2</span>Name the expected positions.</li>
+            <li><span>3</span>Record bounded events.</li>
+            <li><span>4</span>Put five developer champions through it.</li>
+            <li><span>5</span>Share aggregate stopping points with the owning team.</li>
+          </ol>
+        </section>
+
+        <section class="slide slide--prototype" data-slide="18" aria-label="Build a bounded evidence prototype" hidden>
+          <div class="slide-heading">
+            <p class="eyebrow">IF ENGINEERING CANNOT INSTRUMENT IT YET</p>
+            <h1>Build a bounded evidence prototype.</h1>
+          </div>
+          <div class="prototype-grid">
+            <ol>
+              <li>Start from the public FakeSaaSPI reference app.</li>
+              <li>Give a coding agent the official docs and target outcome.</li>
+              <li>Replace the route with a documented mirror.</li>
+              <li>Add Firstmile, review every step, and test with a small group.</li>
+            </ol>
+            <div class="guardrail-card">
+              <h2>Guardrails</h2>
+              <p>Fake data only. Do not invent steps. Do not publish or deploy without approval.</p>
+              <p>A prototype is not production telemetry or usability research.</p>
+              <p>FakeSaaSPI is source available for inspection. No public reuse rights are granted.</p>
             </div>
-            <div class="closing-qr">
-              <div class="qr-frame qr-frame--closing" data-qr-frame="fakesaaspiKit" data-qr-size="160" aria-live="off"></div>
-              <p class="qr-caption qr-caption--closing is-empty" data-qr-caption="fakesaaspiKit" aria-hidden="true"></p>
-            </div>
-            <div class="closing-qr">
-              <div class="qr-frame qr-frame--closing" data-qr-frame="comparison" data-qr-size="160" aria-live="off"></div>
-              <p class="qr-caption qr-caption--closing is-empty" data-qr-caption="comparison" aria-hidden="true"></p>
-            </div>
+          </div>
+        </section>
+
+        <section class="slide slide--closing" data-slide="20" aria-label="Monday action" hidden>
+          <div class="closing-action">
+            <p class="eyebrow">ON MONDAY</p>
+            <h1>Pick one route.</h1>
+            <ol>
+              <li>Define its first-success outcome and observable positions.</li>
+              <li>Put five developers through it.</li>
+              <li>Bring the stopping points and missing evidence to the team that owns them.</li>
+            </ol>
+            <p class="contact" data-contact></p>
           </div>
           <div class="closing-footer">
             <img class="render-logo" src="assets/render-logo.svg?v=2" alt="Render">
