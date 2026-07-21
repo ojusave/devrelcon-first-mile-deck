@@ -56,18 +56,18 @@ body {
 
 .slide-brand {
   position: absolute;
-  right: 24px;
-  bottom: 20px;
+  right: 0;
+  bottom: 0;
   z-index: 30;
-  width: 88px;
-  height: 88px;
+  width: 218px;
+  height: 90px;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
 }
 
 .slide--odyssey .slide-brand {
-  filter: invert(1) drop-shadow(0 2px 2px rgb(16 36 58 / 72%));
+  filter: drop-shadow(0 2px 2px rgb(16 36 58 / 72%));
 }
 
 .slide--title {
@@ -662,7 +662,7 @@ body {
 }
 
 .slide--dashboard {
-  padding: 56px;
+  padding: 56px 56px 100px;
   background: var(--soft-blue);
 }
 
@@ -970,7 +970,7 @@ body {
 .slide--exercise {
   grid-template-rows: auto 1fr;
   gap: 42px;
-  padding: 70px 96px;
+  padding: 70px 96px 100px;
   background: var(--sun);
 }
 
@@ -2441,7 +2441,7 @@ body {
 }
 
 .closing-surface {
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   align-items: end;
   padding: 62px 68px 54px;
 }

@@ -64,9 +64,19 @@ function assert(condition, message) {
         const slide = document.querySelector(`.slide[data-slide="${expectedId}"]`);
         const visible = [...document.querySelectorAll(".slide")].filter((item) => !item.hidden);
         const slideRect = slide.getBoundingClientRect();
-        const brand = slide.querySelector(".slide-brand");
+        const brand = slide.querySelector(".slide-brand,.render-logo");
         const brandRect = brand?.getBoundingClientRect();
         const brandStyle = brand ? getComputedStyle(brand) : null;
+        const brandOverlaps = brand?.classList.contains("slide-brand")
+          ? [...slide.querySelectorAll(".story-surface,.dashboard-frame,.dashboard-placeholder,.instruction-card,.regroup-card,.statement,.fragment-stack,.moral-copy,.slide-heading,.exercise-grid")]
+            .filter((element) => {
+              const rect = element.getBoundingClientRect();
+              const overlapWidth = Math.min(brandRect.right, rect.right) - Math.max(brandRect.left, rect.left);
+              const overlapHeight = Math.min(brandRect.bottom, rect.bottom) - Math.max(brandRect.top, rect.top);
+              return overlapWidth > 2 && overlapHeight > 2;
+            })
+            .map((element) => element.className)
+          : [];
         const selectors = "h1,h2,p,li,pre,canvas,iframe";
         const clipped = [...slide.querySelectorAll(selectors)]
           .filter((element) => {
@@ -88,13 +98,15 @@ function assert(condition, message) {
           backgroundColor: getComputedStyle(slide).backgroundColor,
           hasPrimaryText: Boolean(slide.querySelector("h1,.statement-line")),
           brand: brand ? {
-            count: slide.querySelectorAll(".slide-brand").length,
+            count: slide.querySelectorAll(".slide-brand,.render-logo").length,
+            kind: brand.classList.contains("slide-brand") ? "footer" : "title",
             src: brand.getAttribute("src"),
             alt: brand.getAttribute("alt"),
             ariaHidden: brand.getAttribute("aria-hidden"),
             size: [brandRect.width, brandRect.height],
             placement: [brandStyle.right, brandStyle.bottom, brandStyle.width, brandStyle.height],
             inBounds: brandRect.left >= slideRect.left && brandRect.top >= slideRect.top && brandRect.right <= slideRect.right && brandRect.bottom <= slideRect.bottom,
+            overlaps: brandOverlaps,
           } : null,
           unnamedMedia: [...slide.querySelectorAll("canvas,iframe")]
             .filter((element) => !(element.getAttribute("aria-label") || element.getAttribute("title")))
@@ -109,12 +121,21 @@ function assert(condition, message) {
         assert(state.backgroundColor === unifiedPalette.get(slideId), `${viewport.name} slide ${slideId}: palette drifted to ${state.backgroundColor}`);
       }
       assert(state.hasPrimaryText || [9, 11].includes(slideId), `${viewport.name} slide ${slideId}: missing primary slide text`);
-      assert(state.brand?.count === 1, `${viewport.name} slide ${slideId}: expected exactly one repeated Render mark`);
+      assert(state.brand?.count === 1, `${viewport.name} slide ${slideId}: expected exactly one Render wordmark`);
       assert(state.brand.inBounds, `${viewport.name} slide ${slideId}: Render brand signature is out of bounds`);
-      assert(state.brand.src === "assets/render-logomark.svg?v=1", `${viewport.name} slide ${slideId}: unexpected Render logomark asset ${state.brand.src}`);
-      assert(Math.abs(state.brand.size[0] - state.brand.size[1]) < 0.1, `${viewport.name} slide ${slideId}: Render logomark is not square`);
-      assert(state.brand.placement.join("|") === "24px|20px|88px|88px", `${viewport.name} slide ${slideId}: inconsistent Render logomark placement ${state.brand.placement.join("|")}`);
-      assert(state.brand.alt === "" && state.brand.ariaHidden === "true", `${viewport.name} slide ${slideId}: decorative Render mark is exposed to assistive technology`);
+      if (state.brand.kind === "footer") {
+        const expectedBrandAsset = [2, 3, 4, 5, 6].includes(slideId)
+          ? "assets/brand/render-logo-white.svg?v=1"
+          : "assets/brand/render-logo-black.svg?v=1";
+        assert(state.brand.src === expectedBrandAsset, `${viewport.name} slide ${slideId}: unexpected Render wordmark asset ${state.brand.src}`);
+        assert(state.brand.placement.join("|") === "0px|0px|218px|90px", `${viewport.name} slide ${slideId}: inconsistent Render wordmark placement ${state.brand.placement.join("|")}`);
+        assert(state.brand.overlaps.length === 0, `${viewport.name} slide ${slideId}: Render wordmark overlaps ${state.brand.overlaps.join(", ")}`);
+        assert(state.brand.alt === "" && state.brand.ariaHidden === "true", `${viewport.name} slide ${slideId}: decorative Render wordmark is exposed to assistive technology`);
+      } else {
+        assert(slideId === 1, `${viewport.name} slide ${slideId}: only the title may use the speaker-row wordmark`);
+        assert(state.brand.src === "assets/render-logo.svg?v=2", `${viewport.name} title: unexpected Render wordmark asset ${state.brand.src}`);
+        assert(state.brand.alt === "Render", `${viewport.name} title: speaker-row Render wordmark needs an accessible name`);
+      }
       assert(state.unnamedMedia.length === 0, `${viewport.name} slide ${slideId}: unnamed media ${state.unnamedMedia.join(", ")}`);
       assert(state.clipped.length === 0, `${viewport.name} slide ${slideId}: clipped ${JSON.stringify(state.clipped)}`);
       await page.screenshot({ path: join(outputDir, `${viewport.name}-${String(slideId).padStart(2, "0")}.png`) });
