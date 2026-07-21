@@ -31,12 +31,18 @@
 
   function addSlideBrandMarks() {
     slides.forEach((slide) => {
-      const mark = document.createElement("img");
-      mark.className = "slide-brand";
-      mark.src = "assets/render-logomark.svg?v=1";
-      mark.alt = "";
-      mark.setAttribute("aria-hidden", "true");
-      slide.append(mark);
+      if (slide.querySelector(".render-logo")) {
+        return;
+      }
+
+      const logo = document.createElement("img");
+      logo.className = "slide-brand";
+      logo.src = slide.classList.contains("slide--odyssey")
+        ? "assets/brand/render-logo-white.svg?v=1"
+        : "assets/brand/render-logo-black.svg?v=1";
+      logo.alt = "";
+      logo.setAttribute("aria-hidden", "true");
+      slide.append(logo);
     });
   }
 
