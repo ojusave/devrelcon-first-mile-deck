@@ -632,35 +632,6 @@ body {
   box-shadow: 14px 14px 0 var(--ink);
 }
 
-[data-slide="13"] {
-  position: relative;
-  display: block;
-  padding: 0;
-  color: var(--ink);
-  background-image: url("assets/illustrations/bright/odyssey-wrong-bag.png");
-  background-position: center;
-  background-size: cover;
-}
-
-[data-slide="13"] .fragment-stack {
-  position: absolute;
-  top: 190px;
-  left: 70px;
-  width: 790px;
-  min-height: 660px;
-  padding: 56px;
-  border: 4px solid var(--ink);
-  border-radius: 38px;
-  align-content: center;
-  background: rgb(255 255 255 / 94%);
-  box-shadow: 14px 14px 0 var(--ink);
-}
-
-[data-slide="13"] .statement-line {
-  max-width: 680px;
-  font-size: 72px;
-}
-
 .research-content {
   top: 155px;
   min-height: 700px;

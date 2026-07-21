@@ -7,10 +7,13 @@ const files = {
   config: readFileSync(resolve(root, "config.js"), "utf8"),
   deck: readFileSync(resolve(root, "deck.js"), "utf8"),
   readme: readFileSync(resolve(root, "README.md"), "utf8"),
+  notes: readFileSync(resolve(root, "speaker-notes.js"), "utf8"),
+  notesView: readFileSync(resolve(root, "speaker-notes-view.js"), "utf8"),
+  notesHtml: readFileSync(resolve(root, "speaker-notes.html"), "utf8"),
   theme: readFileSync(resolve(root, "theme-bright.css"), "utf8"),
 };
 
-const expectedOrder = [1, 2, 3, 4, 5, 6, 21, 7, 12, 8, 22, 11, 14, 15, 23, 24, 25, 19, 17, 16, 18, 20];
+const expectedOrder = [1, 2, 3, 4, 5, 6, 21, 7, 12, 8, 13, 22, 11, 14, 15, 23, 24, 25, 19, 17, 16, 18, 20];
 const actualOrder = [...files.html.matchAll(/data-slide="(\d+)"/g)].map((match) => Number(match[1]));
 const errors = [];
 
@@ -22,23 +25,40 @@ function requireCondition(condition, message) {
 
 requireCondition(JSON.stringify(actualOrder) === JSON.stringify(expectedOrder), `Unexpected slide order: ${actualOrder.join(", ")}`);
 requireCondition(new Set(actualOrder).size === actualOrder.length, "Slide IDs must be unique");
-requireCondition(!actualOrder.some((id) => [9, 10, 13].includes(id)), "Removed slides 9, 10, and 13 must stay removed");
+requireCondition(!actualOrder.some((id) => [9, 10].includes(id)), "Removed slides 9 and 10 must stay removed");
 requireCondition(actualOrder.indexOf(12) === actualOrder.indexOf(7) + 1, "Slide 12 must immediately follow slide 7");
+requireCondition(actualOrder.indexOf(8) === actualOrder.indexOf(12) + 1, "Slide 8 must immediately follow slide 12");
+requireCondition(actualOrder.indexOf(13) === actualOrder.indexOf(8) + 1, "Slide 13 must immediately follow slide 8");
 requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).length === 12, "The twelve evidence, resource, workflow, and closing slides must use the shared story surface");
+
+const noteIds = [...files.notes.matchAll(/^\s+(\d+): \{/gm)].map((match) => Number(match[1]));
+requireCondition(JSON.stringify(noteIds) === JSON.stringify(expectedOrder), `Speaker notes do not match slide order: ${noteIds.join(", ")}`);
+requireCondition((files.notes.match(/purpose:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note purpose");
+requireCondition((files.notes.match(/say:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note delivery cue");
+requireCondition((files.notes.match(/transition:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note transition");
 
 for (const requiredText of [
   "Completion is not required",
   "It does not tell us why",
   "Keep the evidence separate",
   "151 / 205",
-  "documentation-selected routes",
+  "we had to choose one route",
+  "the docs identified one directly",
   "83 / 205",
   "122 / 205",
-  "0 / 790",
-  "ROUTE SELECTION · 205 RECORDS",
-  "SUCCESS BOUNDARIES · 205 RECORDS",
-  "HYPOTHESIS MAP",
-  "One documented path to an observable terminal state",
+  "Zero of 790",
+  "TRACKER SCOPE",
+  "Payments APIs",
+  "Cloud infrastructure",
+  "Data platforms",
+  "Real-time messaging",
+  "ROUTE CHOICE · 205 DOCUMENTED ROUTES",
+  "SUCCESS SIGNALS · 205 DOCUMENTED ROUTES",
+  "ONE STOPPING POINT, THREE QUESTIONS",
+  "One selected path for one developer intent",
+  "set CONFIG.resultsUrl",
+  "Only 83 routes explicitly named the first-success milestone",
+  "did not present one unambiguous default route for the selected intent",
   "Observe five intended developers without rescuing them",
   "Five people form a bounded pilot, not a representative sample",
   "No public reuse rights are granted",

@@ -4,7 +4,7 @@ const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 
 const baseUrl = process.env.DECK_URL || "http://127.0.0.1:4173";
-const slideIds = [1, 2, 3, 4, 5, 6, 21, 7, 12, 8, 22, 11, 14, 15, 23, 24, 25, 19, 17, 16, 18, 20];
+const slideIds = [1, 2, 3, 4, 5, 6, 21, 7, 12, 8, 13, 22, 11, 14, 15, 23, 24, 25, 19, 17, 16, 18, 20];
 const viewports = [
   { name: "projector", width: 1920, height: 1080 },
   { name: "laptop", width: 1280, height: 720 },
@@ -43,6 +43,10 @@ function assert(condition, message) {
         await dashboard.locator("body").waitFor();
         await dashboard.getByText("What happened in this route?").waitFor();
       }
+      if (slideId === 13) {
+        await page.getByText("REAL-TIME RESULTS EMBED HERE").waitFor();
+        await page.getByText("set CONFIG.resultsUrl").waitFor();
+      }
       const state = await page.evaluate((expectedId) => {
         const slide = document.querySelector(`.slide[data-slide="${expectedId}"]`);
         const visible = [...document.querySelectorAll(".slide")].filter((item) => !item.hidden);
@@ -79,7 +83,7 @@ function assert(condition, message) {
       if (unifiedPalette.has(slideId)) {
         assert(state.backgroundColor === unifiedPalette.get(slideId), `${viewport.name} slide ${slideId}: palette drifted to ${state.backgroundColor}`);
       }
-      assert(state.hasPrimaryText || slideId === 12, `${viewport.name} slide ${slideId}: missing primary slide text`);
+      assert(state.hasPrimaryText || [12, 13].includes(slideId), `${viewport.name} slide ${slideId}: missing primary slide text`);
       assert(state.unnamedMedia.length === 0, `${viewport.name} slide ${slideId}: unnamed media ${state.unnamedMedia.join(", ")}`);
       assert(state.clipped.length === 0, `${viewport.name} slide ${slideId}: clipped ${JSON.stringify(state.clipped)}`);
       await page.screenshot({ path: join(outputDir, `${viewport.name}-${String(slideId).padStart(2, "0")}.png`) });
@@ -98,12 +102,30 @@ function assert(condition, message) {
     assert((await page.url()).endsWith("#20"), `${viewport.name}: End did not reach slide 20`);
     await page.keyboard.press("Home");
     assert((await page.url()).endsWith("#1"), `${viewport.name}: Home did not reach slide 1`);
-    await page.mouse.click(viewport.width / 2, viewport.height / 2);
-    assert((await page.url()).endsWith("#2"), `${viewport.name}: click did not advance`);
+    await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
+    assert((await page.url()).endsWith("#2"), `${viewport.name}: right-side click did not advance`);
+    await page.mouse.click(viewport.width * 0.2, viewport.height / 2);
+    assert((await page.url()).endsWith("#1"), `${viewport.name}: left-side click did not reverse`);
+    await page.keyboard.press("ArrowRight");
+    assert((await page.url()).endsWith("#2"), `${viewport.name}: ArrowRight did not advance`);
     await page.keyboard.press("ArrowLeft");
     assert((await page.url()).endsWith("#1"), `${viewport.name}: ArrowLeft did not reverse`);
-    await page.touchscreen.tap(viewport.width / 2, viewport.height / 2);
-    assert((await page.url()).endsWith("#2"), `${viewport.name}: touch did not advance`);
+    await page.touchscreen.tap(viewport.width * 0.8, viewport.height / 2);
+    assert((await page.url()).endsWith("#2"), `${viewport.name}: right-side touch did not advance`);
+    await page.touchscreen.tap(viewport.width * 0.2, viewport.height / 2);
+    assert((await page.url()).endsWith("#1"), `${viewport.name}: left-side touch did not reverse`);
+
+    if (viewport.name === "projector") {
+      await page.goto(`${baseUrl}/#14`, { waitUntil: "networkidle" });
+      const notesPage = await context.newPage();
+      await notesPage.goto(`${baseUrl}/speaker-notes.html`, { waitUntil: "networkidle" });
+      await notesPage.getByText("Slide 14").waitFor();
+      await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
+      await notesPage.getByText("Slide 15").waitFor();
+      await notesPage.getByRole("button", { name: "Previous" }).click();
+      await page.waitForURL(/#14$/);
+      await notesPage.close();
+    }
 
     await context.close();
   }
@@ -118,6 +140,19 @@ function assert(condition, message) {
   const transitionDuration = await reducedPage.locator(".scene-image[data-art-fragment]").first().evaluate((element) => getComputedStyle(element).transitionDuration);
   assert(transitionDuration === "0s", `reduced motion: expected 0s transition, found ${transitionDuration}`);
   await reducedContext.close();
+
+  const notesContext = await browser.newContext({ viewport: { width: 1280, height: 720 } });
+  const notesPage = await notesContext.newPage();
+  for (const slideId of slideIds) {
+    await notesPage.goto(`${baseUrl}/speaker-notes.html?check=${slideId}#${slideId}`, { waitUntil: "networkidle" });
+    await notesPage.locator("[data-note-slide]").getByText(String(slideId), { exact: true }).waitFor();
+    const notesFit = await notesPage.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight);
+    assert(notesFit, `speaker notes slide ${slideId}: notes require scrolling at 1280x720`);
+    if (slideId === 23) {
+      await notesPage.screenshot({ path: join(outputDir, "speaker-notes-23.png") });
+    }
+  }
+  await notesContext.close();
 
   const requestContext = await request.newContext();
   for (const url of [

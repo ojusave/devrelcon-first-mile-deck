@@ -7,6 +7,10 @@ const CONFIG = {
   // When set, it embeds this URL as a full-bleed iframe.
   dashboardUrl: "https://fakesaaspi.onrender.com/present",
 
+  // Real-time debrief view shown on slide 13. Keep null until its final
+  // event-specific URL is ready; the slide preserves the full-size frame.
+  resultsUrl: null,
+
   // Takeaway links. Same placeholder-to-QR behavior as fakegptUrl.
   takeaways: {
     firstmile: "https://github.com/ojusave/firstmile",
@@ -25,12 +29,7 @@ const CONFIG = {
     selectionSensitivity: "Sensitivity: 82 / 136 after excluding 69 compact re-researched records",
     boundaries: [
       { value: "83 / 205", label: "routes with an explicitly named first-success milestone" },
-      { value: "122 / 205", label: "routes with a demonstrated terminal state" },
-    ],
-    ambiguity: [
-      { value: "11", label: "universal cause families" },
-      { value: "200", label: "distinct universal candidate reasons before one follow-up question" },
-      { value: "0 / 790", label: "reason cards currently eligible to report as a diagnosed cause" },
+      { value: "122 / 205", label: "routes that demonstrated an end without naming the milestone" },
     ],
   },
 

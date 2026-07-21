@@ -8,10 +8,10 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310243a'/%3E%3Cpath d='M14 42 42 14l8 8-28 28h-8v-8Z' fill='%23ff704d'/%3E%3C/svg%3E">
     <link rel="preload" href="assets/render-logo.svg?v=2" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=8">
-    <link rel="stylesheet" href="theme-bright.css?v=8">
-    <script defer src="config.js?v=3"></script>
+    <link rel="stylesheet" href="theme-bright.css?v=9">
+    <script defer src="config.js?v=4"></script>
     <script defer src="qrcode.js"></script>
-    <script defer src="deck.js?v=10"></script>
+    <script defer src="deck.js?v=11"></script>
   </head>
   <body>
     <div class="viewport" id="viewport">
@@ -111,9 +111,9 @@
           </div>
         </section>
 
-        <section class="slide slide--dashboard" data-slide="12" aria-label="Live room route" hidden>
+        <section class="slide slide--dashboard" data-slide="12" aria-label="Live dashboard" hidden>
           <div class="dashboard-placeholder asset-placeholder" data-dashboard-placeholder>
-            <span>LIVE ROOM ROUTE EMBEDS HERE</span>
+            <span>LIVE DASHBOARD EMBEDS HERE</span>
             <span>set CONFIG.dashboardUrl</span>
           </div>
         </section>
@@ -124,6 +124,13 @@
             <h1>Stop where you are.</h1>
             <p>Keep the last screen open.</p>
             <p class="regroup-limit">The projector shows position and timing. It does not tell us why.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--dashboard slide--results" data-slide="13" aria-label="Real-time room results" hidden>
+          <div class="dashboard-placeholder asset-placeholder" data-results-placeholder>
+            <span>REAL-TIME RESULTS EMBED HERE</span>
+            <span>set CONFIG.resultsUrl</span>
           </div>
         </section>
 
@@ -153,25 +160,24 @@
         <section class="slide slide--scope slide--unified" data-slide="11" aria-label="What the exercise recorded" hidden>
           <div class="story-surface">
             <div class="surface-heading">
-              <p class="source-label">WHAT THE ROOM SENT</p>
-              <h1>Positions, bounded events, and time.</h1>
+              <p class="source-label">TRACKER SCOPE</p>
+              <h1>This is what the tracker recorded.</h1>
             </div>
             <div class="scope-grid">
               <div class="scope-card scope-card--yes">
-                <h2>Sent to the projector</h2>
+                <h2>Recorded</h2>
                 <ul>
-                  <li>Named route positions</li>
-                  <li>Bounded machine error codes</li>
-                  <li>Retries, timing, and terminal completion</li>
+                  <li>Named step and timestamp</li>
+                  <li>Retry and bounded machine error</li>
+                  <li>Terminal completion</li>
                 </ul>
               </div>
               <div class="scope-card scope-card--no">
-                <h2>Not sent</h2>
+                <h2>Not recorded</h2>
                 <ul>
                   <li>Fake account or card values</li>
                   <li>Form contents or page text</li>
                 </ul>
-                <p>The test token is sent for verification. The source code comes later.</p>
               </div>
             </div>
           </div>
@@ -184,10 +190,10 @@
               <h1>The setup work takes different forms.</h1>
             </div>
             <div class="gate-grid">
-              <article><h2>Airwallex</h2><p>Business email and sandbox account</p></article>
-              <article><h2>Akamai Cloud</h2><p>SMS verification and payment method</p></article>
-              <article><h2>Airtable</h2><p>Token scopes and resource selection</p></article>
-              <article><h2>Ably</h2><p>Four capabilities, plus a production credential warning</p></article>
+              <article><h2>Payments APIs</h2><p>Business email and sandbox account</p></article>
+              <article><h2>Cloud infrastructure</h2><p>SMS verification and payment method</p></article>
+              <article><h2>Data platforms</h2><p>Token scopes and resource selection</p></article>
+              <article><h2>Real-time messaging</h2><p>Capability choice and production credential warning</p></article>
             </div>
           </div>
         </section>
@@ -196,28 +202,27 @@
           <div class="story-surface">
             <div class="surface-heading">
               <p class="source-label">RESEARCH METHOD</p>
-              <h1>205 platforms. One selected route each.</h1>
+              <h1>205 platforms. One documented route each.</h1>
             </div>
             <div class="method-grid">
-              <article><p class="card-number">01</p><div><h2>Source</h2><p>Official documentation for each platform.</p></div></article>
-              <article><p class="card-number">02</p><div><h2>Boundary</h2><p>One documented path to an observable terminal state.</p></div></article>
-              <article><p class="card-number">03</p><div><h2>Recorded</h2><p>The same route fields for every platform.</p></div></article>
+              <article><p class="card-number">01</p><div><h2>Source</h2><p>Official documentation for one platform.</p></div></article>
+              <article><p class="card-number">02</p><div><h2>Route</h2><p>One selected path for one developer intent.</p></div></article>
+              <article><p class="card-number">03</p><div><h2>End</h2><p>A named milestone or demonstrated terminal state.</p></div></article>
             </div>
-            <p class="source-note">Record = one platform + one selected surface + one documented route + one research snapshot.</p>
           </div>
         </section>
 
         <section class="slide slide--finding slide--unified" data-slide="23" aria-label="Route selection finding" hidden>
           <div class="story-surface finding-surface">
-            <p class="source-label">ROUTE SELECTION · 205 RECORDS</p>
+            <p class="source-label">ROUTE CHOICE · 205 DOCUMENTED ROUTES</p>
             <div class="finding-layout">
               <div class="finding-primary">
                 <p class="finding-number" data-stat="selectionPrimary"></p>
-                <h1>route records explicitly say the workshop policy selected the route.</h1>
+                <h1>did not present one unambiguous default route for the selected intent.</h1>
               </div>
               <div class="finding-detail">
-                <div class="comparison-row"><strong data-stat="selectionPolicy"></strong><span>research-policy-selected routes</span></div>
-                <div class="comparison-row"><strong data-stat="selectionDocs"></strong><span>documentation-selected routes</span></div>
+                <div class="comparison-row"><strong data-stat="selectionPolicy"></strong><span>we had to choose one route</span></div>
+                <div class="comparison-row"><strong data-stat="selectionDocs"></strong><span>the docs identified one directly</span></div>
                 <p class="finding-action">Recommend one next route for a specific developer intent.</p>
               </div>
             </div>
@@ -227,22 +232,26 @@
         <section class="slide slide--finding slide--unified" data-slide="24" aria-label="Success boundary finding" hidden>
           <div class="story-surface">
             <div class="surface-heading">
-              <p class="source-label">SUCCESS BOUNDARIES · 205 RECORDS</p>
-              <h1>Most quickstarts show an ending. Fewer name the milestone.</h1>
+              <p class="source-label">SUCCESS SIGNALS · 205 DOCUMENTED ROUTES</p>
+              <h1>Only 83 routes explicitly named the first-success milestone.</h1>
             </div>
             <div class="number-grid" data-boundary-stats></div>
           </div>
         </section>
 
-        <section class="slide slide--ambiguity slide--unified" data-slide="25" aria-label="Observed position does not diagnose cause" hidden>
+        <section class="slide slide--ambiguity slide--unified" data-slide="25" aria-label="Questions to ask after a stopping point" hidden>
           <div class="story-surface">
             <div class="surface-heading">
-              <p class="source-label">HYPOTHESIS MAP</p>
-              <h1>A stopping point narrows the search.</h1>
+              <p class="source-label">ONE STOPPING POINT, THREE QUESTIONS</p>
+              <h1>They stopped at “Create app.” What do you check next?</h1>
             </div>
-            <div class="ambiguity-grid" data-ambiguity-stats></div>
+            <div class="ambiguity-grid">
+              <article class="number-card"><p class="number-value">01</p><p class="number-label">Could they choose the right permissions?</p></article>
+              <article class="number-card"><p class="number-value">02</p><p class="number-label">Did the card requirement stop them?</p></article>
+              <article class="number-card"><p class="number-value">03</p><p class="number-label">Did an error block recovery?</p></article>
+            </div>
             <div class="ambiguity-footer">
-              <p class="ambiguity-action">Choose the next evidence.</p>
+              <p class="ambiguity-action">Ask before assigning the cause.</p>
             </div>
           </div>
         </section>

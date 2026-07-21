@@ -11,6 +11,7 @@
   const blackout = document.getElementById("blackout");
   const slides = Array.from(document.querySelectorAll(".slide"));
   const slideIds = slides.map((slide) => Number(slide.dataset.slide));
+  const presenterChannel = "BroadcastChannel" in window ? new BroadcastChannel("devrelcon-deck") : null;
 
   let currentIndex = 0;
   let lastNonDashboardState = { index: 0, fragmentCount: 0 };
@@ -62,6 +63,16 @@
   function updateHash(slideId) {
     const nextUrl = `${window.location.pathname}${window.location.search}#${slideId}`;
     window.history.replaceState(null, "", nextUrl);
+  }
+
+  function announceSlide(slideId) {
+    const state = { slideId, updatedAt: Date.now() };
+    try {
+      window.localStorage.setItem("devrelcon.presenter.slide", JSON.stringify(state));
+    } catch (_error) {
+      // BroadcastChannel still keeps an open notes window synchronized.
+    }
+    presenterChannel?.postMessage({ type: "slide", slideId });
   }
 
   function updateTimer() {
@@ -117,6 +128,7 @@
     if (shouldUpdateHash) {
       updateHash(slideIds[currentIndex]);
     }
+    announceSlide(slideIds[currentIndex]);
   }
 
   function showFromHash() {
@@ -189,6 +201,12 @@
     const willShow = blackout.hidden;
     blackout.hidden = !willShow;
     blackout.setAttribute("aria-hidden", String(!willShow));
+  }
+
+  function openSpeakerNotes() {
+    const notesUrl = new URL("speaker-notes.html", window.location.href);
+    notesUrl.hash = String(slideIds[currentIndex]);
+    window.open(notesUrl, "devrelcon-speaker-notes", "popup,width=900,height=900");
   }
 
   async function toggleFullscreen() {
@@ -289,27 +307,36 @@
     });
   }
 
-  function renderDashboard() {
-    const dashboardSlide = slides[slideIds.indexOf(DASHBOARD_SLIDE)];
-    if (!CONFIG.dashboardUrl) {
+  function renderLiveFrame(slideId, value, label, configKey, placeholderTitle) {
+    const slide = slides[slideIds.indexOf(slideId)];
+    if (!slide) {
+      return;
+    }
+
+    if (!value) {
       const placeholder = document.createElement("div");
       const title = document.createElement("span");
       const instruction = document.createElement("span");
       placeholder.className = "dashboard-placeholder asset-placeholder";
-      title.textContent = "DASHBOARD EMBEDS HERE";
-      instruction.textContent = "set CONFIG.dashboardUrl";
+      title.textContent = placeholderTitle;
+      instruction.textContent = `set CONFIG.${configKey}`;
       placeholder.append(title, instruction);
-      dashboardSlide.replaceChildren(placeholder);
+      slide.replaceChildren(placeholder);
       return;
     }
 
     const iframe = document.createElement("iframe");
     iframe.className = "dashboard-frame";
-    iframe.src = CONFIG.dashboardUrl;
-    iframe.title = "Live dashboard";
+    iframe.src = value;
+    iframe.title = label;
     iframe.loading = "eager";
     iframe.tabIndex = -1;
-    dashboardSlide.replaceChildren(iframe);
+    slide.replaceChildren(iframe);
+  }
+
+  function renderLiveViews() {
+    renderLiveFrame(DASHBOARD_SLIDE, CONFIG.dashboardUrl, "Live dashboard", "dashboardUrl", "LIVE DASHBOARD EMBEDS HERE");
+    renderLiveFrame(13, CONFIG.resultsUrl, "Real-time results", "resultsUrl", "REAL-TIME RESULTS EMBED HERE");
   }
 
   function renderNumberCards(selector, stats) {
@@ -339,7 +366,6 @@
       element.textContent = stats[element.dataset.stat] || "";
     });
     renderNumberCards("[data-boundary-stats]", Array.isArray(stats.boundaries) ? stats.boundaries : []);
-    renderNumberCards("[data-ambiguity-stats]", Array.isArray(stats.ambiguity) ? stats.ambiguity : []);
   }
 
   function renderTimer() {
@@ -366,7 +392,7 @@
     renderQrSet("firstmile", CONFIG.takeaways.firstmile, "CONFIG.takeaways.firstmile");
     renderQrSet("fakesaaspiKit", CONFIG.takeaways.fakesaaspiKit, "CONFIG.takeaways.fakesaaspiKit");
     renderQrSet("comparison", CONFIG.takeaways.comparison, "CONFIG.takeaways.comparison");
-    renderDashboard();
+    renderLiveViews();
     renderStats();
     renderTimer();
     document.querySelector("[data-contact]").textContent = CONFIG.contact;
@@ -387,6 +413,12 @@
     if (key === "f" || key === "F") {
       event.preventDefault();
       toggleFullscreen();
+      return;
+    }
+
+    if (key === "n" || key === "N") {
+      event.preventDefault();
+      openSpeakerNotes();
       return;
     }
 
@@ -413,10 +445,14 @@
   }
 
   function handleClick(event) {
-    if (event.button !== 0 || !blackout.hidden) {
+    if (event.button !== 0 || !blackout.hidden || event.target.closest("a, button, input, textarea, select")) {
       return;
     }
-    advance();
+    if (event.clientX < window.innerWidth / 2) {
+      reverse();
+    } else {
+      advance();
+    }
   }
 
   function handleTouchStart(event) {
@@ -462,6 +498,15 @@
   document.addEventListener("touchstart", handleTouchStart, { passive: true });
   document.addEventListener("touchend", handleTouchEnd, { passive: false });
   blackout.addEventListener("click", (event) => event.stopPropagation());
+  presenterChannel?.addEventListener("message", (event) => {
+    if (event.data?.type === "request-state") {
+      announceSlide(slideIds[currentIndex]);
+    } else if (event.data?.type === "command" && event.data.action === "next") {
+      advance();
+    } else if (event.data?.type === "command" && event.data.action === "previous") {
+      reverse();
+    }
+  });
 
   renderConfiguredAssets();
   fitStage();
