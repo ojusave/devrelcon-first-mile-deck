@@ -7,7 +7,7 @@ const CONFIG = {
   // When set, it embeds this URL as a full-bleed iframe.
   dashboardUrl: "https://fakesaaspi.onrender.com/present",
 
-  // Real-time debrief view shown on slide 13. Keep null until its final
+  // Real-time debrief view shown on slide 11. Keep null until its final
   // event-specific URL is ready; the slide preserves the full-size frame.
   resultsUrl: null,
 

@@ -4,16 +4,16 @@ const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 
 const baseUrl = process.env.DECK_URL || "http://127.0.0.1:4173";
-const slideIds = [1, 2, 3, 4, 5, 6, 21, 7, 12, 8, 13, 22, 11, 14, 15, 23, 24, 25, 19, 17, 16, 18, 20];
+const slideIds = Array.from({ length: 23 }, (_, index) => index + 1);
 const viewports = [
   { name: "projector", width: 1920, height: 1080 },
   { name: "laptop", width: 1280, height: 720 },
 ];
 const unifiedPalette = new Map([
-  [22, "rgb(20, 184, 241)"], [23, "rgb(20, 184, 241)"], [24, "rgb(20, 184, 241)"], [16, "rgb(20, 184, 241)"],
-  [11, "rgb(112, 71, 235)"], [17, "rgb(112, 71, 235)"],
-  [14, "rgb(255, 212, 77)"], [19, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [20, "rgb(255, 212, 77)"],
-  [15, "rgb(255, 138, 102)"], [25, "rgb(255, 138, 102)"],
+  [12, "rgb(20, 184, 241)"], [16, "rgb(20, 184, 241)"], [17, "rgb(20, 184, 241)"], [21, "rgb(20, 184, 241)"],
+  [13, "rgb(112, 71, 235)"], [20, "rgb(112, 71, 235)"],
+  [14, "rgb(255, 212, 77)"], [19, "rgb(255, 212, 77)"], [22, "rgb(255, 212, 77)"], [23, "rgb(255, 212, 77)"],
+  [15, "rgb(255, 138, 102)"], [18, "rgb(255, 138, 102)"],
 ]);
 const outputDir = mkdtempSync(join(tmpdir(), "devrelcon-deck-"));
 
@@ -38,12 +38,12 @@ function assert(condition, message) {
     for (const slideId of slideIds) {
       await page.goto(`${baseUrl}/#${slideId}`, { waitUntil: "networkidle" });
       await page.waitForFunction(() => document.documentElement.dataset.deckReady === "true");
-      if (slideId === 12) {
+      if (slideId === 9) {
         const dashboard = page.frameLocator(".dashboard-frame");
         await dashboard.locator("body").waitFor();
         await dashboard.getByText("What happened in this route?").waitFor();
       }
-      if (slideId === 13) {
+      if (slideId === 11) {
         await page.getByText("REAL-TIME RESULTS EMBED HERE").waitFor();
         await page.getByText("set CONFIG.resultsUrl").waitFor();
       }
@@ -95,29 +95,29 @@ function assert(condition, message) {
       if (unifiedPalette.has(slideId)) {
         assert(state.backgroundColor === unifiedPalette.get(slideId), `${viewport.name} slide ${slideId}: palette drifted to ${state.backgroundColor}`);
       }
-      assert(state.hasPrimaryText || [12, 13].includes(slideId), `${viewport.name} slide ${slideId}: missing primary slide text`);
+      assert(state.hasPrimaryText || [9, 11].includes(slideId), `${viewport.name} slide ${slideId}: missing primary slide text`);
       assert(state.brand?.count === 1, `${viewport.name} slide ${slideId}: expected exactly one repeated Render mark`);
       assert(state.brand.inBounds, `${viewport.name} slide ${slideId}: Render brand signature is out of bounds`);
-      assert(state.brand.src === "assets/render-logo.svg?v=2", `${viewport.name} slide ${slideId}: unexpected Render logo asset ${state.brand.src}`);
-      assert(state.brand.size[0] > state.brand.size[1] * 2, `${viewport.name} slide ${slideId}: Render wordmark has the wrong aspect ratio`);
-      assert(state.brand.placement.join("|") === "32px|28px|144px|48px", `${viewport.name} slide ${slideId}: inconsistent Render logo placement ${state.brand.placement.join("|")}`);
+      assert(state.brand.src === "assets/render-logomark.svg?v=1", `${viewport.name} slide ${slideId}: unexpected Render logomark asset ${state.brand.src}`);
+      assert(Math.abs(state.brand.size[0] - state.brand.size[1]) < 0.1, `${viewport.name} slide ${slideId}: Render logomark is not square`);
+      assert(state.brand.placement.join("|") === "24px|20px|88px|88px", `${viewport.name} slide ${slideId}: inconsistent Render logomark placement ${state.brand.placement.join("|")}`);
       assert(state.brand.alt === "" && state.brand.ariaHidden === "true", `${viewport.name} slide ${slideId}: decorative Render mark is exposed to assistive technology`);
       assert(state.unnamedMedia.length === 0, `${viewport.name} slide ${slideId}: unnamed media ${state.unnamedMedia.join(", ")}`);
       assert(state.clipped.length === 0, `${viewport.name} slide ${slideId}: clipped ${JSON.stringify(state.clipped)}`);
       await page.screenshot({ path: join(outputDir, `${viewport.name}-${String(slideId).padStart(2, "0")}.png`) });
     }
 
-    await page.goto(`${baseUrl}/#7`, { waitUntil: "networkidle" });
+    await page.goto(`${baseUrl}/#8`, { waitUntil: "networkidle" });
     await page.keyboard.press("d");
-    assert((await page.url()).endsWith("#12"), `${viewport.name}: D did not open dashboard`);
+    assert((await page.url()).endsWith("#9"), `${viewport.name}: D did not open dashboard`);
     await page.keyboard.press("d");
-    assert((await page.url()).endsWith("#7"), `${viewport.name}: D did not return to slide 7`);
+    assert((await page.url()).endsWith("#8"), `${viewport.name}: D did not return to slide 8`);
     await page.keyboard.press("b");
     assert(await page.locator("#blackout").isVisible(), `${viewport.name}: B did not show blackout`);
     await page.keyboard.press("b");
     assert(!(await page.locator("#blackout").isVisible()), `${viewport.name}: B did not hide blackout`);
     await page.keyboard.press("End");
-    assert((await page.url()).endsWith("#20"), `${viewport.name}: End did not reach slide 20`);
+    assert((await page.url()).endsWith("#23"), `${viewport.name}: End did not reach slide 23`);
     await page.keyboard.press("Home");
     assert((await page.url()).endsWith("#1"), `${viewport.name}: Home did not reach slide 1`);
     await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
@@ -133,11 +133,11 @@ function assert(condition, message) {
     await page.touchscreen.tap(viewport.width * 0.2, viewport.height / 2);
     assert((await page.url()).endsWith("#1"), `${viewport.name}: left-side touch did not reverse`);
 
-    await page.goto(`${baseUrl}/#12`, { waitUntil: "networkidle" });
+    await page.goto(`${baseUrl}/#9`, { waitUntil: "networkidle" });
     await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
-    assert((await page.url()).endsWith("#8"), `${viewport.name}: dashboard right-side click did not advance`);
+    assert((await page.url()).endsWith("#10"), `${viewport.name}: dashboard right-side click did not advance`);
     await page.mouse.click(viewport.width * 0.2, viewport.height / 2);
-    assert((await page.url()).endsWith("#12"), `${viewport.name}: dashboard left-side click did not reverse`);
+    assert((await page.url()).endsWith("#9"), `${viewport.name}: dashboard left-side click did not reverse`);
 
     if (viewport.name === "projector") {
       await page.goto(`${baseUrl}/#14`, { waitUntil: "networkidle" });
@@ -192,6 +192,24 @@ function assert(condition, message) {
   assert(await notesPage.getByLabel("Talking points").inputValue() === defaultTalkingPoints, "speaker notes: restore defaults did not restore source note");
   await notesPage.reload({ waitUntil: "networkidle" });
   assert(await notesPage.getByLabel("Talking points").inputValue() === defaultTalkingPoints, "speaker notes: restored default did not survive reload");
+
+  const legacyNote = {
+    purpose: "Legacy purpose for the former slide 21.",
+    say: "Legacy talking point that must follow the slide content.",
+    transition: "Legacy transition into the exercise.",
+  };
+  await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v2");
+    localStorage.setItem("devrelcon.presenter.notes.v1", JSON.stringify({ 21: note }));
+  }, legacyNote);
+  await notesPage.goto(`${baseUrl}/speaker-notes.html?migration-check=1#7`, { waitUntil: "networkidle" });
+  assert(await notesPage.getByLabel("Purpose").inputValue() === legacyNote.purpose, "speaker notes: legacy purpose did not migrate from slide 21 to slide 7");
+  assert(await notesPage.getByLabel("Talking points").inputValue() === legacyNote.say, "speaker notes: legacy talking points did not migrate from slide 21 to slide 7");
+  assert(await notesPage.getByLabel("Transition").inputValue() === legacyNote.transition, "speaker notes: legacy transition did not migrate from slide 21 to slide 7");
+  await notesPage.evaluate(() => {
+    localStorage.removeItem("devrelcon.presenter.notes.v1");
+    localStorage.removeItem("devrelcon.presenter.notes.v2");
+  });
   await notesContext.close();
 
   const requestContext = await request.newContext();

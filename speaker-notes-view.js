@@ -1,7 +1,16 @@
 (function () {
   "use strict";
 
-  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v1";
+  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
+  const LEGACY_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v1";
+  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
+  const LEGACY_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide";
+  const LEGACY_SLIDE_ID_MAP = {
+    1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6,
+    21: 7, 7: 8, 12: 9, 8: 10, 13: 11, 22: 12, 11: 13,
+    14: 14, 15: 15, 23: 16, 24: 17, 25: 18, 19: 19,
+    17: 20, 16: 21, 18: 22, 20: 23,
+  };
   const channel = "BroadcastChannel" in window ? new BroadcastChannel("devrelcon-deck") : null;
   const slideElement = document.querySelector("[data-note-slide]");
   const purposeElement = document.querySelector("[data-note-purpose]");
@@ -19,8 +28,28 @@
 
   function readSavedNotes() {
     try {
-      const stored = JSON.parse(window.localStorage.getItem(NOTES_STORAGE_KEY) || "{}");
-      return stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
+      const current = window.localStorage.getItem(NOTES_STORAGE_KEY);
+      if (current) {
+        const stored = JSON.parse(current);
+        return stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
+      }
+
+      const legacy = JSON.parse(window.localStorage.getItem(LEGACY_NOTES_STORAGE_KEY) || "{}");
+      if (!legacy || typeof legacy !== "object" || Array.isArray(legacy)) {
+        return {};
+      }
+
+      const migrated = {};
+      for (const [legacyId, note] of Object.entries(legacy)) {
+        const nextId = LEGACY_SLIDE_ID_MAP[legacyId];
+        if (nextId && note && typeof note === "object" && !Array.isArray(note)) {
+          migrated[nextId] = note;
+        }
+      }
+      if (Object.keys(migrated).length > 0) {
+        window.localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(migrated));
+      }
+      return migrated;
     } catch (_error) {
       return {};
     }
@@ -159,7 +188,7 @@
       }
       return;
     }
-    if (event.key !== "devrelcon.presenter.slide" || !event.newValue) {
+    if (event.key !== PRESENTER_SLIDE_STORAGE_KEY || !event.newValue) {
       return;
     }
     try {
@@ -180,9 +209,12 @@
 
   let initialSlide = validSlide(window.location.hash.slice(1));
   try {
-    const saved = JSON.parse(window.localStorage.getItem("devrelcon.presenter.slide") || "null");
+    const current = window.localStorage.getItem(PRESENTER_SLIDE_STORAGE_KEY);
+    const legacy = window.localStorage.getItem(LEGACY_PRESENTER_SLIDE_STORAGE_KEY);
+    const saved = JSON.parse(current || legacy || "null");
     if (!window.location.hash && saved?.slideId) {
-      initialSlide = validSlide(saved.slideId);
+      const savedSlideId = current ? saved.slideId : LEGACY_SLIDE_ID_MAP[saved.slideId];
+      initialSlide = validSlide(savedSlideId);
     }
   } catch (_error) {
     initialSlide = validSlide(window.location.hash.slice(1));

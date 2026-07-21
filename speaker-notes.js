@@ -1,4 +1,4 @@
-const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 21, 7, 12, 8, 13, 22, 11, 14, 15, 23, 24, 25, 19, 17, 16, 18, 20];
+const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
 const SPEAKER_NOTES = {
   1: {
@@ -52,7 +52,7 @@ const SPEAKER_NOTES = {
 • In developer onboarding, celebrating the one person who finished can hide everyone who stopped earlier.`,
     transition: "Developers also arrive with a destination, and that destination is rarely your onboarding flow.",
   },
-  21: {
+  7: {
     purpose: "State the workshop thesis before asking the room to participate.",
     say: `• Nobody has ever put “complete vendor onboarding” on a vision board.
 • Developers do not wake up wanting to create an account, configure permissions, or copy credentials.
@@ -61,7 +61,7 @@ const SPEAKER_NOTES = {
 • The next exercise makes that route visible.`,
     transition: "You are about to try a workshop simulation designed to be difficult. FakeGPT is only the starting screen, not the app you are being asked to build.",
   },
-  7: {
+  8: {
     purpose: "Start the live exercise with clear intent, safety, and stopping rules.",
     say: `• Say this before anyone scans: “This route is intentionally bad. It is a workshop simulation, not a product demo.”
 • If people hate it, the feature is working. I built it, so complaints can come directly to me after the eight-minute timer.
@@ -71,7 +71,7 @@ const SPEAKER_NOTES = {
 • Keep the final screen open because we will use the room’s positions for the debrief.`,
     transition: "Start the eight-minute clock, move to the live dashboard, and let the room work without coaching them through the route.",
   },
-  12: {
+  9: {
     purpose: "Use the live dashboard as a room mirror while the exercise runs.",
     say: `• Keep this screen visible while participants work.
 • “Named route reach” shows how many distinct sessions reached each named step. It is not a conversion rate for a real product.
@@ -81,14 +81,14 @@ const SPEAKER_NOTES = {
 • At eight minutes, stop even if few people have finished.`,
     transition: "Time is up. Advance once, stop the room, and ask everyone to keep the last screen open.",
   },
-  8: {
+  10: {
     purpose: "Create a clean break between participating and interpreting.",
     say: `• Say: “Stop where you are. Keep your last screen open. The form cannot hurt you anymore.”
 • Give the room a few seconds to stop tapping and look back at the projector.
 • Do not ask yet why they stopped. First establish what the route and tracker can actually show.`,
     transition: "Now look at the final room results as observations, not explanations.",
   },
-  13: {
+  11: {
     purpose: "Debrief the final real-time results without turning behavior into a cause claim.",
     say: `• Use this slide only after CONFIG.resultsUrl points to the final event results view. If it still shows the configuration placeholder, skip it.
 • State the sample size first. This is the people who participated in this room, not a representative developer population.
@@ -97,7 +97,7 @@ const SPEAKER_NOTES = {
 • Do not assign emotion or intent, and do not say someone “gave up” or “dropped off” unless they tell you that directly.`,
     transition: "The dashboard tells us where activity changed. It does not tell us why, so we need to separate the evidence types.",
   },
-  22: {
+  12: {
     purpose: "Separate documented intent, observed behavior, and the explanation that is still missing.",
     say: `• The documented route is what the official instructions ask someone to do.
 • Observed behavior is what this room reached, retried, or completed in the workshop route.
@@ -106,7 +106,7 @@ const SPEAKER_NOTES = {
 • A stopping point is a useful lead for investigation. It is not a diagnosis.`,
     transition: "Before we use the dashboard, be precise about what the tracker recorded and what stayed outside it.",
   },
-  11: {
+  13: {
     purpose: "State the tracker scope and privacy boundary in plain language.",
     say: `• The tracker recorded named steps, timestamps, retries, bounded machine errors, and terminal completion.
 • It did not record the text entered in forms or the fake account and card values.
@@ -135,7 +135,7 @@ const SPEAKER_NOTES = {
 • It does not measure real completion, elapsed effort, product quality, or developer sentiment.`,
     transition: "With that unit defined, the first finding asks whether the documentation supplied one obvious route for the selected intent.",
   },
-  23: {
+  16: {
     purpose: "Explain the route-choice finding and its practical consequence.",
     say: `• In 151 of the 205 records, the inspected documentation did not present one unambiguous default route for the selected intent.
 • I therefore used the same documented tie-break rule to choose one route for those records.
@@ -145,7 +145,7 @@ const SPEAKER_NOTES = {
 • Practical action: for one named developer intent, recommend one next route and make recovery from the wrong route cheap.`,
     transition: "Selecting a route is only half of the job. The developer also needs to recognize the finish line.",
   },
-  24: {
+  17: {
     purpose: "Explain the named-success finding without describing the other routes as failures.",
     say: `• Only 83 of 205 routes explicitly named the first-success milestone.
 • The other 122 routes still demonstrated an observable end, but the documentation did not name that end as the milestone.
@@ -155,7 +155,7 @@ const SPEAKER_NOTES = {
 • Practical action: agree on one developer-visible completion signal before instrumenting activation.`,
     transition: "Even when the route and finish line are visible, a stopping point still does not tell us what caused it.",
   },
-  25: {
+  18: {
     purpose: "Turn one observed stopping point into discriminating follow-up questions.",
     say: `• Imagine the tracker shows that someone stopped at “Create app.”
 • Permissions, a card requirement, and an unrecoverable error are three plausible explanations.
@@ -174,7 +174,7 @@ const SPEAKER_NOTES = {
 • The Atlas does not score product quality, rank competitors, diagnose a cause, or automatically research a missing platform.`,
     transition: "A comparison gives you something specific to inspect. Named positions make that inspection observable in your own route.",
   },
-  17: {
+  20: {
     purpose: "Show the smallest instrumentation example and state its current limits.",
     say: `• Firstmile is the same small SDK pattern used by the workshop route.
 • The first line initializes a manifest, write key, and route definitions.
@@ -185,7 +185,7 @@ const SPEAKER_NOTES = {
 • This can complement an existing analytics system. Do not present it as a validated replacement for PostHog or another product.`,
     transition: "The request to engineering can stay small because the goal is one observable route, not a new analytics program.",
   },
-  16: {
+  21: {
     purpose: "Give DevRel a bounded, credible request to take to the route owner.",
     say: `• Start with one route and define the first-success outcome.
 • Name only the positions required to see progress toward that outcome.
@@ -196,7 +196,7 @@ const SPEAKER_NOTES = {
 • DevRel supplies evidence and translation. The owning team decides and implements the product change.`,
     transition: "If the production route cannot be instrumented yet, use a disposable prototype to collect better questions, not to fake production evidence.",
   },
-  18: {
+  22: {
     purpose: "Offer a fallback when production instrumentation is unavailable.",
     say: `• Start from the public FakeSaaSPI reference app only as an inspectable example.
 • Give a coding agent the official documentation, the intended developer outcome, and the route you are authorized to test.
@@ -207,7 +207,7 @@ const SPEAKER_NOTES = {
 • FakeSaaSPI is source available for inspection but has no public project license. Do not promise reuse rights, publish, or deploy without approval.`,
     transition: "The Monday action is the smallest safe version of the whole workshop.",
   },
-  20: {
+  23: {
     purpose: "End with one action the attendee can start without a new program or framework.",
     say: `• Pick one real first-mile route, not the entire onboarding system.
 • Define its first-success outcome and the positions that make progress visible.

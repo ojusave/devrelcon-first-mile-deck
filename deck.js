@@ -3,9 +3,10 @@
 
   const STAGE_WIDTH = 1920;
   const STAGE_HEIGHT = 1080;
-  const DASHBOARD_SLIDE = 12;
-  const HOLDING_SLIDE = 8;
+  const DASHBOARD_SLIDE = 9;
+  const HOLDING_SLIDE = 10;
   const QR_QUIET_ZONE_MODULES = 4;
+  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
 
   const root = document.documentElement;
   const blackout = document.getElementById("blackout");
@@ -32,7 +33,7 @@
     slides.forEach((slide) => {
       const mark = document.createElement("img");
       mark.className = "slide-brand";
-      mark.src = "assets/render-logo.svg?v=2";
+      mark.src = "assets/render-logomark.svg?v=1";
       mark.alt = "";
       mark.setAttribute("aria-hidden", "true");
       slide.append(mark);
@@ -79,7 +80,7 @@
   function announceSlide(slideId) {
     const state = { slideId, updatedAt: Date.now() };
     try {
-      window.localStorage.setItem("devrelcon.presenter.slide", JSON.stringify(state));
+      window.localStorage.setItem(PRESENTER_SLIDE_STORAGE_KEY, JSON.stringify(state));
     } catch (_error) {
       // BroadcastChannel still keeps an open notes window synchronized.
     }
@@ -347,7 +348,7 @@
 
   function renderLiveViews() {
     renderLiveFrame(DASHBOARD_SLIDE, CONFIG.dashboardUrl, "Live dashboard", "dashboardUrl", "LIVE DASHBOARD EMBEDS HERE");
-    renderLiveFrame(13, CONFIG.resultsUrl, "Real-time results", "resultsUrl", "REAL-TIME RESULTS EMBED HERE");
+    renderLiveFrame(11, CONFIG.resultsUrl, "Real-time results", "resultsUrl", "REAL-TIME RESULTS EMBED HERE");
   }
 
   function renderNumberCards(selector, stats) {

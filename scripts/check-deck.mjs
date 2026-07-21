@@ -13,7 +13,7 @@ const files = {
   theme: readFileSync(resolve(root, "theme-bright.css"), "utf8"),
 };
 
-const expectedOrder = [1, 2, 3, 4, 5, 6, 21, 7, 12, 8, 13, 22, 11, 14, 15, 23, 24, 25, 19, 17, 16, 18, 20];
+const expectedOrder = Array.from({ length: 23 }, (_, index) => index + 1);
 const actualOrder = [...files.html.matchAll(/data-slide="(\d+)"/g)].map((match) => Number(match[1]));
 const errors = [];
 
@@ -25,10 +25,7 @@ function requireCondition(condition, message) {
 
 requireCondition(JSON.stringify(actualOrder) === JSON.stringify(expectedOrder), `Unexpected slide order: ${actualOrder.join(", ")}`);
 requireCondition(new Set(actualOrder).size === actualOrder.length, "Slide IDs must be unique");
-requireCondition(!actualOrder.some((id) => [9, 10].includes(id)), "Removed slides 9 and 10 must stay removed");
-requireCondition(actualOrder.indexOf(12) === actualOrder.indexOf(7) + 1, "Slide 12 must immediately follow slide 7");
-requireCondition(actualOrder.indexOf(8) === actualOrder.indexOf(12) + 1, "Slide 8 must immediately follow slide 12");
-requireCondition(actualOrder.indexOf(13) === actualOrder.indexOf(8) + 1, "Slide 13 must immediately follow slide 8");
+requireCondition(actualOrder.every((id, index) => id === index + 1), "Slide IDs must match their chronological position");
 requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).length === 12, "The twelve evidence, resource, workflow, and closing slides must use the shared story surface");
 
 const noteIds = [...files.notes.matchAll(/^\s+(\d+): \{/gm)].map((match) => Number(match[1]));
@@ -40,7 +37,8 @@ requireCondition((files.notes.match(/• /g) || []).length >= expectedOrder.leng
 requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 3, "Purpose, talking points, and transition must be editable");
 requireCondition(files.notesHtml.includes("Save notes"), "Speaker notes need an explicit save action");
 requireCondition(files.notesHtml.includes("Restore defaults"), "Speaker notes need a restore-defaults action");
-requireCondition(files.notesView.includes("devrelcon.presenter.notes.v1"), "Speaker-note edits must use versioned browser storage");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v2"), "Speaker-note edits must use versioned browser storage");
+requireCondition(files.notesView.includes("LEGACY_SLIDE_ID_MAP"), "Speaker-note edits must migrate from the previous slide numbering");
 
 for (const requiredText of [
   "Completion is not required",
