@@ -9,7 +9,7 @@
     <link rel="preload" href="assets/render-logo.svg?v=2" as="image" type="image/svg+xml">
     <link rel="preload" href="assets/render-logomark.svg?v=1" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=8">
-    <link rel="stylesheet" href="theme-bright.css?v=18">
+    <link rel="stylesheet" href="theme-bright.css?v=19">
     <script defer src="config.js?v=5"></script>
     <script defer src="qrcode.js"></script>
     <script defer src="deck.js?v=16"></script>
@@ -280,58 +280,102 @@
           </div>
         </section>
 
-        <section class="slide slide--firstmile slide--unified" data-slide="20" aria-label="Firstmile instrumentation SDK" hidden>
-          <div class="story-surface resource-layout">
-            <div class="resource-copy">
-              <p class="eyebrow">CALIBRATE · FIRSTMILE WORKSHOP KIT</p>
-              <h1>Record named positions, not form contents.</h1>
-              <pre><code>firstmile({ manifest, writeKey, routes })
-fm.error("company_email", "freemail", attempt)
-fm.shipped()</code></pre>
-              <p class="resource-limit">Public Apache-2.0 source · Calibrate is published on npm as usecalibrate · review identifiers and credential handling before use.</p>
-            </div>
-            <div class="resource-qr">
-              <div class="qr-frame qr-frame--takeaway" data-qr-frame="firstmile" data-qr-size="336" aria-live="off"></div>
-              <p class="qr-caption is-empty" data-qr-caption="firstmile" aria-hidden="true"></p>
-            </div>
-          </div>
-        </section>
-
-        <section class="slide slide--workflow slide--unified" data-slide="21" aria-label="Engineering workflow" hidden>
-          <div class="story-surface">
+        <section class="slide slide--calibrate-product slide--unified" data-slide="20" aria-label="Calibrate product and browser SDK" hidden>
+          <div class="story-surface calibrate-product-surface">
             <div class="surface-heading">
-              <p class="eyebrow">A SMALL ENGINEERING ASK</p>
-              <h1>Bring a route and evidence, not a verdict.</h1>
+              <p class="eyebrow">HOW CALIBRATE CAPTURES PRODUCT FRICTION · 1 / 3</p>
+              <h1>I built Calibrate, a privacy-conscious onboarding signal SDK.</h1>
             </div>
-            <ol class="workflow-list">
-              <li><span>1</span>Define the first-success outcome.</li>
-              <li><span>2</span>Name the expected positions.</li>
-              <li><span>3</span>Record bounded events.</li>
-              <li><span>4</span>Observe five intended developers without rescuing them.</li>
-              <li><span>5</span>Share stopping points, missing evidence, and one next observation with the route owner.</li>
-            </ol>
-          </div>
-        </section>
+            <div class="calibrate-product-grid">
+              <div class="calibrate-code-panel">
+                <p class="source-label">CURRENT REPOSITORY API</p>
+                <pre><code>import { calibrate } from "@usecalibrate/browser";
 
-        <section class="slide slide--prototype slide--unified" data-slide="22" aria-label="Build a bounded evidence prototype" hidden>
-          <div class="story-surface">
-            <div class="surface-heading">
-              <p class="eyebrow">IF ENGINEERING CANNOT INSTRUMENT IT YET</p>
-              <h1>Build a bounded evidence prototype.</h1>
-            </div>
-            <div class="prototype-grid">
-              <ol>
-                <li>Start from the public FakeSaaSPI reference app.</li>
-                <li>Give a coding agent the official docs and target outcome.</li>
-                <li>Replace the route with a documented mirror.</li>
-                <li>Add Calibrate's Firstmile workshop kit, review every step, and test with a small group.</li>
-              </ol>
-              <div class="guardrail-card">
-                <h2>Guardrails</h2>
-                <p>Fake data only. Do not invent steps. Do not publish or deploy without approval.</p>
-                <p>A prototype is not production telemetry or usability research.</p>
-                <p>FakeSaaSPI is source available for inspection. No public reuse rights are granted.</p>
+const cal = calibrate({
+  endpoint: "/__calibrate"
+});</code></pre>
+                <p class="api-boundary">The DOM-autocapture package is in the public repository. npm publication is pending.</p>
               </div>
+              <div class="calibrate-capabilities">
+                <article>
+                  <h2>Standard DOM</h2>
+                  <p>Works with standard controls rendered by React, Vue, Svelte, Angular, or plain HTML. No framework adapter is required.</p>
+                </article>
+                <article>
+                  <h2>Autocapture by default</h2>
+                  <p>Routes and standard field interactions are observed automatically.</p>
+                </article>
+                <article>
+                  <h2>Manual when needed</h2>
+                  <p>Custom controls can report named page, field, copy, paste, and shipped events.</p>
+                </article>
+                <article>
+                  <h2>Fail safely</h2>
+                  <p>Instrumentation disables itself instead of throwing into the host application.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide--calibrate-contract slide--unified" data-slide="21" aria-label="Calibrate data and privacy contract" hidden>
+          <div class="story-surface calibrate-contract-surface">
+            <div class="surface-heading">
+              <p class="eyebrow">HOW CALIBRATE CAPTURES PRODUCT FRICTION · 2 / 3</p>
+              <h1>It captures behavior, not content.</h1>
+            </div>
+            <ol class="signal-journey" aria-label="Captured onboarding journey signals">
+              <li>Session start</li>
+              <li>Route viewed</li>
+              <li>Field state</li>
+              <li>Validation</li>
+              <li>Copy or paste</li>
+              <li>Shipped or closed</li>
+            </ol>
+            <div class="contract-grid">
+              <section class="field-contract" aria-label="Field identification order">
+                <p class="source-label">FIELD IDENTIFIER ORDER</p>
+                <div class="identifier-order" aria-label="data-fm, then name, then id">
+                  <code>data-fm</code><span>then</span><code>name</code><span>then</span><code>id</code>
+                </div>
+                <p>Field events report focus, fill, blank, blur, or error. Abandonment is inferred later, not recorded as a motive.</p>
+              </section>
+              <section class="privacy-contract" aria-label="Privacy boundaries">
+                <p class="source-label">NOT COLLECTED</p>
+                <ul>
+                  <li>No form values are stored or sent. Only empty or non-empty state is checked.</li>
+                  <li>No DOM text, labels, placeholders, clipboard contents, query strings, or hashes.</li>
+                  <li>Full URLs are not sent. Password and hidden fields are ignored.</li>
+                  <li>A strict, closed schema rejects unknown event fields.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide--calibrate-delivery slide--unified" data-slide="22" aria-label="Calibrate delivery architecture and scale boundary" hidden>
+          <div class="story-surface calibrate-delivery-surface">
+            <div class="surface-heading">
+              <p class="eyebrow">HOW CALIBRATE CAPTURES PRODUCT FRICTION · 3 / 3</p>
+              <h1>Simple delivery, clear scale boundary.</h1>
+            </div>
+            <ol class="delivery-flow" aria-label="Calibrate event delivery flow">
+              <li><strong>Browser SDK</strong><span>DOM signals</span></li>
+              <li><strong>Local queue</strong><span>localStorage</span></li>
+              <li><strong>Batched POST</strong><span>/api/events</span></li>
+              <li><strong>Collector</strong><span>schema + dedupe</span></li>
+              <li><strong>Durable store</strong><span>SQLite or Postgres</span></li>
+              <li><strong>Use the evidence</strong><span>dashboard, export, webhook</span></li>
+            </ol>
+            <div class="delivery-facts" aria-label="Transport behavior">
+              <p><strong>about 2 seconds</strong><span>scheduled flush</span></p>
+              <p><strong>10 events</strong><span>queue threshold</span></p>
+              <p><strong>50 events</strong><span>maximum request</span></p>
+              <p><strong>retry + sendBeacon()</strong><span>failure and page close</span></p>
+            </div>
+            <div class="delivery-bottom">
+              <p class="scale-boundary"><strong>Current boundary:</strong> one collector process owns the live aggregate. Horizontal ingestion needs a shared queue or aggregation layer.</p>
+              <p class="delivery-value">Teams can see where progress stopped, then decide what to inspect next.</p>
             </div>
           </div>
         </section>

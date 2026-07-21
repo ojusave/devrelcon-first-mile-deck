@@ -14,7 +14,7 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. Slide 11 is reserved for event-specific results and may show a placeholder outside the live workshop. |
 | 12 to 13 | The deck separates the documented route, observed behavior, and the explanation that is still missing. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
 | 14 to 18 | Research from 205 documented developer onboarding routes. | See where route choice and unclear success boundaries appear in the inspected documentation. |
-| 19 to 24 | The First-Mile Atlas, a small instrumentation example, an engineering handoff, an optional attendee credit, and a Monday action. | Turn one onboarding concern into a route the owning team can inspect, prototype, and improve. |
+| 19 to 24 | The First-Mile Atlas, a three-slide Calibrate section, an optional attendee credit, and a Monday action. | Move from a documented comparison to privacy-conscious product signals, then take one bounded action. |
 
 ## The three research findings
 
@@ -28,13 +28,23 @@ These numbers describe documented routes and a hypothesis inventory. They are no
 
 1. Pick one developer intent and the route that is supposed to serve it.
 2. Name the first useful outcome in words a developer can recognize.
-3. Record positions, retries, bounded errors, and completion without recording form contents.
+3. Use Calibrate to record positions, retries, bounded errors, and completion without storing or sending form values.
 4. Put a small number of intended developers through that route.
 5. Bring the stopping points and missing evidence to the team that owns the route.
 
 Five people form a bounded pilot, not a representative sample. The point is to find a route worth inspecting, not to manufacture a market statistic.
 
 The goal is not to prove that onboarding is bad. The goal is to replace a broad complaint with a specific route, an observable stopping point, and the next question worth answering.
+
+## How Calibrate fits
+
+Calibrate is the product bridge between “we think this route is difficult” and “we can see where activity changed.” The deck covers three parts:
+
+1. The browser SDK observes standard DOM routes and field interactions, with manual events available for custom controls.
+2. Its closed event contract records interaction state without storing or sending form values, DOM copy, clipboard contents, or full URLs.
+3. A local queue batches normal HTTP requests to a collector, which validates, deduplicates, stores, aggregates, and optionally forwards accepted events.
+
+The current collector owns its live aggregate in one process. Postgres can provide durable storage and replay, but horizontal ingestion still needs a shared queue or aggregation layer. The deck states that boundary because it is a current implementation limit, not a future guarantee.
 
 ## Open and use the workshop
 
@@ -44,7 +54,7 @@ The goal is not to prove that onboarding is bad. The goal is to replace a broad 
 - [Calibrate instrumentation project](https://github.com/ojusave/usecalibrate)
 - [Claim $100 in Render credits](https://credits-portal-mmdm.onrender.com/claim/devrelcon)
 
-Eligible DevRelCon attendees can sign in with GitHub to check access to the $100 Render credit. Calibrate is Apache-2.0 licensed public source and is published to npm as `usecalibrate`. The deck's “Firstmile” instrumentation example now lives in Calibrate's workshop kit. FakeSaaSPI is publicly inspectable source without a project license, so the repository does not grant reuse rights. The Atlas compares documented routes. It does not diagnose why a developer stopped.
+Eligible DevRelCon attendees can sign in with GitHub to check access to the $100 Render credit. Calibrate is Apache-2.0 licensed public source. The published `usecalibrate` package is the manifest-driven workshop kit. The repository also contains the newer DOM-autocapture browser client shown in slides 20 to 22, but that workspace package is not yet published to npm. FakeSaaSPI is publicly inspectable source without a project license, so the repository does not grant reuse rights. The Atlas compares documented routes. It does not diagnose why a developer stopped.
 
 | Control | Action |
 | --- | --- |
