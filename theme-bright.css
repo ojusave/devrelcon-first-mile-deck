@@ -115,12 +115,21 @@ body {
 }
 
 .slide--title .byline-row {
-  gap: 18px;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.slide--title .byline {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1;
 }
 
 .slide--title .render-logo {
   width: 190px;
-  height: 42px;
+  height: 38px;
 }
 
 .slide--odyssey {
