@@ -1,4 +1,4 @@
-const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
 
 const SPEAKER_NOTES = {
   1: {
@@ -176,12 +176,12 @@ const SPEAKER_NOTES = {
   },
   20: {
     purpose: "Show the smallest instrumentation example and state its current limits.",
-    say: `• Firstmile is the same small SDK pattern used by the workshop route.
+    say: `• This Firstmile example now lives in Calibrate's workshop kit. The public Calibrate project is Apache-2.0 licensed and the usecalibrate package is on npm.
 • The first line initializes a manifest, write key, and route definitions.
 • The second line records one bounded machine-readable error at a named position. It does not send the entered email value.
 • The third line marks the agreed terminal event as shipped.
-• The repository is public Apache-2.0 source, Node 20 or newer, and ESM-only. It is not published to npm.
-• I named it Firstmile before completing the final mile of publishing it to npm.
+• The workshop-kit API shown here is the small teaching example used by this deck. Review the Calibrate package API before using it in another application.
+• I managed to publish Calibrate before this talk, which ruins one of my better jokes about never reaching my own final mile.
 • This can complement an existing analytics system. Do not present it as a validated replacement for PostHog or another product.`,
     transition: "The request to engineering can stay small because the goal is one observable route, not a new analytics program.",
   },
@@ -205,9 +205,20 @@ const SPEAKER_NOTES = {
 • Add named positions, use fake data, and test with a small invited group.
 • Keep the prototype separate from production telemetry and usability-research claims.
 • FakeSaaSPI is source available for inspection but has no public project license. Do not promise reuse rights, publish, or deploy without approval.`,
-    transition: "The Monday action is the smallest safe version of the whole workshop.",
+    transition: "If you want to run that bounded prototype after the workshop, the next slide has the attendee credit.",
   },
   23: {
+    purpose: "Give eligible attendees a concrete way to deploy their own bounded prototype without turning the workshop into a sales pitch.",
+    say: `• This is optional. You can do the workshop follow-up without deploying anything.
+• Eligible DevRelCon attendees can claim $100 in Render credits. Scan the code and sign in with GitHub to check eligibility.
+• Use the credit for your own code or a resource whose license allows deployment.
+• Connect the repository, choose the appropriate Render service type, and deploy it from the Dashboard, CLI, or a coding agent.
+• Do not deploy FakeSaaSPI from its public repository. It is inspectable, but the repository does not grant public reuse rights.
+• This is the part where I give you money and still assign homework.
+• The portal is active, but the public sign-in screen does not list a deadline or full eligibility terms. Do not promise either from the stage.`,
+    transition: "The credit is optional. The Monday action is not.",
+  },
+  24: {
     purpose: "End with one action the attendee can start without a new program or framework.",
     say: `• Pick one real first-mile route, not the entire onboarding system.
 • Define its first-success outcome and the positions that make progress visible.

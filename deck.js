@@ -6,7 +6,7 @@
   const DASHBOARD_SLIDE = 9;
   const HOLDING_SLIDE = 10;
   const QR_QUIET_ZONE_MODULES = 4;
-  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
+  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
 
   const root = document.documentElement;
   const blackout = document.getElementById("blackout");
@@ -404,6 +404,7 @@
     renderQrSet("firstmile", CONFIG.takeaways.firstmile, "CONFIG.takeaways.firstmile");
     renderQrSet("fakesaaspiKit", CONFIG.takeaways.fakesaaspiKit, "CONFIG.takeaways.fakesaaspiKit");
     renderQrSet("comparison", CONFIG.takeaways.comparison, "CONFIG.takeaways.comparison");
+    renderQrSet("credits", CONFIG.takeaways.credits, "CONFIG.takeaways.credits");
     renderLiveViews();
     renderStats();
     renderTimer();

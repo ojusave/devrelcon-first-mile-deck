@@ -4,15 +4,15 @@ const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 
 const baseUrl = process.env.DECK_URL || "http://127.0.0.1:4173";
-const slideIds = Array.from({ length: 23 }, (_, index) => index + 1);
+const slideIds = Array.from({ length: 24 }, (_, index) => index + 1);
 const viewports = [
   { name: "projector", width: 1920, height: 1080 },
   { name: "laptop", width: 1280, height: 720 },
 ];
 const unifiedPalette = new Map([
   [12, "rgb(20, 184, 241)"], [16, "rgb(20, 184, 241)"], [17, "rgb(20, 184, 241)"], [21, "rgb(20, 184, 241)"],
-  [13, "rgb(112, 71, 235)"], [20, "rgb(112, 71, 235)"],
-  [14, "rgb(255, 212, 77)"], [19, "rgb(255, 212, 77)"], [22, "rgb(255, 212, 77)"], [23, "rgb(255, 212, 77)"],
+  [13, "rgb(112, 71, 235)"], [20, "rgb(112, 71, 235)"], [23, "rgb(112, 71, 235)"],
+  [14, "rgb(255, 212, 77)"], [19, "rgb(255, 212, 77)"], [22, "rgb(255, 212, 77)"], [24, "rgb(255, 212, 77)"],
   [15, "rgb(255, 138, 102)"], [18, "rgb(255, 138, 102)"],
 ]);
 const outputDir = mkdtempSync(join(tmpdir(), "devrelcon-deck-"));
@@ -46,6 +46,19 @@ function assert(condition, message) {
       if (slideId === 11) {
         await page.getByText("REAL-TIME RESULTS EMBED HERE").waitFor();
         await page.getByText("set CONFIG.resultsUrl").waitFor();
+      }
+      if (slideId === 23) {
+        const creditQr = page.locator('[data-qr-frame="credits"] canvas');
+        await creditQr.waitFor();
+        const creditQrState = await creditQr.evaluate((canvas) => ({
+          label: canvas.getAttribute("aria-label"),
+          size: [canvas.width, canvas.height],
+          cssSize: [getComputedStyle(canvas).width, getComputedStyle(canvas).height],
+        }));
+        assert(creditQrState.label === "QR code for CONFIG.takeaways.credits", `${viewport.name}: credit QR is not labeled`);
+        assert(creditQrState.size.join("x") === "400x400", `${viewport.name}: credit QR canvas is not 400px square`);
+        assert(creditQrState.cssSize.join("x") === "400pxx400px", `${viewport.name}: credit QR CSS size is incorrect`);
+        assert(await page.locator('[data-qr-caption="credits"]').textContent() === "credits-portal-mmdm.onrender.com/claim/devrelcon", `${viewport.name}: credit QR caption is incorrect`);
       }
       const state = await page.evaluate((expectedId) => {
         const slide = document.querySelector(`.slide[data-slide="${expectedId}"]`);
@@ -117,7 +130,7 @@ function assert(condition, message) {
     await page.keyboard.press("b");
     assert(!(await page.locator("#blackout").isVisible()), `${viewport.name}: B did not hide blackout`);
     await page.keyboard.press("End");
-    assert((await page.url()).endsWith("#23"), `${viewport.name}: End did not reach slide 23`);
+    assert((await page.url()).endsWith("#24"), `${viewport.name}: End did not reach slide 24`);
     await page.keyboard.press("Home");
     assert((await page.url()).endsWith("#1"), `${viewport.name}: Home did not reach slide 1`);
     await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
@@ -172,8 +185,8 @@ function assert(condition, message) {
     await notesPage.locator("[data-note-slide]").getByText(String(slideId), { exact: true }).waitFor();
     const notesFit = await notesPage.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight);
     assert(notesFit, `speaker notes slide ${slideId}: notes require scrolling at 1280x720`);
-    if (slideId === 23) {
-      await notesPage.screenshot({ path: join(outputDir, "speaker-notes-23.png") });
+    if (slideId === 24) {
+      await notesPage.screenshot({ path: join(outputDir, "speaker-notes-24.png") });
     }
   }
 
@@ -193,12 +206,27 @@ function assert(condition, message) {
   await notesPage.reload({ waitUntil: "networkidle" });
   assert(await notesPage.getByLabel("Talking points").inputValue() === defaultTalkingPoints, "speaker notes: restored default did not survive reload");
 
+  const previousNote = {
+    purpose: "Saved purpose for the previous closing slide.",
+    say: "Saved talking point that must stay with the closing slide.",
+    transition: "Saved closing transition.",
+  };
+  await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v3");
+    localStorage.setItem("devrelcon.presenter.notes.v2", JSON.stringify({ 23: note }));
+  }, previousNote);
+  await notesPage.goto(`${baseUrl}/speaker-notes.html?previous-migration-check=1#24`, { waitUntil: "networkidle" });
+  assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not migrate from slide 23 to slide 24");
+  assert(await notesPage.getByLabel("Talking points").inputValue() === previousNote.say, "speaker notes: previous closing talking points did not migrate from slide 23 to slide 24");
+  assert(await notesPage.getByLabel("Transition").inputValue() === previousNote.transition, "speaker notes: previous closing transition did not migrate from slide 23 to slide 24");
+
   const legacyNote = {
     purpose: "Legacy purpose for the former slide 21.",
     say: "Legacy talking point that must follow the slide content.",
     transition: "Legacy transition into the exercise.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v3");
     localStorage.removeItem("devrelcon.presenter.notes.v2");
     localStorage.setItem("devrelcon.presenter.notes.v1", JSON.stringify({ 21: note }));
   }, legacyNote);
@@ -209,6 +237,7 @@ function assert(condition, message) {
   await notesPage.evaluate(() => {
     localStorage.removeItem("devrelcon.presenter.notes.v1");
     localStorage.removeItem("devrelcon.presenter.notes.v2");
+    localStorage.removeItem("devrelcon.presenter.notes.v3");
   });
   await notesContext.close();
 
@@ -216,13 +245,18 @@ function assert(condition, message) {
   for (const url of [
     "https://fakesaaspi.onrender.com",
     "https://fakesaaspi.onrender.com/present",
-    "https://github.com/ojusave/firstmile",
+    "https://github.com/ojusave/usecalibrate",
     "https://github.com/ojusave/fakesaaspi",
     "https://devrelcon-research.onrender.com",
+    "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
   ]) {
     const response = await requestContext.get(url);
     assert(response.ok(), `${url} returned ${response.status()}`);
   }
+  const creditInfoResponse = await requestContext.get("https://credits-portal-mmdm.onrender.com/api/v1/claim/devrelcon/info");
+  assert(creditInfoResponse.ok(), `credit portal info returned ${creditInfoResponse.status()}`);
+  const creditInfo = await creditInfoResponse.json();
+  assert(creditInfo?.data?.slug === "devrelcon" && creditInfo?.data?.status === "active", "DevRelCon credit claim is not active");
   await requestContext.dispose();
   await browser.close();
 
