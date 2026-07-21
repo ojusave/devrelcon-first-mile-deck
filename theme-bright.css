@@ -73,7 +73,7 @@ body {
   width: 690px;
   height: 690px;
   border-radius: 50%;
-  background: radial-gradient(circle 283px at center, var(--sun) 99.5%, transparent 100%);
+  background: radial-gradient(circle 250px at center, var(--sun) 99.5%, transparent 100%);
   box-shadow: -510px 640px 0 70px var(--aegean);
 }
 
@@ -87,13 +87,19 @@ body {
 }
 
 .slide--title .title-stack {
-  width: 1480px;
-  padding: 62px 68px;
+  width: 1400px;
+  padding: 58px 64px;
   justify-self: center;
   border: 3px solid var(--ink);
   border-radius: 42px;
-  background: rgb(255 255 255 / 94%);
+  background: var(--paper);
   box-shadow: 13px 13px 0 var(--ink);
+}
+
+.slide--title h1 {
+  font-size: 122px;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
 }
 
 .slide--title .title-line {
@@ -104,7 +110,7 @@ body {
 .slide--title .subhead {
   margin-top: 12px;
   color: var(--signal);
-  font-size: 41px;
+  font-size: 38px;
   font-weight: 300;
 }
 
