@@ -120,10 +120,10 @@ body {
 }
 
 .slide--title .byline {
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 400;
-  letter-spacing: -0.025em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   line-height: 1;
 }
 
