@@ -29,11 +29,14 @@
 
       main {
         display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto minmax(124px, auto) minmax(0, 1fr) auto;
         gap: 14px;
         width: min(920px, 100%);
-        min-height: 100vh;
+        height: 100vh;
         margin: 0 auto;
         padding: 18px;
+        overflow: hidden;
       }
 
       header,
@@ -49,6 +52,7 @@
         justify-content: space-between;
         gap: 20px;
         padding: 14px 20px;
+        grid-column: 1 / -1;
       }
 
       h1,
@@ -67,13 +71,44 @@
         align-content: start;
         gap: 8px;
         padding: 16px 20px;
+        min-height: 0;
       }
 
-      .transition { border-color: var(--signal); }
+      .purpose { grid-column: 1; grid-row: 2; }
+      .transition { grid-column: 2; grid-row: 2; border-color: var(--signal); }
+      .talking-points {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        grid-template-rows: auto minmax(0, 1fr);
+        align-content: stretch;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 0;
+        resize: none;
+        border: 0;
+        padding: 0;
+        color: var(--text);
+        background: transparent;
+        font: inherit;
+        line-height: 1.35;
+      }
+
+      textarea:focus-visible {
+        outline: 3px solid var(--sky);
+        outline-offset: 4px;
+      }
+
+      .purpose textarea,
+      .transition textarea { height: 78px; }
+      .talking-points textarea { height: auto; font-size: clamp(17px, 1.75vw, 21px); }
 
       nav {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-column: 1 / -1;
+        grid-row: 4;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 14px;
       }
 
@@ -88,9 +123,32 @@
       }
 
       button:focus-visible { outline: 4px solid var(--sky); outline-offset: 3px; }
+      .save { border-color: var(--sky); background: #0d5873; }
+      .reset { border-color: var(--signal); background: #512d35; }
+
+      @media (max-width: 760px) {
+        main {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto minmax(240px, 1fr) auto auto;
+          height: auto;
+          min-height: 100vh;
+          overflow: visible;
+        }
+
+        header { grid-column: 1; grid-row: 1; }
+        .purpose { grid-column: 1; grid-row: 2; }
+        .talking-points { grid-column: 1; grid-row: 3; }
+        .transition { grid-column: 1; grid-row: 4; }
+        nav { grid-column: 1; grid-row: 5; }
+
+        .purpose textarea,
+        .transition textarea { height: 112px; }
+
+        nav { grid-template-columns: 1fr 1fr; }
+      }
     </style>
-    <script defer src="speaker-notes.js?v=1"></script>
-    <script defer src="speaker-notes-view.js?v=1"></script>
+    <script defer src="speaker-notes.js?v=2"></script>
+    <script defer src="speaker-notes-view.js?v=2"></script>
   </head>
   <body>
     <main>
@@ -99,22 +157,27 @@
           <p class="status">SPEAKER NOTES</p>
           <h1>Slide <span class="slide-number" data-note-slide>1</span></h1>
         </div>
-        <p class="status" data-note-status>Waiting for deck</p>
+        <div>
+          <p class="status" data-note-status role="status" aria-live="polite">Waiting for deck</p>
+          <p class="status">Edits are stored in this browser.</p>
+        </div>
       </header>
-      <section>
-        <h2>Purpose</h2>
-        <p data-note-purpose></p>
+      <section class="purpose">
+        <h2 id="purpose-label">Purpose</h2>
+        <textarea data-note-purpose aria-labelledby="purpose-label" spellcheck="true"></textarea>
       </section>
-      <section>
-        <h2>Say</h2>
-        <p data-note-say></p>
+      <section class="talking-points">
+        <h2 id="talking-points-label">Talking points</h2>
+        <textarea data-note-say aria-labelledby="talking-points-label" spellcheck="true"></textarea>
       </section>
       <section class="transition">
-        <h2>Transition</h2>
-        <p data-note-transition></p>
+        <h2 id="transition-label">Transition</h2>
+        <textarea data-note-transition aria-labelledby="transition-label" spellcheck="true"></textarea>
       </section>
       <nav aria-label="Slide controls">
         <button type="button" data-note-previous>Previous</button>
+        <button class="save" type="button" data-note-save>Save notes</button>
+        <button class="reset" type="button" data-note-reset>Restore defaults</button>
         <button type="button" data-note-next>Next</button>
       </nav>
     </main>
