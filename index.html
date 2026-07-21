@@ -8,10 +8,10 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310243a'/%3E%3Cpath d='M14 42 42 14l8 8-28 28h-8v-8Z' fill='%23ff704d'/%3E%3C/svg%3E">
     <link rel="preload" href="assets/render-logo.svg?v=2" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=8">
-    <link rel="stylesheet" href="theme-bright.css?v=6">
-    <script defer src="config.js?v=2"></script>
+    <link rel="stylesheet" href="theme-bright.css?v=7">
+    <script defer src="config.js?v=3"></script>
     <script defer src="qrcode.js"></script>
-    <script defer src="deck.js?v=9"></script>
+    <script defer src="deck.js?v=10"></script>
   </head>
   <body>
     <div class="viewport" id="viewport">
@@ -127,120 +127,142 @@
           </div>
         </section>
 
-        <section class="slide slide--evidence" data-slide="22" aria-label="Three evidence boundaries" hidden>
-          <div class="slide-heading">
-            <p class="eyebrow">THREE DIFFERENT THINGS</p>
-            <h1>Keep the evidence separate.</h1>
-          </div>
-          <div class="evidence-grid">
-            <article class="evidence-card evidence-card--docs">
-              <p class="card-number">01</p>
-              <h2>Documented route</h2>
-              <p>What official docs ask someone to do.</p>
-            </article>
-            <article class="evidence-card evidence-card--room">
-              <p class="card-number">02</p>
-              <h2>Observed behavior</h2>
-              <p>Where this room reached, retried, and recorded bounded errors.</p>
-            </article>
-            <article class="evidence-card evidence-card--missing">
-              <p class="card-number">03</p>
-              <h2>Missing evidence</h2>
-              <p>Why someone stopped, what they intended, and whether this happens elsewhere.</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="slide slide--scope" data-slide="11" aria-label="What the exercise recorded" hidden>
-          <div class="slide-heading">
-            <p class="eyebrow">WHAT THIS EXERCISE RECORDED</p>
-            <h1>Positions, bounded events, and time.</h1>
-          </div>
-          <div class="scope-grid">
-            <div class="scope-card scope-card--yes">
-              <h2>Sent to the projector</h2>
-              <ul>
-                <li>Named route positions</li>
-                <li>Bounded machine error codes</li>
-                <li>Retries, timing, and terminal completion</li>
-              </ul>
+        <section class="slide slide--evidence slide--unified" data-slide="22" aria-label="Three evidence boundaries" hidden>
+          <div class="story-surface">
+            <div class="surface-heading">
+              <p class="source-label">WORKSHOP MEASUREMENT BOUNDARY</p>
+              <h1>Keep the evidence separate.</h1>
             </div>
-            <div class="scope-card scope-card--no">
-              <h2>Not sent</h2>
-              <ul>
-                <li>Fake account or card values</li>
-                <li>Form contents or page text</li>
-              </ul>
-              <p>The test token is sent for verification. The source code comes later.</p>
+            <div class="evidence-bands">
+              <article class="evidence-band evidence-band--docs">
+                <p class="card-number">01</p>
+                <div><h2>Documented route</h2><p>What official docs ask someone to do.</p></div>
+              </article>
+              <article class="evidence-band evidence-band--room">
+                <p class="card-number">02</p>
+                <div><h2>Observed behavior</h2><p>Where this room reached, retried, and recorded bounded errors.</p></div>
+              </article>
+              <article class="evidence-band evidence-band--missing">
+                <p class="card-number">03</p>
+                <div><h2>Missing evidence</h2><p>Why someone stopped, what they intended, and whether this happens elsewhere.</p></div>
+              </article>
             </div>
+            <p class="surface-boundary">Room observations cannot establish why someone stopped or whether the behavior occurs elsewhere.</p>
           </div>
         </section>
 
-        <section class="slide slide--gates" data-slide="14" aria-label="Examples of documented gates" hidden>
-          <div class="slide-heading">
-            <p class="eyebrow">FOUR DOCUMENTED ROUTES</p>
-            <h1>The setup work takes different forms.</h1>
-          </div>
-          <div class="gate-grid">
-            <article><h2>Airwallex</h2><p>Business email and sandbox account</p></article>
-            <article><h2>Akamai Cloud</h2><p>SMS verification and payment method</p></article>
-            <article><h2>Airtable</h2><p>Token scopes and resource selection</p></article>
-            <article><h2>Ably</h2><p>Four capabilities, plus a production credential warning</p></article>
-          </div>
-          <p class="source-note">Selected documented routes. Official pages checked July 21, 2026.</p>
-        </section>
-
-        <section class="slide slide--method" data-slide="15" aria-label="Research method" hidden>
-          <div class="slide-heading">
-            <p class="eyebrow">METHOD</p>
-            <h1>205 platforms. One selected route each.</h1>
-          </div>
-          <div class="method-grid">
-            <article><p class="card-number">01</p><h2>Source</h2><p>Official documentation for each platform.</p></article>
-            <article><p class="card-number">02</p><h2>Boundary</h2><p>One documented path to a first usable result.</p></article>
-            <article><p class="card-number">03</p><h2>Limit</h2><p>Documentation research, not product telemetry or observed completion time.</p></article>
-          </div>
-          <p class="source-note">Use the records for conditional comparison, not a platform ranking.</p>
-        </section>
-
-        <section class="slide slide--finding" data-slide="23" aria-label="Route selection finding" hidden>
-          <div class="finding-layout">
-            <div>
-              <p class="eyebrow">ROUTE SELECTION</p>
-              <p class="finding-number" data-stat="selectionPrimary"></p>
-              <h1>routes needed the workshop selection policy.</h1>
+        <section class="slide slide--scope slide--unified" data-slide="11" aria-label="What the exercise recorded" hidden>
+          <div class="story-surface">
+            <div class="surface-heading">
+              <p class="source-label">WORKSHOP MEASUREMENT BOUNDARY</p>
+              <h1>Positions, bounded events, and time.</h1>
             </div>
-            <div class="finding-detail">
-              <p class="sensitivity" data-stat="selectionSensitivity"></p>
-              <p>DevRel may need to recommend one route, not only list every option.</p>
-              <p class="source-note">Direct field count. The derived phrase detector undercounts wording variants.</p>
+            <div class="scope-grid">
+              <div class="scope-card scope-card--yes">
+                <h2>Sent to the projector</h2>
+                <ul>
+                  <li>Named route positions</li>
+                  <li>Bounded machine error codes</li>
+                  <li>Retries, timing, and terminal completion</li>
+                </ul>
+              </div>
+              <div class="scope-card scope-card--no">
+                <h2>Not sent</h2>
+                <ul>
+                  <li>Fake account or card values</li>
+                  <li>Form contents or page text</li>
+                </ul>
+                <p>The test token is sent for verification. The source code comes later.</p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section class="slide slide--finding" data-slide="24" aria-label="Success boundary finding" hidden>
-          <div class="slide-heading">
-            <p class="eyebrow">WHERE DOES THE FIRST MILE END?</p>
-            <h1>Two boundary types in the 205 routes.</h1>
-          </div>
-          <div class="number-grid" data-boundary-stats></div>
-          <div class="finding-footer">
-            <p>Agree where the first mile ends before instrumenting it.</p>
-            <p class="source-note">Sensitivity after excluding 69 compact re-researched records: 59 of 136 named, 77 of 136 demonstrated.</p>
+        <section class="slide slide--gates slide--unified" data-slide="14" aria-label="Examples of documented gates" hidden>
+          <div class="story-surface">
+            <div class="surface-heading">
+              <p class="source-label">DOCUMENTED ROUTE DATA · 205 RECORDS</p>
+              <h1>The setup work takes different forms.</h1>
+            </div>
+            <div class="gate-grid">
+              <article><h2>Airwallex</h2><p>Business email and sandbox account</p></article>
+              <article><h2>Akamai Cloud</h2><p>SMS verification and payment method</p></article>
+              <article><h2>Airtable</h2><p>Token scopes and resource selection</p></article>
+              <article><h2>Ably</h2><p>Four capabilities, plus a production credential warning</p></article>
+            </div>
+            <div class="surface-footer">
+              <p>Selected examples, not the most frequent or difficult gates.</p>
+              <p class="source-note">Official pages checked July 21, 2026.</p>
+            </div>
           </div>
         </section>
 
-        <section class="slide slide--ambiguity" data-slide="25" aria-label="Observed position does not diagnose cause" hidden>
-          <div class="slide-heading">
-            <p class="eyebrow">POSITION IS NOT CAUSE</p>
-            <h1>“Learning/setup” or “implementation” still leaves many explanations.</h1>
+        <section class="slide slide--method slide--unified" data-slide="15" aria-label="Research method" hidden>
+          <div class="story-surface">
+            <div class="surface-heading">
+              <p class="source-label">DOCUMENTED ROUTE DATA · 205 RECORDS</p>
+              <h1>205 platforms. One selected route each.</h1>
+            </div>
+            <div class="method-grid">
+              <article><p class="card-number">01</p><div><h2>Source</h2><p>Official documentation for each platform.</p></div></article>
+              <article><p class="card-number">02</p><div><h2>Boundary</h2><p>One documented path to an observable terminal state.</p></div></article>
+              <article><p class="card-number">03</p><div><h2>Limit</h2><p>Documentation research, not product telemetry or observed completion time.</p></div></article>
+            </div>
+            <p class="evidence-handoff">Slides 23 and 24 describe 205 documented-route records. Slide 25 uses a separate blocker hypothesis graph.</p>
+            <p class="source-note">One record means one platform, one selected surface, one documented route, and one research snapshot.</p>
           </div>
-          <div class="ambiguity-grid" data-ambiguity-stats></div>
-          <p class="ambiguity-action">Use the inventory to choose the next evidence, not the answer.</p>
         </section>
 
-        <section class="slide slide--atlas" data-slide="19" aria-label="Use the First-Mile Atlas" hidden>
-          <div class="resource-layout">
+        <section class="slide slide--finding slide--unified" data-slide="23" aria-label="Route selection finding" hidden>
+          <div class="story-surface finding-surface">
+            <p class="source-label">DOCUMENTED ROUTE DATA · 205 RECORDS</p>
+            <div class="finding-layout">
+              <div class="finding-primary">
+                <p class="finding-number" data-stat="selectionPrimary"></p>
+                <h1>route records explicitly say the workshop policy selected the route.</h1>
+              </div>
+              <div class="finding-detail">
+                <div class="comparison-row"><strong data-stat="selectionPolicy"></strong><span>research-policy-selected routes</span></div>
+                <div class="comparison-row"><strong data-stat="selectionDocs"></strong><span>documentation-selected routes</span></div>
+                <p class="finding-action">DevRel may need to recommend one route, not only list every option.</p>
+                <p class="source-note" data-stat="selectionSensitivity"></p>
+              </div>
+            </div>
+            <p class="surface-boundary">This describes route selection in the research records. It does not measure developer preference or abandonment.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--finding slide--unified" data-slide="24" aria-label="Success boundary finding" hidden>
+          <div class="story-surface">
+            <div class="surface-heading">
+              <p class="source-label">DOCUMENTED ROUTE DATA · 205 RECORDS</p>
+              <h1>Most quickstarts show an ending. Fewer name the milestone.</h1>
+            </div>
+            <div class="number-grid" data-boundary-stats></div>
+            <div class="finding-footer">
+              <p>Agree where the first mile ends before instrumenting it.</p>
+              <p class="surface-boundary">A demonstrated terminal is not necessarily a poor outcome. The research only records whether the inspected documentation explicitly names the milestone.</p>
+              <p class="source-note">Sensitivity after excluding 69 compact re-researched records: 59 of 136 named, 77 of 136 demonstrated.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide--ambiguity slide--unified" data-slide="25" aria-label="Observed position does not diagnose cause" hidden>
+          <div class="story-surface">
+            <div class="surface-heading">
+              <p class="source-label">BLOCKER HYPOTHESIS GRAPH · SEPARATE DATASET</p>
+              <h1>A stopping point locates the search. It does not identify the cause.</h1>
+            </div>
+            <div class="ambiguity-grid" data-ambiguity-stats></div>
+            <div class="ambiguity-footer">
+              <p class="ambiguity-action">Choose the next evidence, not the answer.</p>
+              <p class="surface-boundary">These are catalog candidates, not observed, common, severe, or causal blockers.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide--atlas slide--unified" data-slide="19" aria-label="Use the First-Mile Atlas" hidden>
+          <div class="story-surface resource-layout">
             <div class="resource-copy">
               <p class="eyebrow">3 TO 4 MINUTES</p>
               <h1>Check a documented comparison.</h1>
@@ -258,8 +280,8 @@
           </div>
         </section>
 
-        <section class="slide slide--firstmile" data-slide="17" aria-label="Firstmile instrumentation SDK" hidden>
-          <div class="resource-layout">
+        <section class="slide slide--firstmile slide--unified" data-slide="17" aria-label="Firstmile instrumentation SDK" hidden>
+          <div class="story-surface resource-layout">
             <div class="resource-copy">
               <p class="eyebrow">FIRSTMILE</p>
               <h1>Record named positions, not form contents.</h1>
@@ -275,54 +297,61 @@ fm.shipped()</code></pre>
           </div>
         </section>
 
-        <section class="slide slide--workflow" data-slide="16" aria-label="Engineering workflow" hidden>
-          <div class="slide-heading">
-            <p class="eyebrow">A SMALL ENGINEERING ASK</p>
-            <h1>Bring a route and evidence, not a verdict.</h1>
+        <section class="slide slide--workflow slide--unified" data-slide="16" aria-label="Engineering workflow" hidden>
+          <div class="story-surface">
+            <div class="surface-heading">
+              <p class="eyebrow">A SMALL ENGINEERING ASK</p>
+              <h1>Bring a route and evidence, not a verdict.</h1>
+            </div>
+            <ol class="workflow-list">
+              <li><span>1</span>Define the first-success outcome.</li>
+              <li><span>2</span>Name the expected positions.</li>
+              <li><span>3</span>Record bounded events.</li>
+              <li><span>4</span>Observe five intended developers without rescuing them.</li>
+              <li><span>5</span>Share stopping points, missing evidence, and one next observation with the route owner.</li>
+            </ol>
+            <p class="surface-boundary">Five people form a bounded pilot, not a representative sample. Route ownership is not causal ownership.</p>
           </div>
-          <ol class="workflow-list">
-            <li><span>1</span>Define the first-success outcome.</li>
-            <li><span>2</span>Name the expected positions.</li>
-            <li><span>3</span>Record bounded events.</li>
-            <li><span>4</span>Put five developer champions through it.</li>
-            <li><span>5</span>Share aggregate stopping points with the owning team.</li>
-          </ol>
         </section>
 
-        <section class="slide slide--prototype" data-slide="18" aria-label="Build a bounded evidence prototype" hidden>
-          <div class="slide-heading">
-            <p class="eyebrow">IF ENGINEERING CANNOT INSTRUMENT IT YET</p>
-            <h1>Build a bounded evidence prototype.</h1>
-          </div>
-          <div class="prototype-grid">
-            <ol>
-              <li>Start from the public FakeSaaSPI reference app.</li>
-              <li>Give a coding agent the official docs and target outcome.</li>
-              <li>Replace the route with a documented mirror.</li>
-              <li>Add Firstmile, review every step, and test with a small group.</li>
-            </ol>
-            <div class="guardrail-card">
-              <h2>Guardrails</h2>
-              <p>Fake data only. Do not invent steps. Do not publish or deploy without approval.</p>
-              <p>A prototype is not production telemetry or usability research.</p>
-              <p>FakeSaaSPI is source available for inspection. No public reuse rights are granted.</p>
+        <section class="slide slide--prototype slide--unified" data-slide="18" aria-label="Build a bounded evidence prototype" hidden>
+          <div class="story-surface">
+            <div class="surface-heading">
+              <p class="eyebrow">IF ENGINEERING CANNOT INSTRUMENT IT YET</p>
+              <h1>Build a bounded evidence prototype.</h1>
+            </div>
+            <div class="prototype-grid">
+              <ol>
+                <li>Start from the public FakeSaaSPI reference app.</li>
+                <li>Give a coding agent the official docs and target outcome.</li>
+                <li>Replace the route with a documented mirror.</li>
+                <li>Add Firstmile, review every step, and test with a small group.</li>
+              </ol>
+              <div class="guardrail-card">
+                <h2>Guardrails</h2>
+                <p>Fake data only. Do not invent steps. Do not publish or deploy without approval.</p>
+                <p>A prototype is not production telemetry or usability research.</p>
+                <p>FakeSaaSPI is source available for inspection. No public reuse rights are granted.</p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section class="slide slide--closing" data-slide="20" aria-label="Monday action" hidden>
-          <div class="closing-action">
-            <p class="eyebrow">ON MONDAY</p>
-            <h1>Pick one route.</h1>
-            <ol>
-              <li>Define its first-success outcome and observable positions.</li>
-              <li>Put five developers through it.</li>
-              <li>Bring the stopping points and missing evidence to the team that owns them.</li>
-            </ol>
-            <p class="contact" data-contact></p>
-          </div>
-          <div class="closing-footer">
-            <img class="render-logo" src="assets/render-logo.svg?v=2" alt="Render">
+        <section class="slide slide--closing slide--unified" data-slide="20" aria-label="Monday action" hidden>
+          <div class="story-surface closing-surface">
+            <div class="closing-action">
+              <p class="eyebrow">ON MONDAY</p>
+              <h1>Pick one route.</h1>
+              <ol>
+                <li>Define its first-success outcome and observable positions.</li>
+                <li>Put five intended developers through it.</li>
+                <li>Bring the stopping points and missing evidence to the team that owns the route.</li>
+              </ol>
+              <p class="contact" data-contact></p>
+            </div>
+            <div class="closing-footer">
+              <img class="render-logo" src="assets/render-logo.svg?v=2" alt="Render">
+            </div>
           </div>
         </section>
       </main>

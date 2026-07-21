@@ -58,11 +58,19 @@ function assert(condition, message) {
           hash: location.hash,
           visibleCount: visible.length,
           visibleId: visible[0] ? Number(visible[0].dataset.slide) : null,
+          label: slide.getAttribute("aria-label"),
+          hasPrimaryText: Boolean(slide.querySelector("h1,.statement-line")),
+          unnamedMedia: [...slide.querySelectorAll("canvas,iframe")]
+            .filter((element) => !(element.getAttribute("aria-label") || element.getAttribute("title")))
+            .map((element) => element.tagName),
           clipped,
         };
       }, slideId);
       assert(state.hash === `#${slideId}`, `${viewport.name} slide ${slideId}: wrong hash ${state.hash}`);
       assert(state.visibleCount === 1 && state.visibleId === slideId, `${viewport.name} slide ${slideId}: wrong visible slide`);
+      assert(Boolean(state.label), `${viewport.name} slide ${slideId}: missing accessible label`);
+      assert(state.hasPrimaryText || slideId === 12, `${viewport.name} slide ${slideId}: missing primary slide text`);
+      assert(state.unnamedMedia.length === 0, `${viewport.name} slide ${slideId}: unnamed media ${state.unnamedMedia.join(", ")}`);
       assert(state.clipped.length === 0, `${viewport.name} slide ${slideId}: clipped ${JSON.stringify(state.clipped)}`);
       await page.screenshot({ path: join(outputDir, `${viewport.name}-${String(slideId).padStart(2, "0")}.png`) });
     }
@@ -89,6 +97,17 @@ function assert(condition, message) {
 
     await context.close();
   }
+
+  const reducedContext = await browser.newContext({
+    viewport: viewports[0],
+    reducedMotion: "reduce",
+  });
+  const reducedPage = await reducedContext.newPage();
+  await reducedPage.goto(`${baseUrl}/#4`, { waitUntil: "networkidle" });
+  await reducedPage.waitForFunction(() => document.documentElement.dataset.deckReady === "true");
+  const transitionDuration = await reducedPage.locator(".scene-image[data-art-fragment]").first().evaluate((element) => getComputedStyle(element).transitionDuration);
+  assert(transitionDuration === "0s", `reduced motion: expected 0s transition, found ${transitionDuration}`);
+  await reducedContext.close();
 
   const requestContext = await request.newContext();
   for (const url of [

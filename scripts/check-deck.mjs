@@ -24,15 +24,23 @@ requireCondition(JSON.stringify(actualOrder) === JSON.stringify(expectedOrder), 
 requireCondition(new Set(actualOrder).size === actualOrder.length, "Slide IDs must be unique");
 requireCondition(!actualOrder.some((id) => [9, 10, 13].includes(id)), "Removed slides 9, 10, and 13 must stay removed");
 requireCondition(actualOrder.indexOf(12) === actualOrder.indexOf(7) + 1, "Slide 12 must immediately follow slide 7");
+requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).length === 12, "The twelve evidence, resource, workflow, and closing slides must use the shared story surface");
 
 for (const requiredText of [
   "Completion is not required",
   "It does not tell us why",
   "Keep the evidence separate",
   "151 / 205",
+  "documentation-selected routes",
   "83 / 205",
   "122 / 205",
   "0 / 790",
+  "DOCUMENTED ROUTE DATA · 205 RECORDS",
+  "BLOCKER HYPOTHESIS GRAPH · SEPARATE DATASET",
+  "One documented path to an observable terminal state",
+  "Observe five intended developers without rescuing them",
+  "Five people form a bounded pilot, not a representative sample",
+  "These are catalog candidates, not observed, common, severe, or causal blockers",
   "No public reuse rights are granted",
 ]) {
   const corpus = Object.values(files).join("\n");
@@ -55,6 +63,10 @@ const forbiddenPatterns = [
   ["old source count", /1,121/],
   ["unsupported frustration claim", /frustrat(?:ion|ing)/i],
   ["unsupported open-source label for FakeSaaSPI", /open[- ]source FakeSaaSPI/i],
+  ["old research boundary wording", /One documented path to a first usable result/i],
+  ["old participant wording", /Put five developer champions through it/i],
+  ["old handoff wording", /Share aggregate stopping points with the owning team/i],
+  ["cross-dataset implication", /205[^\n]{0,80}(?:790|candidate reasons)|790[^\n]{0,80}205/i],
   ["generic greatest-hits framing", /greatest hits/i],
   ["slop phrase", /at its core|here(?:'|’)s the thing|now more than ever|let that sink in|game-changing|meaningful impact/i],
 ];
