@@ -13,9 +13,10 @@ const CONFIG = {
 
   // Takeaway links. Same placeholder-to-QR behavior as fakegptUrl.
   takeaways: {
-    firstmile: "https://github.com/ojusave/firstmile",
+    firstmile: "https://github.com/ojusave/usecalibrate",
     fakesaaspiKit: "https://github.com/ojusave/fakesaaspi",
     comparison: "https://devrelcon-research.onrender.com",
+    credits: "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
   },
 
   // Optional countdown on the holding slide. null hides it entirely.

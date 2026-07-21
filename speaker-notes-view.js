@@ -1,15 +1,23 @@
 (function () {
   "use strict";
 
-  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
+  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v3";
+  const PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
   const LEGACY_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v1";
-  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
+  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
+  const PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
   const LEGACY_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide";
+  const PREVIOUS_SLIDE_ID_MAP = {
+    1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8,
+    9: 9, 10: 10, 11: 11, 12: 12, 13: 13, 14: 14, 15: 15,
+    16: 16, 17: 17, 18: 18, 19: 19, 20: 20, 21: 21, 22: 22,
+    23: 24,
+  };
   const LEGACY_SLIDE_ID_MAP = {
     1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6,
     21: 7, 7: 8, 12: 9, 8: 10, 13: 11, 22: 12, 11: 13,
     14: 14, 15: 15, 23: 16, 24: 17, 25: 18, 19: 19,
-    17: 20, 16: 21, 18: 22, 20: 23,
+    17: 20, 16: 21, 18: 22, 20: 24,
   };
   const channel = "BroadcastChannel" in window ? new BroadcastChannel("devrelcon-deck") : null;
   const slideElement = document.querySelector("[data-note-slide]");
@@ -32,6 +40,21 @@
       if (current) {
         const stored = JSON.parse(current);
         return stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
+      }
+
+      const previous = JSON.parse(window.localStorage.getItem(PREVIOUS_NOTES_STORAGE_KEY) || "{}");
+      if (previous && typeof previous === "object" && !Array.isArray(previous)) {
+        const migrated = {};
+        for (const [previousId, note] of Object.entries(previous)) {
+          const nextId = PREVIOUS_SLIDE_ID_MAP[previousId];
+          if (nextId && note && typeof note === "object" && !Array.isArray(note)) {
+            migrated[nextId] = note;
+          }
+        }
+        if (Object.keys(migrated).length > 0) {
+          window.localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(migrated));
+          return migrated;
+        }
       }
 
       const legacy = JSON.parse(window.localStorage.getItem(LEGACY_NOTES_STORAGE_KEY) || "{}");
@@ -210,10 +233,15 @@
   let initialSlide = validSlide(window.location.hash.slice(1));
   try {
     const current = window.localStorage.getItem(PRESENTER_SLIDE_STORAGE_KEY);
+    const previous = window.localStorage.getItem(PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const legacy = window.localStorage.getItem(LEGACY_PRESENTER_SLIDE_STORAGE_KEY);
-    const saved = JSON.parse(current || legacy || "null");
+    const saved = JSON.parse(current || previous || legacy || "null");
     if (!window.location.hash && saved?.slideId) {
-      const savedSlideId = current ? saved.slideId : LEGACY_SLIDE_ID_MAP[saved.slideId];
+      const savedSlideId = current
+        ? saved.slideId
+        : previous
+          ? PREVIOUS_SLIDE_ID_MAP[saved.slideId]
+          : LEGACY_SLIDE_ID_MAP[saved.slideId];
       initialSlide = validSlide(savedSlideId);
     }
   } catch (_error) {

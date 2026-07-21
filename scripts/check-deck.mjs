@@ -13,7 +13,7 @@ const files = {
   theme: readFileSync(resolve(root, "theme-bright.css"), "utf8"),
 };
 
-const expectedOrder = Array.from({ length: 23 }, (_, index) => index + 1);
+const expectedOrder = Array.from({ length: 24 }, (_, index) => index + 1);
 const actualOrder = [...files.html.matchAll(/data-slide="(\d+)"/g)].map((match) => Number(match[1]));
 const errors = [];
 
@@ -26,7 +26,7 @@ function requireCondition(condition, message) {
 requireCondition(JSON.stringify(actualOrder) === JSON.stringify(expectedOrder), `Unexpected slide order: ${actualOrder.join(", ")}`);
 requireCondition(new Set(actualOrder).size === actualOrder.length, "Slide IDs must be unique");
 requireCondition(actualOrder.every((id, index) => id === index + 1), "Slide IDs must match their chronological position");
-requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).length === 12, "The twelve evidence, resource, workflow, and closing slides must use the shared story surface");
+requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).length === 13, "The thirteen evidence, resource, workflow, credit, and closing slides must use the shared story surface");
 
 const noteIds = [...files.notes.matchAll(/^\s+(\d+): \{/gm)].map((match) => Number(match[1]));
 requireCondition(JSON.stringify(noteIds) === JSON.stringify(expectedOrder), `Speaker notes do not match slide order: ${noteIds.join(", ")}`);
@@ -37,8 +37,9 @@ requireCondition((files.notes.match(/• /g) || []).length >= expectedOrder.leng
 requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 3, "Purpose, talking points, and transition must be editable");
 requireCondition(files.notesHtml.includes("Save notes"), "Speaker notes need an explicit save action");
 requireCondition(files.notesHtml.includes("Restore defaults"), "Speaker notes need a restore-defaults action");
-requireCondition(files.notesView.includes("devrelcon.presenter.notes.v2"), "Speaker-note edits must use versioned browser storage");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v3"), "Speaker-note edits must use versioned browser storage");
 requireCondition(files.notesView.includes("LEGACY_SLIDE_ID_MAP"), "Speaker-note edits must migrate from the previous slide numbering");
+requireCondition(files.notesView.includes("PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve slide 23 edits when the closing slide moves to slide 24");
 
 for (const requiredText of [
   "Completion is not required",
@@ -65,6 +66,10 @@ for (const requiredText of [
   "Observe five intended developers without rescuing them",
   "Five people form a bounded pilot, not a representative sample",
   "No public reuse rights are granted",
+  "Claim $100 in Render credits",
+  "Eligible DevRelCon attendees",
+  "sign in with GitHub to check eligibility",
+  "repository you are authorized to deploy",
 ]) {
   const corpus = Object.values(files).join("\n");
   requireCondition(corpus.includes(requiredText), `Missing required text: ${requiredText}`);
@@ -73,9 +78,10 @@ for (const requiredText of [
 for (const requiredUrl of [
   "https://fakesaaspi.onrender.com",
   "https://fakesaaspi.onrender.com/present",
-  "https://github.com/ojusave/firstmile",
+  "https://github.com/ojusave/usecalibrate",
   "https://github.com/ojusave/fakesaaspi",
   "https://devrelcon-research.onrender.com",
+  "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
 ]) {
   requireCondition(files.config.includes(requiredUrl), `Missing configured URL: ${requiredUrl}`);
 }

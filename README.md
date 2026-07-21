@@ -14,7 +14,7 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. Slide 11 is reserved for event-specific results and may show a placeholder outside the live workshop. |
 | 12 to 13 | The deck separates the documented route, observed behavior, and the explanation that is still missing. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
 | 14 to 18 | Research from 205 documented developer onboarding routes. | See where route choice and unclear success boundaries appear in the inspected documentation. |
-| 19 to 23 | The First-Mile Atlas, a small instrumentation example, an engineering handoff, and a Monday action. | Turn one onboarding concern into a route the owning team can inspect and improve. |
+| 19 to 24 | The First-Mile Atlas, a small instrumentation example, an engineering handoff, an optional attendee credit, and a Monday action. | Turn one onboarding concern into a route the owning team can inspect, prototype, and improve. |
 
 ## The three research findings
 
@@ -42,9 +42,9 @@ The goal is not to prove that onboarding is bad. The goal is to replace a broad 
 - [FakeSaaSPI exercise](https://fakesaaspi.onrender.com/)
 - [First-Mile Atlas](https://devrelcon-research.onrender.com/)
 - [Calibrate instrumentation project](https://github.com/ojusave/usecalibrate)
-- [FakeSaaSPI reference repository](https://github.com/ojusave/fakesaaspi)
+- [Claim $100 in Render credits](https://credits-portal-mmdm.onrender.com/claim/devrelcon)
 
-Calibrate is Apache-2.0 licensed public source and is published to npm as `usecalibrate`. The deck's “Firstmile” instrumentation example now lives in Calibrate's workshop kit. FakeSaaSPI is publicly inspectable source without a project license, so the repository does not grant reuse rights. The Atlas compares documented routes. It does not diagnose why a developer stopped.
+Eligible DevRelCon attendees can sign in with GitHub to check access to the $100 Render credit. Calibrate is Apache-2.0 licensed public source and is published to npm as `usecalibrate`. The deck's “Firstmile” instrumentation example now lives in Calibrate's workshop kit. FakeSaaSPI is publicly inspectable source without a project license, so the repository does not grant reuse rights. The Atlas compares documented routes. It does not diagnose why a developer stopped.
 
 | Control | Action |
 | --- | --- |
@@ -54,7 +54,7 @@ Calibrate is Apache-2.0 licensed public source and is published to npm as `useca
 | `F` | Enter or leave fullscreen |
 | `N` | Open the synchronized speaker notes |
 
-The slide number in the URL matches the order in the deck: `#1` through `#23`.
+The slide number in the URL matches the order in the deck: `#1` through `#24`.
 
 **What Makes Developers Actually Ship?** was prepared for DevRelCon NYC on July 22, 2026 by Ojus Save from Render.
 
