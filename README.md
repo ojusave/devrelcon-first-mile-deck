@@ -36,25 +36,25 @@ Open [devrelcon.onrender.com](https://devrelcon.onrender.com/). The live configu
 
 The URL hash stores the current slide. Fragment state intentionally resets after refresh.
 
-### Speaker cue: slide 6 through slide 7
+### Speaker cue: slides 6, 21, and 7
 
 After revealing “He came home alone and unrecognized,” say:
 
 > The goal was simple. Getting there wasn’t.
 
-Then advance directly to “Let’s build something.” Do not explain the exercise before attendees scan the QR code.
+Advance to “Developers don’t arrive to complete your onboarding. They arrive to build something.” Let the line land, then say:
+
+> But then the platform puts a journey between intent and success. Every confusing step spends some of their momentum. Some push through frustrated. Others leave. Either way, onboarding has already taught them what working with you will feel like.
+
+Then advance to “Let’s build something.” Do not explain the exercise before attendees scan the QR code.
 
 ### Speaker cue: slides 10, 22, and 11
 
 After “Okay, no.” advance to the missing-signal slide. Name the limits of documented paths before the room sees its data. This turns the reveal into solidarity instead of a gotcha. Then advance to the reveal.
 
-### Speaker cue: slides 11, 12, 21, and 13
+### Speaker cue: slides 11, 12, and 13
 
-After the reveal, once the room has seen the live dashboard, advance to “Developers don’t arrive to complete your onboarding. They arrive to build something.” Let the line land, then say:
-
-> But then the platform puts a journey between intent and success. Every confusing step spends some of their momentum. Some push through frustrated. Others leave. Either way, onboarding has already taught them what working with you will feel like.
-
-Then advance to the bag-of-winds callback.
+After the reveal, once the room has seen the live dashboard, advance to the bag-of-winds callback.
 
 ## Configure workshop assets
 
