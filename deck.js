@@ -30,10 +30,6 @@
 
   function addSlideBrandMarks() {
     slides.forEach((slide) => {
-      if (slide.querySelector(".render-logo")) {
-        return;
-      }
-
       const mark = document.createElement("img");
       mark.className = "slide-brand";
       mark.src = "assets/render-mark.svg?v=1";

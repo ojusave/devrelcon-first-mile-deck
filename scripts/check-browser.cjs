@@ -51,8 +51,9 @@ function assert(condition, message) {
         const slide = document.querySelector(`.slide[data-slide="${expectedId}"]`);
         const visible = [...document.querySelectorAll(".slide")].filter((item) => !item.hidden);
         const slideRect = slide.getBoundingClientRect();
-        const brand = slide.querySelector(".slide-brand,.render-logo");
+        const brand = slide.querySelector(".slide-brand");
         const brandRect = brand?.getBoundingClientRect();
+        const brandStyle = brand ? getComputedStyle(brand) : null;
         const selectors = "h1,h2,p,li,pre,canvas,iframe";
         const clipped = [...slide.querySelectorAll(selectors)]
           .filter((element) => {
@@ -74,11 +75,12 @@ function assert(condition, message) {
           backgroundColor: getComputedStyle(slide).backgroundColor,
           hasPrimaryText: Boolean(slide.querySelector("h1,.statement-line")),
           brand: brand ? {
-            count: slide.querySelectorAll(".slide-brand,.render-logo").length,
-            isMark: brand.classList.contains("slide-brand"),
+            count: slide.querySelectorAll(".slide-brand").length,
             src: brand.getAttribute("src"),
             alt: brand.getAttribute("alt"),
             ariaHidden: brand.getAttribute("aria-hidden"),
+            size: [brandRect.width, brandRect.height],
+            placement: [brandStyle.right, brandStyle.bottom, brandStyle.width, brandStyle.height],
             inBounds: brandRect.left >= slideRect.left && brandRect.top >= slideRect.top && brandRect.right <= slideRect.right && brandRect.bottom <= slideRect.bottom,
           } : null,
           unnamedMedia: [...slide.querySelectorAll("canvas,iframe")]
@@ -94,13 +96,12 @@ function assert(condition, message) {
         assert(state.backgroundColor === unifiedPalette.get(slideId), `${viewport.name} slide ${slideId}: palette drifted to ${state.backgroundColor}`);
       }
       assert(state.hasPrimaryText || [12, 13].includes(slideId), `${viewport.name} slide ${slideId}: missing primary slide text`);
-      assert(state.brand?.count === 1, `${viewport.name} slide ${slideId}: expected exactly one Render brand signature`);
+      assert(state.brand?.count === 1, `${viewport.name} slide ${slideId}: expected exactly one repeated Render mark`);
       assert(state.brand.inBounds, `${viewport.name} slide ${slideId}: Render brand signature is out of bounds`);
-      if (![1, 20].includes(slideId)) {
-        assert(state.brand.isMark, `${viewport.name} slide ${slideId}: expected the symbol-only Render mark`);
-        assert(state.brand.src === "assets/render-mark.svg?v=1", `${viewport.name} slide ${slideId}: unexpected Render mark asset ${state.brand.src}`);
-        assert(state.brand.alt === "" && state.brand.ariaHidden === "true", `${viewport.name} slide ${slideId}: decorative Render mark is exposed to assistive technology`);
-      }
+      assert(state.brand.src === "assets/render-mark.svg?v=1", `${viewport.name} slide ${slideId}: unexpected Render mark asset ${state.brand.src}`);
+      assert(Math.abs(state.brand.size[0] - state.brand.size[1]) < 0.1, `${viewport.name} slide ${slideId}: Render mark is not square`);
+      assert(state.brand.placement.join("|") === "32px|28px|52px|52px", `${viewport.name} slide ${slideId}: inconsistent Render mark placement ${state.brand.placement.join("|")}`);
+      assert(state.brand.alt === "" && state.brand.ariaHidden === "true", `${viewport.name} slide ${slideId}: decorative Render mark is exposed to assistive technology`);
       assert(state.unnamedMedia.length === 0, `${viewport.name} slide ${slideId}: unnamed media ${state.unnamedMedia.join(", ")}`);
       assert(state.clipped.length === 0, `${viewport.name} slide ${slideId}: clipped ${JSON.stringify(state.clipped)}`);
       await page.screenshot({ path: join(outputDir, `${viewport.name}-${String(slideId).padStart(2, "0")}.png`) });
