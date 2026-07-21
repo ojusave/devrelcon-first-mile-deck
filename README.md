@@ -42,11 +42,19 @@ After revealing “He came home alone and unrecognized,” say:
 
 > The goal was simple. Getting there wasn’t.
 
-Advance to “Developers don’t arrive to complete your onboarding. They arrive to build something.” Let the line land, then say:
+Then advance directly to “Let’s build something.” Do not explain the exercise before attendees scan the QR code.
+
+### Speaker cue: slides 10, 22, and 11
+
+After “Okay, no.” advance to the missing-signal slide. Name the limits of documented paths before the room sees its data. This turns the reveal into solidarity instead of a gotcha. Then advance to the reveal.
+
+### Speaker cue: slides 11, 12, 21, and 13
+
+After the reveal, once the room has seen the live dashboard, advance to “Developers don’t arrive to complete your onboarding. They arrive to build something.” Let the line land, then say:
 
 > But then the platform puts a journey between intent and success. Every confusing step spends some of their momentum. Some push through frustrated. Others leave. Either way, onboarding has already taught them what working with you will feel like.
 
-Then advance to “Let’s build something.” Do not explain the exercise before attendees scan the QR code.
+Then advance to the bag-of-winds callback.
 
 ## Configure workshop assets
 
@@ -88,7 +96,7 @@ The production deck is a Render Static Site at [devrelcon.onrender.com](https://
 | Publish Directory | `.` |
 | Required environment variables | None |
 
-To create another copy, connect the repository from **New > Static Site** in the Render Dashboard and use the settings above. Leave the Build Command empty. The repository is private, so the Render GitHub App and the deploying user both need access.
+To create another copy, connect the repository from **New > Static Site** in the Render Dashboard and use the settings above. Leave the Build Command empty. The repository is public, so no private-repository access is required.
 
 After deployment, verify the root page, a direct slide hash such as `/#7`, and the dashboard toggle. Build and request logs are available from the service in the Render Dashboard.
 
@@ -114,4 +122,4 @@ After deployment, verify the root page, a direct slide hash such as `/#7`, and t
 
 Open a focused pull request against `main`. Include the browser and control paths you exercised.
 
-This workshop repository has no public license. Third-party notices in `licenses/` apply only to their respective vendored assets.
+No project-level license has been chosen yet; open an issue before building on this. Third-party notices in `licenses/` apply only to their respective vendored assets.
