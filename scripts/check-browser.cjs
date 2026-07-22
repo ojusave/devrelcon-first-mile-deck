@@ -51,20 +51,26 @@ function assert(condition, message) {
         await page.getByText("Stage navigation skips this slide until the event results URL is added").waitFor();
       }
       if (slideId === 13) {
-        assert((await page.locator('.slide[data-slide="13"] h1').innerText()).trim() === "The documented first mile averaged 10 actions.", `${viewport.name}: slide 13 route-length finding is incorrect`);
-        await page.getByText("7", { exact: true }).waitFor();
-        await page.getByText("2,240", { exact: true }).waitFor();
+        const heading = (await page.locator('.slide[data-slide="13"] h1').innerText()).replace(/\s+/g, " ").trim();
+        assert(heading === "I examined 224 developer platforms.", `${viewport.name}: slide 13 research scope is incorrect`);
+        await page.getByText("2,359", { exact: true }).waitFor();
+        await page.getByText("949", { exact: true }).waitFor();
       }
       if (slideId === 14) {
-        assert((await page.locator('.slide[data-slide="14"] h1').innerText()).trim() === "I found only 74 of 224 routes explicitly named first success.", `${viewport.name}: slide 14 first-success finding is incorrect`);
+        const heading = (await page.locator('.slide[data-slide="14"] h1').innerText()).replace(/\s+/g, " ").trim();
+        assert(heading === "Of the 224 routes I examined, only 74 explicitly named first success.", `${viewport.name}: slide 14 first-success finding is incorrect`);
         await page.getByText("150", { exact: true }).waitFor();
-        await page.getByText("56", { exact: true }).waitFor();
       }
       if (slideId === 15) {
-        assert((await page.locator('.slide[data-slide="15"] h1').innerText()).trim() === "I found a median of 4 documented gates per route.", `${viewport.name}: slide 15 route-condition finding is incorrect`);
+        const heading = (await page.locator('.slide[data-slide="15"] h1').innerText()).replace(/\s+/g, " ").trim();
+        assert(heading === "I documented 1,021 gates. The median route had 4.", `${viewport.name}: slide 15 route-condition finding is incorrect`);
         for (const value of ["124", "103", "60"]) {
           await page.getByText(value, { exact: true }).waitFor();
         }
+      }
+      if (slideId === 16) {
+        const heading = (await page.locator('.slide[data-slide="16"] h1').innerText()).replace(/\s+/g, " ").trim();
+        assert(heading === "I cataloged 790 possible blockers. None is a diagnosis.", `${viewport.name}: slide 16 hypothesis boundary is incorrect`);
       }
       if (slideId === 8) {
         const fakegptQr = page.locator('[data-qr-frame="fakegpt"] canvas');
