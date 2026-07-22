@@ -12,9 +12,9 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | --- | --- | --- |
 | 1 to 7 | Odysseus takes ten years to get home after Troy. | A clear destination does not guarantee a usable route. Developers also arrive with a destination of their own. |
 | 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. The dashboard separates the intended route, observed movement, bypassed stages, and backtracking. Slide 11 is reserved for event-specific results and is skipped automatically until its URL is configured. |
-| 12 to 13 | The deck separates the documented route, observed behavior, and the explanation that is still missing. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
-| 14 to 18 | Research from 205 documented developer onboarding routes. | See where route choice and unclear success boundaries appear in the inspected documentation. |
-| 19 to 25 | The First-Mile Atlas, Calibrate, a developer-champions session, a route-owner handoff, an optional attendee credit, and a Monday action. | Compare one documented route, observe where activity changes, ask what the developer expected, and take one bounded question to the owning team. |
+| 12 | The deck states exactly what the workshop tracker recorded. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
+| 13 to 17 | Research from 205 documented developer onboarding routes. | See where route choice and unclear success boundaries appear in the inspected documentation. |
+| 18 to 24 | The First-Mile Atlas, Calibrate, a developer-champions session, a route-owner handoff, an optional attendee credit, and a Monday action. | Compare one documented route, observe where activity changes, ask what the developer expected, and take one bounded question to the owning team. |
 
 ## The three research findings
 
@@ -64,7 +64,7 @@ Eligible DevRelCon attendees can sign in with GitHub to check access to the $100
 | `F` | Enter or leave fullscreen |
 | `N` | Open the synchronized speaker notes |
 
-The slide number in the URL matches the order in the deck: `#1` through `#25`.
+The slide number in the URL matches the order in the deck: `#1` through `#24`.
 
 Live-room dependency: the event-specific results surface on slide 11 is not connected yet. Normal stage navigation skips it safely. Use the live dashboard on slide 9 for the room debrief until the final results URL is available and rehearsed.
 

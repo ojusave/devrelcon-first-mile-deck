@@ -1610,28 +1610,27 @@ body {
 
 [data-slide="12"] .story-surface,
 [data-slide="13"] .story-surface,
-[data-slide="14"] .story-surface,
-[data-slide="20"] .story-surface {
+[data-slide="19"] .story-surface {
   grid-template-rows: auto 1fr;
+}
+
+[data-slide="16"] .story-surface {
+  grid-template-rows: auto 1fr auto;
+}
+
+[data-slide="20"] .story-surface {
+  grid-template-rows: auto auto 1fr;
+}
+
+[data-slide="21"] .story-surface {
+  grid-template-rows: auto 1fr auto;
 }
 
 [data-slide="17"] .story-surface {
   grid-template-rows: auto 1fr auto;
 }
 
-[data-slide="21"] .story-surface {
-  grid-template-rows: auto auto 1fr;
-}
-
 [data-slide="22"] .story-surface {
-  grid-template-rows: auto 1fr auto;
-}
-
-[data-slide="18"] .story-surface {
-  grid-template-rows: auto 1fr auto;
-}
-
-[data-slide="23"] .story-surface {
   align-content: center;
 }
 

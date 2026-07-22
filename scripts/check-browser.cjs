@@ -4,16 +4,16 @@ const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 
 const baseUrl = process.env.DECK_URL || "http://127.0.0.1:4173";
-const slideIds = Array.from({ length: 25 }, (_, index) => index + 1);
+const slideIds = Array.from({ length: 24 }, (_, index) => index + 1);
 const viewports = [
   { name: "projector", width: 1920, height: 1080 },
   { name: "laptop", width: 1280, height: 720 },
 ];
 const unifiedPalette = new Map([
-  [12, "rgb(20, 184, 241)"], [16, "rgb(20, 184, 241)"], [17, "rgb(20, 184, 241)"], [21, "rgb(20, 184, 241)"], [22, "rgb(20, 184, 241)"],
-  [13, "rgb(112, 71, 235)"], [20, "rgb(112, 71, 235)"], [24, "rgb(112, 71, 235)"],
-  [14, "rgb(255, 212, 77)"], [19, "rgb(255, 212, 77)"], [25, "rgb(255, 212, 77)"],
-  [15, "rgb(255, 138, 102)"], [18, "rgb(255, 138, 102)"], [23, "rgb(255, 138, 102)"],
+  [15, "rgb(20, 184, 241)"], [16, "rgb(20, 184, 241)"], [20, "rgb(20, 184, 241)"], [21, "rgb(20, 184, 241)"],
+  [12, "rgb(112, 71, 235)"], [19, "rgb(112, 71, 235)"], [23, "rgb(112, 71, 235)"],
+  [13, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [24, "rgb(255, 212, 77)"],
+  [14, "rgb(255, 138, 102)"], [17, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"],
 ]);
 const outputDir = mkdtempSync(join(tmpdir(), "devrelcon-deck-"));
 
@@ -71,7 +71,7 @@ function assert(condition, message) {
         assert(fakegptQrState.captionFits, `${viewport.name}: FakeGPT QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="fakegpt"]').textContent() === "fakesaaspi.onrender.com/fakegpt", `${viewport.name}: FakeGPT QR caption is incorrect`);
       }
-      if (slideId === 24) {
+      if (slideId === 23) {
         const creditQr = page.locator('[data-qr-frame="credits"] canvas');
         await creditQr.waitFor();
         const creditQrState = await creditQr.evaluate((canvas) => {
@@ -97,7 +97,7 @@ function assert(condition, message) {
         assert(creditQrState.captionFits, `${viewport.name}: credit QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="credits"]').textContent() === "credits-portal-mmdm.onrender.com/claim/devrelcon", `${viewport.name}: credit QR caption is incorrect`);
       }
-      if (slideId === 25) {
+      if (slideId === 24) {
         const careersQr = page.locator('[data-qr-frame="careers"] canvas');
         await careersQr.waitFor();
         const careersQrState = await careersQr.evaluate((canvas) => {
@@ -237,7 +237,7 @@ function assert(condition, message) {
     await page.keyboard.press("b");
     assert(!(await page.locator("#blackout").isVisible()), `${viewport.name}: B did not hide blackout`);
     await page.keyboard.press("End");
-    assert((await page.url()).endsWith("#25"), `${viewport.name}: End did not reach slide 25`);
+    assert((await page.url()).endsWith("#24"), `${viewport.name}: End did not reach slide 24`);
     await page.keyboard.press("Home");
     assert((await page.url()).endsWith("#1"), `${viewport.name}: Home did not reach slide 1`);
     await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
@@ -313,7 +313,7 @@ function assert(condition, message) {
       return getComputedStyle(field).overflowY === "auto";
     }));
     assert(noteFieldsAreUsable, `speaker notes slide ${slideId}: overflowing note field is not independently scrollable`);
-    if ([8, 16, 22, 24].includes(slideId)) {
+    if ([8, 15, 21, 23].includes(slideId)) {
       await notesPage.screenshot({ path: join(outputDir, `speaker-notes-${String(slideId).padStart(2, "0")}.png`) });
     }
   }
@@ -351,13 +351,13 @@ function assert(condition, message) {
     transition: "Saved closing transition.",
   };
   await notesPage.evaluate((note) => {
-    localStorage.removeItem("devrelcon.presenter.notes.v4");
-    localStorage.setItem("devrelcon.presenter.notes.v3", JSON.stringify({ 24: note }));
+    localStorage.removeItem("devrelcon.presenter.notes.v5");
+    localStorage.setItem("devrelcon.presenter.notes.v4", JSON.stringify({ 25: note }));
   }, previousNote);
-  await notesPage.goto(`${baseUrl}/speaker-notes.html?previous-migration-check=1#25`, { waitUntil: "networkidle" });
-  assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not migrate from slide 24 to slide 25");
-  assert(await notesPage.getByLabel("Talking points").inputValue() === previousNote.say, "speaker notes: previous closing talking points did not migrate from slide 24 to slide 25");
-  assert(await notesPage.getByLabel("Transition").inputValue() === previousNote.transition, "speaker notes: previous closing transition did not migrate from slide 24 to slide 25");
+  await notesPage.goto(`${baseUrl}/speaker-notes.html?previous-migration-check=1#24`, { waitUntil: "networkidle" });
+  assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not migrate from slide 25 to slide 24");
+  assert(await notesPage.getByLabel("Talking points").inputValue() === previousNote.say, "speaker notes: previous closing talking points did not migrate from slide 25 to slide 24");
+  assert(await notesPage.getByLabel("Transition").inputValue() === previousNote.transition, "speaker notes: previous closing transition did not migrate from slide 25 to slide 24");
 
   const legacyNote = {
     purpose: "Legacy purpose for the former slide 21.",
@@ -365,6 +365,7 @@ function assert(condition, message) {
     transition: "Legacy transition into the exercise.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v5");
     localStorage.removeItem("devrelcon.presenter.notes.v4");
     localStorage.removeItem("devrelcon.presenter.notes.v3");
     localStorage.removeItem("devrelcon.presenter.notes.v2");
@@ -379,6 +380,7 @@ function assert(condition, message) {
     localStorage.removeItem("devrelcon.presenter.notes.v2");
     localStorage.removeItem("devrelcon.presenter.notes.v3");
     localStorage.removeItem("devrelcon.presenter.notes.v4");
+    localStorage.removeItem("devrelcon.presenter.notes.v5");
   });
   await notesContext.close();
 
