@@ -10,10 +10,10 @@ const viewports = [
   { name: "laptop", width: 1280, height: 720 },
 ];
 const unifiedPalette = new Map([
-  [12, "rgb(20, 184, 241)"], [16, "rgb(20, 184, 241)"], [17, "rgb(20, 184, 241)"], [21, "rgb(20, 184, 241)"],
-  [13, "rgb(112, 71, 235)"], [20, "rgb(112, 71, 235)"], [23, "rgb(112, 71, 235)"],
-  [14, "rgb(255, 212, 77)"], [19, "rgb(255, 212, 77)"], [22, "rgb(255, 212, 77)"], [24, "rgb(255, 212, 77)"],
-  [15, "rgb(255, 138, 102)"], [18, "rgb(255, 138, 102)"],
+  [15, "rgb(20, 184, 241)"], [16, "rgb(20, 184, 241)"], [20, "rgb(20, 184, 241)"], [21, "rgb(20, 184, 241)"],
+  [12, "rgb(112, 71, 235)"], [19, "rgb(112, 71, 235)"], [23, "rgb(112, 71, 235)"],
+  [13, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [24, "rgb(255, 212, 77)"],
+  [14, "rgb(255, 138, 102)"], [17, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"],
 ]);
 const outputDir = mkdtempSync(join(tmpdir(), "devrelcon-deck-"));
 
@@ -313,7 +313,7 @@ function assert(condition, message) {
       return getComputedStyle(field).overflowY === "auto";
     }));
     assert(noteFieldsAreUsable, `speaker notes slide ${slideId}: overflowing note field is not independently scrollable`);
-    if ([8, 16, 22, 24].includes(slideId)) {
+    if ([8, 15, 21, 23].includes(slideId)) {
       await notesPage.screenshot({ path: join(outputDir, `speaker-notes-${String(slideId).padStart(2, "0")}.png`) });
     }
   }
@@ -351,13 +351,13 @@ function assert(condition, message) {
     transition: "Saved closing transition.",
   };
   await notesPage.evaluate((note) => {
-    localStorage.removeItem("devrelcon.presenter.notes.v3");
-    localStorage.setItem("devrelcon.presenter.notes.v2", JSON.stringify({ 23: note }));
+    localStorage.removeItem("devrelcon.presenter.notes.v5");
+    localStorage.setItem("devrelcon.presenter.notes.v4", JSON.stringify({ 25: note }));
   }, previousNote);
   await notesPage.goto(`${baseUrl}/speaker-notes.html?previous-migration-check=1#24`, { waitUntil: "networkidle" });
-  assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not migrate from slide 23 to slide 24");
-  assert(await notesPage.getByLabel("Talking points").inputValue() === previousNote.say, "speaker notes: previous closing talking points did not migrate from slide 23 to slide 24");
-  assert(await notesPage.getByLabel("Transition").inputValue() === previousNote.transition, "speaker notes: previous closing transition did not migrate from slide 23 to slide 24");
+  assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not migrate from slide 25 to slide 24");
+  assert(await notesPage.getByLabel("Talking points").inputValue() === previousNote.say, "speaker notes: previous closing talking points did not migrate from slide 25 to slide 24");
+  assert(await notesPage.getByLabel("Transition").inputValue() === previousNote.transition, "speaker notes: previous closing transition did not migrate from slide 25 to slide 24");
 
   const legacyNote = {
     purpose: "Legacy purpose for the former slide 21.",
@@ -365,6 +365,8 @@ function assert(condition, message) {
     transition: "Legacy transition into the exercise.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v5");
+    localStorage.removeItem("devrelcon.presenter.notes.v4");
     localStorage.removeItem("devrelcon.presenter.notes.v3");
     localStorage.removeItem("devrelcon.presenter.notes.v2");
     localStorage.setItem("devrelcon.presenter.notes.v1", JSON.stringify({ 21: note }));
@@ -377,6 +379,8 @@ function assert(condition, message) {
     localStorage.removeItem("devrelcon.presenter.notes.v1");
     localStorage.removeItem("devrelcon.presenter.notes.v2");
     localStorage.removeItem("devrelcon.presenter.notes.v3");
+    localStorage.removeItem("devrelcon.presenter.notes.v4");
+    localStorage.removeItem("devrelcon.presenter.notes.v5");
   });
   await notesContext.close();
 

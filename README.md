@@ -12,9 +12,9 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | --- | --- | --- |
 | 1 to 7 | Odysseus takes ten years to get home after Troy. | A clear destination does not guarantee a usable route. Developers also arrive with a destination of their own. |
 | 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. The dashboard separates the intended route, observed movement, bypassed stages, and backtracking. Slide 11 is reserved for event-specific results and is skipped automatically until its URL is configured. |
-| 12 to 13 | The deck separates the documented route, observed behavior, and the explanation that is still missing. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
-| 14 to 18 | Research from 205 documented developer onboarding routes. | See where route choice and unclear success boundaries appear in the inspected documentation. |
-| 19 to 24 | The First-Mile Atlas, a three-slide Calibrate section, an optional attendee credit, and a Monday action. | Move from a documented comparison to privacy-conscious product signals, then take one bounded action. |
+| 12 | The deck states exactly what the workshop tracker recorded. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
+| 13 to 17 | Research from 205 documented developer onboarding routes. | See where route choice and unclear success boundaries appear in the inspected documentation. |
+| 18 to 24 | The First-Mile Atlas, Calibrate, a developer-champions session, a route-owner handoff, an optional attendee credit, and a Monday action. | Compare one documented route, observe where activity changes, ask what the developer expected, and take one bounded question to the owning team. |
 
 ## The three research findings
 
@@ -29,8 +29,8 @@ These numbers describe documented routes and a hypothesis inventory. They are no
 1. Pick one developer intent and the route that is supposed to serve it.
 2. Name the first useful outcome in words a developer can recognize.
 3. Use Calibrate to record positions, retries, bounded errors, and completion without storing or sending form values.
-4. Put a small number of intended developers through that route.
-5. Bring the stopping points and missing evidence to the team that owns the route.
+4. Watch three to five developer champions attempt that route without rescuing them, then ask what they expected.
+5. Bring one stopping point, the champions' explanations, and one next question to the team that owns the route.
 
 Five people form a bounded pilot, not a representative sample. The point is to find a route worth inspecting, not to manufacture a market statistic.
 
@@ -38,13 +38,12 @@ The goal is not to prove that onboarding is bad. The goal is to replace a broad 
 
 ## How Calibrate fits
 
-Calibrate is the product bridge between “we think this route is difficult” and “we can see where activity changed.” The deck covers three parts:
+Calibrate is one way to move from “we think this route is difficult” to “we can see where activity changed.” The deck covers two parts:
 
 1. The browser SDK observes standard DOM routes and field interactions, with manual events available for custom controls.
 2. Its closed event contract records interaction state without storing or sending form values, DOM copy, clipboard contents, or full URLs.
-3. A local queue batches normal HTTP requests to a collector, which validates, deduplicates, stores, aggregates, and optionally forwards accepted events.
 
-The current collector owns its live aggregate in one process. Postgres can provide durable storage and replay, but horizontal ingestion still needs a shared queue or aggregation layer. The deck states that boundary because it is a current implementation limit, not a future guarantee.
+Calibrate cannot explain what a developer expected or why a step was not worth continuing. The developer-champions session supplies that context, and the route-owner handoff turns it into one bounded question or change.
 
 ## Open and use the workshop
 

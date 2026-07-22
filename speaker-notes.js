@@ -123,20 +123,9 @@ const SPEAKER_NOTES = {
 • Do not assign emotion or intent, and do not say someone “gave up” or “dropped off” unless they tell you that directly.`,
     watch: "2 minutes when configured. State the room sample size before any count and watch for audience members volunteering explanations too early.",
     fallback: "If the results URL or embed fails, skip this slide and debrief from the live dashboard or the last screens in the room.",
-    transition: "The dashboard tells us where activity changed. It does not tell us why, so we need to separate the evidence types.",
+    transition: "The dashboard tells us where activity changed, not why. Before we interpret it, be precise about what the tracker actually recorded.",
   },
   12: {
-    purpose: "Separate documented intent, observed behavior, and the explanation that is still missing.",
-    say: `• This is a hypothetical team example, not workshop telemetry.
-• The documented route says the sequence: request Sanity access, draft, get PMM approval, publish.
-• The observable fact is that the draft reached approval and waited.
-• We still do not know whether access, ownership, review time, competing work, or something else explains the wait.
-• The same separation applies to the onboarding route: a stopping point is a lead, not a diagnosis.`,
-    watch: "2 minutes. Ask: “What can we safely say from this example?” Listen for “it reached approval and waited,” not a guessed cause.",
-    fallback: "If the team example feels unfamiliar, map it straight back to FakeSaaSPI: named route, observed position, missing reason.",
-    transition: "The example shows why the boundary matters. Now be precise about what the workshop tracker actually recorded.",
-  },
-  13: {
     purpose: "State the tracker scope and privacy boundary in plain language.",
     say: `• The tracker recorded named steps, timestamps, retries, bounded machine errors, and terminal completion.
 • It did not record the text entered in forms or the fake account and card values.
@@ -147,7 +136,7 @@ const SPEAKER_NOTES = {
     fallback: "If the room needs proof, open the public tracker contract after the session. Do not turn the slide into a code review.",
     transition: "That was one deliberately constructed route. Next, compare its setup work with examples drawn from documented routes across platform categories.",
   },
-  14: {
+  13: {
     purpose: "Connect the simulation to recognizable setup gates found in official documentation.",
     say: `• These are four examples from the 205 documented routes, not four rankings.
 • Payments example, Airwallex: business email and sandbox account.
@@ -159,7 +148,7 @@ const SPEAKER_NOTES = {
     fallback: "If one named example is challenged, return to the cited record after the session and keep the projector claim at the category level.",
     transition: "To compare unlike platforms without pretending they are identical, every research record used the same basic unit.",
   },
-  15: {
+  14: {
     purpose: "Define exactly what one record means before showing aggregate findings.",
     say: `• The denominator is 205 platforms, with one documented route recorded for each platform.
 • Each record begins with official documentation for that platform.
@@ -171,7 +160,7 @@ const SPEAKER_NOTES = {
     fallback: "If the method feels dense, say only the unit and the boundary. Keep the detailed provenance in the README and Atlas.",
     transition: "With that unit defined, the first finding asks whether the documentation supplied one obvious route for the selected intent.",
   },
-  16: {
+  15: {
     purpose: "Explain the route-choice finding and its practical consequence.",
     say: `• In 151 of the 205 canonical records, the selection basis explicitly says the workshop policy chose among documented routes.
 • The generated route-selection classifier reports 94 because it recognizes “Workshop selection policy” but misses 57 records worded as “Under the workshop policy.” Do not use that generated field until its phrase detector is corrected.
@@ -183,7 +172,7 @@ const SPEAKER_NOTES = {
     fallback: "If the count is questioned, show the two raw selection-basis phrases and the 94 plus 57 reconciliation. The generated classifier undercounts this finding.",
     transition: "Selecting a route is only half of the job. The developer also needs to recognize the finish line.",
   },
-  17: {
+  16: {
     purpose: "Explain the named-success finding without describing the other routes as failures.",
     say: `• Only 83 of 205 routes explicitly named the first-success milestone.
 • The other 122 routes still demonstrated an observable end, but the documentation did not name that end as the milestone.
@@ -195,7 +184,7 @@ const SPEAKER_NOTES = {
     fallback: "If nobody volunteers, use “the first valid API response appears” as the example and continue.",
     transition: "Even when the route and finish line are visible, a stopping point still does not tell us what caused it.",
   },
-  18: {
+  17: {
     purpose: "Turn one observed stopping point into discriminating follow-up questions.",
     say: `• Imagine the tracker shows that someone stopped at “Create app.”
 • Permissions, a card requirement, and an unrecoverable error are three plausible explanations.
@@ -206,7 +195,7 @@ const SPEAKER_NOTES = {
     fallback: "If the room is quiet, use the three on-screen questions and state the owner each answer would implicate.",
     transition: "That finishes the problem half. Now we move from identifying a useful question to taking a bounded action.",
   },
-  19: {
+  18: {
     purpose: "Begin the solution half with one documented comparison the attendee can use.",
     say: `• Say: “We have a stopping point. Now we need one useful comparison and one condition we can check.”
 • Open the First-Mile Atlas and find your platform, category, or the nearest useful comparison.
@@ -218,7 +207,7 @@ const SPEAKER_NOTES = {
     fallback: "If the Atlas is unavailable, ask attendees to write down their developer intent, first useful result, and one uncertain condition in the route.",
     transition: "A comparison gives you something specific to inspect. Named positions make that inspection observable in your own route.",
   },
-  20: {
+  19: {
     purpose: "Introduce Calibrate as the product Ojus built, while separating the current repository API from the published workshop-kit package.",
     say: `• This is the part where I admit I built another SDK. Apparently my response to too many onboarding tools was one more onboarding tool.
 • Calibrate watches browser-level signals around one onboarding or funnel route. The example on screen is the DOM-autocapture client in the public repository.
@@ -232,7 +221,7 @@ const SPEAKER_NOTES = {
     fallback: "If the code is too small in the room, read only the import and endpoint. The public repository can carry the implementation details later.",
     transition: "The integration is short. The more important question is what crosses that boundary and what deliberately stays behind.",
   },
-  21: {
+  20: {
     purpose: "Explain Calibrate's event contract and privacy boundary without implying that behavior reveals motivation.",
     say: `• Calibrate records a closed set of lifecycle and interaction events: session start, normalized route, field state, validation, named copy or paste outcomes, flow steps, shipped, and page close.
 • For standard fields, the identifier order is data-fm, then name, then id. If you care about a stable funnel label, set data-fm deliberately instead of hoping an autogenerated id survives Tuesday.
@@ -244,22 +233,33 @@ const SPEAKER_NOTES = {
 • This tells a team where activity changed. It still does not tell the team why.`,
     watch: "2 minutes. Ask which identifier they would set with data-fm in their own route. Listen for a stable step name, not user content.",
     fallback: "If privacy questions take over, state the three boundaries on screen and offer the strict event schema for inspection after the session.",
-    transition: "Those small events are useful only if the delivery path survives ordinary browser exits and ordinary network failure.",
+    transition: "The dashboard can show us where activity changed. It cannot tell us what the developer expected. For that, we need to watch and ask.",
+  },
+  21: {
+    purpose: "Use developer champions to add the context that route telemetry cannot provide.",
+    say: `• Choose three to five champions who resemble the developer this route is meant to serve. Do not recruit only experts who already speak the platform's internal language.
+• Give them the outcome, not the route. If I tell them every turn, I have tested my ability to give directions.
+• Watch the attempt before asking questions. Do not coach them through the route, and do not replace observation with a feedback survey.
+• Calibrate can show where activity changed. It cannot tell us what the developer expected or why the next step stopped feeling worthwhile.
+• After the attempt, ask what they expected, what they tried, and what made the next step uncertain or no longer worth it.
+• Use fake or approved test data. Do not put customer, company, card, or secret information into the session.
+• Three to five people form a bounded pilot, not a representative sample or a conversion benchmark.
+• Bring the route owner one observed stopping point, the champions' explanations, and one next change or investigation.`,
+    watch: "3 minutes to explain the method. During a real pilot, allow enough time for the route plus a short debrief. Watch for attendees choosing internal experts instead of intended users.",
+    fallback: "If attendees cannot recruit champions immediately, ask them to name three suitable people and schedule one 20-minute observation before changing the route.",
+    transition: "Now we have the documented route, the observed position, and the developer's explanation. That is enough to take one useful question to the team that owns the route.",
   },
   22: {
-    purpose: "Show how Calibrate delivers events today, then state the exact boundary before discussing scale.",
-    say: `• The browser writes events to a localStorage outbox first. That protects short bursts and gives retries somewhere to start.
-• A scheduled flush runs after about two seconds. Reaching ten queued events or recording a page or shipped event triggers an immediate flush. Each request contains at most 50 events.
-• Delivery is an ordinary HTTP POST to /api/events. Failed requests retry, and pagehide uses sendBeacon to drain pending batches when the browser allows it. There is no WebSocket requirement and no guarantee that a closing browser will deliver every event.
-• The collector validates the closed schema, deduplicates session sequence numbers, writes through the configured store, and updates funnel and field aggregates.
-• Teams can inspect the dashboard, export JSONL, or configure an optional webhook. The current webhook fan-out is awaited during ingestion, even though destination failures do not reject the accepted batch.
-• Here is the honest scale boundary: the current live aggregate belongs to one collector process. Postgres gives durable storage and replay, but it does not make several processes share one live aggregate.
-• Horizontal ingestion therefore needs a shared queue or aggregation layer and asynchronous downstream processing. That is the next architecture step, not a box I can draw and declare shipped.
-• Horizontal scalability is not achieved by drawing three identical boxes. I checked.
-• The useful outcome today is modest: see where progress stopped, then decide what to inspect next.`,
-    watch: "2 minutes. Keep the sequence at browser, queue, POST, collector, store, use. Do not narrate every implementation detail unless the room asks.",
-    fallback: "If the architecture diagram is unreadable, use the six labels only. If delivery is challenged, say browser exit delivery is best effort and move on.",
-    transition: "Before the Monday action, I have one optional workshop resource: the event credit code.",
+    purpose: "Turn the documented route, observed position, and champion context into a bounded route-owner handoff.",
+    say: `• Bring the expected route and the developer-visible first-success outcome.
+• Show the position where activity changed. Describe what happened without assigning a cause.
+• Add what the champions expected, tried, and found uncertain. Keep disagreements visible instead of forcing one tidy explanation.
+• Ask the owning team for one next check, change, or observation. Do not arrive with a verdict about the entire onboarding system.
+• The route owner decides what changes. DevRel supplies the evidence, the developer language, and the follow-up question.
+• If the evidence is still thin, say that. A useful question is a better handoff than a confident guess.`,
+    watch: "2 minutes. Ask one attendee to name the owner of their route and the single question they would bring to that person.",
+    fallback: "If ownership is unclear, make identifying the route owner the next action. Do not let an unowned route become a fake cross-functional initiative.",
+    transition: "That is the practical handoff. The next slide is an optional workshop resource, not another required step.",
   },
   23: {
     purpose: "Explain exactly what the credit QR does without implying an eligibility screen or deployment workflow.",
@@ -277,9 +277,9 @@ const SPEAKER_NOTES = {
   24: {
     purpose: "End with one action the attendee can start without a new program or framework, then leave an optional path to Render's open roles.",
     say: `• Pick one real first-mile route, not the entire onboarding system.
-• Define its first-success outcome and the positions that make progress visible.
-• Watch five intended developers attempt it without rescuing them.
-• Bring the stopping points and missing evidence to the team that owns the route.
+• Define its first-success outcome in language the developer can recognize.
+• Name the team that owns the route and schedule the next observation.
+• Use the champion session and route-owner handoff we just covered. Do not replace them with a new analytics program.
 • Do not promise a diagnosis. Bring one clearer question and one next observation.
 • Please do not return on Monday with a transformation program and a 46-tab spreadsheet.
 • Render is hiring. The QR goes to our current openings through my referral link.

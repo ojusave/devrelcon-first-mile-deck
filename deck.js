@@ -7,7 +7,7 @@
   const HOLDING_SLIDE = 10;
   const RESULTS_SLIDE = 11;
   const QR_QUIET_ZONE_MODULES = 4;
-  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
+  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v5";
 
   const root = document.documentElement;
   const blackout = document.getElementById("blackout");
