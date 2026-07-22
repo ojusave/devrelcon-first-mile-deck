@@ -1,7 +1,7 @@
 const CONFIG = {
   // When null, slides render a labeled placeholder. When set, a QR code
   // auto-renders from the URL. No layout shift between states.
-  fakegptUrl: "https://fakesaaspi.onrender.com",
+  fakegptUrl: "https://fakesaaspi.onrender.com/fakegpt",
 
   // When null, the dashboard slide shows a labeled placeholder frame.
   // When set, it embeds this URL as a full-bleed iframe.

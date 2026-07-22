@@ -93,7 +93,7 @@ for (const requiredText of [
 }
 
 for (const requiredUrl of [
-  "https://fakesaaspi.onrender.com",
+  "https://fakesaaspi.onrender.com/fakegpt",
   "https://fakesaaspi.onrender.com/present",
   "https://github.com/ojusave/usecalibrate",
   "https://github.com/ojusave/fakesaaspi",
