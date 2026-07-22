@@ -1,4 +1,4 @@
-const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
 
 const SPEAKER_NOTES = {
   1: {
@@ -484,6 +484,29 @@ To answer where activity changes in a route you own, you need an observation lay
     sources: "https://developer-journey-atlas.onrender.com\nhttps://github.com/ojusave/developer-journey-atlas\nDeveloper Journey Atlas live manifest generated July 22, 2026\nApache-2.0 software and CC BY 4.0 original research data",
   },
   19: {
+    purpose: "Demonstrate the live Atlas search and one documented route before moving from documentation research to local observation.",
+    script: `This is the live Atlas, not a screenshot.
+
+[Click the search field inside the Atlas.]
+
+Give me one developer platform. If the room is quiet, I will use Render because I know at least one employee.
+
+[Type the platform name, choose the matching suggestion, and open the journey.]
+
+The result shows the selected documented route from account creation to first success. I can inspect the numbered steps, the documented gates, and the finish line. The platform name links back to the official documentation entry point.
+
+What I am looking for is one question worth checking locally. I am not using this as a leaderboard, and I am not claiming that a longer documented route caused developers to leave.
+
+[When the demonstration is complete, click the Next button below the Atlas.]
+
+Atlas shows what the official route asks for. To see where activity changes in a route we own, we need an observation layer.`,
+    roomCue: "Ask for one platform name. Keep the demo to one route. After interacting with the iframe, use the deck-owned Next button in the bottom margin because keyboard focus remains inside Atlas.",
+    timing: "2 minutes. Stop after one route even if the room offers more examples.",
+    fallback: "If Atlas or Wi-Fi fails, return to slide 18, name one route condition from the research, and advance to Calibrate. Do not troubleshoot the external site on stage.",
+    evidenceBoundary: "The live UI displays current documented-route records. It does not show developer behavior, conversion, sentiment, product quality, or cause.",
+    sources: "https://developer-journey-atlas.onrender.com\nDeveloper Journey Atlas live search and journey API\nCONFIG.atlasUrl",
+  },
+  20: {
     purpose: "Introduce Calibrate as the bounded observation layer between an Atlas route hypothesis and a human explanation.",
     script: `Atlas gives us a documented route hypothesis. Calibrate can mark named positions and bounded events in the route we actually own. The participant debrief supplies what the person expected and tried.
 
@@ -506,7 +529,7 @@ The deciding factor is the data contract.`,
     evidenceBoundary: "Do not promote the unreleased 0.1.4 guided installer or the experimental unpublished workspace package. Do not call Calibrate general product analytics.",
     sources: "Calibrate README: /Users/ojusave/Desktop/Samples/usecalibrate/README.md\nhttps://github.com/ojusave/usecalibrate\nApache-2.0 license\nnpm latest reviewed as usecalibrate 0.1.3 on July 22, 2026",
   },
-  20: {
+  21: {
     purpose: "Give attendees the released Calibrate 0.1.3 plan-before-write installation path and a repository link they can inspect later.",
     script: `This is the released path for adding Calibrate to an application today.
 
@@ -529,7 +552,7 @@ Before running anything, review the data and privacy contract.`,
     evidenceBoundary: "The released npm version verified for this path is usecalibrate 0.1.3. Static verification does not validate collector ingestion or the real browser journey.",
     sources: "npm package usecalibrate@0.1.3\nhttps://github.com/ojusave/usecalibrate\nReleased CLI workflow: detect, plan, apply, verify",
   },
-  21: {
+  22: {
     purpose: "State the current Calibrate position-only contract, privacy exclusions, storage boundary, and inference limit.",
     script: `Calibrate records named route positions, forward and backward navigation, completion, elapsed time, bounded machine errors, configured copy or paste outcomes, and an explicit shipped event.
 
@@ -552,7 +575,7 @@ Use that boundary in a small intended-user investigation.`,
     evidenceBoundary: "Do not claim guaranteed delivery, durable storage by default, live trends, cohorts, time series, intent, emotion, or causal diagnosis.",
     sources: "Calibrate current README and event schema\nPosition-only event contract\nSidecar current-window aggregate and optional JSONL persistence\nSECURITY.md",
   },
-  22: {
+  23: {
     purpose: "Give attendees a concrete ten-person take-home investigation that ends with one owner, one question, and one next check.",
     script: `When you go back, choose one developer intent and one visible first useful result.
 
@@ -577,7 +600,7 @@ If you need somewhere to host the disposable replica, the next resource may help
     evidenceBoundary: "Ten sessions support pattern discovery, not representative statistics. Participation must be informed and use fake or approved test data.",
     sources: "GOV.UK moderated usability testing guidance\nWorkshop evidence contract\nDeveloper Journey Atlas action-brief model",
   },
-  23: {
+  24: {
     purpose: "Offer the Render credit portal accurately without turning the close into a deployment tutorial or guarantee.",
     script: `This resource is optional.
 
@@ -602,7 +625,7 @@ The take-home action is already written down. I will close with a way to stay co
     evidenceBoundary: "The portal requires GitHub sign-in, can show an assigned code or pending state, and directs redemption to Render Billing. It does not deploy code. No repository-level license was found for the portal.",
     sources: "Live portal: https://credits-portal-mmdm.onrender.com/claim/devrelcon\nPortal ClaimPage and claimService implementation\nRender Dashboard docs: https://render.com/docs/render-dashboard",
   },
-  24: {
+  25: {
     purpose: "Thank the room, restate the workshop method, and leave one contact and contribution path visible.",
     script: `One route. One useful question. One owner.
 
@@ -625,7 +648,7 @@ Thank you.
     evidenceBoundary: "Artifact verification is not evidence that the workshop or tools improve onboarding outcomes.",
     sources: "https://x.com/ojusave\nhttps://github.com/ojusave/developer-journey-atlas\nhttps://github.com/ojusave/usecalibrate",
   },
-  25: {
+  26: {
     purpose: "Offer the Render careers link separately from the thank-you and disclose in the spoken notes that it is Ojus's referral link.",
     script: `One final resource: Render is hiring.
 

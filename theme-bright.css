@@ -666,6 +666,35 @@ body {
   background: var(--soft-blue);
 }
 
+.slide--atlas-demo {
+  background: var(--soft-yellow);
+}
+
+.atlas-next {
+  position: absolute;
+  right: 262px;
+  bottom: 20px;
+  min-width: 146px;
+  min-height: 58px;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  color: var(--paper);
+  background: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.atlas-next:hover,
+.atlas-next:focus-visible {
+  color: var(--ink);
+  background: var(--sun);
+  outline: 4px solid var(--signal);
+  outline-offset: 3px;
+}
+
 .dashboard-placeholder {
   border: 5px solid var(--ink);
   border-radius: 42px;

@@ -11,6 +11,9 @@ const CONFIG = {
   // event-specific URL is ready; the slide preserves the full-size frame.
   resultsUrl: null,
 
+  // Live Atlas UI shown on slide 19 for the on-stage search demo.
+  atlasUrl: "https://developer-journey-atlas.onrender.com",
+
   // Takeaway links. Same placeholder-to-QR behavior as fakegptUrl.
   takeaways: {
     firstmile: "https://github.com/ojusave/usecalibrate",

@@ -14,7 +14,7 @@ const files = {
   theme: readFileSync(resolve(root, "theme-bright.css"), "utf8"),
 };
 
-const expectedOrder = Array.from({ length: 25 }, (_, index) => index + 1);
+const expectedOrder = Array.from({ length: 26 }, (_, index) => index + 1);
 const actualOrder = [...files.html.matchAll(/data-slide="(\d+)"/g)].map((match) => Number(match[1]));
 const errors = [];
 
@@ -39,10 +39,14 @@ requireCondition((files.notes.match(/fallback:/g) || []).length === expectedOrde
 requireCondition((files.notes.match(/evidenceBoundary:/g) || []).length === expectedOrder.length, "Every slide needs an evidence boundary");
 requireCondition((files.notes.match(/sources:/g) || []).length === expectedOrder.length, "Every slide needs sources");
 requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 7, "The full script and all six delivery fields must be editable");
+requireCondition(files.config.includes("atlasUrl:"), "The live Atlas slide needs a configured URL");
+requireCondition(files.deck.includes("atlas-frame"), "The live Atlas slide needs an interactive iframe class");
+requireCondition(files.deck.includes("nextControl: true"), "The live Atlas slide needs a reliable exit control");
 requireCondition(files.notesHtml.includes("Save notes"), "Speaker notes need an explicit save action");
 requireCondition(files.notesHtml.includes("Restore defaults"), "Speaker notes need a restore-defaults action");
-requireCondition(files.notesView.includes("devrelcon.presenter.notes.v8"), "Speaker-note edits must use versioned browser storage");
-requireCondition(files.notesView.includes("devrelcon.presenter.notes.v7"), "Speaker-note edits must migrate the previous slide order");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v9"), "Speaker-note edits must use versioned browser storage");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v8"), "Speaker-note edits must migrate the previous slide order");
+requireCondition(files.notesView.includes("ATLAS_INSERTION_SLIDE_ID_MAP"), "Speaker-note edits must follow content shifted by the live Atlas slide");
 requireCondition(files.notesView.includes("SLIDE_22_REMOVAL_MAP"), "Speaker-note edits must follow slides after slide 22 is removed");
 requireCondition(files.notesView.includes("LEGACY_SLIDE_ID_MAP"), "Speaker-note edits must migrate from the previous slide numbering");
 requireCondition(files.notesView.includes("PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve current slide edits when credits and closing move");
@@ -98,6 +102,9 @@ for (const requiredText of [
   "No reset, undo, rollback, or clean restart",
   "I built Atlas for peers improving developer platforms",
   "peer cohort",
+  "LIVE ATLAS EMBEDS HERE",
+  "Live Developer Journey Atlas",
+  "Next →",
   "Stage navigation skips this slide until the event results URL is added",
   "Atlas maps the route. Calibrate observes positions in yours",
   "Ask engineering and product to evaluate one bounded onboarding route",

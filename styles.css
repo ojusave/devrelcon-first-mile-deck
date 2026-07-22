@@ -598,6 +598,15 @@ h1 {
   pointer-events: none;
 }
 
+.atlas-frame {
+  pointer-events: auto;
+}
+
+.atlas-frame:focus-visible {
+  outline: 6px solid var(--signal);
+  outline-offset: 4px;
+}
+
 .slide--research {
   align-items: center;
 }
