@@ -16,8 +16,8 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | 13 to 15 | Ojus's research across 224 developer platforms: scope, first-success clarity, and documented route conditions. | Show exactly what Ojus examined, what he found, and what documentation research cannot prove. |
 | 16 to 17 | A separate inventory of 790 possible blocker hypotheses and eight concrete examples. | Keep plausible explanations separate from diagnosed causes. |
 | 18 | The Developer Journey Atlas and its source-inspection workflow. | Find one documented route, inspect its official sources, and choose one condition to investigate locally. |
-| 19 to 23 | Calibrate, its released setup commands, its data contract, and a ten-person intended-user investigation. | Connect a route hypothesis to observed positions, participant explanations, and one bounded owner handoff. |
-| 24 to 26 | An optional attendee credit, contact, and a separate Render careers slide. | Help attendees continue the work without turning the workshop into a product or recruiting pitch. |
+| 19 to 22 | Calibrate, its released setup commands, its data contract, and a ten-person intended-user investigation. | Connect a route hypothesis to observed positions, participant explanations, and one bounded owner handoff. |
+| 23 to 25 | An optional attendee credit, contact, and a separate Render careers slide. | Help attendees continue the work without turning the workshop into a product or recruiting pitch. |
 
 ## What the research can support
 
@@ -44,7 +44,7 @@ The goal is not to prove that onboarding is bad. The goal is to replace a broad 
 
 Calibrate is one way to move from a documented route hypothesis to named positions in an instrumented route. It records forward or backward movement, completion, elapsed time, bounded machine errors, configured copy or paste outcomes, and an explicit shipped event. It never reads form values, clipboard contents, DOM text, or full URLs.
 
-The deck uses the released `usecalibrate@0.1.3` workflow: install the package, generate and review a route plan, apply it, verify the static integration, then run the generated local sidecar and the application.
+The deck uses the released `usecalibrate@0.1.3` workflow: install the package, generate and review a route plan, apply it, and verify the static integration. The repository documents how to run the collector and application.
 
 The current sidecar provides a current-window aggregate, using memory by default and optional JSONL persistence. It is not general product analytics and does not claim trends, cohorts, time series, intent, emotion, or cause. The participant debrief supplies context, and the owner handoff turns the result into one bounded question or next check.
 
@@ -68,9 +68,9 @@ The credit portal requires GitHub sign-in and reports whether a code is availabl
 | `F` | Enter or leave fullscreen |
 | `N` | Open the synchronized speaker notes |
 
-The speaker-notes view contains the complete script, room cues, timing, fallbacks, evidence boundaries, and sources for every slide. All seven fields are editable and saved in the current browser. Restoring defaults affects only the current slide.
+The speaker-notes view shows the complete script for every slide. The script is editable and saved in the current browser. Restoring defaults affects only the current slide.
 
-The slide number in the URL matches the order in the deck: `#1` through `#26`.
+The slide number in the URL matches the order in the deck: `#1` through `#25`.
 
 Live-room dependency: the event-specific results surface on slide 11 is not connected yet. Normal stage navigation skips it safely. Use the live dashboard on slide 9 for the room debrief until the final results URL is available and rehearsed.
 

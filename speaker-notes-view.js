@@ -1,19 +1,27 @@
 (function () {
   "use strict";
 
-  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v7";
-  const PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v6";
-  const SECOND_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v5";
-  const THIRD_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v4";
-  const FOURTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v3";
-  const FIFTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
+  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v8";
+  const PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v7";
+  const SECOND_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v6";
+  const THIRD_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v5";
+  const FOURTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v4";
+  const FIFTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v3";
+  const SIXTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
   const LEGACY_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v1";
-  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v6";
-  const PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v5";
-  const SECOND_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v4";
-  const THIRD_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
-  const FOURTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
+  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v7";
+  const PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v6";
+  const SECOND_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v5";
+  const THIRD_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v4";
+  const FOURTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
+  const FIFTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
   const LEGACY_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide";
+  const SLIDE_22_REMOVAL_MAP = {
+    1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8,
+    9: 9, 10: 10, 11: 11, 12: 12, 13: 13, 14: 14, 15: 15,
+    16: 16, 17: 17, 18: 18, 19: 19, 20: 20, 21: 21,
+    23: 22, 24: 23, 25: 24, 26: 25,
+  };
   const PREVIOUS_SLIDE_ID_MAP = {
     1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8,
     9: 9, 10: 10, 11: 11, 12: 12, 13: 13, 14: 14, 15: 15,
@@ -90,13 +98,24 @@
     };
   }
 
-  function migrateNotes(notes, slideIdMap) {
+  function remapSlideId(slideId, ...slideIdMaps) {
+    let nextId = Number(slideId);
+    for (const slideIdMap of slideIdMaps.filter(Boolean)) {
+      nextId = slideIdMap[nextId];
+      if (!Number.isFinite(nextId)) {
+        return undefined;
+      }
+    }
+    return nextId;
+  }
+
+  function migrateNotes(notes, ...slideIdMaps) {
     if (!notes || typeof notes !== "object" || Array.isArray(notes)) {
       return {};
     }
     const migrated = {};
     for (const [storedId, note] of Object.entries(notes)) {
-      const nextId = slideIdMap ? slideIdMap[storedId] : Number(storedId);
+      const nextId = remapSlideId(storedId, ...slideIdMaps);
       if (SPEAKER_ORDER.includes(nextId) && note && typeof note === "object" && !Array.isArray(note)) {
         migrated[nextId] = normalizeNote(note, nextId);
       }
@@ -120,33 +139,39 @@
       }
 
       const previous = JSON.parse(window.localStorage.getItem(PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const previousMigration = migrateNotes(previous, PREVIOUS_SLIDE_ID_MAP);
+      const previousMigration = migrateNotes(previous, SLIDE_22_REMOVAL_MAP);
       if (Object.keys(previousMigration).length > 0) {
         return saveMigration(previousMigration);
       }
 
       const secondPrevious = JSON.parse(window.localStorage.getItem(SECOND_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const secondPreviousMigration = migrateNotes(secondPrevious, PREVIOUS_SLIDE_ID_MAP);
+      const secondPreviousMigration = migrateNotes(secondPrevious, PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
       if (Object.keys(secondPreviousMigration).length > 0) {
         return saveMigration(secondPreviousMigration);
       }
 
       const thirdPrevious = JSON.parse(window.localStorage.getItem(THIRD_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const thirdPreviousMigration = migrateNotes(thirdPrevious, SECOND_PREVIOUS_SLIDE_ID_MAP);
+      const thirdPreviousMigration = migrateNotes(thirdPrevious, PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
       if (Object.keys(thirdPreviousMigration).length > 0) {
         return saveMigration(thirdPreviousMigration);
       }
 
       const fourthPrevious = JSON.parse(window.localStorage.getItem(FOURTH_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const fourthPreviousMigration = migrateNotes(fourthPrevious, THIRD_PREVIOUS_SLIDE_ID_MAP);
+      const fourthPreviousMigration = migrateNotes(fourthPrevious, SECOND_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
       if (Object.keys(fourthPreviousMigration).length > 0) {
         return saveMigration(fourthPreviousMigration);
       }
 
       const fifthPrevious = JSON.parse(window.localStorage.getItem(FIFTH_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const fifthPreviousMigration = migrateNotes(fifthPrevious, FOURTH_PREVIOUS_SLIDE_ID_MAP);
+      const fifthPreviousMigration = migrateNotes(fifthPrevious, THIRD_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
       if (Object.keys(fifthPreviousMigration).length > 0) {
         return saveMigration(fifthPreviousMigration);
+      }
+
+      const sixthPrevious = JSON.parse(window.localStorage.getItem(SIXTH_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
+      const sixthPreviousMigration = migrateNotes(sixthPrevious, FOURTH_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
+      if (Object.keys(sixthPreviousMigration).length > 0) {
+        return saveMigration(sixthPreviousMigration);
       }
 
       const legacy = JSON.parse(window.localStorage.getItem(LEGACY_NOTES_STORAGE_KEY) || "{}");
@@ -154,7 +179,7 @@
         return {};
       }
 
-      return saveMigration(migrateNotes(legacy, LEGACY_SLIDE_ID_MAP));
+      return saveMigration(migrateNotes(legacy, LEGACY_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP));
     } catch (_error) {
       return {};
     }
@@ -335,20 +360,23 @@
     const secondPrevious = window.localStorage.getItem(SECOND_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const thirdPrevious = window.localStorage.getItem(THIRD_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const fourthPrevious = window.localStorage.getItem(FOURTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
+    const fifthPrevious = window.localStorage.getItem(FIFTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const legacy = window.localStorage.getItem(LEGACY_PRESENTER_SLIDE_STORAGE_KEY);
-    const saved = JSON.parse(current || previous || secondPrevious || thirdPrevious || fourthPrevious || legacy || "null");
+    const saved = JSON.parse(current || previous || secondPrevious || thirdPrevious || fourthPrevious || fifthPrevious || legacy || "null");
     if (!window.location.hash && saved?.slideId) {
       const savedSlideId = current
         ? saved.slideId
         : previous
-          ? PREVIOUS_SLIDE_ID_MAP[saved.slideId]
+          ? remapSlideId(saved.slideId, SLIDE_22_REMOVAL_MAP)
           : secondPrevious
-            ? SECOND_PREVIOUS_SLIDE_ID_MAP[saved.slideId]
+            ? remapSlideId(saved.slideId, PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP)
             : thirdPrevious
-              ? THIRD_PREVIOUS_SLIDE_ID_MAP[saved.slideId]
+              ? remapSlideId(saved.slideId, SECOND_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP)
               : fourthPrevious
-                ? FOURTH_PREVIOUS_SLIDE_ID_MAP[saved.slideId]
-                : LEGACY_SLIDE_ID_MAP[saved.slideId];
+                ? remapSlideId(saved.slideId, THIRD_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP)
+                : fifthPrevious
+                  ? remapSlideId(saved.slideId, FOURTH_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP)
+                  : remapSlideId(saved.slideId, LEGACY_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
       initialSlide = validSlide(savedSlideId);
     }
   } catch (_error) {

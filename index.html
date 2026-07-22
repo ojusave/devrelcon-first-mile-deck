@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="theme-bright.css?v=24">
     <script defer src="config.js?v=9"></script>
     <script defer src="qrcode.js"></script>
-    <script defer src="deck.js?v=21"></script>
+    <script defer src="deck.js?v=22"></script>
   </head>
   <body>
     <div class="viewport" id="viewport">
@@ -317,34 +317,17 @@ npx usecalibrate verify --dir . --json</code></pre></article>
           </div>
         </section>
 
-        <section class="slide slide--calibrate-run slide--unified" data-slide="22" aria-label="Run Calibrate locally" hidden>
-          <div class="story-surface calibrate-run-surface">
-            <div class="surface-heading">
-              <h1>Run the collector, then your app.</h1>
-            </div>
-            <div class="calibrate-run-grid">
-              <article><p class="source-label">TERMINAL 1</p><pre><code>ADMIN_TOKEN=local-admin-only \
-DASHBOARD_TOKEN=local-dashboard-only \
-WRITE_KEY=local-browser-write-key \
-ALLOWED_ORIGINS=http://localhost:5173 \
-npm run calibrate:sidecar</code></pre></article>
-              <article><p class="source-label">TERMINAL 2</p><pre><code>VITE_CALIBRATE_WRITE_KEY=local-browser-write-key \
-npm run dev</code></pre><p class="calibrate-present-url">localhost:8787/present#token=local-dashboard-only</p></article>
-            </div>
-          </div>
-        </section>
-
-        <section class="slide slide--field-study slide--unified" data-slide="23" aria-label="Ten-user onboarding investigation" hidden>
+        <section class="slide slide--field-study slide--unified" data-slide="22" aria-label="Ten-user onboarding investigation" hidden>
           <div class="story-surface field-study-surface">
             <div class="surface-heading">
               <p class="eyebrow">TAKE-HOME EXERCISE</p>
               <h1>Run ten intended users through one route.</h1>
             </div>
-            <ol class="field-study-steps"><li><span>1</span>Choose one intent and first useful result.</li><li><span>2</span>Recruit intended evaluators, including people new to the route.</li><li><span>3</span>Give them the outcome, not step-by-step instructions.</li><li><span>4</span>Observe position, then ask what they expected.</li><li><span>5</span>Bring the owner one question, one piece of evidence, and one next check.</li></ol>
+            <ol class="field-study-steps"><li><span>1</span>Choose one intent and first useful result.</li><li><span>2</span>Recruit intended evaluators, including people new to the route.</li><li><span>3</span>Give them the outcome, not step-by-step instructions.</li><li><span>4</span>Use Calibrate to see where activity changed. Then ask what they expected.</li><li><span>5</span>Bring the owner one question, one piece of evidence, and one next check.</li></ol>
           </div>
         </section>
 
-        <section class="slide slide--credits slide--unified" data-slide="24" aria-label="Request the DevRelCon Render credit code" hidden>
+        <section class="slide slide--credits slide--unified" data-slide="23" aria-label="Request the DevRelCon Render credit code" hidden>
           <div class="story-surface credit-surface">
             <div class="credit-copy">
               <p class="eyebrow">OPTIONAL WORKSHOP RESOURCE</p>
@@ -362,7 +345,7 @@ npm run dev</code></pre><p class="calibrate-present-url">localhost:8787/present#
           </div>
         </section>
 
-        <section class="slide slide--closing slide--unified" data-slide="25" aria-label="Contact Ojus" hidden>
+        <section class="slide slide--closing slide--unified" data-slide="24" aria-label="Contact Ojus" hidden>
           <div class="story-surface closing-surface">
             <div class="surface-heading closing-heading"><h1>Thank you.</h1></div>
             <div class="closing-links closing-links--single">
@@ -372,7 +355,7 @@ npm run dev</code></pre><p class="calibrate-present-url">localhost:8787/present#
           </div>
         </section>
 
-        <section class="slide slide--closing slide--closing-hiring slide--unified" data-slide="26" aria-label="View Render careers" hidden>
+        <section class="slide slide--closing slide--closing-hiring slide--unified" data-slide="25" aria-label="View Render careers" hidden>
           <div class="story-surface closing-surface">
             <div class="surface-heading closing-heading"><h1>Render is hiring.</h1></div>
             <div class="closing-links closing-links--single">

@@ -1,4 +1,4 @@
-const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
+const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
 
 const SPEAKER_NOTES = {
   1: {
@@ -545,7 +545,7 @@ Most importantly, position tells you where to ask. It does not tell you why. Cal
 
 [Advance]
 
-With that contract understood, we can run the installed integration locally.`,
+Use that boundary in a small intended-user investigation.`,
     roomCue: "Read the Records and Never Reads columns, then land the inference limit. Answer technical questions from the current README.",
     timing: "2 minutes.",
     fallback: "State three boundaries: named positions, no content, no cause inference.",
@@ -553,29 +553,6 @@ With that contract understood, we can run the installed integration locally.`,
     sources: "Calibrate current README and event schema\nPosition-only event contract\nSidecar current-window aggregate and optional JSONL persistence\nSECURITY.md",
   },
   22: {
-    purpose: "Show the released local runtime path from the applied Calibrate plan to a running sidecar, application, dashboard, and observed route.",
-    script: `Now run the integration locally.
-
-In the first terminal, run 'npx usecalibrate sidecar --dir .' from the configured project and keep that process running. In the second terminal, start the application with 'npm run dev' and make its browser write key available through the application's environment.
-
-Open the local dashboard with the dashboard token. Then use the onboarding route in the browser and reach the configured shipped route.
-
-The completion signal is not that the app builds. The dashboard should show the named starting position and an increased shipped count after the browser journey.
-
-If nothing changes, check the write key, exact route paths, collector endpoint, and allowed origin before changing the route model.
-
-The sidecar stores its aggregate in memory by default, so restarting it resets the current window unless persistence was deliberately configured.
-
-[Advance]
-
-Once the local path is observable, use it in a small intended-user investigation.`,
-    roomCue: "Walk left to right through sidecar, app, dashboard, then browser journey. Land on the dashboard count as the runtime proof.",
-    timing: "2 minutes.",
-    fallback: "Say: start the sidecar, start the app, open the dashboard, complete the route, and confirm the count changed.",
-    evidenceBoundary: "A local runtime check validates one configured browser-to-collector path. It does not establish production reliability, representative conversion, intent, emotion, or cause.",
-    sources: "npm package usecalibrate@0.1.3 README\nReleased calibrate sidecar command\nCalibrate dashboard and route verification guidance",
-  },
-  23: {
     purpose: "Give attendees a concrete ten-person take-home investigation that ends with one owner, one question, and one next check.",
     script: `When you go back, choose one developer intent and one visible first useful result.
 
@@ -583,7 +560,7 @@ Recruit ten intended evaluators. Include people who are new to the route, not on
 
 Give them the outcome, not step-by-step instructions. Tell them what signals the route records. Use fake or approved test data. Do not rescue them during the attempt.
 
-Observe the recorded position, then ask what they expected, what they tried, and what made the next action uncertain.
+Use Calibrate to see where activity changed. Then ask what they expected, what they tried, and what made the next action uncertain.
 
 Bring the route owner one question, one piece of evidence, and one next check. Keep disagreements between participants rather than flattening them into one neat story.
 
@@ -600,7 +577,7 @@ If you need somewhere to host the disposable replica, the next resource may help
     evidenceBoundary: "Ten sessions support pattern discovery, not representative statistics. Participation must be informed and use fake or approved test data.",
     sources: "GOV.UK moderated usability testing guidance\nWorkshop evidence contract\nDeveloper Journey Atlas action-brief model",
   },
-  24: {
+  23: {
     purpose: "Offer the Render credit portal accurately without turning the close into a deployment tutorial or guarantee.",
     script: `This resource is optional.
 
@@ -625,7 +602,7 @@ The take-home action is already written down. I will close with a way to stay co
     evidenceBoundary: "The portal requires GitHub sign-in, can show an assigned code or pending state, and directs redemption to Render Billing. It does not deploy code. No repository-level license was found for the portal.",
     sources: "Live portal: https://credits-portal-mmdm.onrender.com/claim/devrelcon\nPortal ClaimPage and claimService implementation\nRender Dashboard docs: https://render.com/docs/render-dashboard",
   },
-  25: {
+  24: {
     purpose: "Thank the room, restate the workshop method, and leave one contact and contribution path visible.",
     script: `One route. One useful question. One owner.
 
@@ -648,7 +625,7 @@ Thank you.
     evidenceBoundary: "Artifact verification is not evidence that the workshop or tools improve onboarding outcomes.",
     sources: "https://x.com/ojusave\nhttps://github.com/ojusave/developer-journey-atlas\nhttps://github.com/ojusave/usecalibrate",
   },
-  26: {
+  25: {
     purpose: "Offer the Render careers link separately from the thank-you and disclose in the spoken notes that it is Ojus's referral link.",
     script: `One final resource: Render is hiring.
 
