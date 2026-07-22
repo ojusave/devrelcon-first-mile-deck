@@ -3,27 +3,22 @@ const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17
 const SPEAKER_NOTES = {
   1: {
     purpose: "Open with the practical question, establish the two-part workshop contract, and earn trust with a real self-own.",
-    script: `[Pause. Look at the room before speaking.]
-
-Hi, I am Ojus. I built three small applications, several repositories, and a custom speaker-notes editor for a workshop about making onboarding simpler.
-
+    script: `This is my first time speaking at DevRelCon. I have applied for the last three years.
+They finally said yes.
+Over the next hour, you are going to find out why they said no the first two times.
 [Pause for laugh.]
-
-I know. I could have made a PDF.
-
-The question behind all of this is simple: what makes a developer keep going long enough to ship something?
-
-I call the beginning the first mile. It starts when a developer arrives with an outcome in mind. It ends when they get the first result they can actually use. Everything between those points is the route: the docs, account setup, permissions, keys, billing, errors, and the moments when the next step stops looking worth the effort.
-
-We are going to do this in two parts. First, you will experience a route and we will inspect what happened. Then we will choose one small way to investigate a route you own. You do not need a laptop or a new analytics program.
-
-I am also going to be careful about the evidence. A dashboard can show a recorded position. Documentation can show what a route asks for. Neither one can read a developer's mind.
-
+To prepare for a workshop about making onboarding simpler, I built three small applications, several repositories, and a custom speaker-notes editor.
+I know. It could have been a PowerPoint.
+Apparently, when I hear “make the first mile simpler,” my instinct is to build an entire transportation system.
+[Pause.]
+Anyway, the question behind all of this is simple: what makes a developer keep going long enough to ship something?
+I call the beginning the first mile. It starts when a developer arrives with an outcome in mind. It ends when they get the first result they can actually use.
+Everything between those points is the route: the docs, account setup, permissions, keys, billing, errors, and the moments when the next step stops looking worth the effort.
+We are going to do this in two parts. First, you will experience a route, and we will inspect what happened. Then we will choose one small way to investigate a route you own.
+You do not need a laptop or a new analytics program.
+I am also going to be careful about the evidence. A dashboard can show a recorded position. Documentation can show what a route asks for. Neither one can read a developer’s mind.
 The useful question for the next hour is: can a developer keep making visible progress toward the thing they came to build?
-
-[Advance]
-
-To explain why the destination is not enough, I want to borrow a product journey from someone with famously bad onboarding: Odysseus.`,
+[Advance.]`,
     roomCue: "Look for recognition when you define the first mile. Let the opening self-own breathe. Do not rush into the myth while people are still settling.",
     timing: "2 minutes. Cut the list of route components if the room starts late, but keep the two-part contract and evidence boundary.",
     fallback: "If the room is cold, skip the second joke and ask: 'What is one thing you tried to build this week?' Take one answer, connect it to first success, and advance.",
