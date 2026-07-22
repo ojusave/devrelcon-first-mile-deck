@@ -157,92 +157,110 @@
           </div>
         </section>
 
-        <section class="slide slide--gates slide--unified" data-slide="13" aria-label="Documented gate types across the frozen Atlas snapshot" hidden>
-          <div class="story-surface">
+        <section class="slide slide--study slide--unified" data-slide="13" aria-label="Frozen 205-route study" hidden>
+          <div class="story-surface study-surface">
             <div class="surface-heading">
-              <p class="source-label">ATLAS RELATION · 205 DOCUMENTED ROUTES</p>
-              <h1><span data-stat="gateCombination"></span> routes combined at least three documented gate types.</h1>
+              <p class="source-label">FROZEN STUDY · 205 SELECTED DOCUMENTED ROUTES</p>
+              <h1>The documented first mile averaged <span data-stat="averageActions"></span> actions.</h1>
             </div>
-            <div class="gate-grid">
-              <article><h2 data-stat="gateChoice"></h2><p>routes included a choice gate</p></article>
-              <article><h2 data-stat="gateAccount"></h2><p>routes included an account gate</p></article>
-              <article><h2 data-stat="gateCredential"></h2><p>routes included a credential gate</p></article>
-              <article><h2 data-stat="gateBilling"></h2><p>routes included a billing gate</p></article>
-            </div>
-            <p class="method-boundary">Gate types describe documented requirements or transitions, not observed drop-off.</p>
-          </div>
-        </section>
-
-        <section class="slide slide--method slide--unified" data-slide="14" aria-label="Research method" hidden>
-          <div class="story-surface">
-            <div class="surface-heading">
-              <p class="source-label">RESEARCH METHOD</p>
-              <h1>205 platforms. One documented route each.</h1>
-            </div>
-            <div class="method-grid">
-              <article><p class="card-number">01</p><div><h2>Source</h2><p>Official documentation for one platform.</p></div></article>
-              <article><p class="card-number">02</p><div><h2>Route</h2><p>One selected path for one developer intent.</p></div></article>
-              <article><p class="card-number">03</p><div><h2>End</h2><p>A named milestone or demonstrated terminal state.</p></div></article>
-            </div>
-            <p class="method-boundary">This describes documentation, not developer behavior.</p>
-          </div>
-        </section>
-
-        <section class="slide slide--finding slide--unified" data-slide="15" aria-label="Route selection finding" hidden>
-          <div class="story-surface finding-surface">
-            <p class="source-label">ROUTE-SELECTION METHOD · 205 DOCUMENTED ROUTES</p>
-            <div class="finding-layout">
-              <div class="finding-primary">
-                <p class="finding-number" data-stat="selectionPrimary"></p>
-                <h1>records document a workshop selection or normalization decision.</h1>
+            <div class="study-grid">
+              <div class="study-hero">
+                <p class="study-number" data-stat="averageActions"></p>
+                <p>developer or administrator actions on average before the recorded first-success boundary</p>
               </div>
-              <div class="finding-detail">
-                <div class="comparison-row"><strong data-stat="selectionPolicy"></strong><span>records mention the workshop policy</span></div>
-                <div class="comparison-row"><strong data-stat="selectionDocs"></strong><span>records do not mention that policy</span></div>
-                <p class="finding-action">This is a method disclosure, not a developer-behavior finding.</p>
+              <div class="study-support">
+                <article><strong data-stat="medianActions"></strong><span>median actions</span></article>
+                <article><strong data-stat="medianGates"></strong><span>median friction gates</span></article>
+                <article><strong data-stat="totalActions"></strong><span>total developer or administrator actions</span></article>
               </div>
             </div>
+            <div class="condition-strip" aria-label="Common documented route conditions">
+              <p><strong>89%</strong><span>required an account</span></p>
+              <p><strong>79%</strong><span>contained a documented choice</span></p>
+              <p><strong>42%</strong><span>contained a wait or asynchronous dependency</span></p>
+            </div>
+            <p class="method-boundary">Also recorded: 1,270 friction gates and 125 automatic platform events. Documentation structure, not observed time, effort, conversion, frustration, or behavior.</p>
           </div>
         </section>
 
-        <section class="slide slide--finding slide--unified" data-slide="16" aria-label="Success boundary finding" hidden>
-          <div class="story-surface">
+        <section class="slide slide--hypotheses slide--unified" data-slide="14" aria-label="Plausible blocker hypothesis inventory" hidden>
+          <div class="story-surface hypothesis-surface">
             <div class="surface-heading">
-              <p class="source-label">SUCCESS SIGNALS · 205 DOCUMENTED ROUTES</p>
-              <h1>83 of 205 routes named the first-success milestone.</h1>
+              <p class="source-label">BLOCKER CATALOG · SEPARATE HYPOTHESIS INVENTORY</p>
+              <h1>A stopping point opens a hypothesis space.</h1>
             </div>
-            <div class="number-grid" data-boundary-stats></div>
-            <p class="success-action">Name the first useful result before you instrument activation.</p>
+            <div class="hypothesis-layout">
+              <div class="hypothesis-hero"><strong data-stat="blockerHypotheses"></strong><span>plausible blocker hypotheses</span></div>
+              <div class="hypothesis-breakdown">
+                <p><strong data-stat="universalHypotheses"></strong><span>universal</span></p>
+                <p><strong data-stat="platformHypotheses"></strong><span>platform-specific</span></p>
+                <p><strong>0</strong><span>diagnosis-eligible</span></p>
+              </div>
+            </div>
+            <p class="method-boundary">An inventory of explanations worth checking, not measured prevalence or proven reasons developers leave.</p>
           </div>
         </section>
 
-        <section class="slide slide--ambiguity slide--unified" data-slide="17" aria-label="Questions to ask after a stopping point" hidden>
-          <div class="story-surface">
+        <section class="slide slide--examples slide--unified" data-slide="15" aria-label="Representative blocker hypotheses" hidden>
+          <div class="story-surface example-surface">
             <div class="surface-heading">
-              <p class="source-label">ONE STOPPING POINT, THREE QUESTIONS</p>
-              <h1>They stopped at “Create app.” What do you check next?</h1>
+              <p class="source-label">REPRESENTATIVE HYPOTHESES</p>
+              <h1>Here are a few worth testing.</h1>
             </div>
-            <div class="ambiguity-grid">
-              <article class="number-card"><p class="number-value">01</p><p class="number-label">Could they choose the right permissions?</p></article>
-              <article class="number-card"><p class="number-value">02</p><p class="number-label">Did the card requirement stop them?</p></article>
-              <article class="number-card"><p class="number-value">03</p><p class="number-label">Did an error block recovery?</p></article>
+            <div class="example-grid">
+              <article><h2>Account<br>and identity</h2><p>Work email required<br><br>Verification delayed, filtered, or expired</p></article>
+              <article><h2>Billing<br>and access</h2><p>Card before evaluation<br><br>Cannot create the required key, certificate, service account, or OAuth app</p></article>
+              <article><h2>Setup<br>and recovery</h2><p>Prerequisites appear too late<br><br>No reset, undo, rollback, or clean restart</p></article>
+              <article><h2>Errors<br>and waits</h2><p>Generic error<br><br>Provisioning, build, deploy, indexing, or model loading takes longer than expected</p></article>
             </div>
-            <div class="ambiguity-footer">
-              <p class="ambiguity-action">Ask before assigning the cause.</p>
+            <p class="method-boundary">Examples from the catalog. Not measured frequency or diagnosed cause.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--atlas-intro slide--unified" data-slide="16" aria-label="Developer Journey Atlas introduction" hidden>
+          <div class="story-surface atlas-intro-surface">
+            <div class="surface-heading">
+              <p class="source-label">DEVELOPER JOURNEY ATLAS</p>
+              <h1>So I built Atlas.</h1>
+              <p class="atlas-dek">An open-source helper for peers who improve developer platforms.</p>
             </div>
+            <div class="atlas-capabilities">
+              <article><strong>200+</strong><span>documented platform journeys</span></article>
+              <article><strong>One route</strong><span>for one selected developer intent</span></article>
+              <article><strong>Source-grounded</strong><span>prerequisites, actions, gates, boundary, and official links</span></article>
+              <article><strong>Contributable</strong><span>corrections and additions through pull requests</span></article>
+            </div>
+            <div class="atlas-scope"><p><strong>Today</strong> First-mile documentation map</p><p><strong>Direction</strong> Full developer journey and evidence-backed pain points</p></div>
+            <p class="method-boundary">Atlas maps documentation. It does not diagnose developer behavior.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--atlas-workflow slide--unified" data-slide="17" aria-label="Developer Journey Atlas workflow" hidden>
+          <div class="story-surface atlas-workflow-surface">
+            <div class="surface-heading">
+              <p class="source-label">SEARCH → INSPECT → VERIFY → CONTRIBUTE</p>
+              <h1>Find a platform. Inspect the route. Improve the map.</h1>
+            </div>
+            <ol class="atlas-steps">
+              <li><span>1</span><strong>Search</strong><p>Find the platform or browse its category.</p></li>
+              <li><span>2</span><strong>Inspect</strong><p>Open one documented route and its official sources.</p></li>
+              <li><span>3</span><strong>Verify</strong><p>Choose one condition to inspect in your product.</p></li>
+              <li><span>4</span><strong>Contribute</strong><p>Correct the route or add what is missing.</p></li>
+            </ol>
+            <div class="atlas-next"><p><strong>Missing platform?</strong> Record it and contribute a route after the session.</p><p><strong>Next layer</strong> Comparison with a qualified peer cohort, after audit.</p></div>
           </div>
         </section>
 
         <section class="slide slide--atlas slide--unified" data-slide="18" aria-label="Move from diagnosis to action with the First-Mile Atlas" hidden>
           <div class="story-surface resource-layout">
             <div class="resource-copy">
-              <p class="eyebrow">PROBLEM → ACTION · 3 TO 4 MINUTES</p>
-              <h1>Inspect one documented route.</h1>
-              <p class="resource-handoff">Choose one documented condition to verify in your own route.</p>
+              <p class="eyebrow">ATLAS ACTIVITY · 3 TO 4 MINUTES</p>
+              <h1>See the onboarding route for your platform.</h1>
+              <p class="resource-handoff">Choose one documented condition you will inspect in your own product.</p>
               <ol>
                 <li>Find your platform or browse its category.</li>
-                <li>Open one source-grounded route.</li>
-                <li>If your platform is missing, write down the mismatch.</li>
+                <li>Open one documented route and its official sources.</li>
+                <li>Write down one condition worth checking locally.</li>
               </ol>
               <p class="resource-limit">The live Atlas changes. The research findings used a frozen 205-record snapshot.</p>
             </div>
@@ -253,39 +271,22 @@
           </div>
         </section>
 
-        <section class="slide slide--calibrate-product slide--unified" data-slide="19" aria-label="Calibrate product and browser SDK" hidden>
-          <div class="story-surface calibrate-product-surface">
+        <section class="slide slide--calibrate-product slide--unified" data-slide="19" aria-label="Calibrate introduction" hidden>
+          <div class="story-surface calibrate-intro-surface">
             <div class="surface-heading">
-              <p class="eyebrow">CALIBRATE · MAKE ONE ROUTE OBSERVABLE</p>
-              <h1>I built Calibrate, a privacy-conscious onboarding signal SDK.</h1>
+              <p class="eyebrow">FROM DOCUMENTED ROUTE TO OBSERVABLE POSITIONS</p>
+              <h1>Atlas maps the route. Calibrate observes positions in yours.</h1>
             </div>
-            <div class="calibrate-product-grid">
-              <div class="calibrate-code-panel">
-                <p class="source-label">EXPERIMENTAL REPOSITORY API · NOT PUBLISHED TO NPM</p>
-                <pre><code>import { calibrate } from
-  "@usecalibrate/browser";
-
-const cal = calibrate({
-  endpoint: "/__calibrate"
-});</code></pre>
-              </div>
-              <div class="calibrate-capabilities">
-                <article>
-                  <h2>Standard DOM</h2>
-                  <p>React, Vue, Svelte, Angular, or plain HTML.</p>
-                </article>
-                <article>
-                  <h2>Autocapture</h2>
-                  <p>Routes and standard field state, on by default.</p>
-                </article>
-                <article>
-                  <h2>Manual events</h2>
-                  <p>For custom controls the browser cannot infer.</p>
-                </article>
-                <article>
-                  <h2>Fail safely</h2>
-                  <p>Stops itself instead of breaking the app.</p>
-                </article>
+            <div class="evidence-handoff">
+              <article><p class="card-number">01</p><h2>Atlas</h2><p>Provides a documented route hypothesis.</p></article>
+              <article><p class="card-number">02</p><h2>Calibrate</h2><p>Records named positions and bounded route events.</p></article>
+              <article><p class="card-number">03</p><h2>Human debrief</h2><p>Supplies what the developer expected and tried.</p></article>
+            </div>
+            <div class="calibrate-cta">
+              <p>Ask engineering and product to evaluate one bounded onboarding route.</p>
+              <div class="mini-resource-qr">
+                <div class="qr-frame qr-frame--takeaway" data-qr-frame="firstmile" data-qr-size="220" aria-live="off"></div>
+                <p class="qr-caption is-empty" data-qr-caption="firstmile" data-qr-display="github.com/ojusave/usecalibrate" aria-hidden="true"></p>
               </div>
             </div>
           </div>
@@ -294,66 +295,52 @@ const cal = calibrate({
         <section class="slide slide--calibrate-contract slide--unified" data-slide="20" aria-label="Calibrate data and privacy contract" hidden>
           <div class="story-surface calibrate-contract-surface">
             <div class="surface-heading">
-              <p class="eyebrow">CALIBRATE · OBSERVE WITHOUT CONTENT</p>
-              <h1>It captures interaction state, not field contents.</h1>
+              <p class="eyebrow">CALIBRATE · POSITION-ONLY CONTRACT</p>
+              <h1>Position tells you where to ask. It does not tell you why.</h1>
             </div>
-            <ol class="signal-journey" aria-label="Captured onboarding journey signals">
-              <li>Session start</li>
-              <li>Route viewed</li>
-              <li>Field state</li>
-              <li>Validation</li>
-              <li>Manual copy/paste signal</li>
-              <li>Shipped or exit signal</li>
-            </ol>
-            <div class="contract-grid">
-              <section class="field-contract" aria-label="Field identification order">
-                <p class="source-label">FIELD IDENTIFIER ORDER</p>
-                <div class="identifier-order" aria-label="data-fm, then name, then id">
-                  <code>data-fm</code><span>then</span><code>name</code><span>then</span><code>id</code>
-                </div>
-                <p>Reports focus, fill, blank, blur, or error. It does not record a motive.</p>
-              </section>
-              <section class="privacy-contract" aria-label="Privacy boundaries">
-                <p class="source-label">NOT COLLECTED</p>
+            <div class="calibrate-boundaries">
+              <section>
+                <p class="source-label">RECORDS</p>
                 <ul>
-                  <li>No form values, page text, labels, placeholders, or clipboard contents.</li>
-                  <li>Query strings and hashes are removed. Review path labels before use.</li>
-                  <li>Password and hidden fields are ignored. Unknown event fields are rejected.</li>
+                  <li>Named route positions and forward or backward movement</li>
+                  <li>Completion, elapsed time, and bounded machine errors</li>
+                  <li>Configured copy or paste outcomes and explicit shipped event</li>
+                </ul>
+              </section>
+              <section>
+                <p class="source-label">NEVER READS</p>
+                <ul>
+                  <li>Form or textarea values and clipboard contents</li>
+                  <li>DOM text, labels, or placeholders</li>
+                  <li>Full URLs, query strings, or hashes</li>
                 </ul>
               </section>
             </div>
+            <p class="method-boundary">Self-hosted, current-window aggregate. No claim of intent, emotion, cause, trends, cohorts, or time series.</p>
           </div>
         </section>
 
-        <section class="slide slide--champions slide--unified" data-slide="21" aria-label="Run the route with developer champions" hidden>
-          <div class="story-surface champion-surface">
+        <section class="slide slide--implementation slide--unified" data-slide="21" aria-label="Two Calibrate implementation paths" hidden>
+          <div class="story-surface implementation-surface">
             <div class="surface-heading">
-              <p class="eyebrow">SMALL PILOT · 3 TO 5 PEOPLE</p>
-              <h1>Run the route with your developer champions.</h1>
+              <p class="eyebrow">ONE ROUTE · TWO WAYS TO START</p>
+              <h1>Start where production reality allows.</h1>
             </div>
-            <ol class="champion-steps">
-              <li><span>1</span>Choose three to five champions who resemble the intended developer.</li>
-              <li><span>2</span>Give them the outcome, not step-by-step instructions.</li>
-              <li><span>3</span>Watch without rescuing them.</li>
-              <li><span>4</span>Record where activity changes.</li>
-              <li><span>5</span>Ask what they expected at that point.</li>
-            </ol>
-            <p class="champion-boundary">A small session finds useful questions. It does not establish a representative conversion rate.</p>
+            <div class="implementation-grid">
+              <article><p class="source-label">PRODUCTION EVALUATION</p><h2>Instrument a test or staging route.</h2><ol><li>Agree on the first useful result.</li><li>Review the privacy and event contract.</li><li>Validate emitted positions with fake data.</li></ol></article>
+              <article><p class="source-label">DISPOSABLE REPLICA</p><h2>Recreate the route when integration is not practical yet.</h2><ol><li>Use no customer or production data.</li><li>Instrument the same named positions.</li><li>Treat findings as research prompts, not production proof.</li></ol></article>
+            </div>
           </div>
         </section>
 
-        <section class="slide slide--handoff slide--unified" data-slide="22" aria-label="Bring one useful question to the route owner" hidden>
-          <div class="story-surface handoff-surface">
+        <section class="slide slide--field-study slide--unified" data-slide="22" aria-label="Ten-user onboarding investigation" hidden>
+          <div class="story-surface field-study-surface">
             <div class="surface-heading">
-              <p class="eyebrow">ROUTE-OWNER HANDOFF</p>
-              <h1>Bring one question, not a verdict.</h1>
+              <p class="eyebrow">TAKE-HOME EXERCISE</p>
+              <h1>Run ten intended users through one route.</h1>
             </div>
-            <div class="handoff-grid">
-              <article><p class="card-number">01</p><h2>Expected route</h2><p>The path and first useful result you agreed to test.</p></article>
-              <article><p class="card-number">02</p><h2>Observed position</h2><p>Where activity changed, without assigning a cause.</p></article>
-              <article><p class="card-number">03</p><h2>Champion context</h2><p>What they expected, tried, and found uncertain.</p></article>
-              <article><p class="card-number">04</p><h2>Next check</h2><p>One change or investigation for the owning team.</p></article>
-            </div>
+            <ol class="field-study-steps"><li><span>1</span>Choose one intent and first useful result.</li><li><span>2</span>Recruit intended evaluators, including people new to the route.</li><li><span>3</span>Give them the outcome, not step-by-step instructions.</li><li><span>4</span>Observe position, then ask what they expected.</li><li><span>5</span>Bring the owner one question, one piece of evidence, and one next check.</li></ol>
+            <p class="method-boundary">Fake or test data only. Ten people reveal patterns and useful questions, not a representative conversion rate.</p>
           </div>
         </section>
 
@@ -361,7 +348,7 @@ const cal = calibrate({
           <div class="story-surface credit-surface">
             <div class="credit-copy">
               <p class="eyebrow">OPTIONAL WORKSHOP RESOURCE</p>
-              <h1>Request your<br>Render credit code.</h1>
+              <h1>Need somewhere to<br>host the replica?</h1>
               <p class="credit-dek">If a code is available, the portal assigns it for redemption in Render Billing.</p>
               <ol class="credit-steps">
                 <li><span>1</span>Scan the QR code.</li>
@@ -377,25 +364,14 @@ const cal = calibrate({
           </div>
         </section>
 
-        <section class="slide slide--closing slide--unified" data-slide="24" aria-label="Monday action" hidden>
+        <section class="slide slide--closing slide--unified" data-slide="24" aria-label="Contact Ojus and view Render careers" hidden>
           <div class="story-surface closing-surface">
-            <div class="closing-action">
-              <p class="eyebrow">ON MONDAY</p>
-              <h1>Pick one route.</h1>
-              <ol>
-                <li>Define its first-success outcome.</li>
-                <li>Name the team that owns the route.</li>
-                <li>Schedule the next observation.</li>
-              </ol>
-              <p class="contact" data-contact></p>
+            <div class="surface-heading closing-heading"><p class="eyebrow">ONE ROUTE · ONE USEFUL QUESTION · ONE OWNER</p><h1>Keep going.</h1></div>
+            <div class="closing-links">
+              <article><h2>Questions or contributions</h2><div class="qr-frame qr-frame--takeaway" data-qr-frame="contact" data-qr-size="300" aria-live="off"></div><p class="qr-caption is-empty" data-qr-caption="contact" data-qr-display="x.com/ojusave" aria-hidden="true"></p></article>
+              <article><h2>Render is hiring</h2><div class="qr-frame qr-frame--takeaway" data-qr-frame="careers" data-qr-size="300" aria-live="off"></div><p class="qr-caption is-empty" data-qr-caption="careers" data-qr-display="render.com/careers" aria-hidden="true"></p><p class="closing-referral">This is my referral link. It does not guarantee an interview or hiring outcome.</p></article>
             </div>
-            <aside class="closing-careers" aria-label="Render careers">
-              <p class="eyebrow">WE’RE HIRING</p>
-              <h2>Scan for open roles.</h2>
-              <div class="qr-frame qr-frame--takeaway" data-qr-frame="careers" data-qr-size="300" aria-live="off"></div>
-              <p class="qr-caption is-empty" data-qr-caption="careers" data-qr-display="render.com/careers" aria-hidden="true"></p>
-              <p class="closing-referral">This link includes my referral.<br>DM me if you have questions.</p>
-            </aside>
+            <p class="contact" data-contact></p>
           </div>
         </section>
       </main>

@@ -13,15 +13,17 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | 1 to 7 | Odysseus takes ten years to get home after Troy. | A clear destination does not guarantee a usable route. Developers also arrive with a destination of their own. |
 | 8 to 11 | You try a workshop onboarding flow while the room dashboard records named route events. | Experience the route before discussing it. The dashboard separates the intended route, observed movement, bypassed stages, and backtracking. Slide 11 is reserved for event-specific results and is skipped automatically until its URL is configured. |
 | 12 | The deck states exactly what the workshop tracker recorded. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
-| 13 to 17 | A frozen research snapshot of 205 documented developer onboarding routes. | Understand how the records were selected, how terminal states were classified, and why a stopping point still needs another observation. |
-| 18 to 24 | The Developer Journey Atlas, Calibrate, a developer-champions session, a route-owner handoff, an optional attendee credit, and a Monday action. | Inspect one documented route, observe where activity changes, ask what the developer expected, and take one bounded question to the owning team. |
+| 13 to 15 | A frozen 205-route study and a separate inventory of 790 plausible blocker hypotheses. | Quantify documented route structure, then keep plausible explanations separate from diagnosed causes. |
+| 16 to 18 | The Developer Journey Atlas and a short source-inspection activity. | Find one documented route, inspect its official sources, and choose one condition to investigate locally. |
+| 19 to 22 | Calibrate, two implementation paths, and a ten-person intended-user investigation. | Connect a route hypothesis to observed positions, participant explanations, and one bounded owner handoff. |
+| 23 to 24 | An optional attendee credit, contact, and a transparent Render careers link. | Help attendees continue the work without turning the workshop into a product or recruiting pitch. |
 
 ## What the research can support
 
-1. **One hundred ninety-six of 205 routes contain at least three distinct documented gate types.** Choice, account, credential, and billing categories can overlap inside the same route. These are documented requirements or transitions, not observed drop-off.
-2. **In 151 of 205 source records, the selection basis says workshop policy affected route selection or normalization.** This is a research-method disclosure, not evidence that 151 platforms lacked a default route.
-3. **Eighty-three of 205 records classify the terminal as an explicitly named first-success milestone.** The other 122 classify it as a demonstrated terminal state without that milestone being named.
-4. **A stopping point is not a diagnosis.** Permissions, billing, an error, time, or another condition can produce the same recorded position. One more observation or question is required.
+1. **The frozen 205-route study contains 2,569 developer or administrator actions.** That is 12.5 actions on average before the recorded first-success boundary, with a median of 10.
+2. **The same routes contain 1,270 documented friction gates, with a median of 6.** They also contain 125 automatic platform events, excluded from the 12.5 action average.
+3. **Eighty-nine percent of the selected routes require an account, 79 percent contain a documented choice, and 42 percent contain a wait or asynchronous dependency.** These are route conditions, not developer-behavior findings.
+4. **The separate blocker catalog contains 790 plausible hypotheses: 466 universal and 324 platform-specific.** Zero are diagnosis-eligible. The catalog does not establish reasons for frustration, abandonment, or leaving.
 
 These numbers describe a frozen documentation snapshot. They are not conversion data, developer sentiment, product rankings, or evidence that one platform is better than another.
 
@@ -30,21 +32,18 @@ These numbers describe a frozen documentation snapshot. They are not conversion 
 1. Pick one developer intent and the route that is supposed to serve it.
 2. Name the first useful outcome in words a developer can recognize.
 3. Use Calibrate, existing analytics, logs, or careful notes to record where activity changes. The tool is optional.
-4. Watch three to five developer champions attempt that route without rescuing them, then ask what they expected.
-5. Bring one stopping point, the champions' explanations, and one next question to the team that owns the route.
+4. Watch ten intended evaluators attempt that route without rescuing them, then ask what they expected.
+5. Bring one observed position, the participants' explanations, and one next question to the team that owns the route.
 
-Five people form a bounded pilot, not a representative sample. The point is to find a route worth inspecting, not to manufacture a market statistic.
+Ten people support pattern discovery, not a representative conversion rate. The point is to find a route worth inspecting, not to manufacture a market statistic.
 
 The goal is not to prove that onboarding is bad. The goal is to replace a broad complaint with a specific route, an observable stopping point, and the next question worth answering.
 
 ## How Calibrate fits
 
-Calibrate is one way to move from “we think this route is difficult” to “we can see where activity changed.” The deck distinguishes two implementations:
+Calibrate is one way to move from a documented route hypothesis to named positions in an instrumented route. It records forward or backward movement, completion, elapsed time, bounded machine errors, configured copy or paste outcomes, and an explicit shipped event. It never reads form values, clipboard contents, DOM text, or full URLs.
 
-1. The published `usecalibrate` package uses stable route and step IDs supplied by the application.
-2. The repository also contains an experimental DOM-autocapture browser client. It derives empty or filled state without storing or sending the value. Custom controls can require manual instrumentation.
-
-Calibrate cannot explain what a developer expected or why a step was not worth continuing. The developer-champions session supplies that context, and the route-owner handoff turns it into one bounded question or change.
+The current sidecar provides a current-window aggregate, using memory by default and optional JSONL persistence. It is not general product analytics and does not claim trends, cohorts, time series, intent, emotion, or cause. The participant debrief supplies context, and the owner handoff turns the result into one bounded question or next check.
 
 ## Open and use the workshop
 
@@ -53,9 +52,10 @@ Calibrate cannot explain what a developer expected or why a step was not worth c
 - [Developer Journey Atlas](https://developer-journey-atlas.onrender.com/)
 - [Calibrate instrumentation project](https://github.com/ojusave/usecalibrate)
 - [Request a Render credit code](https://credits-portal-mmdm.onrender.com/claim/devrelcon)
+- [Ojus on X](https://x.com/ojusave)
 - [Render careers through Ojus's referral link](https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG)
 
-The credit portal requires GitHub sign-in and reports whether a code is available or pending. It does not connect a repository or deploy an application. Calibrate is Apache-2.0 licensed public source. The published `usecalibrate` package is the manifest-driven workshop kit. The repository also contains the experimental DOM-autocapture browser client shown on slides 19 and 20, but that workspace package is not published to npm. FakeSaaSPI is publicly inspectable source without a project license, so the repository does not grant reuse rights. The Atlas describes documented routes. It does not diagnose why a developer stopped.
+The credit portal requires GitHub sign-in and reports whether a code is available or pending. It does not connect a repository or deploy an application. Calibrate is Apache-2.0 licensed open-source software. npm latest remains `usecalibrate@0.1.3`; the newer guided repository flow is not promoted by the deck. FakeSaaSPI is publicly inspectable source without a project license, so the repository does not grant reuse rights. Atlas software is Apache-2.0 and its original research data is CC BY 4.0. Atlas describes documented routes. It does not diagnose why a developer stopped.
 
 | Control | Action |
 | --- | --- |

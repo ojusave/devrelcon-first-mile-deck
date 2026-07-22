@@ -10,10 +10,10 @@ const viewports = [
   { name: "laptop", width: 1280, height: 720 },
 ];
 const unifiedPalette = new Map([
-  [15, "rgb(20, 184, 241)"], [16, "rgb(20, 184, 241)"], [20, "rgb(20, 184, 241)"], [21, "rgb(20, 184, 241)"],
+  [14, "rgb(20, 184, 241)"], [17, "rgb(20, 184, 241)"], [20, "rgb(20, 184, 241)"],
   [12, "rgb(112, 71, 235)"], [19, "rgb(112, 71, 235)"], [23, "rgb(112, 71, 235)"],
-  [13, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [24, "rgb(255, 212, 77)"],
-  [14, "rgb(255, 138, 102)"], [17, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"],
+  [13, "rgb(255, 212, 77)"], [16, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [21, "rgb(255, 212, 77)"], [24, "rgb(255, 212, 77)"],
+  [15, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"],
 ]);
 const outputDir = mkdtempSync(join(tmpdir(), "devrelcon-deck-"));
 
@@ -98,6 +98,30 @@ function assert(condition, message) {
         assert(comparisonQrState.captionFits, `${viewport.name}: Atlas QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="comparison"]').textContent() === "developer-journey-atlas.onrender.com", `${viewport.name}: Atlas QR caption is incorrect`);
       }
+      if (slideId === 19) {
+        const calibrateQr = page.locator('[data-qr-frame="firstmile"] canvas');
+        await calibrateQr.waitFor();
+        const calibrateQrState = await calibrateQr.evaluate((canvas) => {
+          const frame = canvas.closest('[data-qr-frame="firstmile"]');
+          const caption = document.querySelector('[data-qr-caption="firstmile"]');
+          const canvasRect = canvas.getBoundingClientRect();
+          const frameRect = frame.getBoundingClientRect();
+          return {
+            label: canvas.getAttribute("aria-label"),
+            size: [canvas.width, canvas.height],
+            contained: canvasRect.left >= frameRect.left
+              && canvasRect.top >= frameRect.top
+              && canvasRect.right <= frameRect.right
+              && canvasRect.bottom <= frameRect.bottom,
+            captionFits: caption.scrollWidth <= caption.clientWidth && caption.scrollHeight <= caption.clientHeight,
+          };
+        });
+        assert(calibrateQrState.label === "QR code for CONFIG.takeaways.firstmile", `${viewport.name}: Calibrate QR is not labeled`);
+        assert(calibrateQrState.size.join("x") === "220x220", `${viewport.name}: Calibrate QR canvas is not 220px square`);
+        assert(calibrateQrState.contained, `${viewport.name}: Calibrate QR canvas is clipped by its frame`);
+        assert(calibrateQrState.captionFits, `${viewport.name}: Calibrate QR caption is clipped or wrapped`);
+        assert(await page.locator('[data-qr-caption="firstmile"]').textContent() === "github.com/ojusave/usecalibrate", `${viewport.name}: Calibrate QR caption is incorrect`);
+      }
       if (slideId === 23) {
         const creditQr = page.locator('[data-qr-frame="credits"] canvas');
         await creditQr.waitFor();
@@ -125,6 +149,29 @@ function assert(condition, message) {
         assert(await page.locator('[data-qr-caption="credits"]').textContent() === "credits-portal-mmdm.onrender.com/claim/devrelcon", `${viewport.name}: credit QR caption is incorrect`);
       }
       if (slideId === 24) {
+        const contactQr = page.locator('[data-qr-frame="contact"] canvas');
+        await contactQr.waitFor();
+        const contactQrState = await contactQr.evaluate((canvas) => {
+          const frame = canvas.closest('[data-qr-frame="contact"]');
+          const caption = document.querySelector('[data-qr-caption="contact"]');
+          const canvasRect = canvas.getBoundingClientRect();
+          const frameRect = frame.getBoundingClientRect();
+          return {
+            label: canvas.getAttribute("aria-label"),
+            size: [canvas.width, canvas.height],
+            contained: canvasRect.left >= frameRect.left
+              && canvasRect.top >= frameRect.top
+              && canvasRect.right <= frameRect.right
+              && canvasRect.bottom <= frameRect.bottom,
+            captionFits: caption.scrollWidth <= caption.clientWidth && caption.scrollHeight <= caption.clientHeight,
+          };
+        });
+        assert(contactQrState.label === "QR code for CONFIG.takeaways.contact", `${viewport.name}: contact QR is not labeled`);
+        assert(contactQrState.size.join("x") === "300x300", `${viewport.name}: contact QR canvas is not 300px square`);
+        assert(contactQrState.contained, `${viewport.name}: contact QR canvas is clipped by its frame`);
+        assert(contactQrState.captionFits, `${viewport.name}: contact QR caption is clipped or wrapped`);
+        assert(await page.locator('[data-qr-caption="contact"]').textContent() === "x.com/ojusave", `${viewport.name}: contact QR caption is incorrect`);
+
         const careersQr = page.locator('[data-qr-frame="careers"] canvas');
         await careersQr.waitFor();
         const careersQrState = await careersQr.evaluate((canvas) => {
@@ -452,6 +499,7 @@ function assert(condition, message) {
     "https://github.com/ojusave/fakesaaspi",
     "https://developer-journey-atlas.onrender.com",
     "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
+    "https://x.com/ojusave",
     "https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG",
   ]) {
     const response = await requestContext.get(url);

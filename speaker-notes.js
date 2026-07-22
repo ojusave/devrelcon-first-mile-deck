@@ -340,296 +340,238 @@ This route was exaggerated. The ingredients were not invented from nowhere. I pu
     sources: "FakeSaaSPI event validation: packages/kit/src/event-validation.ts\nFakeSaaSPI tracker delivery: packages/kit/src/tracker.ts\nFakeSaaSPI deployment configuration: render.yaml",
   },
   13: {
-    purpose: "Connect the exaggerated workshop route to a reproducible relationship across the frozen Atlas snapshot without implying user behavior or causation.",
-    script: `The route you just tried exaggerated the sequence. It did not invent the categories.
+    purpose: "Reveal the scale and composition of the frozen 205-route study without turning documentation counts into developer-behavior claims.",
+    script: `I built the fictional exercise from recurring platform patterns. I did not copy one company's onboarding flow, and I am not claiming the exercise itself is average or median.
 
-In the frozen 205-record Atlas snapshot, 196 routes contain at least three distinct documented gate types.
+Across 205 selected documented routes, I counted 2,569 actions performed by a developer or administrator. That is 12.5 actions on average before the recorded first-success boundary. The median is 10.
 
-The categories overlap inside the same route. Choice appears in 162 records. Account appears in 129. Credential appears in 115. Billing appears in 42.
+The same routes contain 1,270 documented friction gates, with a median of 6. They also contain 125 automatic platform events. Those automatic events are excluded from the 12.5 action average.
 
-That is the relationship I want you to notice. The first mile is often not one bad screen. A selected documented route can combine several different classes of requirement before the developer reaches the first result.
+These actions are not twelve clicks on one page. They can include account creation, installation, documentation navigation, permissions, billing, credential creation, choices, and waits.
 
-Some of those requirements are necessary. Credentials protect access. Billing can protect expensive infrastructure. A choice can be real product capability, not accidental clutter.
+Eighty-nine percent of the selected routes require an account. Seventy-nine percent contain at least one documented choice. Forty-two percent contain a wait or asynchronous dependency.
 
-This count does not say that 196 developers struggled. It does not say these gates caused abandonment. It says the documentation records several kinds of setup condition on the same selected route.
-
-FakeSaaSPI compressed those categories into one absurd trip so we could feel the coordination problem.
+Those percentages describe the route records. They do not tell us how difficult the steps felt, how long a real developer took, or whether any condition caused someone to leave.
 
 [Pause.]
 
-Also, nobody wants my legal strategy to be 'but the card was fictional.'
+The exercise exaggerated the experience. The coordination burden in the frozen study is real documentation structure.
 
 [Advance]
 
-Before I show another number, I need to define what one Atlas record represents.`,
-    roomCue: "Let the 196 of 205 relationship land before reading the four category counts. Do not turn a gate category into criticism of any named platform.",
-    timing: "1 minute 35 seconds.",
-    fallback: "If time is short, state only that 196 of 205 records contain at least three distinct documented gate types, then give the evidence boundary and advance.",
-    evidenceBoundary: "Gate types are researcher-coded documented requirements or transitions. Counts can overlap within a route. They do not measure prevalence among users, completion, frustration, product quality, drop-off, or cause.",
-    sources: "Frozen Atlas snapshot: platform-first-mile-kb commit dd23053647944efefc1bec68d1897a369b495055\nDerived from distinct frictionGates.type values in 205 platform_journey records\nDeveloper Journey Atlas research method",
+But structure still does not tell us why a particular person stopped.`,
+    roomCue: "Let 12.5 land first, then add the median, gates, and three route-condition percentages. Keep the frozen study boundary visible.",
+    timing: "2 minutes.",
+    fallback: "State 12.5 average actions, 10 median actions, and 6 median friction gates, then give the documentation boundary and advance.",
+    evidenceBoundary: "One record is one selected documented route, not a user, session, complete company journey, or verified shortest path. Counts do not measure effort, time, conversion, frustration, behavior, or cause.",
+    sources: "Frozen 205-route snapshot: platform-first-mile-kb commit dd23053647944efefc1bec68d1897a369b495055\n2,569 developer or administrator actions divided by 205 routes: 12.5317\nMedian actions: 10\n1,270 friction gates, median 6\n125 automatic platform events\nAccount 182 of 205, choice 162 of 205, wait or asynchronous dependency 85 of 205",
   },
   14: {
-    purpose: "Define the frozen research unit before any aggregate counts appear.",
-    script: `The preserved workshop analysis contains 205 records.
+    purpose: "Introduce the blocker catalog as a hypothesis inventory and explicitly prevent it from becoming a list of diagnosed causes.",
+    script: `A recorded stopping point creates a place to investigate. It does not select an explanation.
 
-One record means one platform, one selected developer intent, one documented route, and one research snapshot. The source is official documentation. The end is either a milestone the documentation names or a terminal state it demonstrates.
+To help with that investigation, I documented 790 plausible blocker hypotheses. Four hundred sixty-six are universal hypotheses. Three hundred twenty-four are platform-specific.
 
-That unit is narrower than 'a company's onboarding.' A platform can have many products, entry points, languages, account states, and routes. This research follows one selected path. It does not claim to represent every way into that platform.
+Zero are diagnosis-eligible.
 
-I also did not complete onboarding on 205 production accounts. I retain a small amount of self-preservation and a finite number of credit cards.
+That zero matters more than the impressive-looking 790. I documented 790 explanations worth checking. I did not document 790 proven reasons developers leave.
 
-[Pause for laugh.]
+The catalog is intentionally broad because the same observed position can follow from identity rules, permissions, billing, unclear prerequisites, a generic error, a slow asynchronous process, an interruption, or something the tracker cannot see.
 
-This is documentation evidence. It can show what the inspected source asks for and how the route was represented. It cannot show whether real developers completed it, how long they took, what they felt, or why they stopped.
-
-Please keep that boundary in your head for the next two numbers. Large type does not upgrade the evidence.
+Do not connect this inventory directly to the 205 routes as if every route experienced every hypothesis. They are separate research structures.
 
 [Advance]
 
-The first number is actually about my research method, because the dataset records when the workshop had to make a selection decision.`,
-    roomCue: "Make sure the room can repeat the unit: one platform, one intent, one documented route, one snapshot. Slow down before the evidence boundary.",
+Let me make the hypothesis language concrete with a few examples.`,
+    roomCue: "Pause on zero diagnosis-eligible. Say the distinction between worth checking and proven reason slowly.",
     timing: "1 minute 30 seconds.",
-    fallback: "If the method feels dense, say only the unit and boundary. The Atlas and README contain the detail.",
-    evidenceBoundary: "Do not call these 205 tested onboarding experiences, verified shortest paths, users, sessions, or companies with measured behavior.",
-    sources: "Frozen corpus: platform-first-mile-kb commit dd23053647944efefc1bec68d1897a369b495055\nMeasurement contract: research/platform-first-mile-kb/MEASUREMENT-CONTRACT.md\nDeveloper Journey Atlas research guide",
+    fallback: "Say: '790 hypotheses, zero diagnosed causes.' Then explain that the route study and blocker catalog are separate structures.",
+    evidenceBoundary: "The catalog is not telemetry, prevalence, frequency, sentiment, abandonment, or causal evidence. No explicit mapping connects all 790 cards to the 205 route records.",
+    sources: "Developer Journey Atlas generated blocker catalog\n790 cards: 466 universal and 324 platform-specific\nAll cards marked not_diagnosis_eligible\npackages/generated-views/blockers.md and src/generated/catalog.json",
   },
   15: {
-    purpose: "Disclose how often workshop policy affected route selection or normalization, and prevent that method count from becoming a platform-performance claim.",
-    script: `This number needs a careful reading.
+    purpose: "Give the audience representative blocker hypotheses they can recognize and test without presenting them as common or proven.",
+    script: `Here are eight examples from the catalog.
 
-In 151 of the 205 source records, the selection-basis text says workshop policy affected route selection or normalization. The other 54 do not use that policy language.
+Account and identity includes a work-email requirement and verification that is delayed, filtered, or expired.
 
-The earlier slide turned that phrase count into a much stronger claim: that 151 platforms failed to present one unambiguous default route. The records do not support that conclusion. In some cases the policy chose among routes. In others it normalized signup or how the route was represented for the research.
+Billing and access includes a card appearing before evaluation, or a developer who cannot create the required key, certificate, service account, or OAuth application.
 
-So this number is a method disclosure. It tells you that a researcher made many route decisions while producing one comparable record per platform. It does not tell you that 151 groups of developers were confused, or even that 151 documentation sets lacked a recommendation.
+Setup and recovery includes prerequisites appearing after the step that needs them, and routes with no reset, undo, rollback, or clean restart.
 
-The practical consequence is caution. When you inspect a route in the Atlas, read the selection basis and the source. Do not turn a normalized research route into a universal product truth.
+Errors and waits includes a generic error, and provisioning, build, deploy, indexing, or model loading that takes longer than expected.
 
-If a statistic becomes less exciting when its denominator is explained, that is not a presentation failure. That is the statistic returning to its natural habitat.
+These examples are useful because each one suggests a different question and a different owner. They are not a ranking of common frustrations. Some may be intentional controls.
+
+The next job is to locate one condition in a real documented route, then decide whether it is worth inspecting locally.
 
 [Advance]
 
-The next count is stronger because its two categories are explicitly recorded for every item in the frozen corpus.`,
-    roomCue: "Make the method boundary explicit. Expect questions about why the count remains visible and keep the answer tied to the selection-basis field.",
-    timing: "1 minute 45 seconds.",
-    fallback: "If time is short, say: '151 records mention a workshop policy decision. That is method metadata, not proof that platform documentation confused developers.'",
-    evidenceBoundary: "Do not say 151 platforms lacked an unambiguous default route. Do not use the generated 94 classifier as a substitute. The supported fact is the 151-record phrase count and its limited meaning.",
-    sources: "Frozen corpus: platform-first-mile-kb commit dd23053647944efefc1bec68d1897a369b495055\nFrozen selection_basis fields\nRoute-selection classifier audit\nIndependent exercise and research review completed July 22, 2026",
+That is why I built Atlas.`,
+    roomCue: "Read one example per quadrant first. Add the second only if the room is following. Do not invite vendor name-and-shame.",
+    timing: "2 minutes.",
+    fallback: "Read one example from each quadrant and land the line that every hypothesis needs a local check.",
+    evidenceBoundary: "Examples are catalog entries, not measured frequency, platform quality, developer emotion, abandonment, or cause.",
+    sources: "Developer Journey Atlas blocker catalog\nUniversal hypotheses U04.02, U04.04, U06.01, U07.04, U08.08, U17.05, U17.17, and U18.04\npackages/generated-views/blockers.md",
   },
   16: {
-    purpose: "Explain the 83/122 terminal classification and turn it into a concrete route-design question.",
-    script: `This count uses the same frozen set of 205 documented routes.
+    purpose: "Introduce Atlas as a current first-mile documentation helper and distinguish its present scope from the broader product vision.",
+    script: `I built Atlas as an open-source helper for peers who work on developer platforms.
 
-Eighty-three records classify the terminal as an explicitly named first-success milestone. The other 122 classify it as a demonstrated terminal state without that milestone being named.
+Today it contains more than 200 documented platform journeys. Each record follows one selected route for one developer intent and presents prerequisites, actions, friction gates, a first-success boundary, and official sources.
 
-The second group still has an observable end. It might show a valid response, a deployed service, or a completed configuration. The classification says the documentation did not explicitly label that end as the first-success milestone for this record.
+The useful unit is deliberately narrow. This is not everything a company calls onboarding. It is one documented route that gives us a concrete starting hypothesis.
 
-It does not mean 122 platforms have no success. It does not mean developers failed to recognize success. We did not observe developers here.
+You can correct a route or contribute an addition through a pull request. The software is Apache-2.0. The original research data is CC BY 4.0.
 
-The useful question is local: for the route you own, what result can the developer see and say, 'Yes, the thing works'?
+Today, Atlas is a first-mile documentation map. The direction I want to take it is the full developer journey and evidence-backed pain points across the platform.
 
-A finish line should not require escape-room logic.
-
-[Pause for laugh.]
-
-Name that signal before you instrument activation. Otherwise the internal metric may say 'activated' while the developer is still asking whether anything happened.
-
-[Ask the room.]
-
-What is one visible first result in a route you work on?
-
-[Take one short answer.]
+That future does not change the current boundary: Atlas maps documentation. It does not diagnose developer behavior.
 
 [Advance]
 
-Even with a named finish line, a stopping point still leaves us with competing explanations.`,
-    roomCue: "Take one concrete audience answer. Push gently for something a developer can observe, not an internal lifecycle label.",
-    timing: "1 minute 40 seconds.",
-    fallback: "If nobody answers, use 'the first valid API response appears' and continue.",
-    evidenceBoundary: "The 83 and 122 counts are documentation classifications. Do not describe the 122 as routes with no success, unclear onboarding, or failed users.",
-    sources: "Frozen corpus: platform-first-mile-kb commit dd23053647944efefc1bec68d1897a369b495055\nFrozen boundary_evidence.type fields\nDeveloper Journey Atlas evidence contract",
+Here is the workflow I want peers to use.`,
+    roomCue: "Keep the product introduction brief. Emphasize the current scope before describing the longer-term direction.",
+    timing: "2 minutes.",
+    fallback: "State the current scope, the contribution path, and the documentation boundary, then advance.",
+    evidenceBoundary: "Do not claim full-product coverage, observed pain points, verified behavior, conversion, or diagnosis. Use more than 200 rather than a disputed live exact count.",
+    sources: "Developer Journey Atlas README\nhttps://developer-journey-atlas.onrender.com\nhttps://github.com/ojusave/developer-journey-atlas\nApache-2.0 software and CC BY 4.0 original research data",
   },
   17: {
-    purpose: "Show how one observed position becomes a discriminating question instead of a confident diagnosis.",
-    script: `Suppose the tracker says activity changed around 'Create app.'
+    purpose: "Teach the Atlas inspection workflow while keeping missing-platform research and peer comparison inside their verified boundaries.",
+    script: `Start by searching for the platform or browsing its category.
 
-We have at least three plausible explanations on screen. The developer may not know which permissions to choose. The card requirement may change whether the route feels worth continuing. An error may block recovery.
+Open one documented route. Read the prerequisites, actions, gates, first-success boundary, and official sources. Then choose one condition you want to inspect in your own product.
 
-There are others. Time ran out. The browser lost state. The developer opened another tab. Someone asked where the coffee was.
+If something is wrong, contribute a correction. If the platform is missing, record it and contribute a route after the session.
 
-The stopping point does not choose among them for us.
+Atlas also contains the foundation for long-running missing-platform research and qualified peer-cohort comparison. I am not presenting those as dependable public features today. The missing-platform production flow still needs a stage rehearsal, and public peer results are withheld until records pass the required audit.
 
-So ask the smallest question, or collect the smallest additional observation, that separates the plausible explanations.
-
-For permissions: what did you think this choice would allow? For the card: what changed when payment appeared? For the error: what did you try next, and could you recover?
-
-[Ask the room.]
-
-Give me one other explanation for stopping at 'Create app.'
-
-[Take one answer.]
-
-Good. What would we need to observe or ask to tell that explanation apart from the others?
-
-[Take one answer or supply a short example.]
-
-This is the end of the problem half. We have experienced a route, located activity changes, and protected the difference between a position and a cause.
+Peer cohort is the useful term. It means comparable platforms in the same category with compatible route and success-boundary definitions. It is not an anonymous leaderboard assembled from incompatible journeys.
 
 [Advance]
 
-The action half starts smaller than a redesign. Pick one documented route, one condition to inspect, and one person who can explain what they expected.`,
-    roomCue: "Take one explanation and one discriminating question. Stop the discussion before it becomes a full diagnosis of the fake route.",
+Now take three minutes and inspect the route for a platform you know.`,
+    roomCue: "Do not demo the missing-platform workflow or public comparison. Point the room toward route and source inspection.",
     timing: "2 minutes.",
-    fallback: "If the room is quiet, use 'the developer did not know whether creating the app would incur a charge' and ask what evidence would distinguish it.",
-    evidenceBoundary: "Treat every proposed cause as a hypothesis until an observation or participant account separates it from alternatives.",
-    sources: "Developer Journey Atlas diagnosis evidence contract\nWorkshop evidence boundary",
+    fallback: "If time is short, teach search, source inspection, and one local condition. Omit future layers.",
+    evidenceBoundary: "Missing-platform research is conditional on production rehearsal. Peer comparison is audit-gated and currently withheld. Do not add per-result evidence-status badges.",
+    sources: "Developer Journey Atlas README and API implementation\nMissing-platform workflow implementation\nPeer comparison eligibility checks\nLive Atlas audit and meta responses reviewed July 22, 2026",
   },
   18: {
-    purpose: "Make the transition into action concrete by using the Atlas as a source-inspection tool rather than a leaderboard.",
-    script: `This is the turn from describing the problem to deciding what to inspect.
+    purpose: "Give attendees a short Atlas activity that produces one inspectable condition rather than a platform score.",
+    script: `Scan the QR and find a platform you know, or browse its category.
 
-The Developer Journey Atlas is one resource you can use. Open one platform you know, or browse a relevant category. Choose one source-grounded route and inspect the conditions documented along it.
+Open one documented route and its official sources. Your task is to write down one condition you will inspect in your own product. It might be an account rule, installation, a permission choice, billing, credential creation, documentation navigation, a wait, or the language used for first success.
 
-Do not begin by asking, 'What is our score?' The Atlas does not score product quality. It does not report conversion, time to value, sentiment, or a verified cause. Official documentation is evidence. It is not sworn testimony from the developer who rage-closed the tab.
+You are not looking for a score. You are looking for one route hypothesis.
 
-The live Atlas changes as records are added and reviewed. The two counts I just showed came from a frozen 205-record workshop snapshot. The live total may be different. Most shortest-route audits still need human judgment, so open the sources rather than treating the generated route as authority.
+[Allow three minutes. Help only with access.]
 
-Your action is small: choose one documented condition to verify in your own route. Maybe it is account state, a permission choice, a billing gate, a credential warning, or the language used for first success.
+If your platform is missing, write down the name. We will use that as a contribution case after the session rather than promise a live research result from the stage.
 
-If your platform is missing, record the missing case. Do not ask the tool to invent a benchmark.
+[Regroup.]
 
-[Allow a brief scan if the room has devices out.]
+Keep the condition you selected. Atlas gives us the documented route hypothesis. The next question is how to observe where activity changes in the route you actually own.
 
-[Advance]
-
-Once you have a condition worth checking, you need a way to observe where activity changes in your route.`,
-    roomCue: "Confirm that attendees understand this as source inspection, not peer ranking. If scanning would steal time, point out that the URL remains in the deck and move on.",
-    timing: "2 minutes 30 seconds, including a short scan window.",
-    fallback: "If the Atlas is unavailable, return to one documented condition on slide 13 and ask attendees to name the equivalent condition in their own route. Conference Wi-Fi is not the learning objective.",
-    evidenceBoundary: "The live Atlas currently differs from the frozen 205-record snapshot and most route audits need human judgment. It describes official documentation, not observed developer behavior.",
-    sources: "Developer Journey Atlas: https://developer-journey-atlas.onrender.com\nRepository README and research method\nSoftware Apache 2.0, original research and generated views CC BY 4.0",
+[Advance]`,
+    roomCue: "Give the room three quiet minutes. Regroup with one attendee example if time permits.",
+    timing: "4 minutes, including instructions and regroup.",
+    fallback: "If Atlas or Wi-Fi fails, ask attendees to choose one condition from slide 13 and locate its equivalent in a route they own.",
+    evidenceBoundary: "The live Atlas changes while the talk statistics use the frozen 205-route snapshot. This activity inspects documentation, not product behavior or platform quality.",
+    sources: "https://developer-journey-atlas.onrender.com\nFrozen 205-route workshop snapshot\nDeveloper Journey Atlas research and evidence contracts",
   },
   19: {
-    purpose: "Introduce Calibrate as one optional observation tool, clearly separating the published package from the experimental repository client.",
-    script: `I built Calibrate because I wanted a small way to mark where activity changes without collecting the contents people type into a route.
+    purpose: "Introduce Calibrate as the bounded observation layer between an Atlas route hypothesis and a human explanation.",
+    script: `Atlas gives us a documented route hypothesis. Calibrate can mark named positions and bounded events in the route we actually own. The participant debrief supplies what the person expected and tried.
 
-Apparently my response to too many onboarding tools was one more onboarding tool.
+I built Calibrate as a self-hosted, privacy-bounded onboarding signal tool. It is Apache-2.0 open-source software.
 
-[Pause for laugh.]
+The important unit is one route. Agree on the first useful result, name the positions, and decide what bounded machine events are worth recording.
 
-The code on this slide is the experimental browser client in the public repository. The visible label matters: it is not published to npm.
+Do not install a tool merely because its author is standing near a QR code. Ask engineering and product to evaluate the repository against your privacy, reliability, and route requirements.
 
-For standard browser fields, this repository client can observe routes and field state without a framework-specific adapter because React, Vue, Svelte, Angular, and plain HTML ultimately render DOM controls. Custom controls may still need manual instrumentation. Autocapture does not understand user intent.
+The current npm release is usecalibrate 0.1.3. The newer guided installer in the repository is not the stage path until its package release is complete.
 
-The published package is called usecalibrate. It uses stable route and step IDs supplied by the application. It can record position, bounded errors, retries, named copy or paste outcomes, and an explicit shipped event.
-
-Use Calibrate only if it helps answer your route question. Existing analytics, server logs, or a small manual observation may already be enough.
+Existing analytics, logs, or careful observation may already answer your question. Calibrate is one option, not a required layer.
 
 [Advance]
 
-Forget the import for a moment. The useful design decision is the data contract.`,
-    roomCue: "Watch for npm or framework questions. Answer the publication distinction immediately. Keep the SDK subordinate to the workshop method.",
-    timing: "2 minutes 30 seconds.",
-    fallback: "If the code is unreadable, say only: 'This repository client observes standard DOM controls. The published package uses named steps. Neither one automatically understands intent.'",
-    evidenceBoundary: "@usecalibrate/browser is an experimental repository package and is not published to npm. The published usecalibrate package is manifest-driven. Custom controls can require manual events. Do not mix the two collector implementations.",
-    sources: "Calibrate README: /Users/ojusave/Desktop/Samples/usecalibrate/README.md\nPublished package README: packages/kit/README.md\nExperimental browser client: packages/browser/src\nApache 2.0 license",
+The deciding factor is the data contract.`,
+    roomCue: "Give the room time to scan the repository QR. Keep the tool subordinate to the evidence method.",
+    timing: "1 minute 30 seconds.",
+    fallback: "State the three-layer handoff: Atlas route, Calibrate position, human explanation.",
+    evidenceBoundary: "Do not promote the unreleased 0.1.4 guided installer or the experimental unpublished workspace package. Do not call Calibrate general product analytics.",
+    sources: "Calibrate README: /Users/ojusave/Desktop/Samples/usecalibrate/README.md\nhttps://github.com/ojusave/usecalibrate\nApache-2.0 license\nnpm latest reviewed as usecalibrate 0.1.3 on July 22, 2026",
   },
   20: {
-    purpose: "Explain what Calibrate can record, what it deliberately excludes, and why those signals still do not explain motivation.",
-    script: `The contract is: interaction state, not field contents.
+    purpose: "State the current Calibrate position-only contract, privacy exclusions, storage boundary, and inference limit.",
+    script: `Calibrate records named route positions, forward and backward navigation, completion, elapsed time, bounded machine errors, configured copy or paste outcomes, and an explicit shipped event.
 
-For the experimental browser client, a session can record a normalized route, field focus, whether a field became empty or non-empty, validation state, named flow steps, manual copy or paste outcomes from the application, shipped, and a browser exit signal.
+It never reads form or textarea values, clipboard contents, DOM text, or full URLs, query strings, and hashes.
 
-For standard fields, the identifier order is data-fm, then name, then id. If a route matters, give the step a stable data-fm label. Do not trust an autogenerated component ID to survive Tuesday.
+Copy and paste are named outcomes emitted by the application. The tool does not inspect the clipboard.
 
-The client checks value length to derive empty or filled. It does not store or transmit the value. It does not collect DOM text, labels, placeholders, query strings, hashes, or clipboard contents. Password and hidden fields are ignored. Unknown event fields are rejected by the closed schema. Review route path labels before deployment, and use identify only with an approved opaque identifier.
+The sidecar keeps a current-window aggregate in memory by default. Optional JSONL persistence can preserve events. Without persistence, a restart resets the aggregate.
 
-Copy and paste outcomes are named application signals. The SDK does not inspect the clipboard. Your production password remains between you, your password manager, and your incident review.
+That means the current dashboard is not a general analytics system. Do not claim trends, cohorts, time series, or representative conversion rates from it.
 
-[Pause for laugh.]
-
-Events enter a local queue, normally flush after about two seconds or ten queued events, and are sent in batches of up to 50. Failed requests retry. Exit delivery is best effort.
-
-The SDK knows a field changed. It does not know whether the developer was confused, interrupted, or checking Slack for emotional support.
-
-That is the central limit. Telemetry can tell us where activity changed. It cannot tell us what the developer expected.
+Most importantly, position tells you where to ask. It does not tell you why. Calibrate cannot infer intent, motivation, emotion, or cause.
 
 [Advance]
 
-For that, we need to watch a small number of people attempt the route and then ask.`,
-    roomCue: "Ask for one stable data-fm label only if time allows. If privacy questions arise, answer from the closed schema and defer code review.",
-    timing: "2 minutes 30 seconds.",
-    fallback: "If the room cannot read the diagram, state three boundaries: no field content, stable named signals, and no motive inference. Offer the schema after the session.",
-    evidenceBoundary: "Do not say the client never reads a form value. It checks length to derive state. Path segments need review and identify accepts an optional opaque ID. Do not claim automatic clipboard capture, guaranteed real-time or exit delivery, total framework independence, or production-ready horizontal scale.",
-    sources: "Calibrate field observer: packages/browser/src/fields.ts\nCalibrate transport: packages/browser/src/transport.ts\nCalibrate collector: packages/collector/src/server.ts\nCalibrate security policy: SECURITY.md",
+With that contract understood, there are two responsible ways to begin.`,
+    roomCue: "Read the Records and Never Reads columns, then land the inference limit. Answer technical questions from the current README.",
+    timing: "2 minutes.",
+    fallback: "State three boundaries: named positions, no content, no cause inference.",
+    evidenceBoundary: "Do not claim guaranteed delivery, durable storage by default, live trends, cohorts, time series, intent, emotion, or causal diagnosis.",
+    sources: "Calibrate current README and event schema\nPosition-only event contract\nSidecar current-window aggregate and optional JSONL persistence\nSECURITY.md",
   },
   21: {
-    purpose: "Restore the practical developer-champions exercise so attendees can add human context to route telemetry.",
-    script: `Pick three to five developer champions who resemble the developer this route is meant to serve.
+    purpose: "Offer two bounded implementation paths without shaming engineering or granting unsupported reuse rights for FakeSaaSPI.",
+    script: `The first path is a production evaluation. Agree on the first useful result, review the event and privacy contract with engineering and product, instrument a test or staging route, and validate the emitted positions with fake data.
 
-Think of one person who would be a good fit for that small pilot.
+The second path is a disposable replica. Use this when production integration is not approved or practical yet. Recreate the route with fake credentials and no customer or production data. Instrument the same named positions.
 
-[Pause for five seconds.]
+The replica is a research aid. It is not proof of production behavior.
 
-Do not recruit only the people who helped build the platform and already speak every internal acronym. Five friendly insiders are not five new developers. They are a very polite control group.
+FakeSaaSPI is the workshop reference pattern, but I am not telling the audience to copy that repository today. It is publicly inspectable source without a project license, and its embedded SDK still needs reconciliation with current Calibrate.
 
-Give them the outcome, not step-by-step instructions. Say, for example, 'Create an app and get the first valid response.' Then watch.
-
-Do not rescue them during the attempt. If I explain every click, I have tested my ability to give directions.
-
-[Pause for laugh.]
-
-Record where activity changes. Calibrate can help with a named position when the route is instrumented and delivery succeeds. You can also take careful notes. The tool is optional. The observation is the work.
-
-After the attempt, ask what they expected at that point, what they tried, and what made the next step uncertain or no longer worthwhile. Ask after observing, because a feedback survey alone tends to flatten the sequence into a general opinion.
-
-Use fake or approved test data. Do not put customer, company, payment, or secret information into a pilot.
-
-Three to five people can expose useful questions. They cannot establish a representative conversion rate. If all three stop at the same place, that is worth investigating. It is not '60 percent of developers abandon onboarding.'
+The point of the fallback is not to go around engineering. It is to reduce the cost of asking a better question before requesting production work.
 
 [Advance]
 
-Now we have the documented route, the recorded position, and the participant's explanation. That is enough to take one useful question to the person who owns the route.`,
-    roomCue: "Ask attendees to name one suitable champion, not an internal expert. Listen for people planning to coach participants and correct that gently.",
-    timing: "3 minutes 30 seconds to teach the method. A real pilot needs the route time plus a short debrief and happens after the workshop.",
-    fallback: "If attendees cannot recruit champions now, ask them to name three candidates and schedule one 20-minute observation. If no telemetry is available, use notes and the participant's last screen.",
-    evidenceBoundary: "A three-to-five-person pilot produces qualitative observations and useful questions, not a representative rate. Calibrate records a position only when instrumentation and delivery work.",
-    sources: "GOV.UK moderated usability testing: https://www.gov.uk/service-manual/user-research/using-moderated-usability-testing\nGOV.UK participant recruitment and session analysis\nNielsen Norman Group, Usability Testing 101",
+Whichever path you choose, the next step is a small intended-user investigation.`,
+    roomCue: "Present both paths as legitimate. Avoid adversarial language about engineering approval.",
+    timing: "2 minutes.",
+    fallback: "State production evaluation, disposable replica, and no-production-proof boundary.",
+    evidenceBoundary: "Do not call FakeSaaSPI open source or grant reuse rights. A replica does not validate production behavior, reliability, or conversion.",
+    sources: "Calibrate README and Apache-2.0 license\nFakeSaaSPI repository license audit, July 22, 2026\nFakeSaaSPI embedded @firstmile/sdk review",
   },
   22: {
-    purpose: "Turn the route evidence into a bounded cross-functional handoff with an owner and one next check.",
-    script: `The route owner does not need a 40-page diagnosis. They need enough evidence to decide what to inspect or change next.
+    purpose: "Give attendees a concrete ten-person take-home investigation that ends with one owner, one question, and one next check.",
+    script: `When you go back, choose one developer intent and one visible first useful result.
 
-Bring four things.
+Recruit ten intended evaluators. Include people who are new to the route, not only developer champions who already know every internal term.
 
-First, the expected route and the first useful result you agreed to test.
+Give them the outcome, not step-by-step instructions. Tell them what signals the route records. Use fake or approved test data. Do not rescue them during the attempt.
 
-Second, the position where recorded activity changed. Describe what happened without assigning a cause.
+Observe the recorded position, then ask what they expected, what they tried, and what made the next action uncertain.
 
-Third, what the champions expected, tried, and found uncertain. If their explanations disagree, keep the disagreement. Do not iron it into one neat story for the slide deck.
+Bring the route owner one question, one piece of evidence, and one next check. Keep disagreements between participants rather than flattening them into one neat story.
 
-Fourth, one next check. Maybe the team compares two permission explanations, tests recovery from one error, moves a billing explanation earlier, or observes another person with a different background.
+Ten people can reveal patterns and useful questions. They cannot establish a representative conversion rate.
 
-DevRel contributes the documented route, developer language, and evidence from the attempt. The owning team decides what changes. That keeps the handoff useful and respects who carries the product risk.
-
-If everyone owns the route, write down who can actually change Tuesday's step.
-
-[Ask the room.]
-
-Who owns one route you care about, and what single question would you bring them?
-
-[Take one concise answer.]
-
-If ownership is unclear, identifying the owner is the next action. An unowned route does not become cross-functional merely because we put four functions in a meeting.
+This is promotion-shaped work. You turned developer anecdotes into evidence and gave product, engineering, and documentation one concrete decision. If you are interviewing, bring the same analysis. It shows how you think before you have the title.
 
 [Advance]
 
-That is the workshop method. The next resource is optional and much simpler.`,
-    roomCue: "Take one owner and one question from the room. Stop any answer that expands into a full transformation program and bring it back to one route.",
-    timing: "2 minutes 30 seconds.",
-    fallback: "If nobody knows the owner, say that finding the person who can change the route is the action. Use the FakeSaaSPI card step as a worked example.",
-    evidenceBoundary: "This handoff is a recommended operating pattern, not a validated framework. The owner decides whether the evidence supports a change.",
-    sources: "Developer Journey Atlas action-brief model: src/action-brief.ts\nWorkshop session contract on DevRel cross-functional input",
+If you need somewhere to host the disposable replica, the next resource may help.`,
+    roomCue: "Ask attendees to write down one route, one intended user, and the likely owner. Keep the career line grounded in useful work.",
+    timing: "3 minutes.",
+    fallback: "Reduce the plan to route, participant, observation, debrief, and owner handoff.",
+    evidenceBoundary: "Ten sessions support pattern discovery, not representative statistics. Participation must be informed and use fake or approved test data.",
+    sources: "GOV.UK moderated usability testing guidance\nWorkshop evidence contract\nDeveloper Journey Atlas action-brief model",
   },
   23: {
     purpose: "Offer the Render credit portal accurately without turning the close into a deployment tutorial or guarantee.",
@@ -649,7 +591,7 @@ Use the credit for an approved prototype or another project you are authorized t
 
 [Advance]
 
-Credit or no credit, there is one action I want you to take on Monday.`,
+The take-home action is already written down. I will close with the two ways to stay connected.`,
     roomCue: "Give the room a brief scan window. Keep the credit optional. Do not improvise an amount, deadline, eligibility rule, or delivery time.",
     timing: "1 minute 30 seconds, including the QR scan pause.",
     fallback: "If the portal fails, say the link is in the README and continue. Do not troubleshoot sign-in or promise that a code will arrive later.",
@@ -657,34 +599,28 @@ Credit or no credit, there is one action I want you to take on Monday.`,
     sources: "Live portal: https://credits-portal-mmdm.onrender.com/claim/devrelcon\nPortal ClaimPage and claimService implementation\nRender Dashboard docs: https://render.com/docs/render-dashboard",
   },
   24: {
-    purpose: "End with one bounded Monday action, a transparent careers invitation, and a verbal acknowledgment without manufacturing grandeur.",
-    script: `On Monday, pick one route. Not the entire developer journey. One route.
+    purpose: "Close with the workshop method, an invitation to contribute, and a transparent Render careers link.",
+    script: `One route. One useful question. One owner.
 
-Write down the first-success outcome in words a developer can recognize. Name the team that owns the route. Schedule the next observation with a developer champion who resembles the intended user.
+The left QR is my X account. Use it for questions, corrections, or to tell me what happened when you ran the investigation.
 
-[Give the room 10 seconds to write down the route and owner.]
+Atlas and Calibrate are open source, so pull requests are welcome. The best contribution is a correction with an official source or a concrete improvement to the bounded event contract.
 
-Use the Atlas if you need a documented condition to inspect. Use Calibrate, your existing analytics, logs, or careful notes to mark where activity changes. Then ask what the developer expected. Bring the owner one question and one next check.
+The right QR opens Render's careers page through my referral link. The referral does not guarantee an interview or hiring outcome. If a role is relevant, you can ask me about the team or application.
 
-Do not return on Monday with a transformation program and a 46-tab spreadsheet.
-
-[Pause for laugh.]
-
-If all you leave with is 'our onboarding has friction,' I have given you a true sentence that is almost useless. Leave with a named route, a visible first result, an owner, and a scheduled observation.
-
-The QR on the right opens Render's current careers page and highlights the role if it is still open. The link includes my referral. That does not promise an interview or a hiring outcome. If a role looks relevant, DM me with questions about the team or application. If the highlighted role has closed, the link still opens our current roles.
-
-One last thank-you to Dylan for the dry run. The Bag of Winds label, the clearer problem-to-action turn, and the route curve are here because he was willing to say, 'I do not understand what this means.' That is excellent feedback and, conveniently, the method of this workshop.
+Thank you to Dylan for the dry run and to everyone here for attempting the intentionally terrible route.
 
 [Pause.]
 
-Pick one route. I am happy to take questions.
+You already wrote down the next action: one route, ten intended users, and one evidence-backed question for the owner.
+
+Thank you. I am happy to take questions.
 
 [Leave this slide visible.]`,
-    roomCue: "Ask attendees to write down their one route before packing up. Leave the QR visible during questions. Thank Dylan by name only after the workshop content is complete.",
-    timing: "2 minutes 30 seconds, then questions. Protect at least 3 minutes of schedule recovery before this slide so the ending is not rushed.",
-    fallback: "If time is gone, state the Monday action in three sentences, say the careers QR includes the referral link, thank Dylan, and stop. Do not add a grand conclusion.",
-    evidenceBoundary: "The careers role can close. A referral link does not guarantee an interview or hiring outcome. The workshop artifact is verified, but workshop impact requires rehearsal and observation with a representative room.",
-    sources: "Render careers: https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG\nUser confirmation that the link contains Ojus's referral\nDylan dry-run feedback supplied by Ojus",
+    roomCue: "Leave both QRs visible during questions. Keep the careers invitation transparent and brief.",
+    timing: "1 minute, then questions.",
+    fallback: "Thank the room, identify the two QRs, disclose the referral, and stop.",
+    evidenceBoundary: "A referral link does not guarantee an interview or hiring outcome. Artifact verification is not evidence that the workshop or tools improve onboarding outcomes.",
+    sources: "https://x.com/ojusave\nhttps://github.com/ojusave/developer-journey-atlas\nhttps://github.com/ojusave/usecalibrate\nRender careers referral URL in CONFIG.takeaways.careers",
   },
 };

@@ -17,6 +17,7 @@ const CONFIG = {
     fakesaaspiKit: "https://github.com/ojusave/fakesaaspi",
     comparison: "https://developer-journey-atlas.onrender.com",
     credits: "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
+    contact: "https://x.com/ojusave",
     careers: "https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG",
   },
 
@@ -25,18 +26,16 @@ const CONFIG = {
 
   // Counts reproduced from the frozen 205-record workshop snapshot on July 21, 2026.
   stats: {
-    gateCombination: "196 / 205",
-    gateChoice: "162",
-    gateAccount: "129",
-    gateCredential: "115",
-    gateBilling: "42",
-    selectionPrimary: "151 / 205",
-    selectionPolicy: "151",
-    selectionDocs: "54",
-    boundaries: [
-      { value: "83 / 205", label: "routes with an explicitly named first-success milestone" },
-      { value: "122 / 205", label: "routes that demonstrated an end without naming the milestone" },
-    ],
+    averageActions: "12.5",
+    medianActions: "10",
+    medianGates: "6",
+    totalActions: "2,569",
+    totalGates: "1,270",
+    totalAutomaticEvents: "125",
+    totalTransitions: "2,694",
+    blockerHypotheses: "790",
+    universalHypotheses: "466",
+    platformHypotheses: "324",
   },
 
   // Contact line for the closing slide.

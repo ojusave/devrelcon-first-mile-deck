@@ -429,6 +429,7 @@
     renderQrSet("fakesaaspiKit", CONFIG.takeaways.fakesaaspiKit, "CONFIG.takeaways.fakesaaspiKit");
     renderQrSet("comparison", CONFIG.takeaways.comparison, "CONFIG.takeaways.comparison");
     renderQrSet("credits", CONFIG.takeaways.credits, "CONFIG.takeaways.credits");
+    renderQrSet("contact", CONFIG.takeaways.contact, "CONFIG.takeaways.contact");
     renderQrSet("careers", CONFIG.takeaways.careers, "CONFIG.takeaways.careers");
     renderLiveViews();
     renderStats();
