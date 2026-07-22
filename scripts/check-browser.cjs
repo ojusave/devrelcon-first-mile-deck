@@ -404,9 +404,9 @@ function assert(condition, message) {
     for (const slideId of slideIds) {
       await visualNotesPage.goto(`${baseUrl}/speaker-notes.html?check=${viewport.name}-${slideId}#${slideId}`, { waitUntil: "networkidle" });
       await visualNotesPage.locator("[data-note-slide]").getByText(String(slideId), { exact: true }).waitFor();
-      for (const label of ["Full script", "Room cue", "Timing", "Fallback", "Evidence boundary", "Sources"]) {
-        assert((await visualNotesPage.getByLabel(label).inputValue()).trim().length > 0, `${viewport.name} speaker notes slide ${slideId}: missing ${label.toLowerCase()}`);
-      }
+      assert((await visualNotesPage.getByLabel("Full script").inputValue()).trim().length > 0, `${viewport.name} speaker notes slide ${slideId}: missing full script`);
+      assert(await visualNotesPage.locator(".script").isVisible(), `${viewport.name} speaker notes slide ${slideId}: full script is not visible`);
+      assert(await visualNotesPage.locator(".metadata").isHidden(), `${viewport.name} speaker notes slide ${slideId}: delivery metadata is still visible`);
       const notesFit = await visualNotesPage.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight);
       assert(notesFit, `${viewport.name} speaker notes slide ${slideId}: outer page requires scrolling`);
       const noteFieldsAreUsable = await visualNotesPage.locator("textarea").evaluateAll((fields) => fields.every((field) => {
@@ -426,14 +426,12 @@ function assert(condition, message) {
 
   await notesPage.goto(`${baseUrl}/speaker-notes.html?scroll-reset-check=1#14`, { waitUntil: "networkidle" });
   await notesPage.getByLabel("Full script").evaluate((field) => { field.scrollTop = field.scrollHeight; });
-  await notesPage.locator(".metadata").evaluate((rail) => { rail.scrollTop = rail.scrollHeight; });
   await notesPage.getByRole("button", { name: "Next" }).click();
   await notesPage.getByText("Slide 15").waitFor();
   assert(await notesPage.getByLabel("Full script").evaluate((field) => field.scrollTop) === 0, "speaker notes: full script did not reset to the top after slide change");
-  assert(await notesPage.locator(".metadata").evaluate((rail) => rail.scrollTop) === 0, "speaker notes: metadata rail did not reset to the top after slide change");
 
   await notesPage.goto(`${baseUrl}/speaker-notes.html?edit-check=1#14`, { waitUntil: "networkidle" });
-  const editableNotes = ["Purpose", "Full script", "Room cue", "Timing", "Fallback", "Evidence boundary", "Sources"];
+  const editableNotes = ["Full script"];
   const defaultNotes = {};
   const editedNotes = {};
   for (const label of editableNotes) {
