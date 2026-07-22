@@ -10,10 +10,10 @@ const viewports = [
   { name: "laptop", width: 1280, height: 720 },
 ];
 const unifiedPalette = new Map([
-  [14, "rgb(20, 184, 241)"], [17, "rgb(20, 184, 241)"], [20, "rgb(20, 184, 241)"],
+  [14, "rgb(20, 184, 241)"], [20, "rgb(20, 184, 241)"],
   [12, "rgb(112, 71, 235)"], [19, "rgb(112, 71, 235)"], [23, "rgb(112, 71, 235)"],
   [13, "rgb(255, 212, 77)"], [16, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [21, "rgb(255, 212, 77)"], [24, "rgb(255, 212, 77)"],
-  [15, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"],
+  [15, "rgb(255, 138, 102)"], [17, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"],
 ]);
 const outputDir = mkdtempSync(join(tmpdir(), "devrelcon-deck-"));
 
@@ -49,6 +49,22 @@ function assert(condition, message) {
       if (slideId === 11) {
         await page.getByText("RESULTS VIEW IS NOT CONNECTED").waitFor();
         await page.getByText("Stage navigation skips this slide until the event results URL is added").waitFor();
+      }
+      if (slideId === 13) {
+        assert((await page.locator('.slide[data-slide="13"] h1').innerText()).trim() === "The documented first mile averaged 10 actions.", `${viewport.name}: slide 13 route-length finding is incorrect`);
+        await page.getByText("7", { exact: true }).waitFor();
+        await page.getByText("2,240", { exact: true }).waitFor();
+      }
+      if (slideId === 14) {
+        assert((await page.locator('.slide[data-slide="14"] h1').innerText()).trim() === "I found only 74 of 224 routes explicitly named first success.", `${viewport.name}: slide 14 first-success finding is incorrect`);
+        await page.getByText("150", { exact: true }).waitFor();
+        await page.getByText("56", { exact: true }).waitFor();
+      }
+      if (slideId === 15) {
+        assert((await page.locator('.slide[data-slide="15"] h1').innerText()).trim() === "I found a median of 4 documented gates per route.", `${viewport.name}: slide 15 route-condition finding is incorrect`);
+        for (const value of ["124", "103", "60"]) {
+          await page.getByText(value, { exact: true }).waitFor();
+        }
       }
       if (slideId === 8) {
         const fakegptQr = page.locator('[data-qr-frame="fakegpt"] canvas');

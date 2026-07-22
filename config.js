@@ -24,15 +24,23 @@ const CONFIG = {
   // Optional countdown on the holding slide. null hides it entirely.
   trapTimerMinutes: null,
 
-  // Counts reproduced from the frozen 205-record workshop snapshot on July 21, 2026.
+  // Counts verified against Developer Journey Atlas origin/main at 065e4fa
+  // and the live data manifest generated on July 22, 2026.
   stats: {
-    averageActions: "12.5",
-    medianActions: "10",
-    medianGates: "6",
-    totalActions: "2,569",
-    totalGates: "1,270",
-    totalAutomaticEvents: "125",
-    totalTransitions: "2,694",
+    atlasPlatforms: "224",
+    atlasSteps: "2,359",
+    atlasSources: "949",
+    averageActions: "10",
+    medianActions: "7",
+    totalActions: "2,240",
+    medianGates: "4",
+    totalGates: "1,021",
+    namedMilestones: "74",
+    demonstratedTerminals: "150",
+    timeClaims: "56",
+    credentialRoutes: "124",
+    choiceRoutes: "103",
+    waitRoutes: "60",
     blockerHypotheses: "790",
     universalHypotheses: "466",
     platformHypotheses: "324",

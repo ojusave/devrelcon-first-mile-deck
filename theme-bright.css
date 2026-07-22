@@ -2701,7 +2701,7 @@ body {
 
 /* Phase 3 research and action sequence */
 .slide--study,
-.slide--atlas-intro,
+.slide--hypotheses,
 .slide--implementation,
 .slide--closing {
   --orb: var(--aegean);
@@ -2709,14 +2709,14 @@ body {
   background: var(--sun);
 }
 
-.slide--hypotheses,
-.slide--atlas-workflow,
+.slide--composition,
 .slide--calibrate-contract {
   --orb: var(--sun);
   --ring: var(--signal);
   background: var(--sky);
 }
 
+.slide--success-research,
 .slide--examples,
 .slide--field-study {
   --orb: var(--sun);
@@ -2725,6 +2725,8 @@ body {
 }
 
 .study-surface,
+.composition-surface,
+.success-research-surface,
 .hypothesis-surface,
 .example-surface,
 .atlas-intro-surface,
@@ -2736,6 +2738,8 @@ body {
 }
 
 .study-surface .surface-heading h1,
+.composition-surface .surface-heading h1,
+.success-research-surface .surface-heading h1,
 .hypothesis-surface .surface-heading h1,
 .example-surface .surface-heading h1,
 .atlas-intro-surface .surface-heading h1,
@@ -2748,7 +2752,7 @@ body {
 }
 
 .study-surface {
-  grid-template-rows: auto 1fr auto auto;
+  grid-template-rows: auto 1fr auto;
 }
 
 .study-grid {
@@ -2784,7 +2788,7 @@ body {
 
 .study-support {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   overflow: hidden;
   border: 4px solid var(--ink);
   border-radius: 24px;
@@ -2859,6 +2863,8 @@ body {
 }
 
 .study-surface .method-boundary,
+.composition-surface .method-boundary,
+.success-research-surface .method-boundary,
 .hypothesis-surface .method-boundary,
 .example-surface .method-boundary,
 .atlas-intro-surface .method-boundary,
@@ -2866,6 +2872,94 @@ body {
 .field-study-surface .method-boundary {
   padding: 13px 18px;
   font-size: 17px;
+}
+
+.composition-surface {
+  grid-template-rows: auto 1fr auto;
+}
+
+.composition-hero {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+  border: 4px solid var(--ink);
+  border-radius: 24px;
+}
+
+.composition-hero p {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: center;
+  gap: 16px;
+  padding: 26px 32px;
+  background: #ffffff;
+}
+
+.composition-hero p + p {
+  border-left: 4px solid var(--ink);
+  background: var(--soft-yellow);
+}
+
+.composition-hero p:nth-child(3) {
+  background: #ffffff;
+}
+
+.composition-hero strong {
+  color: var(--signal);
+  font-family: var(--font-display);
+  font-size: 78px;
+  line-height: 0.9;
+}
+
+.composition-hero span {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  line-height: 1.22;
+}
+
+.success-research-surface {
+  grid-template-rows: auto 1fr auto;
+}
+
+.success-research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+}
+
+.success-research-grid article {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  padding: 30px 34px;
+  background: #ffffff;
+}
+
+.success-research-grid article + article {
+  border-left: 4px solid var(--ink);
+}
+
+.success-research-grid article:nth-child(2) {
+  background: var(--soft-blue);
+}
+
+.success-research-grid strong {
+  color: var(--signal);
+  font-family: var(--font-display);
+  font-size: 82px;
+  line-height: 0.9;
+}
+
+.success-research-grid h2 {
+  font-size: 30px;
+}
+
+.success-research-grid p {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  line-height: 1.25;
 }
 
 .hypothesis-surface {
