@@ -10,10 +10,10 @@
     <link rel="preload" href="assets/brand/render-logo-black.svg?v=1" as="image" type="image/svg+xml">
     <link rel="preload" href="assets/brand/render-logo-white.svg?v=1" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=9">
-    <link rel="stylesheet" href="theme-bright.css?v=22">
+    <link rel="stylesheet" href="theme-bright.css?v=23">
     <script defer src="config.js?v=9"></script>
     <script defer src="qrcode.js"></script>
-    <script defer src="deck.js?v=19"></script>
+    <script defer src="deck.js?v=20"></script>
   </head>
   <body>
     <div class="viewport" id="viewport">
@@ -97,7 +97,7 @@
 
         <section class="slide slide--exercise" data-slide="8" aria-label="Try the onboarding route" hidden>
           <div class="slide-heading">
-            <p class="eyebrow">8 MINUTES · Completion is not required.</p>
+            <p class="eyebrow">8 MINUTES</p>
             <h1>Try to reach the first usable result.</h1>
           </div>
           <p class="exercise-route"><strong>WORKSHOP EXERCISE</strong> The QR opens FakeGPT. Give it one small thing you want to build, then follow the prompts.</p>
@@ -113,7 +113,6 @@
                 <li>Keep your last screen open.</li>
               </ol>
               <p class="privacy-note">Do not enter personal, company, customer, card, or secret information.</p>
-              <p class="device-note">No device? Watch the room route on screen.</p>
             </div>
           </div>
         </section>
@@ -288,7 +287,7 @@
         <section class="slide slide--calibrate-product slide--unified" data-slide="20" aria-label="Calibrate product and browser SDK" hidden>
           <div class="story-surface calibrate-product-surface">
             <div class="surface-heading">
-              <p class="eyebrow">HOW CALIBRATE CAPTURES PRODUCT FRICTION · 1 / 3</p>
+              <p class="eyebrow">CALIBRATE · MAKE ONE ROUTE OBSERVABLE</p>
               <h1>I built Calibrate, a privacy-conscious onboarding signal SDK.</h1>
             </div>
             <div class="calibrate-product-grid">
@@ -326,7 +325,7 @@ const cal = calibrate({
         <section class="slide slide--calibrate-contract slide--unified" data-slide="21" aria-label="Calibrate data and privacy contract" hidden>
           <div class="story-surface calibrate-contract-surface">
             <div class="surface-heading">
-              <p class="eyebrow">HOW CALIBRATE CAPTURES PRODUCT FRICTION · 2 / 3</p>
+              <p class="eyebrow">CALIBRATE · OBSERVE WITHOUT CONTENT</p>
               <h1>It captures behavior, not content.</h1>
             </div>
             <ol class="signal-journey" aria-label="Captured onboarding journey signals">
@@ -357,34 +356,39 @@ const cal = calibrate({
           </div>
         </section>
 
-        <section class="slide slide--calibrate-delivery slide--unified" data-slide="22" aria-label="Calibrate delivery architecture and scale boundary" hidden>
-          <div class="story-surface calibrate-delivery-surface">
+        <section class="slide slide--champions slide--unified" data-slide="22" aria-label="Run the route with developer champions" hidden>
+          <div class="story-surface champion-surface">
             <div class="surface-heading">
-              <p class="eyebrow">HOW CALIBRATE CAPTURES PRODUCT FRICTION · 3 / 3</p>
-              <h1>Simple delivery, clear scale boundary.</h1>
+              <p class="eyebrow">SMALL PILOT · 3 TO 5 PEOPLE</p>
+              <h1>Run the route with your developer champions.</h1>
             </div>
-            <ol class="delivery-flow" aria-label="Calibrate event delivery flow">
-              <li><strong>Browser SDK</strong><span>DOM signals</span></li>
-              <li><strong>Local queue</strong><span>localStorage</span></li>
-              <li><strong>Batched POST</strong><span>/api/events</span></li>
-              <li><strong>Collector</strong><span>schema + dedupe</span></li>
-              <li><strong>Durable store</strong><span>SQLite or Postgres</span></li>
-              <li><strong>Use the evidence</strong><span>dashboard, export, webhook</span></li>
+            <ol class="champion-steps">
+              <li><span>1</span>Choose three to five champions who resemble the intended developer.</li>
+              <li><span>2</span>Give them the outcome, not step-by-step instructions.</li>
+              <li><span>3</span>Watch without rescuing them.</li>
+              <li><span>4</span>Record where activity changes.</li>
+              <li><span>5</span>Ask what they expected at that point.</li>
             </ol>
-            <div class="delivery-facts" aria-label="Transport behavior">
-              <p><strong>about 2 seconds</strong><span>scheduled flush</span></p>
-              <p><strong>10 events</strong><span>queue threshold</span></p>
-              <p><strong>50 events</strong><span>maximum request</span></p>
-              <p><strong>retry + sendBeacon()</strong><span>failure and page close</span></p>
+            <p class="champion-boundary">A small session finds useful questions. It does not establish a representative conversion rate.</p>
+          </div>
+        </section>
+
+        <section class="slide slide--handoff slide--unified" data-slide="23" aria-label="Bring one useful question to the route owner" hidden>
+          <div class="story-surface handoff-surface">
+            <div class="surface-heading">
+              <p class="eyebrow">ROUTE-OWNER HANDOFF</p>
+              <h1>Bring one question, not a verdict.</h1>
             </div>
-            <div class="delivery-bottom">
-              <p class="scale-boundary"><strong>Current boundary:</strong> one collector process owns the live aggregate. Horizontal ingestion needs a shared queue or aggregation layer.</p>
-              <p class="delivery-value">Teams can see where progress stopped, then decide what to inspect next.</p>
+            <div class="handoff-grid">
+              <article><p class="card-number">01</p><h2>Expected route</h2><p>The path and first useful result you agreed to test.</p></article>
+              <article><p class="card-number">02</p><h2>Observed position</h2><p>Where activity changed, without assigning a cause.</p></article>
+              <article><p class="card-number">03</p><h2>Champion context</h2><p>What they expected, tried, and found uncertain.</p></article>
+              <article><p class="card-number">04</p><h2>Next check</h2><p>One change or investigation for the owning team.</p></article>
             </div>
           </div>
         </section>
 
-        <section class="slide slide--credits slide--unified" data-slide="23" aria-label="Claim the DevRelCon Render credit code" hidden>
+        <section class="slide slide--credits slide--unified" data-slide="24" aria-label="Claim the DevRelCon Render credit code" hidden>
           <div class="story-surface credit-surface">
             <div class="credit-copy">
               <p class="eyebrow">OPTIONAL WORKSHOP RESOURCE</p>
@@ -404,15 +408,15 @@ const cal = calibrate({
           </div>
         </section>
 
-        <section class="slide slide--closing slide--unified" data-slide="24" aria-label="Monday action" hidden>
+        <section class="slide slide--closing slide--unified" data-slide="25" aria-label="Monday action" hidden>
           <div class="story-surface closing-surface">
             <div class="closing-action">
               <p class="eyebrow">ON MONDAY</p>
               <h1>Pick one route.</h1>
               <ol>
-                <li>Define its first-success outcome and observable positions.</li>
-                <li>Put five intended developers through it.</li>
-                <li>Bring the stopping points and missing evidence to the team that owns the route.</li>
+                <li>Define its first-success outcome.</li>
+                <li>Name the team that owns the route.</li>
+                <li>Schedule the next observation.</li>
               </ol>
               <p class="contact" data-contact></p>
             </div>

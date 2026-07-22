@@ -13,7 +13,7 @@ const files = {
   theme: readFileSync(resolve(root, "theme-bright.css"), "utf8"),
 };
 
-const expectedOrder = Array.from({ length: 24 }, (_, index) => index + 1);
+const expectedOrder = Array.from({ length: 25 }, (_, index) => index + 1);
 const actualOrder = [...files.html.matchAll(/data-slide="(\d+)"/g)].map((match) => Number(match[1]));
 const errors = [];
 
@@ -26,7 +26,7 @@ function requireCondition(condition, message) {
 requireCondition(JSON.stringify(actualOrder) === JSON.stringify(expectedOrder), `Unexpected slide order: ${actualOrder.join(", ")}`);
 requireCondition(new Set(actualOrder).size === actualOrder.length, "Slide IDs must be unique");
 requireCondition(actualOrder.every((id, index) => id === index + 1), "Slide IDs must match their chronological position");
-requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).length === 13, "The thirteen evidence, resource, workflow, credit, and closing slides must use the shared story surface");
+requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).length === 14, "The fourteen evidence, resource, workshop-action, credit, and closing slides must use the shared story surface");
 
 const noteIds = [...files.notes.matchAll(/^\s+(\d+): \{/gm)].map((match) => Number(match[1]));
 requireCondition(JSON.stringify(noteIds) === JSON.stringify(expectedOrder), `Speaker notes do not match slide order: ${noteIds.join(", ")}`);
@@ -39,12 +39,13 @@ requireCondition((files.notes.match(/• /g) || []).length >= expectedOrder.leng
 requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 5, "Purpose, talking points, transition, room cue, and fallback must be editable");
 requireCondition(files.notesHtml.includes("Save notes"), "Speaker notes need an explicit save action");
 requireCondition(files.notesHtml.includes("Restore defaults"), "Speaker notes need a restore-defaults action");
-requireCondition(files.notesView.includes("devrelcon.presenter.notes.v3"), "Speaker-note edits must use versioned browser storage");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v4"), "Speaker-note edits must use versioned browser storage");
 requireCondition(files.notesView.includes("LEGACY_SLIDE_ID_MAP"), "Speaker-note edits must migrate from the previous slide numbering");
-requireCondition(files.notesView.includes("PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve slide 23 edits when the closing slide moves to slide 24");
+requireCondition(files.notesView.includes("PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve current slide edits when credits and closing move");
+requireCondition(files.notesView.includes("SECOND_PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve the earlier closing-slide migration");
 
 for (const requiredText of [
-  "Completion is not required",
+  "8 MINUTES",
   "It does not tell us why",
   "A stopping point is not an explanation",
   "151 / 205",
@@ -66,19 +67,16 @@ for (const requiredText of [
   "83 of 205 routes named the first-success milestone",
   "did not present one unambiguous default route for the selected intent",
   "Five people form a bounded pilot, not a representative sample",
-  "HOW CALIBRATE CAPTURES PRODUCT FRICTION",
+  "CALIBRATE · MAKE ONE ROUTE OBSERVABLE",
   "I built Calibrate, a privacy-conscious onboarding signal SDK",
   "It captures behavior, not content",
-  "Simple delivery, clear scale boundary",
+  "Run the route with your developer champions",
+  "A small session finds useful questions",
+  "Bring one question, not a verdict",
   "@usecalibrate/browser",
   "Autocapture",
   "data-fm",
   "No form values",
-  "sendBeacon()",
-  "/api/events",
-  "10 events",
-  "50 events",
-  "shared queue or aggregation layer",
   "not yet published to npm",
   "Claim your Render credit code",
   "The portal gives you a promotional credit code",

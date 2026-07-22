@@ -1,4 +1,4 @@
-const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+const SPEAKER_ORDER = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
 
 const SPEAKER_NOTES = {
   1: {
@@ -244,24 +244,35 @@ const SPEAKER_NOTES = {
 • This tells a team where activity changed. It still does not tell the team why.`,
     watch: "2 minutes. Ask which identifier they would set with data-fm in their own route. Listen for a stable step name, not user content.",
     fallback: "If privacy questions take over, state the three boundaries on screen and offer the strict event schema for inspection after the session.",
-    transition: "Those small events are useful only if the delivery path survives ordinary browser exits and ordinary network failure.",
+    transition: "The dashboard can show us where activity changed. It cannot tell us what the developer expected. For that, we need to watch and ask.",
   },
   22: {
-    purpose: "Show how Calibrate delivers events today, then state the exact boundary before discussing scale.",
-    say: `• The browser writes events to a localStorage outbox first. That protects short bursts and gives retries somewhere to start.
-• A scheduled flush runs after about two seconds. Reaching ten queued events or recording a page or shipped event triggers an immediate flush. Each request contains at most 50 events.
-• Delivery is an ordinary HTTP POST to /api/events. Failed requests retry, and pagehide uses sendBeacon to drain pending batches when the browser allows it. There is no WebSocket requirement and no guarantee that a closing browser will deliver every event.
-• The collector validates the closed schema, deduplicates session sequence numbers, writes through the configured store, and updates funnel and field aggregates.
-• Teams can inspect the dashboard, export JSONL, or configure an optional webhook. The current webhook fan-out is awaited during ingestion, even though destination failures do not reject the accepted batch.
-• Here is the honest scale boundary: the current live aggregate belongs to one collector process. Postgres gives durable storage and replay, but it does not make several processes share one live aggregate.
-• Horizontal ingestion therefore needs a shared queue or aggregation layer and asynchronous downstream processing. That is the next architecture step, not a box I can draw and declare shipped.
-• Horizontal scalability is not achieved by drawing three identical boxes. I checked.
-• The useful outcome today is modest: see where progress stopped, then decide what to inspect next.`,
-    watch: "2 minutes. Keep the sequence at browser, queue, POST, collector, store, use. Do not narrate every implementation detail unless the room asks.",
-    fallback: "If the architecture diagram is unreadable, use the six labels only. If delivery is challenged, say browser exit delivery is best effort and move on.",
-    transition: "Before the Monday action, I have one optional workshop resource: the event credit code.",
+    purpose: "Use developer champions to add the context that route telemetry cannot provide.",
+    say: `• Choose three to five champions who resemble the developer this route is meant to serve. Do not recruit only experts who already speak the platform's internal language.
+• Give them the outcome, not the route. If I tell them every turn, I have tested my ability to give directions.
+• Watch the attempt before asking questions. Do not coach them through the route, and do not replace observation with a feedback survey.
+• Calibrate can show where activity changed. It cannot tell us what the developer expected or why the next step stopped feeling worthwhile.
+• After the attempt, ask what they expected, what they tried, and what made the next step uncertain or no longer worth it.
+• Use fake or approved test data. Do not put customer, company, card, or secret information into the session.
+• Three to five people form a bounded pilot, not a representative sample or a conversion benchmark.
+• Bring the route owner one observed stopping point, the champions' explanations, and one next change or investigation.`,
+    watch: "3 minutes to explain the method. During a real pilot, allow enough time for the route plus a short debrief. Watch for attendees choosing internal experts instead of intended users.",
+    fallback: "If attendees cannot recruit champions immediately, ask them to name three suitable people and schedule one 20-minute observation before changing the route.",
+    transition: "Now we have the documented route, the observed position, and the developer's explanation. That is enough to take one useful question to the team that owns the route.",
   },
   23: {
+    purpose: "Turn the documented route, observed position, and champion context into a bounded route-owner handoff.",
+    say: `• Bring the expected route and the developer-visible first-success outcome.
+• Show the position where activity changed. Describe what happened without assigning a cause.
+• Add what the champions expected, tried, and found uncertain. Keep disagreements visible instead of forcing one tidy explanation.
+• Ask the owning team for one next check, change, or observation. Do not arrive with a verdict about the entire onboarding system.
+• The route owner decides what changes. DevRel supplies the evidence, the developer language, and the follow-up question.
+• If the evidence is still thin, say that. A useful question is a better handoff than a confident guess.`,
+    watch: "2 minutes. Ask one attendee to name the owner of their route and the single question they would bring to that person.",
+    fallback: "If ownership is unclear, make identifying the route owner the next action. Do not let an unowned route become a fake cross-functional initiative.",
+    transition: "That is the practical handoff. The next slide is an optional workshop resource, not another required step.",
+  },
+  24: {
     purpose: "Explain exactly what the credit QR does without implying an eligibility screen or deployment workflow.",
     say: `• This is optional. You can do the workshop follow-up without deploying anything.
 • The QR opens the DevRelCon claim portal. It does not connect a repository or deploy an application.
@@ -274,12 +285,12 @@ const SPEAKER_NOTES = {
     fallback: "If the portal is unavailable, tell attendees the link is in the deck README and continue. Do not promise availability or timing.",
     transition: "The credit is optional. The Monday action is not.",
   },
-  24: {
+  25: {
     purpose: "End with one action the attendee can start without a new program or framework, then leave an optional path to Render's open roles.",
     say: `• Pick one real first-mile route, not the entire onboarding system.
-• Define its first-success outcome and the positions that make progress visible.
-• Watch five intended developers attempt it without rescuing them.
-• Bring the stopping points and missing evidence to the team that owns the route.
+• Define its first-success outcome in language the developer can recognize.
+• Name the team that owns the route and schedule the next observation.
+• Use the champion session and route-owner handoff we just covered. Do not replace them with a new analytics program.
 • Do not promise a diagnosis. Bring one clearer question and one next observation.
 • Please do not return on Monday with a transformation program and a 46-tab spreadsheet.
 • Render is hiring. The QR goes to our current openings through my referral link.
