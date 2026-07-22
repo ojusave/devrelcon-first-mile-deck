@@ -44,8 +44,8 @@ function assert(condition, message) {
         await dashboard.getByText("What happened in this route?").waitFor();
       }
       if (slideId === 11) {
-        await page.getByText("REAL-TIME RESULTS EMBED HERE").waitFor();
-        await page.getByText("set CONFIG.resultsUrl").waitFor();
+        await page.getByText("RESULTS VIEW IS NOT CONNECTED").waitFor();
+        await page.getByText("Stage navigation skips this slide until the event results URL is added").waitFor();
       }
       if (slideId === 23) {
         const creditQr = page.locator('[data-qr-frame="credits"] canvas');
@@ -139,6 +139,31 @@ function assert(condition, message) {
       assert(state.unnamedMedia.length === 0, `${viewport.name} slide ${slideId}: unnamed media ${state.unnamedMedia.join(", ")}`);
       assert(state.clipped.length === 0, `${viewport.name} slide ${slideId}: clipped ${JSON.stringify(state.clipped)}`);
       await page.screenshot({ path: join(outputDir, `${viewport.name}-${String(slideId).padStart(2, "0")}.png`) });
+
+      const fragmentCount = await page.locator(`.slide[data-slide="${slideId}"] .fragment`).count();
+      for (let fragmentState = 1; fragmentState <= fragmentCount; fragmentState += 1) {
+        await page.waitForTimeout(650);
+        const revealState = await page.evaluate(({ expectedId, expectedState }) => {
+          const slide = document.querySelector(`.slide[data-slide="${expectedId}"]`);
+          const fragments = [...slide.querySelectorAll(".fragment")];
+          const currentArt = [...slide.querySelectorAll("[data-art-fragment].is-current")]
+            .map((element) => Number(element.dataset.artFragment));
+          return {
+            shown: Number(slide.dataset.fragmentsShown),
+            visible: fragments.filter((fragment) => fragment.classList.contains("is-visible")).length,
+            current: fragments.filter((fragment) => fragment.classList.contains("is-current")).length,
+            currentArt,
+            expectedState,
+          };
+        }, { expectedId: slideId, expectedState: fragmentState });
+        assert(revealState.shown === fragmentState, `${viewport.name} slide ${slideId}: fragment state ${revealState.shown}, expected ${fragmentState}`);
+        assert(revealState.visible === fragmentState && revealState.current === 1, `${viewport.name} slide ${slideId}: invalid visible fragment state ${JSON.stringify(revealState)}`);
+        if ([4, 5, 6].includes(slideId)) {
+          assert(revealState.currentArt.length === 1 && revealState.currentArt[0] === fragmentState, `${viewport.name} slide ${slideId}: artwork did not follow fragment ${fragmentState}`);
+        }
+        await page.screenshot({ path: join(outputDir, `${viewport.name}-${String(slideId).padStart(2, "0")}-fragment-${fragmentState}.png`) });
+        if (fragmentState < fragmentCount) await page.keyboard.press("ArrowRight");
+      }
     }
 
     await page.goto(`${baseUrl}/#8`, { waitUntil: "networkidle" });
@@ -173,6 +198,14 @@ function assert(condition, message) {
     await page.mouse.click(viewport.width * 0.2, viewport.height / 2);
     assert((await page.url()).endsWith("#9"), `${viewport.name}: dashboard left-side click did not reverse`);
 
+    await page.goto(`${baseUrl}/#10`, { waitUntil: "networkidle" });
+    await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
+    await page.waitForURL(/#12$/);
+    assert((await page.url()).endsWith("#12"), `${viewport.name}: unconfigured results slide was not skipped going forward`);
+    await page.mouse.click(viewport.width * 0.2, viewport.height / 2);
+    await page.waitForURL(/#10$/);
+    assert((await page.url()).endsWith("#10"), `${viewport.name}: unconfigured results slide was not skipped going backward`);
+
     if (viewport.name === "projector") {
       await page.goto(`${baseUrl}/#14`, { waitUntil: "networkidle" });
       const notesPage = await context.newPage();
@@ -182,6 +215,12 @@ function assert(condition, message) {
       await notesPage.getByText("Slide 15").waitFor();
       await notesPage.getByRole("button", { name: "Previous" }).click();
       await page.waitForURL(/#14$/);
+
+      await page.goto(`${baseUrl}/#10`, { waitUntil: "networkidle" });
+      await notesPage.goto(`${baseUrl}/speaker-notes.html#10`, { waitUntil: "networkidle" });
+      await notesPage.getByRole("button", { name: "Next" }).click();
+      await page.waitForURL(/#12$/);
+      await notesPage.getByText("Slide 12").waitFor();
       await notesPage.close();
     }
 
@@ -204,28 +243,46 @@ function assert(condition, message) {
   for (const slideId of slideIds) {
     await notesPage.goto(`${baseUrl}/speaker-notes.html?check=${slideId}#${slideId}`, { waitUntil: "networkidle" });
     await notesPage.locator("[data-note-slide]").getByText(String(slideId), { exact: true }).waitFor();
+    assert((await notesPage.getByLabel("Timing and room cue").inputValue()).trim().length > 0, `speaker notes slide ${slideId}: missing timing and room cue`);
+    assert((await notesPage.getByLabel("Fallback").inputValue()).trim().length > 0, `speaker notes slide ${slideId}: missing fallback`);
     const notesFit = await notesPage.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight);
     assert(notesFit, `speaker notes slide ${slideId}: notes require scrolling at 1280x720`);
-    if (slideId === 24) {
-      await notesPage.screenshot({ path: join(outputDir, "speaker-notes-24.png") });
+    const noteFieldsAreUsable = await notesPage.locator("textarea").evaluateAll((fields) => fields.every((field) => {
+      if (field.scrollHeight <= field.clientHeight) return true;
+      return getComputedStyle(field).overflowY === "auto";
+    }));
+    assert(noteFieldsAreUsable, `speaker notes slide ${slideId}: overflowing note field is not independently scrollable`);
+    if ([8, 16, 22, 24].includes(slideId)) {
+      await notesPage.screenshot({ path: join(outputDir, `speaker-notes-${String(slideId).padStart(2, "0")}.png`) });
     }
   }
 
   await notesPage.goto(`${baseUrl}/speaker-notes.html?edit-check=1#14`, { waitUntil: "networkidle" });
-  const talkingPoints = notesPage.getByLabel("Talking points");
-  const defaultTalkingPoints = await talkingPoints.inputValue();
-  const editedTalkingPoints = `${defaultTalkingPoints}\n• Browser-local edit test.`;
-  await talkingPoints.fill(editedTalkingPoints);
+  const editableNotes = ["Purpose", "Talking points", "Transition", "Timing and room cue", "Fallback"];
+  const defaultNotes = {};
+  const editedNotes = {};
+  for (const label of editableNotes) {
+    const field = notesPage.getByLabel(label);
+    defaultNotes[label] = await field.inputValue();
+    editedNotes[label] = `${defaultNotes[label]}\nBrowser-local ${label.toLowerCase()} edit test.`;
+    await field.fill(editedNotes[label]);
+  }
   await notesPage.getByRole("status").getByText("Unsaved edits").waitFor();
   await notesPage.getByRole("button", { name: "Save notes" }).click();
   await notesPage.getByRole("status").getByText("Saved in this browser").waitFor();
   await notesPage.reload({ waitUntil: "networkidle" });
-  assert(await notesPage.getByLabel("Talking points").inputValue() === editedTalkingPoints, "speaker notes: saved edit did not survive reload");
+  for (const label of editableNotes) {
+    assert(await notesPage.getByLabel(label).inputValue() === editedNotes[label], `speaker notes: saved ${label.toLowerCase()} edit did not survive reload`);
+  }
   notesPage.once("dialog", (dialog) => dialog.accept());
   await notesPage.getByRole("button", { name: "Restore defaults" }).click();
-  assert(await notesPage.getByLabel("Talking points").inputValue() === defaultTalkingPoints, "speaker notes: restore defaults did not restore source note");
+  for (const label of editableNotes) {
+    assert(await notesPage.getByLabel(label).inputValue() === defaultNotes[label], `speaker notes: restore defaults did not restore ${label.toLowerCase()}`);
+  }
   await notesPage.reload({ waitUntil: "networkidle" });
-  assert(await notesPage.getByLabel("Talking points").inputValue() === defaultTalkingPoints, "speaker notes: restored default did not survive reload");
+  for (const label of editableNotes) {
+    assert(await notesPage.getByLabel(label).inputValue() === defaultNotes[label], `speaker notes: restored ${label.toLowerCase()} default did not survive reload`);
+  }
 
   const previousNote = {
     purpose: "Saved purpose for the previous closing slide.",

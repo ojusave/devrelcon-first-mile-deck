@@ -968,14 +968,28 @@ body {
 }
 
 .slide--exercise {
-  grid-template-rows: auto 1fr;
-  gap: 42px;
+  grid-template-rows: auto auto 1fr;
+  gap: 22px;
   padding: 70px 96px 100px;
   background: var(--sun);
 }
 
 .slide--exercise .slide-heading h1 {
   font-size: 76px;
+}
+
+.exercise-route {
+  padding: 16px 22px;
+  border: 4px solid var(--ink);
+  border-radius: 18px;
+  font-family: var(--font-mono);
+  font-size: 22px;
+  line-height: 1.3;
+  background: var(--soft-coral);
+}
+
+.exercise-route strong {
+  color: var(--signal);
 }
 
 .exercise-grid {
@@ -1600,11 +1614,21 @@ body {
 [data-slide="12"] .story-surface,
 [data-slide="13"] .story-surface,
 [data-slide="14"] .story-surface,
-[data-slide="17"] .story-surface,
-[data-slide="20"] .story-surface,
-[data-slide="21"] .story-surface,
-[data-slide="22"] .story-surface {
+[data-slide="20"] .story-surface {
   grid-template-rows: auto 1fr;
+}
+
+[data-slide="17"] .story-surface {
+  grid-template-rows: auto 1fr auto;
+}
+
+[data-slide="21"] .story-surface {
+  grid-template-rows: auto auto 1fr;
+}
+
+[data-slide="22"] .story-surface {
+  grid-template-rows: auto auto auto auto;
+  align-content: center;
 }
 
 [data-slide="18"] .story-surface {
@@ -1778,11 +1802,24 @@ body {
   grid-template-columns: 80px 1fr;
   gap: 20px;
   align-items: center;
-  min-height: 116px;
+  min-height: 142px;
   padding: 19px 28px;
   border: 0;
   border-radius: 0;
   box-shadow: none;
+}
+
+.method-boundary,
+.success-action,
+.resource-handoff {
+  font-family: var(--font-mono);
+}
+
+.method-boundary {
+  padding: 17px 22px;
+  border-radius: 16px;
+  font-size: 21px;
+  background: var(--soft-coral);
 }
 
 .story-surface .method-grid article + article {
@@ -1891,6 +1928,7 @@ body {
 
 .story-surface .number-grid {
   grid-template-columns: 1fr 1fr;
+  align-self: center;
 }
 
 .story-surface .ambiguity-grid {
@@ -1919,7 +1957,16 @@ body {
 }
 
 .story-surface .number-label {
-  font-size: 22px;
+  font-size: 24px;
+}
+
+.success-action {
+  padding: 18px 22px;
+  border-radius: 16px;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1.25;
+  background: var(--signal);
 }
 
 .story-surface .ambiguity-grid .number-card {
@@ -1964,6 +2011,12 @@ body {
   max-width: 1050px;
   font-size: 71px;
   line-height: 1;
+}
+
+.resource-handoff {
+  max-width: 1040px;
+  font-size: 24px;
+  line-height: 1.35;
 }
 
 .story-surface .resource-copy ol {
@@ -2042,15 +2095,9 @@ body {
   border-radius: 20px;
   color: #ffffff;
   font-family: var(--font-mono);
-  font-size: 19px;
+  font-size: 22px;
   line-height: 1.55;
   background: var(--ink);
-}
-
-.calibrate-code-panel .api-boundary {
-  font-family: var(--font-mono);
-  font-size: 17px;
-  line-height: 1.35;
 }
 
 .calibrate-capabilities {
@@ -2065,7 +2112,7 @@ body {
 .calibrate-capabilities article {
   display: grid;
   align-content: start;
-  gap: 12px;
+  gap: 16px;
   min-width: 0;
   padding: 28px 30px;
 }
@@ -2084,14 +2131,14 @@ body {
 }
 
 .calibrate-capabilities h2 {
-  font-size: 29px;
+  font-size: 34px;
   line-height: 1.05;
 }
 
 .calibrate-capabilities p {
   font-family: var(--font-mono);
-  font-size: 17px;
-  line-height: 1.36;
+  font-size: 23px;
+  line-height: 1.3;
 }
 
 .signal-journey,
@@ -2116,7 +2163,7 @@ body {
   border-radius: 20px;
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 17px;
+  font-size: 21px;
   line-height: 1.22;
   background: #ffffff;
 }
@@ -2162,7 +2209,7 @@ body {
 
 .field-contract > p:last-child {
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 21px;
   line-height: 1.35;
 }
 
@@ -2194,22 +2241,22 @@ body {
   margin: 0;
   padding-left: 28px;
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 21px;
   line-height: 1.3;
 }
 
 .delivery-flow li {
   align-content: center;
   gap: 7px;
-  min-height: 112px;
+  min-height: 170px;
 }
 
 .delivery-flow strong {
-  font-size: 19px;
+  font-size: 22px;
 }
 
 .delivery-flow span {
-  font-size: 14px;
+  font-size: 17px;
 }
 
 .delivery-facts {
@@ -2225,6 +2272,7 @@ body {
   display: grid;
   gap: 5px;
   min-width: 0;
+  min-height: 96px;
   padding: 18px 20px;
   font-family: var(--font-mono);
 }
@@ -2234,11 +2282,11 @@ body {
 }
 
 .delivery-facts strong {
-  font-size: 19px;
+  font-size: 21px;
 }
 
 .delivery-facts span {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .delivery-bottom {
@@ -2251,11 +2299,11 @@ body {
 .delivery-value {
   display: grid;
   align-content: center;
-  min-height: 112px;
+  min-height: 130px;
   padding: 20px 24px;
   border-radius: 20px;
   font-family: var(--font-mono);
-  font-size: 17px;
+  font-size: 19px;
   line-height: 1.32;
 }
 
