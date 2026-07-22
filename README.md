@@ -11,7 +11,7 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | Slides | What you will see | Why it is there |
 | --- | --- | --- |
 | 1 to 7 | Odysseus takes ten years to get home after Troy. | A clear destination does not guarantee a usable route. Developers also arrive with a destination of their own. |
-| 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. Slide 11 is reserved for event-specific results and is skipped automatically until its URL is configured. |
+| 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. The dashboard shows distinct-session movement between route stages, with backtracking separate from forward movement. Slide 11 is reserved for event-specific results and is skipped automatically until its URL is configured. |
 | 12 to 13 | The deck separates the documented route, observed behavior, and the explanation that is still missing. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
 | 14 to 18 | Research from 205 documented developer onboarding routes. | See where route choice and unclear success boundaries appear in the inspected documentation. |
 | 19 to 24 | The First-Mile Atlas, a three-slide Calibrate section, an optional attendee credit, and a Monday action. | Move from a documented comparison to privacy-conscious product signals, then take one bounded action. |
