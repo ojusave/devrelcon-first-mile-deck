@@ -1,10 +1,11 @@
 (function () {
   "use strict";
 
-  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v5";
-  const PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v4";
-  const SECOND_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v3";
-  const THIRD_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
+  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v6";
+  const PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v5";
+  const SECOND_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v4";
+  const THIRD_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v3";
+  const FOURTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
   const LEGACY_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v1";
   const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v5";
   const PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v4";
@@ -38,10 +39,13 @@
   const channel = "BroadcastChannel" in window ? new BroadcastChannel("devrelcon-deck") : null;
   const slideElement = document.querySelector("[data-note-slide]");
   const purposeElement = document.querySelector("[data-note-purpose]");
-  const sayElement = document.querySelector("[data-note-say]");
-  const transitionElement = document.querySelector("[data-note-transition]");
-  const watchElement = document.querySelector("[data-note-watch]");
+  const scriptElement = document.querySelector("[data-note-script]");
+  const roomCueElement = document.querySelector("[data-note-room-cue]");
+  const timingElement = document.querySelector("[data-note-timing]");
   const fallbackElement = document.querySelector("[data-note-fallback]");
+  const evidenceBoundaryElement = document.querySelector("[data-note-evidence-boundary]");
+  const sourcesElement = document.querySelector("[data-note-sources]");
+  const metadataElement = document.querySelector(".metadata");
   const statusElement = document.querySelector("[data-note-status]");
   let currentSlide = 1;
   let renderedNote = null;
@@ -64,57 +68,71 @@
     return Math.max(0, Math.min(nextIndex, SPEAKER_ORDER.length - 1));
   }
 
+  function normalizeNote(note, slideId) {
+    const defaults = SPEAKER_NOTES[slideId];
+    const previousScript = [note?.say, note?.transition].filter(Boolean).join("\n\n");
+    return {
+      purpose: note?.purpose ?? defaults.purpose,
+      script: note?.script ?? (previousScript || defaults.script),
+      roomCue: note?.roomCue ?? note?.watch ?? defaults.roomCue,
+      timing: note?.timing ?? defaults.timing,
+      fallback: note?.fallback ?? defaults.fallback,
+      evidenceBoundary: note?.evidenceBoundary ?? defaults.evidenceBoundary,
+      sources: note?.sources ?? defaults.sources,
+    };
+  }
+
+  function migrateNotes(notes, slideIdMap) {
+    if (!notes || typeof notes !== "object" || Array.isArray(notes)) {
+      return {};
+    }
+    const migrated = {};
+    for (const [storedId, note] of Object.entries(notes)) {
+      const nextId = slideIdMap ? slideIdMap[storedId] : Number(storedId);
+      if (SPEAKER_ORDER.includes(nextId) && note && typeof note === "object" && !Array.isArray(note)) {
+        migrated[nextId] = normalizeNote(note, nextId);
+      }
+    }
+    return migrated;
+  }
+
+  function saveMigration(migrated) {
+    if (Object.keys(migrated).length > 0) {
+      window.localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(migrated));
+    }
+    return migrated;
+  }
+
   function readSavedNotes() {
     try {
       const current = window.localStorage.getItem(NOTES_STORAGE_KEY);
       if (current) {
         const stored = JSON.parse(current);
-        return stored && typeof stored === "object" && !Array.isArray(stored) ? stored : {};
+        return migrateNotes(stored);
       }
 
       const previous = JSON.parse(window.localStorage.getItem(PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      if (previous && typeof previous === "object" && !Array.isArray(previous)) {
-        const migrated = {};
-        for (const [previousId, note] of Object.entries(previous)) {
-          const nextId = PREVIOUS_SLIDE_ID_MAP[previousId];
-          if (nextId && note && typeof note === "object" && !Array.isArray(note)) {
-            migrated[nextId] = note;
-          }
-        }
-        if (Object.keys(migrated).length > 0) {
-          window.localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(migrated));
-          return migrated;
-        }
+      const previousMigration = migrateNotes(previous);
+      if (Object.keys(previousMigration).length > 0) {
+        return saveMigration(previousMigration);
       }
 
       const secondPrevious = JSON.parse(window.localStorage.getItem(SECOND_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      if (secondPrevious && typeof secondPrevious === "object" && !Array.isArray(secondPrevious)) {
-        const migrated = {};
-        for (const [previousId, note] of Object.entries(secondPrevious)) {
-          const nextId = SECOND_PREVIOUS_SLIDE_ID_MAP[previousId];
-          if (nextId && note && typeof note === "object" && !Array.isArray(note)) {
-            migrated[nextId] = note;
-          }
-        }
-        if (Object.keys(migrated).length > 0) {
-          window.localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(migrated));
-          return migrated;
-        }
+      const secondPreviousMigration = migrateNotes(secondPrevious, PREVIOUS_SLIDE_ID_MAP);
+      if (Object.keys(secondPreviousMigration).length > 0) {
+        return saveMigration(secondPreviousMigration);
       }
 
       const thirdPrevious = JSON.parse(window.localStorage.getItem(THIRD_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      if (thirdPrevious && typeof thirdPrevious === "object" && !Array.isArray(thirdPrevious)) {
-        const migrated = {};
-        for (const [previousId, note] of Object.entries(thirdPrevious)) {
-          const nextId = THIRD_PREVIOUS_SLIDE_ID_MAP[previousId];
-          if (nextId && note && typeof note === "object" && !Array.isArray(note)) {
-            migrated[nextId] = note;
-          }
-        }
-        if (Object.keys(migrated).length > 0) {
-          window.localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(migrated));
-          return migrated;
-        }
+      const thirdPreviousMigration = migrateNotes(thirdPrevious, SECOND_PREVIOUS_SLIDE_ID_MAP);
+      if (Object.keys(thirdPreviousMigration).length > 0) {
+        return saveMigration(thirdPreviousMigration);
+      }
+
+      const fourthPrevious = JSON.parse(window.localStorage.getItem(FOURTH_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
+      const fourthPreviousMigration = migrateNotes(fourthPrevious, THIRD_PREVIOUS_SLIDE_ID_MAP);
+      if (Object.keys(fourthPreviousMigration).length > 0) {
+        return saveMigration(fourthPreviousMigration);
       }
 
       const legacy = JSON.parse(window.localStorage.getItem(LEGACY_NOTES_STORAGE_KEY) || "{}");
@@ -122,17 +140,7 @@
         return {};
       }
 
-      const migrated = {};
-      for (const [legacyId, note] of Object.entries(legacy)) {
-        const nextId = LEGACY_SLIDE_ID_MAP[legacyId];
-        if (nextId && note && typeof note === "object" && !Array.isArray(note)) {
-          migrated[nextId] = note;
-        }
-      }
-      if (Object.keys(migrated).length > 0) {
-        window.localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(migrated));
-      }
-      return migrated;
+      return saveMigration(migrateNotes(legacy, LEGACY_SLIDE_ID_MAP));
     } catch (_error) {
       return {};
     }
@@ -149,19 +157,23 @@
   function currentDraft() {
     return {
       purpose: purposeElement.value,
-      say: sayElement.value,
-      transition: transitionElement.value,
-      watch: watchElement.value,
+      script: scriptElement.value,
+      roomCue: roomCueElement.value,
+      timing: timingElement.value,
       fallback: fallbackElement.value,
+      evidenceBoundary: evidenceBoundaryElement.value,
+      sources: sourcesElement.value,
     };
   }
 
   function notesMatch(left, right) {
     return left.purpose === right.purpose
-      && left.say === right.say
-      && left.transition === right.transition
-      && left.watch === right.watch
-      && left.fallback === right.fallback;
+      && left.script === right.script
+      && left.roomCue === right.roomCue
+      && left.timing === right.timing
+      && left.fallback === right.fallback
+      && left.evidenceBoundary === right.evidenceBoundary
+      && left.sources === right.sources;
   }
 
   function hasUnsavedChanges() {
@@ -203,10 +215,16 @@
     const note = noteFor(currentSlide);
     slideElement.textContent = String(currentSlide);
     purposeElement.value = note.purpose;
-    sayElement.value = note.say;
-    transitionElement.value = note.transition;
-    watchElement.value = note.watch;
+    scriptElement.value = note.script;
+    roomCueElement.value = note.roomCue;
+    timingElement.value = note.timing;
     fallbackElement.value = note.fallback;
+    evidenceBoundaryElement.value = note.evidenceBoundary;
+    sourcesElement.value = note.sources;
+    for (const field of [purposeElement, scriptElement, roomCueElement, timingElement, fallbackElement, evidenceBoundaryElement, sourcesElement]) {
+      field.scrollTop = 0;
+    }
+    metadataElement.scrollTop = 0;
     renderedNote = { ...note };
     statusElement.textContent = status;
     window.history.replaceState(null, "", `#${currentSlide}`);
@@ -234,7 +252,7 @@
     showNote(currentSlide, "Deck defaults restored");
   }
 
-  for (const field of [purposeElement, sayElement, transitionElement, watchElement, fallbackElement]) {
+  for (const field of [purposeElement, scriptElement, roomCueElement, timingElement, fallbackElement, evidenceBoundaryElement, sourcesElement]) {
     field.addEventListener("input", () => {
       statusElement.textContent = "Unsaved edits";
     });
