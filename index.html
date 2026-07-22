@@ -167,7 +167,7 @@
                 <p>one selected developer goal and one official documented route per platform</p>
               </div>
               <div class="study-support">
-                <article><strong data-stat="atlasSteps"></strong><span>documented route steps</span></article>
+                <article><strong data-stat="atlasSteps"></strong><span>documented steps across primary and candidate routes</span></article>
                 <article><strong data-stat="atlasSources"></strong><span>official sources inspected</span></article>
               </div>
             </div>
@@ -179,11 +179,11 @@
           <div class="story-surface composition-surface">
             <div class="surface-heading">
               <p class="source-label">WHAT I FOUND · FIRST-SUCCESS CLARITY</p>
-              <h1>Of the 224 routes I examined, only <span data-stat="namedMilestones"></span> explicitly named first success.</h1>
+              <h1>Only <span data-stat="namedMilestoneRate"></span> explicitly named first success.</h1>
             </div>
             <div class="composition-hero">
-              <p><strong data-stat="namedMilestones"></strong><span>explicitly named the first-success milestone</span></p>
-              <p><strong data-stat="demonstratedTerminals"></strong><span>showed a terminal result without naming the milestone</span></p>
+              <p><strong data-stat="namedMilestoneRate"></strong><span>explicitly named the first-success milestone</span></p>
+              <p><strong data-stat="demonstratedTerminalRate"></strong><span>showed a terminal result without naming the milestone</span></p>
             </div>
             <p class="method-boundary">A demonstrated endpoint is not the same as a clearly named milestone. This finding describes documentation, not completion behavior.</p>
           </div>
@@ -196,9 +196,9 @@
               <h1>I documented <span data-stat="totalGates"></span> gates. The median route had <span data-stat="medianGates"></span>.</h1>
             </div>
             <div class="success-research-grid">
-              <article><strong data-stat="credentialRoutes"></strong><h2>of 224 routes</h2><p>included at least one credential requirement</p></article>
-              <article><strong data-stat="choiceRoutes"></strong><h2>of 224 routes</h2><p>included at least one documented choice</p></article>
-              <article><strong data-stat="waitRoutes"></strong><h2>of 224 routes</h2><p>included at least one documented wait</p></article>
+              <article><strong data-stat="credentialRouteRate"></strong><p>included at least one credential requirement</p></article>
+              <article><strong data-stat="choiceRouteRate"></strong><p>included at least one documented choice</p></article>
+              <article><strong data-stat="waitRouteRate"></strong><p>included at least one documented wait</p></article>
             </div>
             <p class="method-boundary">A gate is a documented requirement or transition. These counts overlap and do not prove difficulty, drop-off, or cause.</p>
           </div>
@@ -265,17 +265,34 @@
               <article><p class="card-number">02</p><h2>Calibrate</h2><p>Records named positions and bounded route events.</p></article>
               <article><p class="card-number">03</p><h2>Human debrief</h2><p>Supplies what the developer expected and tried.</p></article>
             </div>
-            <div class="calibrate-cta">
-              <p>Ask engineering and product to evaluate one bounded onboarding route.</p>
-              <div class="mini-resource-qr">
-                <div class="qr-frame qr-frame--takeaway" data-qr-frame="firstmile" data-qr-size="220" aria-live="off"></div>
+          </div>
+        </section>
+
+        <section class="slide slide--calibrate-setup slide--unified" data-slide="20" aria-label="Install Calibrate in one onboarding route" hidden>
+          <div class="story-surface calibrate-setup-surface">
+            <div class="surface-heading">
+              <h1>Add Calibrate to one route.</h1>
+            </div>
+            <div class="calibrate-setup-layout">
+              <div class="calibrate-commands">
+                <article><span>1</span><pre><code>npm install usecalibrate@0.1.3</code></pre></article>
+                <article><span>2</span><pre><code>npx usecalibrate plan --dir . \
+  --route /signup=account \
+  --route /welcome=success:shipped \
+  --out calibrate.plan.json</code></pre></article>
+                <article><span>3</span><pre><code>npx usecalibrate apply \
+  --plan calibrate.plan.json --yes
+npx usecalibrate verify --dir . --json</code></pre></article>
+              </div>
+              <div class="calibrate-setup-qr">
+                <div class="qr-frame qr-frame--takeaway" data-qr-frame="firstmile" data-qr-size="360" aria-live="off"></div>
                 <p class="qr-caption is-empty" data-qr-caption="firstmile" data-qr-display="github.com/ojusave/usecalibrate" aria-hidden="true"></p>
               </div>
             </div>
           </div>
         </section>
 
-        <section class="slide slide--calibrate-contract slide--unified" data-slide="20" aria-label="Calibrate data and privacy contract" hidden>
+        <section class="slide slide--calibrate-contract slide--unified" data-slide="21" aria-label="Calibrate data and privacy contract" hidden>
           <div class="story-surface calibrate-contract-surface">
             <div class="surface-heading">
               <h1>Position tells you where to ask. It does not tell you why.</h1>
@@ -301,20 +318,24 @@
           </div>
         </section>
 
-        <section class="slide slide--implementation slide--unified" data-slide="21" aria-label="Two Calibrate implementation paths" hidden>
-          <div class="story-surface implementation-surface">
+        <section class="slide slide--calibrate-run slide--unified" data-slide="22" aria-label="Run Calibrate locally" hidden>
+          <div class="story-surface calibrate-run-surface">
             <div class="surface-heading">
-              <p class="eyebrow">ONE ROUTE · TWO WAYS TO START</p>
-              <h1>Start where production reality allows.</h1>
+              <h1>Run the collector, then your app.</h1>
             </div>
-            <div class="implementation-grid">
-              <article><p class="source-label">PRODUCTION EVALUATION</p><h2>Instrument a test or staging route.</h2><ol><li>Agree on the first useful result.</li><li>Review the privacy and event contract.</li><li>Validate emitted positions with fake data.</li></ol></article>
-              <article><p class="source-label">DISPOSABLE REPLICA</p><h2>Recreate the route when integration is not practical yet.</h2><ol><li>Use no customer or production data.</li><li>Instrument the same named positions.</li><li>Treat findings as research prompts, not production proof.</li></ol></article>
+            <div class="calibrate-run-grid">
+              <article><p class="source-label">TERMINAL 1</p><pre><code>ADMIN_TOKEN=local-admin-only \
+DASHBOARD_TOKEN=local-dashboard-only \
+WRITE_KEY=local-browser-write-key \
+ALLOWED_ORIGINS=http://localhost:5173 \
+npm run calibrate:sidecar</code></pre></article>
+              <article><p class="source-label">TERMINAL 2</p><pre><code>VITE_CALIBRATE_WRITE_KEY=local-browser-write-key \
+npm run dev</code></pre><p class="calibrate-present-url">localhost:8787/present#token=local-dashboard-only</p></article>
             </div>
           </div>
         </section>
 
-        <section class="slide slide--field-study slide--unified" data-slide="22" aria-label="Ten-user onboarding investigation" hidden>
+        <section class="slide slide--field-study slide--unified" data-slide="23" aria-label="Ten-user onboarding investigation" hidden>
           <div class="story-surface field-study-surface">
             <div class="surface-heading">
               <p class="eyebrow">TAKE-HOME EXERCISE</p>
@@ -324,7 +345,7 @@
           </div>
         </section>
 
-        <section class="slide slide--credits slide--unified" data-slide="23" aria-label="Request the DevRelCon Render credit code" hidden>
+        <section class="slide slide--credits slide--unified" data-slide="24" aria-label="Request the DevRelCon Render credit code" hidden>
           <div class="story-surface credit-surface">
             <div class="credit-copy">
               <p class="eyebrow">OPTIONAL WORKSHOP RESOURCE</p>
@@ -342,12 +363,21 @@
           </div>
         </section>
 
-        <section class="slide slide--closing slide--unified" data-slide="24" aria-label="Contact Ojus and view Render careers" hidden>
+        <section class="slide slide--closing slide--unified" data-slide="25" aria-label="Contact Ojus" hidden>
           <div class="story-surface closing-surface">
             <div class="surface-heading closing-heading"><p class="eyebrow">ONE ROUTE · ONE USEFUL QUESTION · ONE OWNER</p><h1>Thank you.</h1></div>
-            <div class="closing-links">
+            <div class="closing-links closing-links--single">
               <article><h2>Questions or contributions</h2><div class="qr-frame qr-frame--takeaway" data-qr-frame="contact" data-qr-size="300" aria-live="off"></div><p class="qr-caption is-empty" data-qr-caption="contact" data-qr-display="x.com/ojusave" aria-hidden="true"></p></article>
-              <article><h2>Render is hiring</h2><div class="qr-frame qr-frame--takeaway" data-qr-frame="careers" data-qr-size="300" aria-live="off"></div><p class="qr-caption is-empty" data-qr-caption="careers" data-qr-display="render.com/careers" aria-hidden="true"></p></article>
+            </div>
+            <p class="contact" data-contact></p>
+          </div>
+        </section>
+
+        <section class="slide slide--closing slide--closing-hiring slide--unified" data-slide="26" aria-label="View Render careers" hidden>
+          <div class="story-surface closing-surface">
+            <div class="surface-heading closing-heading"><h1>Render is hiring.</h1></div>
+            <div class="closing-links closing-links--single">
+              <article><h2>Build the platform developers depend on.</h2><div class="qr-frame qr-frame--takeaway" data-qr-frame="careers" data-qr-size="300" aria-live="off"></div><p class="qr-caption is-empty" data-qr-caption="careers" data-qr-display="render.com/careers" aria-hidden="true"></p></article>
             </div>
             <p class="contact" data-contact></p>
           </div>

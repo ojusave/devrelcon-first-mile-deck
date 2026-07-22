@@ -16,14 +16,14 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | 13 to 15 | Ojus's research across 224 developer platforms: scope, first-success clarity, and documented route conditions. | Show exactly what Ojus examined, what he found, and what documentation research cannot prove. |
 | 16 to 17 | A separate inventory of 790 possible blocker hypotheses and eight concrete examples. | Keep plausible explanations separate from diagnosed causes. |
 | 18 | The Developer Journey Atlas and its source-inspection workflow. | Find one documented route, inspect its official sources, and choose one condition to investigate locally. |
-| 19 to 22 | Calibrate, two implementation paths, and a ten-person intended-user investigation. | Connect a route hypothesis to observed positions, participant explanations, and one bounded owner handoff. |
-| 23 to 24 | An optional attendee credit, contact, and a transparent Render careers link. | Help attendees continue the work without turning the workshop into a product or recruiting pitch. |
+| 19 to 23 | Calibrate, its released setup commands, its data contract, and a ten-person intended-user investigation. | Connect a route hypothesis to observed positions, participant explanations, and one bounded owner handoff. |
+| 24 to 26 | An optional attendee credit, contact, and a separate Render careers slide. | Help attendees continue the work without turning the workshop into a product or recruiting pitch. |
 
 ## What the research can support
 
-1. **Ojus examined 224 developer platforms.** Each Atlas record covers one selected developer goal and one official documented route. Together, those records contain 2,359 documented route steps grounded in 949 official sources.
-2. **Only 74 of the 224 routes explicitly name the first-success milestone.** The other 150 demonstrate a terminal result without naming that result as first success.
-3. **The 224 routes contain 1,021 documented gates, with a median of 4 per route.** At least one credential requirement appears in 124 routes, at least one documented choice appears in 103, and at least one documented wait appears in 60. Those categories overlap.
+1. **Ojus examined 224 developer platforms.** Each Atlas record covers one selected developer goal and one official documented route. The manifest contains 2,359 documented steps across primary and candidate routes, grounded in 949 official sources.
+2. **Only 33% explicitly name the first-success milestone.** The other 67% demonstrate a terminal result without naming that result as first success.
+3. **The 224 routes contain 1,021 documented gates, with a median of 4 per route.** A credential requirement appears in 55%, a documented choice in 46%, and a documented wait in 27%. Those categories overlap.
 4. **A separate blocker catalog contains 790 possible explanations: 466 universal and 324 platform-specific.** Zero are diagnosis-eligible. The catalog does not establish reasons for frustration, abandonment, or leaving.
 
 These numbers describe a documentation snapshot generated on July 22, 2026. They are not conversion data, developer sentiment, product rankings, or evidence that one platform is better than another.
@@ -43,6 +43,8 @@ The goal is not to prove that onboarding is bad. The goal is to replace a broad 
 ## How Calibrate fits
 
 Calibrate is one way to move from a documented route hypothesis to named positions in an instrumented route. It records forward or backward movement, completion, elapsed time, bounded machine errors, configured copy or paste outcomes, and an explicit shipped event. It never reads form values, clipboard contents, DOM text, or full URLs.
+
+The deck uses the released `usecalibrate@0.1.3` workflow: install the package, generate and review a route plan, apply it, verify the static integration, then run the generated local sidecar and the application.
 
 The current sidecar provides a current-window aggregate, using memory by default and optional JSONL persistence. It is not general product analytics and does not claim trends, cohorts, time series, intent, emotion, or cause. The participant debrief supplies context, and the owner handoff turns the result into one bounded question or next check.
 
@@ -68,7 +70,7 @@ The credit portal requires GitHub sign-in and reports whether a code is availabl
 
 The speaker-notes view contains the complete script, room cues, timing, fallbacks, evidence boundaries, and sources for every slide. All seven fields are editable and saved in the current browser. Restoring defaults affects only the current slide.
 
-The slide number in the URL matches the order in the deck: `#1` through `#24`.
+The slide number in the URL matches the order in the deck: `#1` through `#26`.
 
 Live-room dependency: the event-specific results surface on slide 11 is not connected yet. Normal stage navigation skips it safely. Use the live dashboard on slide 9 for the room debrief until the final results URL is available and rehearsed.
 

@@ -14,7 +14,7 @@ const files = {
   theme: readFileSync(resolve(root, "theme-bright.css"), "utf8"),
 };
 
-const expectedOrder = Array.from({ length: 24 }, (_, index) => index + 1);
+const expectedOrder = Array.from({ length: 26 }, (_, index) => index + 1);
 const actualOrder = [...files.html.matchAll(/data-slide="(\d+)"/g)].map((match) => Number(match[1]));
 const errors = [];
 
@@ -27,7 +27,7 @@ function requireCondition(condition, message) {
 requireCondition(JSON.stringify(actualOrder) === JSON.stringify(expectedOrder), `Unexpected slide order: ${actualOrder.join(", ")}`);
 requireCondition(new Set(actualOrder).size === actualOrder.length, "Slide IDs must be unique");
 requireCondition(actualOrder.every((id, index) => id === index + 1), "Slide IDs must match their chronological position");
-requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).length === 13, "The thirteen evidence, resource, workshop-action, credit, and closing slides must use the shared story surface");
+requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).length === 15, "The fifteen evidence, resource, workshop-action, credit, and closing slides must use the shared story surface");
 
 const noteIds = [...files.notes.matchAll(/^\s+(\d+): \{/gm)].map((match) => Number(match[1]));
 requireCondition(JSON.stringify(noteIds) === JSON.stringify(expectedOrder), `Speaker notes do not match slide order: ${noteIds.join(", ")}`);
@@ -41,8 +41,8 @@ requireCondition((files.notes.match(/sources:/g) || []).length === expectedOrder
 requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 7, "The full script and all six delivery fields must be editable");
 requireCondition(files.notesHtml.includes("Save notes"), "Speaker notes need an explicit save action");
 requireCondition(files.notesHtml.includes("Restore defaults"), "Speaker notes need a restore-defaults action");
-requireCondition(files.notesView.includes("devrelcon.presenter.notes.v6"), "Speaker-note edits must use versioned browser storage");
-requireCondition(files.notesView.includes("devrelcon.presenter.notes.v5"), "Speaker-note edits must migrate the previous field shape");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v7"), "Speaker-note edits must use versioned browser storage");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v6"), "Speaker-note edits must migrate the previous slide order");
 requireCondition(files.notesView.includes("LEGACY_SLIDE_ID_MAP"), "Speaker-note edits must migrate from the previous slide numbering");
 requireCondition(files.notesView.includes("PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve current slide edits when credits and closing move");
 requireCondition(files.notesView.includes("SECOND_PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve the earlier closing-slide migration");
@@ -67,7 +67,9 @@ for (const requiredText of [
   "one selected developer goal and one official documented route per platform",
   "2,359",
   "949",
-  "Of the 224 routes I examined",
+  "Only",
+  "33%",
+  "67%",
   "explicitly named the first-success milestone",
   "showed a terminal result without naming the milestone",
   "I documented",
@@ -75,6 +77,9 @@ for (const requiredText of [
   "included at least one credential requirement",
   "included at least one documented choice",
   "included at least one documented wait",
+  "55%",
+  "46%",
+  "27%",
   "124",
   "103",
   "60",
@@ -93,10 +98,14 @@ for (const requiredText of [
   "Stage navigation skips this slide until the event results URL is added",
   "Atlas maps the route. Calibrate observes positions in yours",
   "Ask engineering and product to evaluate one bounded onboarding route",
+  "npm install usecalibrate@0.1.3",
+  "npx usecalibrate plan --dir .",
+  "npx usecalibrate apply",
+  "npx usecalibrate verify --dir . --json",
   "Position tells you where to ask. It does not tell you why",
   "NEVER READS",
-  "PRODUCTION EVALUATION",
-  "DISPOSABLE REPLICA",
+  "npm run calibrate:sidecar",
+  "VITE_CALIBRATE_WRITE_KEY",
   "Run ten intended users through one route",
   "Request the DevRelCon Render credit code",
   "Continue with GitHub",

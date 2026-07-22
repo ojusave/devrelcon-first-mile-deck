@@ -1,40 +1,48 @@
 (function () {
   "use strict";
 
-  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v6";
-  const PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v5";
-  const SECOND_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v4";
-  const THIRD_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v3";
-  const FOURTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
+  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v7";
+  const PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v6";
+  const SECOND_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v5";
+  const THIRD_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v4";
+  const FOURTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v3";
+  const FIFTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
   const LEGACY_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v1";
-  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v5";
-  const PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v4";
-  const SECOND_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
-  const THIRD_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
+  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v6";
+  const PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v5";
+  const SECOND_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v4";
+  const THIRD_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
+  const FOURTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
   const LEGACY_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide";
   const PREVIOUS_SLIDE_ID_MAP = {
     1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8,
-    9: 9, 10: 10, 11: 11,
-    13: 12, 14: 13, 15: 14, 16: 15, 17: 16, 18: 17,
-    19: 18, 20: 19, 21: 20, 22: 21, 23: 22, 24: 23, 25: 24,
+    9: 9, 10: 10, 11: 11, 12: 12, 13: 13, 14: 14, 15: 15,
+    16: 16, 17: 17, 18: 18, 19: 19,
+    20: 21, 21: 22, 22: 23, 23: 24, 24: 25,
   };
   const SECOND_PREVIOUS_SLIDE_ID_MAP = {
     1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8,
     9: 9, 10: 10, 11: 11,
     13: 12, 14: 13, 15: 14, 16: 15, 17: 16, 18: 17,
-    19: 18, 20: 19, 21: 20, 23: 23, 24: 24,
+    19: 18, 20: 19, 21: 21, 22: 22, 23: 23, 24: 24, 25: 25,
   };
   const THIRD_PREVIOUS_SLIDE_ID_MAP = {
     1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8,
     9: 9, 10: 10, 11: 11,
     13: 12, 14: 13, 15: 14, 16: 15, 17: 16, 18: 17,
-    19: 18, 20: 19, 21: 20, 22: 21, 23: 24,
+    19: 18, 20: 19, 21: 21, 23: 24, 24: 25,
+  };
+  const FOURTH_PREVIOUS_SLIDE_ID_MAP = {
+    1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8,
+    9: 9, 10: 10, 11: 11,
+    13: 12, 14: 13, 15: 14, 16: 15, 17: 16, 18: 17,
+    19: 18, 20: 19, 21: 21, 22: 22, 23: 25,
   };
   const LEGACY_SLIDE_ID_MAP = {
     1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6,
     21: 7, 7: 8, 12: 9, 8: 10, 13: 11, 11: 12,
     14: 13, 15: 14, 23: 15, 24: 16, 25: 17, 19: 18,
-    17: 19, 16: 21, 18: 22, 20: 24,
+    17: 19, 16: 22, 18: 23, 20: 25,
   };
   const channel = "BroadcastChannel" in window ? new BroadcastChannel("devrelcon-deck") : null;
   const slideElement = document.querySelector("[data-note-slide]");
@@ -112,7 +120,7 @@
       }
 
       const previous = JSON.parse(window.localStorage.getItem(PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const previousMigration = migrateNotes(previous);
+      const previousMigration = migrateNotes(previous, PREVIOUS_SLIDE_ID_MAP);
       if (Object.keys(previousMigration).length > 0) {
         return saveMigration(previousMigration);
       }
@@ -133,6 +141,12 @@
       const fourthPreviousMigration = migrateNotes(fourthPrevious, THIRD_PREVIOUS_SLIDE_ID_MAP);
       if (Object.keys(fourthPreviousMigration).length > 0) {
         return saveMigration(fourthPreviousMigration);
+      }
+
+      const fifthPrevious = JSON.parse(window.localStorage.getItem(FIFTH_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
+      const fifthPreviousMigration = migrateNotes(fifthPrevious, FOURTH_PREVIOUS_SLIDE_ID_MAP);
+      if (Object.keys(fifthPreviousMigration).length > 0) {
+        return saveMigration(fifthPreviousMigration);
       }
 
       const legacy = JSON.parse(window.localStorage.getItem(LEGACY_NOTES_STORAGE_KEY) || "{}");
@@ -320,8 +334,9 @@
     const previous = window.localStorage.getItem(PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const secondPrevious = window.localStorage.getItem(SECOND_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const thirdPrevious = window.localStorage.getItem(THIRD_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
+    const fourthPrevious = window.localStorage.getItem(FOURTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const legacy = window.localStorage.getItem(LEGACY_PRESENTER_SLIDE_STORAGE_KEY);
-    const saved = JSON.parse(current || previous || secondPrevious || thirdPrevious || legacy || "null");
+    const saved = JSON.parse(current || previous || secondPrevious || thirdPrevious || fourthPrevious || legacy || "null");
     if (!window.location.hash && saved?.slideId) {
       const savedSlideId = current
         ? saved.slideId
@@ -331,7 +346,9 @@
             ? SECOND_PREVIOUS_SLIDE_ID_MAP[saved.slideId]
             : thirdPrevious
               ? THIRD_PREVIOUS_SLIDE_ID_MAP[saved.slideId]
-              : LEGACY_SLIDE_ID_MAP[saved.slideId];
+              : fourthPrevious
+                ? FOURTH_PREVIOUS_SLIDE_ID_MAP[saved.slideId]
+                : LEGACY_SLIDE_ID_MAP[saved.slideId];
       initialSlide = validSlide(savedSlideId);
     }
   } catch (_error) {

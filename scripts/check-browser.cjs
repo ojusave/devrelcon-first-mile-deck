@@ -4,16 +4,16 @@ const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 
 const baseUrl = process.env.DECK_URL || "http://127.0.0.1:4173";
-const slideIds = Array.from({ length: 24 }, (_, index) => index + 1);
+const slideIds = Array.from({ length: 26 }, (_, index) => index + 1);
 const viewports = [
   { name: "projector", width: 1920, height: 1080 },
   { name: "laptop", width: 1280, height: 720 },
 ];
 const unifiedPalette = new Map([
-  [14, "rgb(20, 184, 241)"], [20, "rgb(20, 184, 241)"],
-  [12, "rgb(112, 71, 235)"], [19, "rgb(112, 71, 235)"], [23, "rgb(112, 71, 235)"],
-  [13, "rgb(255, 212, 77)"], [16, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [21, "rgb(255, 212, 77)"], [24, "rgb(255, 212, 77)"],
-  [15, "rgb(255, 138, 102)"], [17, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"],
+  [14, "rgb(20, 184, 241)"], [20, "rgb(20, 184, 241)"], [21, "rgb(20, 184, 241)"],
+  [12, "rgb(112, 71, 235)"], [19, "rgb(112, 71, 235)"], [24, "rgb(112, 71, 235)"], [26, "rgb(112, 71, 235)"],
+  [13, "rgb(255, 212, 77)"], [16, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [25, "rgb(255, 212, 77)"],
+  [15, "rgb(255, 138, 102)"], [17, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"], [23, "rgb(255, 138, 102)"],
 ]);
 const outputDir = mkdtempSync(join(tmpdir(), "devrelcon-deck-"));
 
@@ -54,17 +54,18 @@ function assert(condition, message) {
         const heading = (await page.locator('.slide[data-slide="13"] h1').innerText()).replace(/\s+/g, " ").trim();
         assert(heading === "I examined 224 developer platforms.", `${viewport.name}: slide 13 research scope is incorrect`);
         await page.getByText("2,359", { exact: true }).waitFor();
+        await page.getByText("documented steps across primary and candidate routes", { exact: true }).waitFor();
         await page.getByText("949", { exact: true }).waitFor();
       }
       if (slideId === 14) {
         const heading = (await page.locator('.slide[data-slide="14"] h1').innerText()).replace(/\s+/g, " ").trim();
-        assert(heading === "Of the 224 routes I examined, only 74 explicitly named first success.", `${viewport.name}: slide 14 first-success finding is incorrect`);
-        await page.getByText("150", { exact: true }).waitFor();
+        assert(heading === "Only 33% explicitly named first success.", `${viewport.name}: slide 14 first-success finding is incorrect`);
+        await page.getByText("67%", { exact: true }).waitFor();
       }
       if (slideId === 15) {
         const heading = (await page.locator('.slide[data-slide="15"] h1').innerText()).replace(/\s+/g, " ").trim();
         assert(heading === "I documented 1,021 gates. The median route had 4.", `${viewport.name}: slide 15 route-condition finding is incorrect`);
-        for (const value of ["124", "103", "60"]) {
+        for (const value of ["55%", "46%", "27%"]) {
           await page.getByText(value, { exact: true }).waitFor();
         }
       }
@@ -120,7 +121,7 @@ function assert(condition, message) {
         assert(comparisonQrState.captionFits, `${viewport.name}: Atlas QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="comparison"]').textContent() === "developer-journey-atlas.onrender.com", `${viewport.name}: Atlas QR caption is incorrect`);
       }
-      if (slideId === 19) {
+      if (slideId === 20) {
         const calibrateQr = page.locator('[data-qr-frame="firstmile"] canvas');
         await calibrateQr.waitFor();
         const calibrateQrState = await calibrateQr.evaluate((canvas) => {
@@ -139,12 +140,12 @@ function assert(condition, message) {
           };
         });
         assert(calibrateQrState.label === "QR code for CONFIG.takeaways.firstmile", `${viewport.name}: Calibrate QR is not labeled`);
-        assert(calibrateQrState.size.join("x") === "220x220", `${viewport.name}: Calibrate QR canvas is not 220px square`);
+        assert(calibrateQrState.size.join("x") === "360x360", `${viewport.name}: Calibrate QR canvas is not 360px square`);
         assert(calibrateQrState.contained, `${viewport.name}: Calibrate QR canvas is clipped by its frame`);
         assert(calibrateQrState.captionFits, `${viewport.name}: Calibrate QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="firstmile"]').textContent() === "github.com/ojusave/usecalibrate", `${viewport.name}: Calibrate QR caption is incorrect`);
       }
-      if (slideId === 23) {
+      if (slideId === 24) {
         const creditQr = page.locator('[data-qr-frame="credits"] canvas');
         await creditQr.waitFor();
         const creditQrState = await creditQr.evaluate((canvas) => {
@@ -170,7 +171,7 @@ function assert(condition, message) {
         assert(creditQrState.captionFits, `${viewport.name}: credit QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="credits"]').textContent() === "credits-portal-mmdm.onrender.com/claim/devrelcon", `${viewport.name}: credit QR caption is incorrect`);
       }
-      if (slideId === 24) {
+      if (slideId === 25) {
         const contactQr = page.locator('[data-qr-frame="contact"] canvas');
         await contactQr.waitFor();
         const contactQrState = await contactQr.evaluate((canvas) => {
@@ -194,6 +195,8 @@ function assert(condition, message) {
         assert(contactQrState.captionFits, `${viewport.name}: contact QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="contact"]').textContent() === "x.com/ojusave", `${viewport.name}: contact QR caption is incorrect`);
 
+      }
+      if (slideId === 26) {
         const careersQr = page.locator('[data-qr-frame="careers"] canvas');
         await careersQr.waitFor();
         const careersQrState = await careersQr.evaluate((canvas) => {
@@ -333,7 +336,7 @@ function assert(condition, message) {
     await page.keyboard.press("b");
     assert(!(await page.locator("#blackout").isVisible()), `${viewport.name}: B did not hide blackout`);
     await page.keyboard.press("End");
-    assert((await page.url()).endsWith("#24"), `${viewport.name}: End did not reach slide 24`);
+    assert((await page.url()).endsWith("#26"), `${viewport.name}: End did not reach slide 26`);
     await page.keyboard.press("Home");
     assert((await page.url()).endsWith("#1"), `${viewport.name}: Home did not reach slide 1`);
     await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
@@ -411,7 +414,7 @@ function assert(condition, message) {
         return getComputedStyle(field).overflowY === "auto";
       }));
       assert(noteFieldsAreUsable, `${viewport.name} speaker notes slide ${slideId}: overflowing note field is not independently scrollable`);
-      if ([1, 8, 15, 21, 24].includes(slideId)) {
+      if ([1, 8, 15, 20, 21, 22, 25, 26].includes(slideId)) {
         await visualNotesPage.screenshot({ path: join(outputDir, `${viewport.name}-speaker-notes-${String(slideId).padStart(2, "0")}.png`) });
       }
     }
@@ -464,6 +467,7 @@ function assert(condition, message) {
     fallback: "Saved fallback.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v7");
     localStorage.removeItem("devrelcon.presenter.notes.v6");
     localStorage.setItem("devrelcon.presenter.notes.v5", JSON.stringify({ 14: note }));
   }, previousShapeNote);
@@ -479,13 +483,14 @@ function assert(condition, message) {
     transition: "Saved closing transition.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v7");
     localStorage.removeItem("devrelcon.presenter.notes.v6");
     localStorage.removeItem("devrelcon.presenter.notes.v5");
     localStorage.setItem("devrelcon.presenter.notes.v4", JSON.stringify({ 25: note }));
   }, previousNote);
-  await notesPage.goto(`${baseUrl}/speaker-notes.html?previous-migration-check=1#24`, { waitUntil: "networkidle" });
-  assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not migrate from slide 25 to slide 24");
-  assert(await notesPage.getByLabel("Full script").inputValue() === `${previousNote.say}\n\n${previousNote.transition}`, "speaker notes: previous closing script did not migrate from slide 25 to slide 24");
+  await notesPage.goto(`${baseUrl}/speaker-notes.html?previous-migration-check=1#25`, { waitUntil: "networkidle" });
+  assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not remain on slide 25");
+  assert(await notesPage.getByLabel("Full script").inputValue() === `${previousNote.say}\n\n${previousNote.transition}`, "speaker notes: previous closing script did not remain on slide 25");
 
   const legacyNote = {
     purpose: "Legacy purpose for the former slide 21.",
@@ -493,6 +498,7 @@ function assert(condition, message) {
     transition: "Legacy transition into the exercise.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v7");
     localStorage.removeItem("devrelcon.presenter.notes.v6");
     localStorage.removeItem("devrelcon.presenter.notes.v5");
     localStorage.removeItem("devrelcon.presenter.notes.v4");
