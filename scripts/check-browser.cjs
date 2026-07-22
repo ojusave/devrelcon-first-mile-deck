@@ -54,7 +54,7 @@ function assert(condition, message) {
         const heading = (await page.locator('.slide[data-slide="13"] h1').innerText()).replace(/\s+/g, " ").trim();
         assert(heading === "I examined 224 developer platforms.", `${viewport.name}: slide 13 research scope is incorrect`);
         await page.getByText("2,359", { exact: true }).waitFor();
-        await page.getByText("documented steps across primary and candidate routes", { exact: true }).waitFor();
+        await page.getByText("documented steps indexed in Atlas", { exact: true }).waitFor();
         await page.getByText("949", { exact: true }).waitFor();
       }
       if (slideId === 14) {

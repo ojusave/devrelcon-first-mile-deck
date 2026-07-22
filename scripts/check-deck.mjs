@@ -66,6 +66,9 @@ for (const requiredText of [
   "developer platforms",
   "one selected developer goal and one official documented route per platform",
   "2,359",
+  "documented steps indexed in Atlas",
+  "2,322 primary-path steps",
+  "37 candidate-path steps",
   "949",
   "Only",
   "33%",
@@ -110,7 +113,7 @@ for (const requiredText of [
   "Request the DevRelCon Render credit code",
   "Continue with GitHub",
   "redeem it from Render Billing",
-  "Questions or contributions",
+  "Connect with me",
   "Render is hiring",
 ]) {
   const corpus = Object.values(files).join("\n");
