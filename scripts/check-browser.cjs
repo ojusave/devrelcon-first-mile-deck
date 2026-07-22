@@ -50,14 +50,27 @@ function assert(condition, message) {
       if (slideId === 23) {
         const creditQr = page.locator('[data-qr-frame="credits"] canvas');
         await creditQr.waitFor();
-        const creditQrState = await creditQr.evaluate((canvas) => ({
-          label: canvas.getAttribute("aria-label"),
-          size: [canvas.width, canvas.height],
-          cssSize: [getComputedStyle(canvas).width, getComputedStyle(canvas).height],
-        }));
+        const creditQrState = await creditQr.evaluate((canvas) => {
+          const frame = canvas.closest('[data-qr-frame="credits"]');
+          const caption = document.querySelector('[data-qr-caption="credits"]');
+          const canvasRect = canvas.getBoundingClientRect();
+          const frameRect = frame.getBoundingClientRect();
+          return {
+            label: canvas.getAttribute("aria-label"),
+            size: [canvas.width, canvas.height],
+            cssSize: [getComputedStyle(canvas).width, getComputedStyle(canvas).height],
+            contained: canvasRect.left >= frameRect.left
+              && canvasRect.top >= frameRect.top
+              && canvasRect.right <= frameRect.right
+              && canvasRect.bottom <= frameRect.bottom,
+            captionFits: caption.scrollWidth <= caption.clientWidth && caption.scrollHeight <= caption.clientHeight,
+          };
+        });
         assert(creditQrState.label === "QR code for CONFIG.takeaways.credits", `${viewport.name}: credit QR is not labeled`);
         assert(creditQrState.size.join("x") === "400x400", `${viewport.name}: credit QR canvas is not 400px square`);
         assert(creditQrState.cssSize.join("x") === "400pxx400px", `${viewport.name}: credit QR CSS size is incorrect`);
+        assert(creditQrState.contained, `${viewport.name}: credit QR canvas is clipped by its frame`);
+        assert(creditQrState.captionFits, `${viewport.name}: credit QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="credits"]').textContent() === "credits-portal-mmdm.onrender.com/claim/devrelcon", `${viewport.name}: credit QR caption is incorrect`);
       }
       const state = await page.evaluate((expectedId) => {

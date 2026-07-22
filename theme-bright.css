@@ -2396,10 +2396,17 @@ body {
   background: var(--soft-yellow);
 }
 
+.story-surface .credit-qr .qr-frame {
+  width: 448px;
+  height: 448px;
+}
+
 .story-surface .credit-qr .qr-caption {
-  max-width: 450px;
-  min-height: 54px;
-  font-size: 17px;
+  max-width: 454px;
+  min-height: 24px;
+  font-size: 14px;
+  overflow-wrap: normal;
+  white-space: nowrap;
 }
 
 .slide[data-slide="21"].slide--workflow::before {

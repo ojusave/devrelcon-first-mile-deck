@@ -72,18 +72,17 @@ const SPEAKER_NOTES = {
 • When the connection becomes unclear, another required step feels more expensive than it looks in a flowchart.
 • The next exercise makes that route visible.`,
     watch: "45 seconds. Look for nods on the account, permission, and credential examples. That is enough before the exercise.",
-    fallback: "If time is short, say the headline and one example. Do not cut the warning that the next route is intentionally bad.",
-    transition: "You are about to try a workshop simulation designed to be difficult. FakeGPT is only the starting screen, not the app you are being asked to build.",
+    fallback: "If time is short, say the headline and one example. Keep the exercise setup and safety instructions on the next slide.",
+    transition: "You are about to try a workshop exercise. FakeGPT gives you a place to start, then you follow the prompts.",
   },
   8: {
     purpose: "Start the live exercise with clear intent, safety, and stopping rules.",
-    say: `• Say this before anyone scans: “This route is intentionally bad. It is a workshop simulation, not a product demo.”
-• If people hate it, the feature is working. I built it, so complaints can come directly to me after the eight-minute timer.
-• In FakeGPT, type any small thing you want to build. FakeGPT will ask you to obtain a FakeSaaSPI token. Follow that link and continue from there.
-• Use fake details only. Do not enter real personal, company, customer, card, or secret information.
-• Completion is not required. Stop when time is called or when the next step is no longer worth it.
-• Keep the final screen open because we will use the room’s positions for the debrief.`,
-    watch: "Allow 60 seconds for setup, then 8 minutes for the attempt. Do not start the clock until the room understands FakeGPT versus FakeSaaSPI.",
+    say: `• “The QR opens FakeGPT. Give it one small thing you would like to build, then follow the prompts.”
+• “You have eight minutes, but finishing is not the goal.”
+• “Use fake details only. If the next step stops feeling worth it, stop there and leave that screen open.”
+• “I will explain what we are collecting after time is called.”
+• Do not hint that difficulty, stopping, or failure is the intended outcome.`,
+    watch: "Allow 60 seconds for setup, then 8 minutes for the attempt. Do not start the clock until the room understands what to type, the safety rule, and the stopping rule.",
     fallback: "If the QR or participant app fails, narrate the route from the prepared dashboard and ask the room where they would stop. Do not collect real details.",
     transition: "Start the eight-minute clock, move to the live dashboard, and let the room work without coaching them through the route.",
   },
@@ -104,7 +103,10 @@ const SPEAKER_NOTES = {
     purpose: "Create a clean break between participating and interpreting.",
     say: `• Say: “Stop where you are. Keep your last screen open. The form cannot hurt you anymore.”
 • Give the room a few seconds to stop tapping and look back at the projector.
-• Do not ask yet why they stopped. First establish what the route and tracker can actually show.`,
+• “Okay, confession: that route was bad on purpose. FakeGPT gave you a destination. FakeSaaSPI put obstacles between you and that destination.”
+• “I combined several onboarding obstacles into one exaggerated route so we could experience them together.”
+• “If you are annoyed with me, that means the demo worked. Please hold that energy for the dashboard.”
+• “Your last screen tells us where activity changed. It does not tell us why you stopped. We still have to ask.”`,
     watch: "30 seconds. Wait until hands and eyes are off phones before moving into interpretation.",
     fallback: "If people keep working, repeat the stop instruction once and move on. Completion is not required.",
     transition: "Now look at the final room results as observations, not explanations.",
@@ -254,19 +256,19 @@ const SPEAKER_NOTES = {
 • The useful outcome today is modest: see where progress stopped, then decide what to inspect next.`,
     watch: "2 minutes. Keep the sequence at browser, queue, POST, collector, store, use. Do not narrate every implementation detail unless the room asks.",
     fallback: "If the architecture diagram is unreadable, use the six labels only. If delivery is challenged, say browser exit delivery is best effort and move on.",
-    transition: "If you want to deploy your own authorized route or prototype after the workshop, the attendee credit is next.",
+    transition: "Before the Monday action, I have one optional workshop resource: the event credit code.",
   },
   23: {
-    purpose: "Give eligible attendees a concrete way to deploy their own bounded prototype without turning the workshop into a sales pitch.",
+    purpose: "Explain exactly what the credit QR does without implying an eligibility screen or deployment workflow.",
     say: `• This is optional. You can do the workshop follow-up without deploying anything.
-• Eligible DevRelCon attendees can claim $100 in Render credits. Scan the code and sign in with GitHub to check eligibility.
-• Use the credit for your own code or a resource whose license allows deployment.
-• Connect the repository, choose the appropriate Render service type, and deploy it from the Dashboard, CLI, or a coding agent.
-• Do not deploy FakeSaaSPI from its public repository. It is inspectable, but the repository does not grant public reuse rights.
+• The QR opens the DevRelCon claim portal. It does not connect a repository or deploy an application.
+• Scan the code, continue with GitHub, and copy the promotional code shown by the portal when one is available.
+• Redeem the code from the Billing page in your Render Dashboard.
+• If the portal cannot issue a code immediately, read the status it gives you instead of promising a code from the stage.
 • This is the part where I give you money and still assign homework.
-• The portal is active, but the public sign-in screen does not list a deadline or full eligibility terms. Do not promise either from the stage.`,
-    watch: "1 minute. Keep this optional. Give people enough time to scan without restarting the workshop as a Render pitch.",
-    fallback: "If the portal is unavailable, tell attendees the link is in the deck README and continue. Do not improvise eligibility terms.",
+• The public claim page does not list a deadline. Do not invent one from the stage.`,
+    watch: "1 minute. Keep this optional. Give people enough time to scan without turning it into a deployment tutorial.",
+    fallback: "If the portal is unavailable, tell attendees the link is in the deck README and continue. Do not promise availability or timing.",
     transition: "The credit is optional. The Monday action is not.",
   },
   24: {

@@ -80,10 +80,10 @@ for (const requiredText of [
   "50 events",
   "shared queue or aggregation layer",
   "not yet published to npm",
-  "Claim $100 in Render credits",
-  "Eligible DevRelCon attendees",
-  "sign in with GitHub to check eligibility",
-  "repository you are authorized to deploy",
+  "Claim your Render credit code",
+  "The portal gives you a promotional credit code",
+  "Continue with GitHub",
+  "redeem it from Render Billing",
 ]) {
   const corpus = Object.values(files).join("\n");
   requireCondition(corpus.includes(requiredText), `Missing required text: ${requiredText}`);
@@ -106,6 +106,8 @@ const forbiddenPatterns = [
   ["old source count", /1,121/],
   ["unsupported frustration claim", /frustrat(?:ion|ing)/i],
   ["unsupported open-source label for FakeSaaSPI", /open[- ]source FakeSaaSPI/i],
+  ["unsupported credit-portal eligibility flow", /sign in with GitHub to check eligibility/i],
+  ["unsupported credit-portal deployment flow", /Connect a repository you are authorized to deploy|Create the Render service and run the prototype/i],
   ["old research boundary wording", /One documented path to a first usable result/i],
   ["old participant wording", /Put five developer champions through it/i],
   ["old handoff wording", /Share aggregate stopping points with the owning team/i],
