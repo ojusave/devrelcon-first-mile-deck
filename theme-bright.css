@@ -2880,7 +2880,7 @@ body {
 
 .composition-hero {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.15fr 0.85fr;
   overflow: hidden;
   border: 4px solid var(--ink);
   border-radius: 24px;
@@ -2888,9 +2888,9 @@ body {
 
 .composition-hero p {
   display: grid;
-  grid-template-columns: 1fr;
-  align-content: center;
-  gap: 16px;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: center;
   padding: 26px 32px;
   background: #ffffff;
 }
@@ -2898,10 +2898,6 @@ body {
 .composition-hero p + p {
   border-left: 4px solid var(--ink);
   background: var(--soft-yellow);
-}
-
-.composition-hero p:nth-child(3) {
-  background: #ffffff;
 }
 
 .composition-hero strong {
@@ -3271,7 +3267,7 @@ body {
 }
 
 [data-slide="20"] .calibrate-contract-surface {
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
 }
 
 .calibrate-boundaries {

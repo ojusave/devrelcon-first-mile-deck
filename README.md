@@ -13,20 +13,20 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | 1 to 7 | Odysseus takes ten years to get home after Troy. | A clear destination does not guarantee a usable route. Developers also arrive with a destination of their own. |
 | 8 to 11 | You try a workshop onboarding flow while the room dashboard records named route events. | Experience the route before discussing it. The dashboard separates the intended route, observed movement, bypassed stages, and backtracking. Slide 11 is reserved for event-specific results and is skipped automatically until its URL is configured. |
 | 12 | The deck states exactly what the workshop tracker recorded. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
-| 13 to 15 | Ojus's research across 224 developer platforms: route length, first-success clarity, time claims, and documented route conditions. | Present several useful findings while keeping documentation evidence separate from developer behavior. |
-| 16 to 17 | A separate inventory of plausible blocker hypotheses and representative examples. | Turn a stopping point into questions worth checking without presenting hypotheses as diagnosed causes. |
-| 18 | The Developer Journey Atlas and a short source-inspection activity. | Find one documented route, inspect its official sources, and choose one condition to investigate locally. |
+| 13 to 15 | Ojus's research across 224 developer platforms: scope, first-success clarity, and documented route conditions. | Show exactly what Ojus examined, what he found, and what documentation research cannot prove. |
+| 16 to 17 | A separate inventory of 790 possible blocker hypotheses and eight concrete examples. | Keep plausible explanations separate from diagnosed causes. |
+| 18 | The Developer Journey Atlas and its source-inspection workflow. | Find one documented route, inspect its official sources, and choose one condition to investigate locally. |
 | 19 to 22 | Calibrate, two implementation paths, and a ten-person intended-user investigation. | Connect a route hypothesis to observed positions, participant explanations, and one bounded owner handoff. |
 | 23 to 24 | An optional attendee credit, contact, and a transparent Render careers link. | Help attendees continue the work without turning the workshop into a product or recruiting pitch. |
 
 ## What the research can support
 
-1. **Across 224 selected documented routes, Atlas contains 2,240 developer or administrator actions.** That is 10 actions on average before the recorded first-success boundary, with a median of 7. The action count excludes 82 automatic platform events.
-2. **Only 74 of 224 routes explicitly name the first-success milestone.** Another 150 demonstrate a terminal result without naming that result as first success. Only 56 make any time-to-first-success claim, and those claims do not necessarily describe the complete first mile.
-3. **The median route contains four documented gates.** Of the 224 routes, 124 include a credential requirement, 103 include a documented choice, and 60 include a documented wait. These categories overlap.
-4. **The separate blocker catalog contains 790 plausible hypotheses: 466 universal and 324 platform-specific.** Zero are diagnosis-eligible. The catalog does not establish reasons for frustration, abandonment, or leaving.
+1. **Ojus examined 224 developer platforms.** Each Atlas record covers one selected developer goal and one official documented route. Together, those records contain 2,359 documented route steps grounded in 949 official sources.
+2. **Only 74 of the 224 routes explicitly name the first-success milestone.** The other 150 demonstrate a terminal result without naming that result as first success.
+3. **The 224 routes contain 1,021 documented gates, with a median of 4 per route.** At least one credential requirement appears in 124 routes, at least one documented choice appears in 103, and at least one documented wait appears in 60. Those categories overlap.
+4. **A separate blocker catalog contains 790 possible explanations: 466 universal and 324 platform-specific.** Zero are diagnosis-eligible. The catalog does not establish reasons for frustration, abandonment, or leaving.
 
-These numbers describe the 224-route Atlas documentation snapshot generated July 22, 2026 and grounded in 949 official sources. They are not conversion data, developer sentiment, product rankings, or evidence that one platform is better than another.
+These numbers describe a documentation snapshot generated on July 22, 2026. They are not conversion data, developer sentiment, product rankings, or evidence that one platform is better than another.
 
 ## What to take back to your team
 
