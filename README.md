@@ -53,6 +53,7 @@ The current collector owns its live aggregate in one process. Postgres can provi
 - [First-Mile Atlas](https://devrelcon-research.onrender.com/)
 - [Calibrate instrumentation project](https://github.com/ojusave/usecalibrate)
 - [Claim your Render credit code](https://credits-portal-mmdm.onrender.com/claim/devrelcon)
+- [Render careers through Ojus's referral link](https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG)
 
 Eligible DevRelCon attendees can sign in with GitHub to check access to the $100 Render credit. Calibrate is Apache-2.0 licensed public source. The published `usecalibrate` package is the manifest-driven workshop kit. The repository also contains the newer DOM-autocapture browser client shown in slides 20 to 22, but that workspace package is not yet published to npm. FakeSaaSPI is publicly inspectable source without a project license, so the repository does not grant reuse rights. The Atlas compares documented routes. It does not diagnose why a developer stopped.
 

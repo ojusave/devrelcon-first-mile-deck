@@ -272,16 +272,18 @@ const SPEAKER_NOTES = {
     transition: "The credit is optional. The Monday action is not.",
   },
   24: {
-    purpose: "End with one action the attendee can start without a new program or framework.",
+    purpose: "End with one action the attendee can start without a new program or framework, then leave an optional path to Render's open roles.",
     say: `• Pick one real first-mile route, not the entire onboarding system.
 • Define its first-success outcome and the positions that make progress visible.
 • Watch five intended developers attempt it without rescuing them.
 • Bring the stopping points and missing evidence to the team that owns the route.
 • Do not promise a diagnosis. Bring one clearer question and one next observation.
 • Please do not return on Monday with a transformation program and a 46-tab spreadsheet.
+• Render is hiring. The QR goes to our current openings through my referral link.
+• If a role looks relevant, DM me with questions. The link does not promise an interview or hiring outcome.
 • Thank Dylan for the dry-run feedback after the workshop content is complete.`,
-    watch: "Leave this slide up for questions. Ask attendees to write down the one route they will inspect before they pack up.",
-    fallback: "If time is gone, read the first, second, and fifth bullets, thank Dylan, and end. Do not add a grand conclusion.",
-    transition: "Stop here. Leave the Monday action on screen for questions.",
+    watch: "Leave this slide up for questions and scanning. Ask attendees to write down the one route they will inspect before they pack up.",
+    fallback: "If time is gone, state the Monday action, mention that the QR links to Render's open roles, thank Dylan, and end. Do not add a grand conclusion.",
+    transition: "Stop here. Leave the Monday action and careers QR on screen for questions.",
   },
 };

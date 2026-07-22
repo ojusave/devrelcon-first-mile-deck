@@ -73,6 +73,30 @@ function assert(condition, message) {
         assert(creditQrState.captionFits, `${viewport.name}: credit QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="credits"]').textContent() === "credits-portal-mmdm.onrender.com/claim/devrelcon", `${viewport.name}: credit QR caption is incorrect`);
       }
+      if (slideId === 24) {
+        const careersQr = page.locator('[data-qr-frame="careers"] canvas');
+        await careersQr.waitFor();
+        const careersQrState = await careersQr.evaluate((canvas) => {
+          const frame = canvas.closest('[data-qr-frame="careers"]');
+          const caption = document.querySelector('[data-qr-caption="careers"]');
+          const canvasRect = canvas.getBoundingClientRect();
+          const frameRect = frame.getBoundingClientRect();
+          return {
+            label: canvas.getAttribute("aria-label"),
+            size: [canvas.width, canvas.height],
+            contained: canvasRect.left >= frameRect.left
+              && canvasRect.top >= frameRect.top
+              && canvasRect.right <= frameRect.right
+              && canvasRect.bottom <= frameRect.bottom,
+            captionFits: caption.scrollWidth <= caption.clientWidth && caption.scrollHeight <= caption.clientHeight,
+          };
+        });
+        assert(careersQrState.label === "QR code for CONFIG.takeaways.careers", `${viewport.name}: careers QR is not labeled`);
+        assert(careersQrState.size.join("x") === "300x300", `${viewport.name}: careers QR canvas is not 300px square`);
+        assert(careersQrState.contained, `${viewport.name}: careers QR canvas is clipped by its frame`);
+        assert(careersQrState.captionFits, `${viewport.name}: careers QR caption is clipped or wrapped`);
+        assert(await page.locator('[data-qr-caption="careers"]').textContent() === "render.com/careers", `${viewport.name}: careers QR caption is incorrect`);
+      }
       const state = await page.evaluate((expectedId) => {
         const slide = document.querySelector(`.slide[data-slide="${expectedId}"]`);
         const visible = [...document.querySelectorAll(".slide")].filter((item) => !item.hidden);
@@ -340,6 +364,7 @@ function assert(condition, message) {
     "https://github.com/ojusave/fakesaaspi",
     "https://devrelcon-research.onrender.com",
     "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
+    "https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG",
   ]) {
     const response = await requestContext.get(url);
     assert(response.ok(), `${url} returned ${response.status()}`);

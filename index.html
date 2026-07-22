@@ -10,10 +10,10 @@
     <link rel="preload" href="assets/brand/render-logo-black.svg?v=1" as="image" type="image/svg+xml">
     <link rel="preload" href="assets/brand/render-logo-white.svg?v=1" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=9">
-    <link rel="stylesheet" href="theme-bright.css?v=21">
-    <script defer src="config.js?v=8"></script>
+    <link rel="stylesheet" href="theme-bright.css?v=22">
+    <script defer src="config.js?v=9"></script>
     <script defer src="qrcode.js"></script>
-    <script defer src="deck.js?v=18"></script>
+    <script defer src="deck.js?v=19"></script>
   </head>
   <body>
     <div class="viewport" id="viewport">
@@ -416,6 +416,13 @@ const cal = calibrate({
               </ol>
               <p class="contact" data-contact></p>
             </div>
+            <aside class="closing-careers" aria-label="Render careers">
+              <p class="eyebrow">WE’RE HIRING</p>
+              <h2>Scan for open roles.</h2>
+              <div class="qr-frame qr-frame--takeaway" data-qr-frame="careers" data-qr-size="300" aria-live="off"></div>
+              <p class="qr-caption is-empty" data-qr-caption="careers" data-qr-display="render.com/careers" aria-hidden="true"></p>
+              <p class="closing-referral">This link includes my referral.<br>DM me if you have questions.</p>
+            </aside>
           </div>
         </section>
       </main>

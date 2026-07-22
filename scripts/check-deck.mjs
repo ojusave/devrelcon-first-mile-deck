@@ -84,6 +84,9 @@ for (const requiredText of [
   "The portal gives you a promotional credit code",
   "Continue with GitHub",
   "redeem it from Render Billing",
+  "WE’RE HIRING",
+  "This link includes my referral",
+  "DM me if you have questions",
 ]) {
   const corpus = Object.values(files).join("\n");
   requireCondition(corpus.includes(requiredText), `Missing required text: ${requiredText}`);
@@ -96,6 +99,7 @@ for (const requiredUrl of [
   "https://github.com/ojusave/fakesaaspi",
   "https://devrelcon-research.onrender.com",
   "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
+  "https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG",
 ]) {
   requireCondition(files.config.includes(requiredUrl), `Missing configured URL: ${requiredUrl}`);
 }

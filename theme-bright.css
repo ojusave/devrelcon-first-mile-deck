@@ -2496,8 +2496,9 @@ body {
 }
 
 .closing-surface {
-  grid-template-columns: 1fr;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr) 430px;
+  gap: 56px;
+  align-items: center;
   padding: 62px 68px 54px;
 }
 
@@ -2511,8 +2512,47 @@ body {
 }
 
 .closing-surface .closing-action ol {
-  max-width: 1320px;
+  max-width: 1080px;
   font-size: 28px;
+}
+
+.closing-careers {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  padding: 30px 28px 28px;
+  border: 4px solid var(--ink);
+  border-radius: 30px;
+  text-align: center;
+  background: var(--soft-yellow);
+  box-shadow: 10px 10px 0 var(--ink);
+}
+
+.closing-careers .eyebrow {
+  font-size: 21px;
+}
+
+.closing-careers h2 {
+  font-size: 38px;
+  line-height: 1.05;
+}
+
+.closing-careers .qr-frame {
+  width: 348px;
+  height: 348px;
+}
+
+.closing-careers .qr-caption {
+  width: 100%;
+  height: auto;
+  min-height: 24px;
+  font-size: 18px;
+}
+
+.closing-referral {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 1.35;
 }
 
 .closing-surface .closing-footer {
