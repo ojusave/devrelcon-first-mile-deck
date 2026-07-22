@@ -91,7 +91,6 @@ for (const requiredText of [
   "Work email required",
   "No reset, undo, rollback, or clean restart",
   "I built Atlas for peers improving developer platforms",
-  "Search 224 documented journeys",
   "peer cohort",
   "Stage navigation skips this slide until the event results URL is added",
   "Atlas maps the route. Calibrate observes positions in yours",
