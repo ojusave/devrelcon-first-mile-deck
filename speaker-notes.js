@@ -89,15 +89,16 @@ const SPEAKER_NOTES = {
   9: {
     purpose: "Use the live dashboard as a room mirror while the exercise runs.",
     say: `• Keep this screen visible while participants work.
-• “How the room moved” groups the route into a few readable stages. Each path width is the number of distinct sessions observed moving between two stages.
-• Solid blue paths are forward movement. Dashed amber paths are backtracking. One session counts once per path, so retries do not make the curve look wider.
-• “Named route reach” shows how many distinct sessions reached each named step. It is not a conversion rate for a real product.
+• “Observed route movement” groups the route into a few readable stages. The dotted line is the intended route. Solid blue paths are observed forward movement. Dashed amber paths are backtracking.
+• Each path width is the number of distinct sessions observed moving between two stages. One session counts once per path, so retries do not make it wider.
+• If a blue path arcs over a stage, the session reached the later stage without a recorded visit to the stage underneath it. That can happen when someone enters from a different URL.
+• “Named route reach” counts explicit page-view events for each named step. It is not a conversion rate for a real product.
 • The other panels show bounded validation errors, retries, timing, and terminal states recorded by this workshop route.
 • A thinner path says fewer observed sessions traversed that edge by the cutoff. It does not tell us whether they stopped, switched tabs, ran out of time, or decided the next step was not worth it.
 • There is no prize for being first through a fake card form.
 • Do not announce an early winner or assign a reason to a pause. Counts can change until the cutoff.
 • At eight minutes, stop even if few people have finished.`,
-    watch: "8 minutes. Watch the forward path narrow and note any dashed backtracking path, but do not narrate a cause while people are still moving.",
+    watch: "8 minutes. Watch the observed path narrow, note any bypass arc or dashed backtracking path, but do not narrate a cause while people are still moving.",
     fallback: "If the dashboard fails, keep the exercise running, ask people to hold their last screen, and use a quick show of hands by named step after time is called.",
     transition: "Time is up. Advance once, stop the room, and ask everyone to keep the last screen open.",
   },
