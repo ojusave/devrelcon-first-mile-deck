@@ -21,7 +21,7 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 
 ## What the research can support
 
-1. **Ojus examined 224 developer platforms.** Each Atlas record covers one selected developer goal and one official documented route. Together, those records contain 2,359 documented route steps grounded in 949 official sources.
+1. **Ojus examined 224 developer platforms.** Each Atlas record covers one selected developer goal and one official documented route. Atlas indexes 2,359 documented steps grounded in 949 official sources: 2,322 primary-path steps and 37 candidate-path steps.
 2. **Only 74 of the 224 routes explicitly name the first-success milestone.** The other 150 demonstrate a terminal result without naming that result as first success.
 3. **The 224 routes contain 1,021 documented gates, with a median of 4 per route.** At least one credential requirement appears in 124 routes, at least one documented choice appears in 103, and at least one documented wait appears in 60. Those categories overlap.
 4. **A separate blocker catalog contains 790 possible explanations: 466 universal and 324 platform-specific.** Zero are diagnosis-eligible. The catalog does not establish reasons for frustration, abandonment, or leaving.
