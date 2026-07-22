@@ -10,10 +10,10 @@
     <link rel="preload" href="assets/brand/render-logo-black.svg?v=1" as="image" type="image/svg+xml">
     <link rel="preload" href="assets/brand/render-logo-white.svg?v=1" as="image" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css?v=9">
-    <link rel="stylesheet" href="theme-bright.css?v=21">
-    <script defer src="config.js?v=8"></script>
+    <link rel="stylesheet" href="theme-bright.css?v=22">
+    <script defer src="config.js?v=9"></script>
     <script defer src="qrcode.js"></script>
-    <script defer src="deck.js?v=18"></script>
+    <script defer src="deck.js?v=19"></script>
   </head>
   <body>
     <div class="viewport" id="viewport">
@@ -100,7 +100,7 @@
             <p class="eyebrow">8 MINUTES · Completion is not required.</p>
             <h1>Try to reach the first usable result.</h1>
           </div>
-          <p class="exercise-route"><strong>WORKSHOP SIMULATION</strong> FakeGPT is the starting screen. It sends you into an intentionally bad FakeSaaSPI token route.</p>
+          <p class="exercise-route"><strong>WORKSHOP EXERCISE</strong> The QR opens FakeGPT. Give it one small thing you want to build, then follow the prompts.</p>
           <div class="exercise-grid">
             <div class="exercise-qr">
               <div class="qr-frame qr-frame--primary" data-qr-frame="fakegpt" aria-live="off"></div>
@@ -384,18 +384,18 @@ const cal = calibrate({
           </div>
         </section>
 
-        <section class="slide slide--credits slide--unified" data-slide="23" aria-label="Claim Render attendee credits and deploy your code" hidden>
+        <section class="slide slide--credits slide--unified" data-slide="23" aria-label="Claim the DevRelCon Render credit code" hidden>
           <div class="story-surface credit-surface">
             <div class="credit-copy">
               <p class="eyebrow">OPTIONAL WORKSHOP RESOURCE</p>
-              <h1>Claim $100 in Render credits.</h1>
-              <p class="credit-dek">Eligible DevRelCon attendees can use the credit to deploy their own code or a licensed workshop resource.</p>
+              <h1>Claim your<br>Render credit code.</h1>
+              <p class="credit-dek">The portal gives you a promotional credit code. It does not connect or deploy a repository.</p>
               <ol class="credit-steps">
-                <li><span>1</span>Scan and sign in with GitHub to check eligibility.</li>
-                <li><span>2</span>Connect a repository you are authorized to deploy.</li>
-                <li><span>3</span>Create the Render service and run the prototype.</li>
+                <li><span>1</span>Scan the QR code.</li>
+                <li><span>2</span>Continue with GitHub.</li>
+                <li><span>3</span>Copy the code and redeem it from Render Billing.</li>
               </ol>
-              <p class="credit-limit">The credit is optional. Keep the prototype and its data within your team's approval boundaries.</p>
+              <p class="credit-limit">If a code cannot be issued immediately, the portal will tell you what happens next.</p>
             </div>
             <div class="resource-qr credit-qr">
               <div class="qr-frame qr-frame--takeaway" data-qr-frame="credits" data-qr-size="400" aria-live="off"></div>
@@ -416,6 +416,13 @@ const cal = calibrate({
               </ol>
               <p class="contact" data-contact></p>
             </div>
+            <aside class="closing-careers" aria-label="Render careers">
+              <p class="eyebrow">WE’RE HIRING</p>
+              <h2>Scan for open roles.</h2>
+              <div class="qr-frame qr-frame--takeaway" data-qr-frame="careers" data-qr-size="300" aria-live="off"></div>
+              <p class="qr-caption is-empty" data-qr-caption="careers" data-qr-display="render.com/careers" aria-hidden="true"></p>
+              <p class="closing-referral">This link includes my referral.<br>DM me if you have questions.</p>
+            </aside>
           </div>
         </section>
       </main>

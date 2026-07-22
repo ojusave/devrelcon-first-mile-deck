@@ -11,7 +11,7 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | Slides | What you will see | Why it is there |
 | --- | --- | --- |
 | 1 to 7 | Odysseus takes ten years to get home after Troy. | A clear destination does not guarantee a usable route. Developers also arrive with a destination of their own. |
-| 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. Slide 11 is reserved for event-specific results and is skipped automatically until its URL is configured. |
+| 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. The dashboard shows distinct-session movement between route stages, with backtracking separate from forward movement. Slide 11 is reserved for event-specific results and is skipped automatically until its URL is configured. |
 | 12 to 13 | The deck separates the documented route, observed behavior, and the explanation that is still missing. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
 | 14 to 18 | Research from 205 documented developer onboarding routes. | See where route choice and unclear success boundaries appear in the inspected documentation. |
 | 19 to 24 | The First-Mile Atlas, a three-slide Calibrate section, an optional attendee credit, and a Monday action. | Move from a documented comparison to privacy-conscious product signals, then take one bounded action. |
@@ -52,7 +52,8 @@ The current collector owns its live aggregate in one process. Postgres can provi
 - [FakeSaaSPI exercise](https://fakesaaspi.onrender.com/)
 - [First-Mile Atlas](https://devrelcon-research.onrender.com/)
 - [Calibrate instrumentation project](https://github.com/ojusave/usecalibrate)
-- [Claim $100 in Render credits](https://credits-portal-mmdm.onrender.com/claim/devrelcon)
+- [Claim your Render credit code](https://credits-portal-mmdm.onrender.com/claim/devrelcon)
+- [Render careers through Ojus's referral link](https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG)
 
 Eligible DevRelCon attendees can sign in with GitHub to check access to the $100 Render credit. Calibrate is Apache-2.0 licensed public source. The published `usecalibrate` package is the manifest-driven workshop kit. The repository also contains the newer DOM-autocapture browser client shown in slides 20 to 22, but that workspace package is not yet published to npm. FakeSaaSPI is publicly inspectable source without a project license, so the repository does not grant reuse rights. The Atlas compares documented routes. It does not diagnose why a developer stopped.
 

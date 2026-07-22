@@ -320,12 +320,12 @@
       frame.replaceChildren(makeQrCanvas(value, label, size));
       frame.classList.remove("asset-placeholder");
       frame.classList.add("is-ready");
-      caption.textContent = shortUrl(value);
+      caption.textContent = caption.dataset.qrDisplay || shortUrl(value);
       caption.classList.remove("is-empty");
       caption.setAttribute("aria-hidden", "false");
     } catch (_error) {
       setQrPlaceholder(frame, `ERROR: ${label}`);
-      caption.textContent = shortUrl(value);
+      caption.textContent = caption.dataset.qrDisplay || shortUrl(value);
       caption.classList.remove("is-empty");
       caption.setAttribute("aria-hidden", "false");
     }
@@ -429,6 +429,7 @@
     renderQrSet("fakesaaspiKit", CONFIG.takeaways.fakesaaspiKit, "CONFIG.takeaways.fakesaaspiKit");
     renderQrSet("comparison", CONFIG.takeaways.comparison, "CONFIG.takeaways.comparison");
     renderQrSet("credits", CONFIG.takeaways.credits, "CONFIG.takeaways.credits");
+    renderQrSet("careers", CONFIG.takeaways.careers, "CONFIG.takeaways.careers");
     renderLiveViews();
     renderStats();
     renderTimer();

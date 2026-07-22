@@ -80,10 +80,13 @@ for (const requiredText of [
   "50 events",
   "shared queue or aggregation layer",
   "not yet published to npm",
-  "Claim $100 in Render credits",
-  "Eligible DevRelCon attendees",
-  "sign in with GitHub to check eligibility",
-  "repository you are authorized to deploy",
+  "Claim your Render credit code",
+  "The portal gives you a promotional credit code",
+  "Continue with GitHub",
+  "redeem it from Render Billing",
+  "WE’RE HIRING",
+  "This link includes my referral",
+  "DM me if you have questions",
 ]) {
   const corpus = Object.values(files).join("\n");
   requireCondition(corpus.includes(requiredText), `Missing required text: ${requiredText}`);
@@ -96,6 +99,7 @@ for (const requiredUrl of [
   "https://github.com/ojusave/fakesaaspi",
   "https://devrelcon-research.onrender.com",
   "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
+  "https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG",
 ]) {
   requireCondition(files.config.includes(requiredUrl), `Missing configured URL: ${requiredUrl}`);
 }
@@ -106,6 +110,8 @@ const forbiddenPatterns = [
   ["old source count", /1,121/],
   ["unsupported frustration claim", /frustrat(?:ion|ing)/i],
   ["unsupported open-source label for FakeSaaSPI", /open[- ]source FakeSaaSPI/i],
+  ["unsupported credit-portal eligibility flow", /sign in with GitHub to check eligibility/i],
+  ["unsupported credit-portal deployment flow", /Connect a repository you are authorized to deploy|Create the Render service and run the prototype/i],
   ["old research boundary wording", /One documented path to a first usable result/i],
   ["old participant wording", /Put five developer champions through it/i],
   ["old handoff wording", /Share aggregate stopping points with the owning team/i],

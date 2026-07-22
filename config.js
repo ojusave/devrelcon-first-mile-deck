@@ -17,6 +17,7 @@ const CONFIG = {
     fakesaaspiKit: "https://github.com/ojusave/fakesaaspi",
     comparison: "https://devrelcon-research.onrender.com",
     credits: "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
+    careers: "https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG",
   },
 
   // Optional countdown on the holding slide. null hides it entirely.
