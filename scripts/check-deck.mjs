@@ -33,8 +33,10 @@ requireCondition(JSON.stringify(noteIds) === JSON.stringify(expectedOrder), `Spe
 requireCondition((files.notes.match(/purpose:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note purpose");
 requireCondition((files.notes.match(/say:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note delivery cue");
 requireCondition((files.notes.match(/transition:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note transition");
+requireCondition((files.notes.match(/watch:/g) || []).length === expectedOrder.length, "Every slide needs timing and an audience cue");
+requireCondition((files.notes.match(/fallback:/g) || []).length === expectedOrder.length, "Every slide needs a fallback");
 requireCondition((files.notes.match(/• /g) || []).length >= expectedOrder.length * 3, "Every slide needs detailed speaker-note talking points");
-requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 3, "Purpose, talking points, and transition must be editable");
+requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 5, "Purpose, talking points, transition, room cue, and fallback must be editable");
 requireCondition(files.notesHtml.includes("Save notes"), "Speaker notes need an explicit save action");
 requireCondition(files.notesHtml.includes("Restore defaults"), "Speaker notes need a restore-defaults action");
 requireCondition(files.notesView.includes("devrelcon.presenter.notes.v3"), "Speaker-note edits must use versioned browser storage");
@@ -44,10 +46,10 @@ requireCondition(files.notesView.includes("PREVIOUS_SLIDE_ID_MAP"), "Speaker-not
 for (const requiredText of [
   "Completion is not required",
   "It does not tell us why",
-  "Keep the evidence separate",
-  "151 / 205",
-  "we had to choose one route",
-  "the docs identified one directly",
+  "A stopping point is not an explanation",
+  "94 / 205",
+  "research policy selected the route",
+  "documentation supplied a default",
   "83 / 205",
   "122 / 205",
   "Zero of 790",
@@ -60,18 +62,18 @@ for (const requiredText of [
   "SUCCESS SIGNALS · 205 DOCUMENTED ROUTES",
   "ONE STOPPING POINT, THREE QUESTIONS",
   "One selected path for one developer intent",
-  "set CONFIG.resultsUrl",
-  "Only 83 routes explicitly named the first-success milestone",
-  "did not present one unambiguous default route for the selected intent",
+  "Stage navigation skips this slide until the event results URL is added",
+  "83 of 205 routes named the first-success milestone",
+  "required the research policy to choose among documented routes",
   "Five people form a bounded pilot, not a representative sample",
   "HOW CALIBRATE CAPTURES PRODUCT FRICTION",
   "I built Calibrate, a privacy-conscious onboarding signal SDK",
   "It captures behavior, not content",
   "Simple delivery, clear scale boundary",
   "@usecalibrate/browser",
-  "Autocapture by default",
+  "Autocapture",
   "data-fm",
-  "No form values are stored or sent",
+  "No form values",
   "sendBeacon()",
   "/api/events",
   "10 events",

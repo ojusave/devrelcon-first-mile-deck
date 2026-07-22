@@ -30,8 +30,8 @@
       main {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto minmax(124px, auto) minmax(0, 1fr) auto;
-        gap: 14px;
+        grid-template-rows: auto minmax(108px, auto) minmax(0, 1fr) minmax(108px, auto) auto;
+        gap: 10px;
         width: min(920px, 100%);
         height: 100vh;
         margin: 0 auto;
@@ -82,6 +82,8 @@
         grid-template-rows: auto minmax(0, 1fr);
         align-content: stretch;
       }
+      .watch { grid-column: 1; grid-row: 4; border-color: var(--sky); }
+      .fallback { grid-column: 2; grid-row: 4; border-color: var(--signal); }
 
       textarea {
         width: 100%;
@@ -89,10 +91,20 @@
         resize: none;
         border: 0;
         padding: 0;
+        overflow-y: auto;
+        scrollbar-color: var(--sky) transparent;
+        scrollbar-width: thin;
         color: var(--text);
         background: transparent;
         font: inherit;
         line-height: 1.35;
+      }
+
+      textarea::-webkit-scrollbar { width: 8px; }
+      textarea::-webkit-scrollbar-track { background: transparent; }
+      textarea::-webkit-scrollbar-thumb {
+        border-radius: 999px;
+        background: var(--sky);
       }
 
       textarea:focus-visible {
@@ -101,13 +113,15 @@
       }
 
       .purpose textarea,
-      .transition textarea { height: 78px; }
+      .transition textarea,
+      .watch textarea,
+      .fallback textarea { height: 58px; }
       .talking-points textarea { height: auto; font-size: clamp(17px, 1.75vw, 21px); }
 
       nav {
         display: grid;
         grid-column: 1 / -1;
-        grid-row: 4;
+        grid-row: 5;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         gap: 14px;
       }
@@ -129,7 +143,7 @@
       @media (max-width: 760px) {
         main {
           grid-template-columns: 1fr;
-          grid-template-rows: auto auto minmax(240px, 1fr) auto auto;
+          grid-template-rows: auto auto minmax(240px, 1fr) auto auto auto auto;
           height: auto;
           min-height: 100vh;
           overflow: visible;
@@ -139,16 +153,21 @@
         .purpose { grid-column: 1; grid-row: 2; }
         .talking-points { grid-column: 1; grid-row: 3; }
         .transition { grid-column: 1; grid-row: 4; }
-        nav { grid-column: 1; grid-row: 5; }
+        .watch { grid-column: 1; grid-row: 5; }
+        .fallback { grid-column: 1; grid-row: 6; }
+        nav { grid-column: 1; grid-row: 7; }
 
         .purpose textarea,
-        .transition textarea { height: 112px; }
+        .transition textarea,
+        .watch textarea,
+        .fallback textarea { height: 92px; }
 
         nav { grid-template-columns: 1fr 1fr; }
       }
     </style>
-    <script defer src="speaker-notes.js?v=4"></script>
-    <script defer src="speaker-notes-view.js?v=4"></script>
+    <script defer src="config.js?v=7"></script>
+    <script defer src="speaker-notes.js?v=6"></script>
+    <script defer src="speaker-notes-view.js?v=6"></script>
   </head>
   <body>
     <main>
@@ -173,6 +192,14 @@
       <section class="transition">
         <h2 id="transition-label">Transition</h2>
         <textarea data-note-transition aria-labelledby="transition-label" spellcheck="true"></textarea>
+      </section>
+      <section class="watch">
+        <h2 id="watch-label">Timing and room cue</h2>
+        <textarea data-note-watch aria-labelledby="watch-label" spellcheck="true"></textarea>
+      </section>
+      <section class="fallback">
+        <h2 id="fallback-label">Fallback</h2>
+        <textarea data-note-fallback aria-labelledby="fallback-label" spellcheck="true"></textarea>
       </section>
       <nav aria-label="Slide controls">
         <button type="button" data-note-previous>Previous</button>

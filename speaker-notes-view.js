@@ -24,6 +24,8 @@
   const purposeElement = document.querySelector("[data-note-purpose]");
   const sayElement = document.querySelector("[data-note-say]");
   const transitionElement = document.querySelector("[data-note-transition]");
+  const watchElement = document.querySelector("[data-note-watch]");
+  const fallbackElement = document.querySelector("[data-note-fallback]");
   const statusElement = document.querySelector("[data-note-status]");
   let currentSlide = 1;
   let renderedNote = null;
@@ -32,6 +34,18 @@
   function validSlide(value) {
     const slideId = Number(value);
     return SPEAKER_ORDER.includes(slideId) ? slideId : 1;
+  }
+
+  function shouldSkipDuringStageNavigation(slideId) {
+    return slideId === 11 && !CONFIG.resultsUrl;
+  }
+
+  function adjacentNoteIndex(startIndex, direction) {
+    let nextIndex = startIndex + direction;
+    while (nextIndex >= 0 && nextIndex < SPEAKER_ORDER.length && shouldSkipDuringStageNavigation(SPEAKER_ORDER[nextIndex])) {
+      nextIndex += direction;
+    }
+    return Math.max(0, Math.min(nextIndex, SPEAKER_ORDER.length - 1));
   }
 
   function readSavedNotes() {
@@ -91,11 +105,17 @@
       purpose: purposeElement.value,
       say: sayElement.value,
       transition: transitionElement.value,
+      watch: watchElement.value,
+      fallback: fallbackElement.value,
     };
   }
 
   function notesMatch(left, right) {
-    return left.purpose === right.purpose && left.say === right.say && left.transition === right.transition;
+    return left.purpose === right.purpose
+      && left.say === right.say
+      && left.transition === right.transition
+      && left.watch === right.watch
+      && left.fallback === right.fallback;
   }
 
   function hasUnsavedChanges() {
@@ -139,6 +159,8 @@
     purposeElement.value = note.purpose;
     sayElement.value = note.say;
     transitionElement.value = note.transition;
+    watchElement.value = note.watch;
+    fallbackElement.value = note.fallback;
     renderedNote = { ...note };
     statusElement.textContent = status;
     window.history.replaceState(null, "", `#${currentSlide}`);
@@ -150,9 +172,7 @@
     }
     channel?.postMessage({ type: "command", action });
     const index = SPEAKER_ORDER.indexOf(currentSlide);
-    const nextIndex = action === "next"
-      ? Math.min(index + 1, SPEAKER_ORDER.length - 1)
-      : Math.max(index - 1, 0);
+    const nextIndex = adjacentNoteIndex(index, action === "next" ? 1 : -1);
     showNote(SPEAKER_ORDER[nextIndex], channel ? "Controlling deck" : "Notes only");
   }
 
@@ -168,7 +188,7 @@
     showNote(currentSlide, "Deck defaults restored");
   }
 
-  for (const field of [purposeElement, sayElement, transitionElement]) {
+  for (const field of [purposeElement, sayElement, transitionElement, watchElement, fallbackElement]) {
     field.addEventListener("input", () => {
       statusElement.textContent = "Unsaved edits";
     });

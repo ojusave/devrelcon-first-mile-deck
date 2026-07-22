@@ -5,6 +5,7 @@
   const STAGE_HEIGHT = 1080;
   const DASHBOARD_SLIDE = 9;
   const HOLDING_SLIDE = 10;
+  const RESULTS_SLIDE = 11;
   const QR_QUIET_ZONE_MODULES = 4;
   const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
 
@@ -156,6 +157,18 @@
     showSlide(nextIndex, 0, requestedIndex < 0);
   }
 
+  function isSkippedDuringStageNavigation(index) {
+    return slideIds[index] === RESULTS_SLIDE && !CONFIG.resultsUrl;
+  }
+
+  function adjacentStageIndex(startIndex, direction) {
+    let nextIndex = startIndex + direction;
+    while (nextIndex >= 0 && nextIndex < slides.length && isSkippedDuringStageNavigation(nextIndex)) {
+      nextIndex += direction;
+    }
+    return nextIndex;
+  }
+
   function advance() {
     const currentSlide = slides[currentIndex];
     const fragments = getFragments(currentSlide);
@@ -169,8 +182,9 @@
       return;
     }
 
-    if (currentIndex < slides.length - 1) {
-      showSlide(currentIndex + 1, 0, true);
+    const nextIndex = adjacentStageIndex(currentIndex, 1);
+    if (nextIndex < slides.length) {
+      showSlide(nextIndex, 0, true);
     }
   }
 
@@ -187,8 +201,8 @@
       return;
     }
 
-    if (currentIndex > 0) {
-      const previousIndex = currentIndex - 1;
+    const previousIndex = adjacentStageIndex(currentIndex, -1);
+    if (previousIndex >= 0) {
       showSlide(previousIndex, getFragments(slides[previousIndex]).length, true);
     }
   }
@@ -337,9 +351,12 @@
       const instruction = document.createElement("span");
       placeholder.className = "dashboard-placeholder asset-placeholder";
       title.textContent = placeholderTitle;
-      instruction.textContent = `set CONFIG.${configKey}`;
+      instruction.textContent = slideId === RESULTS_SLIDE
+        ? "Stage navigation skips this slide until the event results URL is added"
+        : `set CONFIG.${configKey}`;
       placeholder.append(title, instruction);
       slide.replaceChildren(placeholder);
+      slide.dataset.liveReady = "false";
       return;
     }
 
@@ -350,11 +367,12 @@
     iframe.loading = "eager";
     iframe.tabIndex = -1;
     slide.replaceChildren(iframe);
+    slide.dataset.liveReady = "true";
   }
 
   function renderLiveViews() {
     renderLiveFrame(DASHBOARD_SLIDE, CONFIG.dashboardUrl, "Live dashboard", "dashboardUrl", "LIVE DASHBOARD EMBEDS HERE");
-    renderLiveFrame(11, CONFIG.resultsUrl, "Real-time results", "resultsUrl", "REAL-TIME RESULTS EMBED HERE");
+    renderLiveFrame(RESULTS_SLIDE, CONFIG.resultsUrl, "Real-time results", "resultsUrl", "RESULTS VIEW IS NOT CONNECTED");
   }
 
   function renderNumberCards(selector, stats) {

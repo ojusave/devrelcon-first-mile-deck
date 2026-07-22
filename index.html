@@ -9,11 +9,11 @@
     <link rel="preload" href="assets/render-logo.svg?v=2" as="image" type="image/svg+xml">
     <link rel="preload" href="assets/brand/render-logo-black.svg?v=1" as="image" type="image/svg+xml">
     <link rel="preload" href="assets/brand/render-logo-white.svg?v=1" as="image" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=8">
-    <link rel="stylesheet" href="theme-bright.css?v=20">
-    <script defer src="config.js?v=5"></script>
+    <link rel="stylesheet" href="styles.css?v=9">
+    <link rel="stylesheet" href="theme-bright.css?v=21">
+    <script defer src="config.js?v=7"></script>
     <script defer src="qrcode.js"></script>
-    <script defer src="deck.js?v=17"></script>
+    <script defer src="deck.js?v=18"></script>
   </head>
   <body>
     <div class="viewport" id="viewport">
@@ -66,14 +66,14 @@
           </div>
         </section>
 
-        <section class="slide slide--odyssey" data-slide="5" aria-label="The wrong bag" hidden>
+        <section class="slide slide--odyssey" data-slide="5" aria-label="The Bag of Winds" hidden>
           <div class="scene-stack" aria-hidden="true">
             <img class="scene-image" data-art-fragment="1" src="assets/illustrations/bright/odyssey-ithaca-sight-v2.png" alt="">
             <img class="scene-image" data-art-fragment="2" src="assets/illustrations/bright/odyssey-wrong-bag.png" alt="">
           </div>
           <div class="fragment-stack">
             <p class="fragment statement-line" data-fragment>At one point, Ithaca was <span class="odyssey-accent">in sight.</span></p>
-            <p class="fragment statement-line" data-fragment>Then someone opened the <span class="odyssey-accent">wrong bag.</span></p>
+            <p class="fragment statement-line" data-fragment>Then the crew opened the <span class="odyssey-accent">Bag of Winds.</span></p>
           </div>
         </section>
 
@@ -100,6 +100,7 @@
             <p class="eyebrow">8 MINUTES · Completion is not required.</p>
             <h1>Try to reach the first usable result.</h1>
           </div>
+          <p class="exercise-route"><strong>WORKSHOP SIMULATION</strong> FakeGPT is the starting screen. It sends you into an intentionally bad FakeSaaSPI token route.</p>
           <div class="exercise-grid">
             <div class="exercise-qr">
               <div class="qr-frame qr-frame--primary" data-qr-frame="fakegpt" aria-live="off"></div>
@@ -135,29 +136,29 @@
 
         <section class="slide slide--dashboard slide--results" data-slide="11" aria-label="Real-time room results" hidden>
           <div class="dashboard-placeholder asset-placeholder" data-results-placeholder>
-            <span>REAL-TIME RESULTS EMBED HERE</span>
-            <span>set CONFIG.resultsUrl</span>
+            <span>RESULTS VIEW IS NOT CONNECTED</span>
+            <span>Stage navigation skips this slide until the event results URL is added</span>
           </div>
         </section>
 
         <section class="slide slide--evidence slide--unified" data-slide="12" aria-label="Three evidence boundaries" hidden>
           <div class="story-surface">
             <div class="surface-heading">
-              <p class="source-label">THREE KINDS OF EVIDENCE</p>
-              <h1>Keep the evidence separate.</h1>
+              <p class="source-label">EVIDENCE BOUNDARY · HYPOTHETICAL TEAM ROUTE</p>
+              <h1>A stopping point is not an explanation.</h1>
             </div>
             <div class="evidence-bands">
               <article class="evidence-band evidence-band--docs">
                 <p class="card-number">01</p>
-                <div><h2>Documented route</h2><p>What official docs ask someone to do.</p></div>
+                <div><h2>Documented route</h2><p>Request Sanity access → draft → PMM approval → publish.</p></div>
               </article>
               <article class="evidence-band evidence-band--room">
                 <p class="card-number">02</p>
-                <div><h2>Observed behavior</h2><p>Where this room reached, retried, and recorded bounded errors.</p></div>
+                <div><h2>Observed behavior</h2><p>The draft reached approval and waited.</p></div>
               </article>
               <article class="evidence-band evidence-band--missing">
                 <p class="card-number">03</p>
-                <div><h2>Missing evidence</h2><p>Why someone stopped, what they intended, and whether this happens elsewhere.</p></div>
+                <div><h2>Missing evidence</h2><p>Why it waited, who owned the next step, and whether this repeats.</p></div>
               </article>
             </div>
           </div>
@@ -215,6 +216,7 @@
               <article><p class="card-number">02</p><div><h2>Route</h2><p>One selected path for one developer intent.</p></div></article>
               <article><p class="card-number">03</p><div><h2>End</h2><p>A named milestone or demonstrated terminal state.</p></div></article>
             </div>
+            <p class="method-boundary">This describes documentation, not developer behavior.</p>
           </div>
         </section>
 
@@ -224,11 +226,11 @@
             <div class="finding-layout">
               <div class="finding-primary">
                 <p class="finding-number" data-stat="selectionPrimary"></p>
-                <h1>did not present one unambiguous default route for the selected intent.</h1>
+                <h1>required the research policy to choose among documented routes.</h1>
               </div>
               <div class="finding-detail">
-                <div class="comparison-row"><strong data-stat="selectionPolicy"></strong><span>we had to choose one route</span></div>
-                <div class="comparison-row"><strong data-stat="selectionDocs"></strong><span>the docs identified one directly</span></div>
+                <div class="comparison-row"><strong data-stat="selectionPolicy"></strong><span>research policy selected the route</span></div>
+                <div class="comparison-row"><strong data-stat="selectionDocs"></strong><span>documentation supplied a default</span></div>
                 <p class="finding-action">Recommend one next route for a specific developer intent.</p>
               </div>
             </div>
@@ -239,9 +241,10 @@
           <div class="story-surface">
             <div class="surface-heading">
               <p class="source-label">SUCCESS SIGNALS · 205 DOCUMENTED ROUTES</p>
-              <h1>Only 83 routes explicitly named the first-success milestone.</h1>
+              <h1>83 of 205 routes named the first-success milestone.</h1>
             </div>
             <div class="number-grid" data-boundary-stats></div>
+            <p class="success-action">Name the first useful result before you instrument activation.</p>
           </div>
         </section>
 
@@ -262,17 +265,18 @@
           </div>
         </section>
 
-        <section class="slide slide--atlas slide--unified" data-slide="19" aria-label="Use the First-Mile Atlas" hidden>
+        <section class="slide slide--atlas slide--unified" data-slide="19" aria-label="Move from diagnosis to action with the First-Mile Atlas" hidden>
           <div class="story-surface resource-layout">
             <div class="resource-copy">
-              <p class="eyebrow">3 TO 4 MINUTES</p>
-              <h1>Check a documented comparison.</h1>
+              <p class="eyebrow">PROBLEM → ACTION · 3 TO 4 MINUTES</p>
+              <h1>Start with one useful comparison.</h1>
+              <p class="resource-handoff">We have a stopping point. Choose one documented condition to inspect next.</p>
               <ol>
                 <li>Find your platform, category, or nearest comparison.</li>
-                <li>Choose one documented condition worth checking.</li>
+                <li>Choose one condition in your own route to verify.</li>
                 <li>If your platform is missing, write down the mismatch.</li>
               </ol>
-              <p class="resource-limit">Use the Atlas to choose what to investigate next.</p>
+              <p class="resource-limit">This is a comparison, not a ranking or diagnosis.</p>
             </div>
             <div class="resource-qr">
               <div class="qr-frame qr-frame--takeaway" data-qr-frame="comparison" data-qr-size="336" aria-live="off"></div>
@@ -290,29 +294,29 @@
             <div class="calibrate-product-grid">
               <div class="calibrate-code-panel">
                 <p class="source-label">CURRENT REPOSITORY API</p>
-                <pre><code>import { calibrate } from "@usecalibrate/browser";
+                <pre><code>import { calibrate } from
+  "@usecalibrate/browser";
 
 const cal = calibrate({
   endpoint: "/__calibrate"
 });</code></pre>
-                <p class="api-boundary">The DOM-autocapture package is in the public repository. npm publication is pending.</p>
               </div>
               <div class="calibrate-capabilities">
                 <article>
                   <h2>Standard DOM</h2>
-                  <p>Works with standard controls rendered by React, Vue, Svelte, Angular, or plain HTML. No framework adapter is required.</p>
+                  <p>React, Vue, Svelte, Angular, or plain HTML.</p>
                 </article>
                 <article>
-                  <h2>Autocapture by default</h2>
-                  <p>Routes and standard field interactions are observed automatically.</p>
+                  <h2>Autocapture</h2>
+                  <p>Routes and standard field state, on by default.</p>
                 </article>
                 <article>
-                  <h2>Manual when needed</h2>
-                  <p>Custom controls can report named page, field, copy, paste, and shipped events.</p>
+                  <h2>Manual events</h2>
+                  <p>For custom controls the browser cannot infer.</p>
                 </article>
                 <article>
                   <h2>Fail safely</h2>
-                  <p>Instrumentation disables itself instead of throwing into the host application.</p>
+                  <p>Stops itself instead of breaking the app.</p>
                 </article>
               </div>
             </div>
@@ -339,15 +343,14 @@ const cal = calibrate({
                 <div class="identifier-order" aria-label="data-fm, then name, then id">
                   <code>data-fm</code><span>then</span><code>name</code><span>then</span><code>id</code>
                 </div>
-                <p>Field events report focus, fill, blank, blur, or error. Abandonment is inferred later, not recorded as a motive.</p>
+                <p>Reports focus, fill, blank, blur, or error. It does not record a motive.</p>
               </section>
               <section class="privacy-contract" aria-label="Privacy boundaries">
                 <p class="source-label">NOT COLLECTED</p>
                 <ul>
-                  <li>No form values are stored or sent. Only empty or non-empty state is checked.</li>
-                  <li>No DOM text, labels, placeholders, clipboard contents, query strings, or hashes.</li>
-                  <li>Full URLs are not sent. Password and hidden fields are ignored.</li>
-                  <li>A strict, closed schema rejects unknown event fields.</li>
+                  <li>No form values, page text, labels, placeholders, or clipboard contents.</li>
+                  <li>Routes are normalized. Query strings and hashes are removed.</li>
+                  <li>Password and hidden fields are ignored. Unknown event fields are rejected.</li>
                 </ul>
               </section>
             </div>

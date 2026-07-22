@@ -11,14 +11,14 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 | Slides | What you will see | Why it is there |
 | --- | --- | --- |
 | 1 to 7 | Odysseus takes ten years to get home after Troy. | A clear destination does not guarantee a usable route. Developers also arrive with a destination of their own. |
-| 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. Slide 11 is reserved for event-specific results and may show a placeholder outside the live workshop. |
+| 8 to 11 | You try an intentionally difficult onboarding flow while the room dashboard records progress. | Experience the route before discussing it. Slide 11 is reserved for event-specific results and is skipped automatically until its URL is configured. |
 | 12 to 13 | The deck separates the documented route, observed behavior, and the explanation that is still missing. | A stopping point tells us where to investigate. It does not tell us why someone stopped. |
 | 14 to 18 | Research from 205 documented developer onboarding routes. | See where route choice and unclear success boundaries appear in the inspected documentation. |
 | 19 to 24 | The First-Mile Atlas, a three-slide Calibrate section, an optional attendee credit, and a Monday action. | Move from a documented comparison to privacy-conscious product signals, then take one bounded action. |
 
 ## The three research findings
 
-1. **151 of 205 routes needed a selection rule.** For these records, the inspected documentation did not supply one unambiguous default route for the chosen developer intent.
+1. **94 of 205 routes required the research policy to select the route.** The other 111 records supplied a documented default for the selected developer intent.
 2. **Only 83 of 205 routes explicitly named the first-success milestone.** The other 122 reached a demonstrable end without naming that end as the milestone.
 3. **A stopping point is not a diagnosis.** The separate blocker inventory contains hundreds of possible explanations. Zero of 790 reason cards is currently eligible to report as a diagnosed cause.
 
@@ -65,6 +65,8 @@ Eligible DevRelCon attendees can sign in with GitHub to check access to the $100
 | `N` | Open the synchronized speaker notes |
 
 The slide number in the URL matches the order in the deck: `#1` through `#24`.
+
+Live-room dependency: the event-specific results surface on slide 11 is not connected yet. Normal stage navigation skips it safely. Use the live dashboard on slide 9 for the room debrief until the final results URL is available and rehearsed.
 
 **What Makes Developers Actually Ship?** was prepared for DevRelCon NYC on July 22, 2026 by Ojus Save from Render.
 
