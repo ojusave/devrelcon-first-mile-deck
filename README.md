@@ -18,7 +18,7 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 
 ## The three research findings
 
-1. **94 of 205 routes required the research policy to select the route.** The other 111 records supplied a documented default for the selected developer intent.
+1. **In 151 of 205 routes, the inspected documentation did not supply one unambiguous default for the selected developer intent.** The workshop policy selected one documented route for those records. The documentation selected one directly in the other 54 records.
 2. **Only 83 of 205 routes explicitly named the first-success milestone.** The other 122 reached a demonstrable end without naming that end as the milestone.
 3. **A stopping point is not a diagnosis.** The separate blocker inventory contains hundreds of possible explanations. Zero of 790 reason cards is currently eligible to report as a diagnosed cause.
 

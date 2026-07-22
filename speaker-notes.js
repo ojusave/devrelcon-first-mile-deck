@@ -168,13 +168,14 @@ const SPEAKER_NOTES = {
   },
   16: {
     purpose: "Explain the route-choice finding and its practical consequence.",
-    say: `• In 94 of the 205 records, the current generated dataset says the research policy selected among documented routes.
-• In the other 111 records, the documentation supplied a default for the selected intent.
+    say: `• In 151 of the 205 canonical records, the selection basis explicitly says the workshop policy chose among documented routes.
+• The generated route-selection classifier reports 94 because it recognizes “Workshop selection policy” but misses 57 records worded as “Under the workshop policy.” Do not use that generated field until its phrase detector is corrected.
+• In the other 54 records, the documentation selected one route directly for the chosen intent.
 • When the docs did not choose, someone still had to. In this dataset, that someone was unfortunately me.
-• This does not prove that developers failed or found the choice difficult. It describes how the research route was selected.
+• This does not prove that developers failed or found the choice difficult. It describes what the inspected documentation supplied for this research intent.
 • Practical action: for one named developer intent, recommend one next route and make recovery from the wrong route cheap.`,
     watch: "2 minutes. Say the denominator and both complementary counts. Watch for anyone treating the number as user behavior and correct that immediately.",
-    fallback: "If the count is questioned, open ds-quality.json after the talk. The generated fields are policy-selected 94 and documented-default 111.",
+    fallback: "If the count is questioned, show the two raw selection-basis phrases and the 94 plus 57 reconciliation. The generated classifier undercounts this finding.",
     transition: "Selecting a route is only half of the job. The developer also needs to recognize the finish line.",
   },
   17: {

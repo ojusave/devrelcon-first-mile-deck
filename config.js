@@ -24,9 +24,9 @@ const CONFIG = {
 
   // Counts reproduced from the research repositories on July 21, 2026.
   stats: {
-    selectionPrimary: "94 / 205",
-    selectionPolicy: "94",
-    selectionDocs: "111",
+    selectionPrimary: "151 / 205",
+    selectionPolicy: "151",
+    selectionDocs: "54",
     boundaries: [
       { value: "83 / 205", label: "routes with an explicitly named first-success milestone" },
       { value: "122 / 205", label: "routes that demonstrated an end without naming the milestone" },
