@@ -1,21 +1,29 @@
 (function () {
   "use strict";
 
-  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v8";
-  const PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v7";
-  const SECOND_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v6";
-  const THIRD_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v5";
-  const FOURTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v4";
-  const FIFTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v3";
-  const SIXTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
+  const NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v9";
+  const PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v8";
+  const SECOND_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v7";
+  const THIRD_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v6";
+  const FOURTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v5";
+  const FIFTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v4";
+  const SIXTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v3";
+  const SEVENTH_PREVIOUS_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v2";
   const LEGACY_NOTES_STORAGE_KEY = "devrelcon.presenter.notes.v1";
-  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v7";
-  const PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v6";
-  const SECOND_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v5";
-  const THIRD_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v4";
-  const FOURTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
-  const FIFTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
+  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v8";
+  const PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v7";
+  const SECOND_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v6";
+  const THIRD_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v5";
+  const FOURTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v4";
+  const FIFTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v3";
+  const SIXTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v2";
   const LEGACY_PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide";
+  const ATLAS_INSERTION_SLIDE_ID_MAP = {
+    1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8,
+    9: 9, 10: 10, 11: 11, 12: 12, 13: 13, 14: 14, 15: 15,
+    16: 16, 17: 17, 18: 18, 19: 20, 20: 21, 21: 22,
+    22: 23, 23: 24, 24: 25, 25: 26,
+  };
   const SLIDE_22_REMOVAL_MAP = {
     1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8,
     9: 9, 10: 10, 11: 11, 12: 12, 13: 13, 14: 14, 15: 15,
@@ -139,39 +147,45 @@
       }
 
       const previous = JSON.parse(window.localStorage.getItem(PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const previousMigration = migrateNotes(previous, SLIDE_22_REMOVAL_MAP);
+      const previousMigration = migrateNotes(previous, ATLAS_INSERTION_SLIDE_ID_MAP);
       if (Object.keys(previousMigration).length > 0) {
         return saveMigration(previousMigration);
       }
 
       const secondPrevious = JSON.parse(window.localStorage.getItem(SECOND_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const secondPreviousMigration = migrateNotes(secondPrevious, PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
+      const secondPreviousMigration = migrateNotes(secondPrevious, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP);
       if (Object.keys(secondPreviousMigration).length > 0) {
         return saveMigration(secondPreviousMigration);
       }
 
       const thirdPrevious = JSON.parse(window.localStorage.getItem(THIRD_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const thirdPreviousMigration = migrateNotes(thirdPrevious, PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
+      const thirdPreviousMigration = migrateNotes(thirdPrevious, PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP);
       if (Object.keys(thirdPreviousMigration).length > 0) {
         return saveMigration(thirdPreviousMigration);
       }
 
       const fourthPrevious = JSON.parse(window.localStorage.getItem(FOURTH_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const fourthPreviousMigration = migrateNotes(fourthPrevious, SECOND_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
+      const fourthPreviousMigration = migrateNotes(fourthPrevious, PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP);
       if (Object.keys(fourthPreviousMigration).length > 0) {
         return saveMigration(fourthPreviousMigration);
       }
 
       const fifthPrevious = JSON.parse(window.localStorage.getItem(FIFTH_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const fifthPreviousMigration = migrateNotes(fifthPrevious, THIRD_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
+      const fifthPreviousMigration = migrateNotes(fifthPrevious, SECOND_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP);
       if (Object.keys(fifthPreviousMigration).length > 0) {
         return saveMigration(fifthPreviousMigration);
       }
 
       const sixthPrevious = JSON.parse(window.localStorage.getItem(SIXTH_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
-      const sixthPreviousMigration = migrateNotes(sixthPrevious, FOURTH_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
+      const sixthPreviousMigration = migrateNotes(sixthPrevious, THIRD_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP);
       if (Object.keys(sixthPreviousMigration).length > 0) {
         return saveMigration(sixthPreviousMigration);
+      }
+
+      const seventhPrevious = JSON.parse(window.localStorage.getItem(SEVENTH_PREVIOUS_NOTES_STORAGE_KEY) || "{}");
+      const seventhPreviousMigration = migrateNotes(seventhPrevious, FOURTH_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP);
+      if (Object.keys(seventhPreviousMigration).length > 0) {
+        return saveMigration(seventhPreviousMigration);
       }
 
       const legacy = JSON.parse(window.localStorage.getItem(LEGACY_NOTES_STORAGE_KEY) || "{}");
@@ -179,7 +193,7 @@
         return {};
       }
 
-      return saveMigration(migrateNotes(legacy, LEGACY_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP));
+      return saveMigration(migrateNotes(legacy, LEGACY_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP));
     } catch (_error) {
       return {};
     }
@@ -361,22 +375,25 @@
     const thirdPrevious = window.localStorage.getItem(THIRD_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const fourthPrevious = window.localStorage.getItem(FOURTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const fifthPrevious = window.localStorage.getItem(FIFTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
+    const sixthPrevious = window.localStorage.getItem(SIXTH_PREVIOUS_PRESENTER_SLIDE_STORAGE_KEY);
     const legacy = window.localStorage.getItem(LEGACY_PRESENTER_SLIDE_STORAGE_KEY);
-    const saved = JSON.parse(current || previous || secondPrevious || thirdPrevious || fourthPrevious || fifthPrevious || legacy || "null");
+    const saved = JSON.parse(current || previous || secondPrevious || thirdPrevious || fourthPrevious || fifthPrevious || sixthPrevious || legacy || "null");
     if (!window.location.hash && saved?.slideId) {
       const savedSlideId = current
         ? saved.slideId
         : previous
-          ? remapSlideId(saved.slideId, SLIDE_22_REMOVAL_MAP)
+          ? remapSlideId(saved.slideId, ATLAS_INSERTION_SLIDE_ID_MAP)
           : secondPrevious
-            ? remapSlideId(saved.slideId, PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP)
+            ? remapSlideId(saved.slideId, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP)
             : thirdPrevious
-              ? remapSlideId(saved.slideId, SECOND_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP)
+              ? remapSlideId(saved.slideId, PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP)
               : fourthPrevious
-                ? remapSlideId(saved.slideId, THIRD_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP)
+                ? remapSlideId(saved.slideId, SECOND_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP)
                 : fifthPrevious
-                  ? remapSlideId(saved.slideId, FOURTH_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP)
-                  : remapSlideId(saved.slideId, LEGACY_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP);
+                  ? remapSlideId(saved.slideId, THIRD_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP)
+                  : sixthPrevious
+                    ? remapSlideId(saved.slideId, FOURTH_PREVIOUS_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP)
+                    : remapSlideId(saved.slideId, LEGACY_SLIDE_ID_MAP, SLIDE_22_REMOVAL_MAP, ATLAS_INSERTION_SLIDE_ID_MAP);
       initialSlide = validSlide(savedSlideId);
     }
   } catch (_error) {

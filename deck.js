@@ -6,8 +6,9 @@
   const DASHBOARD_SLIDE = 9;
   const HOLDING_SLIDE = 10;
   const RESULTS_SLIDE = 11;
+  const ATLAS_SLIDE = 19;
   const QR_QUIET_ZONE_MODULES = 4;
-  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v7";
+  const PRESENTER_SLIDE_STORAGE_KEY = "devrelcon.presenter.slide.v8";
 
   const root = document.documentElement;
   const blackout = document.getElementById("blackout");
@@ -339,7 +340,7 @@
     });
   }
 
-  function renderLiveFrame(slideId, value, label, configKey, placeholderTitle) {
+  function renderLiveFrame(slideId, value, label, configKey, placeholderTitle, options = {}) {
     const slide = slides[slideIds.indexOf(slideId)];
     if (!slide) {
       return;
@@ -361,18 +362,37 @@
     }
 
     const iframe = document.createElement("iframe");
-    iframe.className = "dashboard-frame";
+    iframe.className = ["dashboard-frame", options.className].filter(Boolean).join(" ");
     iframe.src = value;
     iframe.title = label;
     iframe.loading = "eager";
-    iframe.tabIndex = -1;
-    slide.replaceChildren(iframe);
+    iframe.tabIndex = options.interactive ? 0 : -1;
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    if (options.nextControl) {
+      const nextButton = document.createElement("button");
+      nextButton.className = "atlas-next";
+      nextButton.type = "button";
+      nextButton.textContent = "Next →";
+      nextButton.setAttribute("aria-label", "Continue to the next slide");
+      nextButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        advance();
+      });
+      slide.replaceChildren(iframe, nextButton);
+    } else {
+      slide.replaceChildren(iframe);
+    }
     slide.dataset.liveReady = "true";
   }
 
   function renderLiveViews() {
     renderLiveFrame(DASHBOARD_SLIDE, CONFIG.dashboardUrl, "Live dashboard", "dashboardUrl", "LIVE DASHBOARD EMBEDS HERE");
     renderLiveFrame(RESULTS_SLIDE, CONFIG.resultsUrl, "Real-time results", "resultsUrl", "RESULTS VIEW IS NOT CONNECTED");
+    renderLiveFrame(ATLAS_SLIDE, CONFIG.atlasUrl, "Live Developer Journey Atlas", "atlasUrl", "LIVE ATLAS EMBEDS HERE", {
+      className: "atlas-frame",
+      interactive: true,
+      nextControl: true,
+    });
   }
 
   function renderNumberCards(selector, stats) {
