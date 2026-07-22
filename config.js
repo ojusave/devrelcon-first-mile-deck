@@ -15,7 +15,7 @@ const CONFIG = {
   takeaways: {
     firstmile: "https://github.com/ojusave/usecalibrate",
     fakesaaspiKit: "https://github.com/ojusave/fakesaaspi",
-    comparison: "https://devrelcon-research.onrender.com",
+    comparison: "https://developer-journey-atlas.onrender.com",
     credits: "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
     careers: "https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG",
   },
@@ -23,7 +23,7 @@ const CONFIG = {
   // Optional countdown on the holding slide. null hides it entirely.
   trapTimerMinutes: null,
 
-  // Counts reproduced from the research repositories on July 21, 2026.
+  // Counts reproduced from the frozen 205-record workshop snapshot on July 21, 2026.
   stats: {
     selectionPrimary: "151 / 205",
     selectionPolicy: "151",

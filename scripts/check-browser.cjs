@@ -31,7 +31,10 @@ function assert(condition, message) {
     const context = await browser.newContext({ viewport, hasTouch: true });
     const page = await context.newPage();
     page.on("console", (message) => {
-      if (message.type() === "error") errors.push(`${viewport.name} console: ${message.text()}`);
+      if (message.type() === "error") {
+        const source = message.location().url || "unknown resource";
+        errors.push(`${viewport.name} console (${source}): ${message.text()}`);
+      }
     });
     page.on("pageerror", (error) => errors.push(`${viewport.name} page: ${error.message}`));
 
@@ -299,27 +302,42 @@ function assert(condition, message) {
   assert(transitionDuration === "0s", `reduced motion: expected 0s transition, found ${transitionDuration}`);
   await reducedContext.close();
 
-  const notesContext = await browser.newContext({ viewport: { width: 1280, height: 720 } });
-  const notesPage = await notesContext.newPage();
-  for (const slideId of slideIds) {
-    await notesPage.goto(`${baseUrl}/speaker-notes.html?check=${slideId}#${slideId}`, { waitUntil: "networkidle" });
-    await notesPage.locator("[data-note-slide]").getByText(String(slideId), { exact: true }).waitFor();
-    assert((await notesPage.getByLabel("Timing and room cue").inputValue()).trim().length > 0, `speaker notes slide ${slideId}: missing timing and room cue`);
-    assert((await notesPage.getByLabel("Fallback").inputValue()).trim().length > 0, `speaker notes slide ${slideId}: missing fallback`);
-    const notesFit = await notesPage.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight);
-    assert(notesFit, `speaker notes slide ${slideId}: notes require scrolling at 1280x720`);
-    const noteFieldsAreUsable = await notesPage.locator("textarea").evaluateAll((fields) => fields.every((field) => {
-      if (field.scrollHeight <= field.clientHeight) return true;
-      return getComputedStyle(field).overflowY === "auto";
-    }));
-    assert(noteFieldsAreUsable, `speaker notes slide ${slideId}: overflowing note field is not independently scrollable`);
-    if ([8, 15, 21, 23].includes(slideId)) {
-      await notesPage.screenshot({ path: join(outputDir, `speaker-notes-${String(slideId).padStart(2, "0")}.png`) });
+  for (const viewport of viewports) {
+    const visualNotesContext = await browser.newContext({ viewport });
+    const visualNotesPage = await visualNotesContext.newPage();
+    for (const slideId of slideIds) {
+      await visualNotesPage.goto(`${baseUrl}/speaker-notes.html?check=${viewport.name}-${slideId}#${slideId}`, { waitUntil: "networkidle" });
+      await visualNotesPage.locator("[data-note-slide]").getByText(String(slideId), { exact: true }).waitFor();
+      for (const label of ["Full script", "Room cue", "Timing", "Fallback", "Evidence boundary", "Sources"]) {
+        assert((await visualNotesPage.getByLabel(label).inputValue()).trim().length > 0, `${viewport.name} speaker notes slide ${slideId}: missing ${label.toLowerCase()}`);
+      }
+      const notesFit = await visualNotesPage.evaluate(() => document.documentElement.scrollHeight <= window.innerHeight);
+      assert(notesFit, `${viewport.name} speaker notes slide ${slideId}: outer page requires scrolling`);
+      const noteFieldsAreUsable = await visualNotesPage.locator("textarea").evaluateAll((fields) => fields.every((field) => {
+        if (field.scrollHeight <= field.clientHeight) return true;
+        return getComputedStyle(field).overflowY === "auto";
+      }));
+      assert(noteFieldsAreUsable, `${viewport.name} speaker notes slide ${slideId}: overflowing note field is not independently scrollable`);
+      if ([1, 8, 15, 21, 24].includes(slideId)) {
+        await visualNotesPage.screenshot({ path: join(outputDir, `${viewport.name}-speaker-notes-${String(slideId).padStart(2, "0")}.png`) });
+      }
     }
+    await visualNotesContext.close();
   }
 
+  const notesContext = await browser.newContext({ viewport: { width: 1280, height: 720 } });
+  const notesPage = await notesContext.newPage();
+
+  await notesPage.goto(`${baseUrl}/speaker-notes.html?scroll-reset-check=1#14`, { waitUntil: "networkidle" });
+  await notesPage.getByLabel("Full script").evaluate((field) => { field.scrollTop = field.scrollHeight; });
+  await notesPage.locator(".metadata").evaluate((rail) => { rail.scrollTop = rail.scrollHeight; });
+  await notesPage.getByRole("button", { name: "Next" }).click();
+  await notesPage.getByText("Slide 15").waitFor();
+  assert(await notesPage.getByLabel("Full script").evaluate((field) => field.scrollTop) === 0, "speaker notes: full script did not reset to the top after slide change");
+  assert(await notesPage.locator(".metadata").evaluate((rail) => rail.scrollTop) === 0, "speaker notes: metadata rail did not reset to the top after slide change");
+
   await notesPage.goto(`${baseUrl}/speaker-notes.html?edit-check=1#14`, { waitUntil: "networkidle" });
-  const editableNotes = ["Purpose", "Talking points", "Transition", "Timing and room cue", "Fallback"];
+  const editableNotes = ["Purpose", "Full script", "Room cue", "Timing", "Fallback", "Evidence boundary", "Sources"];
   const defaultNotes = {};
   const editedNotes = {};
   for (const label of editableNotes) {
@@ -345,19 +363,36 @@ function assert(condition, message) {
     assert(await notesPage.getByLabel(label).inputValue() === defaultNotes[label], `speaker notes: restored ${label.toLowerCase()} default did not survive reload`);
   }
 
+  const previousShapeNote = {
+    purpose: "Saved purpose from the previous field shape.",
+    say: "Saved full delivery that must migrate.",
+    transition: "Saved spoken transition that belongs at the end.",
+    watch: "Saved room and timing guidance.",
+    fallback: "Saved fallback.",
+  };
+  await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v6");
+    localStorage.setItem("devrelcon.presenter.notes.v5", JSON.stringify({ 14: note }));
+  }, previousShapeNote);
+  await notesPage.goto(`${baseUrl}/speaker-notes.html?shape-migration-check=1#14`, { waitUntil: "networkidle" });
+  assert(await notesPage.getByLabel("Purpose").inputValue() === previousShapeNote.purpose, "speaker notes: previous purpose did not migrate from v5");
+  assert(await notesPage.getByLabel("Full script").inputValue() === `${previousShapeNote.say}\n\n${previousShapeNote.transition}`, "speaker notes: previous talking points and transition did not merge into the full script");
+  assert(await notesPage.getByLabel("Room cue").inputValue() === previousShapeNote.watch, "speaker notes: previous room guidance did not migrate from v5");
+  assert(await notesPage.getByLabel("Fallback").inputValue() === previousShapeNote.fallback, "speaker notes: previous fallback did not migrate from v5");
+
   const previousNote = {
     purpose: "Saved purpose for the previous closing slide.",
     say: "Saved talking point that must stay with the closing slide.",
     transition: "Saved closing transition.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v6");
     localStorage.removeItem("devrelcon.presenter.notes.v5");
     localStorage.setItem("devrelcon.presenter.notes.v4", JSON.stringify({ 25: note }));
   }, previousNote);
   await notesPage.goto(`${baseUrl}/speaker-notes.html?previous-migration-check=1#24`, { waitUntil: "networkidle" });
   assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not migrate from slide 25 to slide 24");
-  assert(await notesPage.getByLabel("Talking points").inputValue() === previousNote.say, "speaker notes: previous closing talking points did not migrate from slide 25 to slide 24");
-  assert(await notesPage.getByLabel("Transition").inputValue() === previousNote.transition, "speaker notes: previous closing transition did not migrate from slide 25 to slide 24");
+  assert(await notesPage.getByLabel("Full script").inputValue() === `${previousNote.say}\n\n${previousNote.transition}`, "speaker notes: previous closing script did not migrate from slide 25 to slide 24");
 
   const legacyNote = {
     purpose: "Legacy purpose for the former slide 21.",
@@ -365,6 +400,7 @@ function assert(condition, message) {
     transition: "Legacy transition into the exercise.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v6");
     localStorage.removeItem("devrelcon.presenter.notes.v5");
     localStorage.removeItem("devrelcon.presenter.notes.v4");
     localStorage.removeItem("devrelcon.presenter.notes.v3");
@@ -373,14 +409,14 @@ function assert(condition, message) {
   }, legacyNote);
   await notesPage.goto(`${baseUrl}/speaker-notes.html?migration-check=1#7`, { waitUntil: "networkidle" });
   assert(await notesPage.getByLabel("Purpose").inputValue() === legacyNote.purpose, "speaker notes: legacy purpose did not migrate from slide 21 to slide 7");
-  assert(await notesPage.getByLabel("Talking points").inputValue() === legacyNote.say, "speaker notes: legacy talking points did not migrate from slide 21 to slide 7");
-  assert(await notesPage.getByLabel("Transition").inputValue() === legacyNote.transition, "speaker notes: legacy transition did not migrate from slide 21 to slide 7");
+  assert(await notesPage.getByLabel("Full script").inputValue() === `${legacyNote.say}\n\n${legacyNote.transition}`, "speaker notes: legacy script did not migrate from slide 21 to slide 7");
   await notesPage.evaluate(() => {
     localStorage.removeItem("devrelcon.presenter.notes.v1");
     localStorage.removeItem("devrelcon.presenter.notes.v2");
     localStorage.removeItem("devrelcon.presenter.notes.v3");
     localStorage.removeItem("devrelcon.presenter.notes.v4");
     localStorage.removeItem("devrelcon.presenter.notes.v5");
+    localStorage.removeItem("devrelcon.presenter.notes.v6");
   });
   await notesContext.close();
 
@@ -390,7 +426,7 @@ function assert(condition, message) {
     "https://fakesaaspi.onrender.com/present",
     "https://github.com/ojusave/usecalibrate",
     "https://github.com/ojusave/fakesaaspi",
-    "https://devrelcon-research.onrender.com",
+    "https://developer-journey-atlas.onrender.com",
     "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
     "https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG",
   ]) {

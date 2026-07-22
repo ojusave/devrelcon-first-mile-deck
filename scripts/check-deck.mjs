@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import vm from "node:vm";
 
 const root = resolve(import.meta.dirname, "..");
 const files = {
@@ -31,45 +32,57 @@ requireCondition((files.html.match(/class="story-surface(?:\s|\")/g) || []).leng
 const noteIds = [...files.notes.matchAll(/^\s+(\d+): \{/gm)].map((match) => Number(match[1]));
 requireCondition(JSON.stringify(noteIds) === JSON.stringify(expectedOrder), `Speaker notes do not match slide order: ${noteIds.join(", ")}`);
 requireCondition((files.notes.match(/purpose:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note purpose");
-requireCondition((files.notes.match(/say:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note delivery cue");
-requireCondition((files.notes.match(/transition:/g) || []).length === expectedOrder.length, "Every slide needs one speaker-note transition");
-requireCondition((files.notes.match(/watch:/g) || []).length === expectedOrder.length, "Every slide needs timing and an audience cue");
+requireCondition((files.notes.match(/script:/g) || []).length === expectedOrder.length, "Every slide needs one complete speaker script");
+requireCondition((files.notes.match(/roomCue:/g) || []).length === expectedOrder.length, "Every slide needs a room cue");
+requireCondition((files.notes.match(/timing:/g) || []).length === expectedOrder.length, "Every slide needs timing guidance");
 requireCondition((files.notes.match(/fallback:/g) || []).length === expectedOrder.length, "Every slide needs a fallback");
-requireCondition((files.notes.match(/• /g) || []).length >= expectedOrder.length * 3, "Every slide needs detailed speaker-note talking points");
-requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 5, "Purpose, talking points, transition, room cue, and fallback must be editable");
+requireCondition((files.notes.match(/evidenceBoundary:/g) || []).length === expectedOrder.length, "Every slide needs an evidence boundary");
+requireCondition((files.notes.match(/sources:/g) || []).length === expectedOrder.length, "Every slide needs sources");
+requireCondition((files.notesHtml.match(/<textarea data-note-/g) || []).length === 7, "The full script and all six delivery fields must be editable");
 requireCondition(files.notesHtml.includes("Save notes"), "Speaker notes need an explicit save action");
 requireCondition(files.notesHtml.includes("Restore defaults"), "Speaker notes need a restore-defaults action");
-requireCondition(files.notesView.includes("devrelcon.presenter.notes.v5"), "Speaker-note edits must use versioned browser storage");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v6"), "Speaker-note edits must use versioned browser storage");
+requireCondition(files.notesView.includes("devrelcon.presenter.notes.v5"), "Speaker-note edits must migrate the previous field shape");
 requireCondition(files.notesView.includes("LEGACY_SLIDE_ID_MAP"), "Speaker-note edits must migrate from the previous slide numbering");
 requireCondition(files.notesView.includes("PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve current slide edits when credits and closing move");
 requireCondition(files.notesView.includes("SECOND_PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve the earlier closing-slide migration");
 requireCondition(files.notesView.includes("THIRD_PREVIOUS_SLIDE_ID_MAP"), "Speaker-note edits must preserve older slide-note migrations");
 
+const notesContext = {};
+vm.createContext(notesContext);
+vm.runInContext(`${files.notes}\nthis.__speakerNotes = SPEAKER_NOTES;`, notesContext);
+const parsedNotes = notesContext.__speakerNotes;
+const spokenWordCount = Object.values(parsedNotes).reduce((total, note) => {
+  const spoken = note.script.replace(/\[[^\]]+\]/g, " ").replace(/https?:\/\/\S+/g, " ");
+  return total + (spoken.match(/[A-Za-z0-9][A-Za-z0-9'’.-]*/g) || []).length;
+}, 0);
+requireCondition(spokenWordCount >= 3900 && spokenWordCount <= 4500, `Speaker script must contain 3900 to 4500 spoken words, found ${spokenWordCount}`);
+requireCondition(Object.values(parsedNotes).every((note) => note.script.includes("[")), "Every slide script needs at least one stage direction");
+
 for (const requiredText of [
   "8 MINUTES",
   "It does not tell us why",
   "151 / 205",
-  "the workshop policy selected a route",
-  "the documentation selected one directly",
+  "records mention the workshop policy",
+  "records do not mention that policy",
   "83 / 205",
   "122 / 205",
-  "Zero of 790",
   "TRACKER SCOPE",
   "Payments APIs",
   "Cloud infrastructure",
   "Data platforms",
   "Real-time messaging",
-  "ROUTE CHOICE · 205 DOCUMENTED ROUTES",
+  "ROUTE-SELECTION METHOD · 205 DOCUMENTED ROUTES",
   "SUCCESS SIGNALS · 205 DOCUMENTED ROUTES",
   "ONE STOPPING POINT, THREE QUESTIONS",
   "One selected path for one developer intent",
   "Stage navigation skips this slide until the event results URL is added",
   "83 of 205 routes named the first-success milestone",
-  "did not present one unambiguous default route for the selected intent",
+  "records document a workshop selection or normalization decision",
   "Five people form a bounded pilot, not a representative sample",
   "CALIBRATE · MAKE ONE ROUTE OBSERVABLE",
   "I built Calibrate, a privacy-conscious onboarding signal SDK",
-  "It captures behavior, not content",
+  "It captures interaction state, not field contents",
   "Run the route with your developer champions",
   "A small session finds useful questions",
   "Bring one question, not a verdict",
@@ -77,9 +90,9 @@ for (const requiredText of [
   "Autocapture",
   "data-fm",
   "No form values",
-  "not yet published to npm",
-  "Claim your Render credit code",
-  "The portal gives you a promotional credit code",
+  "not published to npm",
+  "Request the DevRelCon Render credit code",
+  "If a code is available, the portal assigns it",
   "Continue with GitHub",
   "redeem it from Render Billing",
   "WE’RE HIRING",
@@ -95,7 +108,7 @@ for (const requiredUrl of [
   "https://fakesaaspi.onrender.com/present",
   "https://github.com/ojusave/usecalibrate",
   "https://github.com/ojusave/fakesaaspi",
-  "https://devrelcon-research.onrender.com",
+  "https://developer-journey-atlas.onrender.com",
   "https://credits-portal-mmdm.onrender.com/claim/devrelcon",
   "https://render.com/careers?ashby_jid=4611bde4-47ac-45fc-ab56-235489e52682&utm_source=L51D6eVlVG",
 ]) {
@@ -103,10 +116,10 @@ for (const requiredUrl of [
 }
 
 const forbiddenPatterns = [
-  ["em dash character", /—/],
+  ["em dash character", /\u2014/],
   ["old transition count", /2,694/],
   ["old source count", /1,121/],
-  ["unsupported frustration claim", /frustrat(?:ion|ing)/i],
+  ["unsupported frustration claim", /(?:shows?|proves?|measures?) frustration|frustration (?:rate|score)/i],
   ["unsupported open-source label for FakeSaaSPI", /open[- ]source FakeSaaSPI/i],
   ["unsupported credit-portal eligibility flow", /sign in with GitHub to check eligibility/i],
   ["unsupported credit-portal deployment flow", /Connect a repository you are authorized to deploy|Create the Render service and run the prototype/i],

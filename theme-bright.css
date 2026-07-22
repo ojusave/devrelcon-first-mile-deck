@@ -994,8 +994,8 @@ body {
 
 .exercise-grid {
   display: grid;
-  grid-template-columns: 620px minmax(0, 1fr);
-  gap: 72px;
+  grid-template-columns: 1fr;
+  justify-items: center;
   align-items: center;
 }
 

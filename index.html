@@ -40,7 +40,7 @@
           </div>
           <div class="statement">
             <h1>Troy to <span class="odyssey-accent">Ithaca.</span></h1>
-            <p class="subhead"><span class="odyssey-stat">565</span> nautical miles.<br>About two weeks under sail.</p>
+            <p class="subhead"><span class="odyssey-stat">565</span> nautical miles.<br>One modern sailor's estimate.</p>
           </div>
         </section>
 
@@ -77,14 +77,14 @@
           </div>
         </section>
 
-        <section class="slide slide--odyssey" data-slide="6" aria-label="Odysseus returns alone and unrecognized" hidden>
+        <section class="slide slide--odyssey" data-slide="6" aria-label="Odysseus reaches Ithaca without his crew and in disguise" hidden>
           <div class="scene-stack" aria-hidden="true">
             <img class="scene-image" data-art-fragment="1" src="assets/illustrations/bright/odyssey-fleet.png" alt="">
             <img class="scene-image" data-art-fragment="2" src="assets/illustrations/bright/odyssey-beggar.png" alt="">
           </div>
           <div class="fragment-stack">
-            <p class="fragment statement-line" data-fragment>He left with <span class="odyssey-accent">12 ships</span> and around <span class="odyssey-accent">600 men.</span></p>
-            <p class="fragment statement-line" data-fragment>He came home <span class="odyssey-accent">alone and unrecognized.</span></p>
+            <p class="fragment statement-line" data-fragment>He left Troy with <span class="odyssey-accent">12 ships.</span></p>
+            <p class="fragment statement-line" data-fragment>He reached Ithaca <span class="odyssey-accent">without his crew.</span> Athena disguised him as a beggar.</p>
           </div>
         </section>
 
@@ -106,14 +106,6 @@
               <div class="qr-frame qr-frame--primary" data-qr-frame="fakegpt" aria-live="off"></div>
               <p class="qr-caption is-empty" data-qr-caption="fakegpt" aria-hidden="true"></p>
             </div>
-            <div class="instruction-card">
-              <ol>
-                <li>Use fake details only.</li>
-                <li>Stop when time is called, or when the next step is no longer worth it.</li>
-                <li>Keep your last screen open.</li>
-              </ol>
-              <p class="privacy-note">Do not enter personal, company, customer, card, or secret information.</p>
-            </div>
           </div>
         </section>
 
@@ -129,7 +121,7 @@
             <p class="eyebrow">TIME</p>
             <h1>Stop where you are.</h1>
             <p>Keep the last screen open.</p>
-            <p class="regroup-limit">The projector shows position and timing. It does not tell us why.</p>
+            <p class="regroup-limit">The dashboard records selected route events. It does not tell us why.</p>
           </div>
         </section>
 
@@ -198,16 +190,16 @@
 
         <section class="slide slide--finding slide--unified" data-slide="15" aria-label="Route selection finding" hidden>
           <div class="story-surface finding-surface">
-            <p class="source-label">ROUTE CHOICE · 205 DOCUMENTED ROUTES</p>
+            <p class="source-label">ROUTE-SELECTION METHOD · 205 DOCUMENTED ROUTES</p>
             <div class="finding-layout">
               <div class="finding-primary">
                 <p class="finding-number" data-stat="selectionPrimary"></p>
-                <h1>did not present one unambiguous default route for the selected intent.</h1>
+                <h1>records document a workshop selection or normalization decision.</h1>
               </div>
               <div class="finding-detail">
-                <div class="comparison-row"><strong data-stat="selectionPolicy"></strong><span>the workshop policy selected a route</span></div>
-                <div class="comparison-row"><strong data-stat="selectionDocs"></strong><span>the documentation selected one directly</span></div>
-                <p class="finding-action">Recommend one next route for a specific developer intent.</p>
+                <div class="comparison-row"><strong data-stat="selectionPolicy"></strong><span>records mention the workshop policy</span></div>
+                <div class="comparison-row"><strong data-stat="selectionDocs"></strong><span>records do not mention that policy</span></div>
+                <p class="finding-action">This is a method disclosure, not a developer-behavior finding.</p>
               </div>
             </div>
           </div>
@@ -245,14 +237,14 @@
           <div class="story-surface resource-layout">
             <div class="resource-copy">
               <p class="eyebrow">PROBLEM → ACTION · 3 TO 4 MINUTES</p>
-              <h1>Start with one useful comparison.</h1>
-              <p class="resource-handoff">We have a stopping point. Choose one documented condition to inspect next.</p>
+              <h1>Inspect one documented route.</h1>
+              <p class="resource-handoff">Choose one documented condition to verify in your own route.</p>
               <ol>
-                <li>Find your platform, category, or nearest comparison.</li>
-                <li>Choose one condition in your own route to verify.</li>
+                <li>Find your platform or browse its category.</li>
+                <li>Open one source-grounded route.</li>
                 <li>If your platform is missing, write down the mismatch.</li>
               </ol>
-              <p class="resource-limit">This is a comparison, not a ranking or diagnosis.</p>
+              <p class="resource-limit">The live Atlas changes. The research findings used a frozen 205-record snapshot.</p>
             </div>
             <div class="resource-qr">
               <div class="qr-frame qr-frame--takeaway" data-qr-frame="comparison" data-qr-size="336" aria-live="off"></div>
@@ -269,7 +261,7 @@
             </div>
             <div class="calibrate-product-grid">
               <div class="calibrate-code-panel">
-                <p class="source-label">CURRENT REPOSITORY API</p>
+                <p class="source-label">EXPERIMENTAL REPOSITORY API · NOT PUBLISHED TO NPM</p>
                 <pre><code>import { calibrate } from
   "@usecalibrate/browser";
 
@@ -303,15 +295,15 @@ const cal = calibrate({
           <div class="story-surface calibrate-contract-surface">
             <div class="surface-heading">
               <p class="eyebrow">CALIBRATE · OBSERVE WITHOUT CONTENT</p>
-              <h1>It captures behavior, not content.</h1>
+              <h1>It captures interaction state, not field contents.</h1>
             </div>
             <ol class="signal-journey" aria-label="Captured onboarding journey signals">
               <li>Session start</li>
               <li>Route viewed</li>
               <li>Field state</li>
               <li>Validation</li>
-              <li>Copy or paste</li>
-              <li>Shipped or closed</li>
+              <li>Manual copy/paste signal</li>
+              <li>Shipped or exit signal</li>
             </ol>
             <div class="contract-grid">
               <section class="field-contract" aria-label="Field identification order">
@@ -325,7 +317,7 @@ const cal = calibrate({
                 <p class="source-label">NOT COLLECTED</p>
                 <ul>
                   <li>No form values, page text, labels, placeholders, or clipboard contents.</li>
-                  <li>Routes are normalized. Query strings and hashes are removed.</li>
+                  <li>Query strings and hashes are removed. Review path labels before use.</li>
                   <li>Password and hidden fields are ignored. Unknown event fields are rejected.</li>
                 </ul>
               </section>
@@ -365,12 +357,12 @@ const cal = calibrate({
           </div>
         </section>
 
-        <section class="slide slide--credits slide--unified" data-slide="23" aria-label="Claim the DevRelCon Render credit code" hidden>
+        <section class="slide slide--credits slide--unified" data-slide="23" aria-label="Request the DevRelCon Render credit code" hidden>
           <div class="story-surface credit-surface">
             <div class="credit-copy">
               <p class="eyebrow">OPTIONAL WORKSHOP RESOURCE</p>
-              <h1>Claim your<br>Render credit code.</h1>
-              <p class="credit-dek">The portal gives you a promotional credit code. It does not connect or deploy a repository.</p>
+              <h1>Request your<br>Render credit code.</h1>
+              <p class="credit-dek">If a code is available, the portal assigns it for redemption in Render Billing.</p>
               <ol class="credit-steps">
                 <li><span>1</span>Scan the QR code.</li>
                 <li><span>2</span>Continue with GitHub.</li>
