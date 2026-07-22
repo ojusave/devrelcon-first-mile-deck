@@ -4,16 +4,16 @@ const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 
 const baseUrl = process.env.DECK_URL || "http://127.0.0.1:4173";
-const slideIds = Array.from({ length: 26 }, (_, index) => index + 1);
+const slideIds = Array.from({ length: 25 }, (_, index) => index + 1);
 const viewports = [
   { name: "projector", width: 1920, height: 1080 },
   { name: "laptop", width: 1280, height: 720 },
 ];
 const unifiedPalette = new Map([
   [14, "rgb(20, 184, 241)"], [20, "rgb(20, 184, 241)"], [21, "rgb(20, 184, 241)"],
-  [12, "rgb(112, 71, 235)"], [19, "rgb(112, 71, 235)"], [24, "rgb(112, 71, 235)"], [26, "rgb(112, 71, 235)"],
-  [13, "rgb(255, 212, 77)"], [16, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [25, "rgb(255, 212, 77)"],
-  [15, "rgb(255, 138, 102)"], [17, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"], [23, "rgb(255, 138, 102)"],
+  [12, "rgb(112, 71, 235)"], [19, "rgb(112, 71, 235)"], [23, "rgb(112, 71, 235)"], [25, "rgb(112, 71, 235)"],
+  [13, "rgb(255, 212, 77)"], [16, "rgb(255, 212, 77)"], [18, "rgb(255, 212, 77)"], [24, "rgb(255, 212, 77)"],
+  [15, "rgb(255, 138, 102)"], [17, "rgb(255, 138, 102)"], [22, "rgb(255, 138, 102)"],
 ]);
 const outputDir = mkdtempSync(join(tmpdir(), "devrelcon-deck-"));
 
@@ -145,7 +145,7 @@ function assert(condition, message) {
         assert(calibrateQrState.captionFits, `${viewport.name}: Calibrate QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="firstmile"]').textContent() === "github.com/ojusave/usecalibrate", `${viewport.name}: Calibrate QR caption is incorrect`);
       }
-      if (slideId === 24) {
+      if (slideId === 23) {
         const creditQr = page.locator('[data-qr-frame="credits"] canvas');
         await creditQr.waitFor();
         const creditQrState = await creditQr.evaluate((canvas) => {
@@ -171,7 +171,7 @@ function assert(condition, message) {
         assert(creditQrState.captionFits, `${viewport.name}: credit QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="credits"]').textContent() === "credits-portal-mmdm.onrender.com/claim/devrelcon", `${viewport.name}: credit QR caption is incorrect`);
       }
-      if (slideId === 25) {
+      if (slideId === 24) {
         const contactQr = page.locator('[data-qr-frame="contact"] canvas');
         await contactQr.waitFor();
         const contactQrState = await contactQr.evaluate((canvas) => {
@@ -196,7 +196,7 @@ function assert(condition, message) {
         assert(await page.locator('[data-qr-caption="contact"]').textContent() === "x.com/ojusave", `${viewport.name}: contact QR caption is incorrect`);
 
       }
-      if (slideId === 26) {
+      if (slideId === 25) {
         const careersQr = page.locator('[data-qr-frame="careers"] canvas');
         await careersQr.waitFor();
         const careersQrState = await careersQr.evaluate((canvas) => {
@@ -336,7 +336,7 @@ function assert(condition, message) {
     await page.keyboard.press("b");
     assert(!(await page.locator("#blackout").isVisible()), `${viewport.name}: B did not hide blackout`);
     await page.keyboard.press("End");
-    assert((await page.url()).endsWith("#26"), `${viewport.name}: End did not reach slide 26`);
+    assert((await page.url()).endsWith("#25"), `${viewport.name}: End did not reach slide 25`);
     await page.keyboard.press("Home");
     assert((await page.url()).endsWith("#1"), `${viewport.name}: Home did not reach slide 1`);
     await page.mouse.click(viewport.width * 0.8, viewport.height / 2);
@@ -414,7 +414,7 @@ function assert(condition, message) {
         return getComputedStyle(field).overflowY === "auto";
       }));
       assert(noteFieldsAreUsable, `${viewport.name} speaker notes slide ${slideId}: overflowing note field is not independently scrollable`);
-      if ([1, 8, 15, 20, 21, 22, 25, 26].includes(slideId)) {
+      if ([1, 8, 15, 20, 21, 22, 24, 25].includes(slideId)) {
         await visualNotesPage.screenshot({ path: join(outputDir, `${viewport.name}-speaker-notes-${String(slideId).padStart(2, "0")}.png`) });
       }
     }
@@ -457,6 +457,18 @@ function assert(condition, message) {
     assert(await notesPage.getByLabel(label).inputValue() === defaultNotes[label], `speaker notes: restored ${label.toLowerCase()} default did not survive reload`);
   }
 
+  const removalMigrationNote = {
+    purpose: "Saved purpose for the intended-user investigation before slide 22 was removed.",
+    script: "Saved investigation script that must move with its slide.\n\n[Advance.]",
+  };
+  await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v8");
+    localStorage.setItem("devrelcon.presenter.notes.v7", JSON.stringify({ 23: note }));
+  }, removalMigrationNote);
+  await notesPage.goto(`${baseUrl}/speaker-notes.html?removal-migration-check=1#22`, { waitUntil: "networkidle" });
+  assert(await notesPage.getByLabel("Purpose").inputValue() === removalMigrationNote.purpose, "speaker notes: investigation purpose did not move from slide 23 to slide 22");
+  assert(await notesPage.getByLabel("Full script").inputValue() === removalMigrationNote.script, "speaker notes: investigation script did not move from slide 23 to slide 22");
+
   const previousShapeNote = {
     purpose: "Saved purpose from the previous field shape.",
     say: "Saved full delivery that must migrate.",
@@ -465,6 +477,7 @@ function assert(condition, message) {
     fallback: "Saved fallback.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v8");
     localStorage.removeItem("devrelcon.presenter.notes.v7");
     localStorage.removeItem("devrelcon.presenter.notes.v6");
     localStorage.setItem("devrelcon.presenter.notes.v5", JSON.stringify({ 14: note }));
@@ -481,14 +494,15 @@ function assert(condition, message) {
     transition: "Saved closing transition.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v8");
     localStorage.removeItem("devrelcon.presenter.notes.v7");
     localStorage.removeItem("devrelcon.presenter.notes.v6");
     localStorage.removeItem("devrelcon.presenter.notes.v5");
     localStorage.setItem("devrelcon.presenter.notes.v4", JSON.stringify({ 25: note }));
   }, previousNote);
-  await notesPage.goto(`${baseUrl}/speaker-notes.html?previous-migration-check=1#25`, { waitUntil: "networkidle" });
-  assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not remain on slide 25");
-  assert(await notesPage.getByLabel("Full script").inputValue() === `${previousNote.say}\n\n${previousNote.transition}`, "speaker notes: previous closing script did not remain on slide 25");
+  await notesPage.goto(`${baseUrl}/speaker-notes.html?previous-migration-check=1#24`, { waitUntil: "networkidle" });
+  assert(await notesPage.getByLabel("Purpose").inputValue() === previousNote.purpose, "speaker notes: previous closing purpose did not move to slide 24");
+  assert(await notesPage.getByLabel("Full script").inputValue() === `${previousNote.say}\n\n${previousNote.transition}`, "speaker notes: previous closing script did not move to slide 24");
 
   const legacyNote = {
     purpose: "Legacy purpose for the former slide 21.",
@@ -496,6 +510,7 @@ function assert(condition, message) {
     transition: "Legacy transition into the exercise.",
   };
   await notesPage.evaluate((note) => {
+    localStorage.removeItem("devrelcon.presenter.notes.v8");
     localStorage.removeItem("devrelcon.presenter.notes.v7");
     localStorage.removeItem("devrelcon.presenter.notes.v6");
     localStorage.removeItem("devrelcon.presenter.notes.v5");
@@ -514,6 +529,8 @@ function assert(condition, message) {
     localStorage.removeItem("devrelcon.presenter.notes.v4");
     localStorage.removeItem("devrelcon.presenter.notes.v5");
     localStorage.removeItem("devrelcon.presenter.notes.v6");
+    localStorage.removeItem("devrelcon.presenter.notes.v7");
+    localStorage.removeItem("devrelcon.presenter.notes.v8");
   });
   await notesContext.close();
 
