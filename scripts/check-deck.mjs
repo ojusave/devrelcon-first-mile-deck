@@ -92,7 +92,6 @@ for (const requiredText of [
   "No reset, undo, rollback, or clean restart",
   "I built Atlas for peers improving developer platforms",
   "Search 224 documented journeys",
-  "Atlas maps documentation. It does not diagnose developer behavior",
   "peer cohort",
   "Stage navigation skips this slide until the event results URL is added",
   "Atlas maps the route. Calibrate observes positions in yours",
@@ -103,14 +102,11 @@ for (const requiredText of [
   "PRODUCTION EVALUATION",
   "DISPOSABLE REPLICA",
   "Run ten intended users through one route",
-  "Ten people reveal patterns and useful questions",
   "Request the DevRelCon Render credit code",
-  "If a code is available, the portal assigns it",
   "Continue with GitHub",
   "redeem it from Render Billing",
   "Questions or contributions",
   "Render is hiring",
-  "This is my referral link",
 ]) {
   const corpus = Object.values(files).join("\n");
   requireCondition(corpus.includes(requiredText), `Missing required text: ${requiredText}`);

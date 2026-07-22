@@ -2963,7 +2963,7 @@ body {
 }
 
 .hypothesis-surface {
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
 }
 
 .hypothesis-layout {
@@ -3034,7 +3034,7 @@ body {
 }
 
 .example-surface {
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
 }
 
 .example-grid {
@@ -3305,9 +3305,12 @@ body {
   line-height: 1.3;
 }
 
-.implementation-surface,
-.field-study-surface {
+.implementation-surface {
   grid-template-rows: auto 1fr auto;
+}
+
+.field-study-surface {
+  grid-template-rows: auto 1fr;
 }
 
 .implementation-grid {
@@ -3358,7 +3361,7 @@ body {
 
 .field-study-steps li {
   display: grid;
-  align-content: start;
+  align-content: center;
   gap: 16px;
   padding: 26px 24px;
   font-family: var(--font-mono);
