@@ -124,32 +124,29 @@ By the time Odysseus finally reached Ithaca, the route had changed the outcome c
     sources: "Homer, Odyssey Book 10: https://www.theoi.com/Text/HomerOdyssey10.html\nDylan dry-run feedback supplied by Ojus",
   },
   6: {
-    purpose: "Close the myth with a truthful statement about the route's cost, without inventing a conversion denominator.",
+    purpose: "Close the myth by contrasting the scale of the starting group with the single person who reached the destination.",
     script: `[Advance.]
 
-Odysseus left Troy with 12 ships.
+Twelve ships. Roughly 600 people.
 
-Homer does not give us a clean starting headcount, so I am not calculating Bronze Age conversion. Twelve ships is enough to understand the scale.
+Ten years later, one person from that crew reached Ithaca: Odysseus.
 
 [Advance.]
 
-He reached Ithaca without his crew. The Phaeacians carried him home while he slept. Athena covered the island in mist and then disguised him as an old beggar.
+And he arrived as a beggar.
 
-He finally reached home and immediately entered an identity-verification flow.
+[Pause.]
 
-[Pause for laugh.]
+Technically, the journey was completed.
 
-The arrival counts as completion. It does not establish that the route was good.
+But if roughly 600 people start your route and one person reaches the destination, completion is not the story.
 
-That is the pattern I am borrowing: a destination can remain clear while the route repeatedly interrupts or reverses progress.
+The route is.`,
 
-[Advance]
-
-Developers also arrive with a destination, and that destination is almost never your onboarding flow.`,
-    roomCue: "Let the fleet reveal register before advancing. Pause after identity verification. Keep the evidence qualification short and conversational.",
+    roomCue: "Let the starting scale register before revealing the single arrival. Pause after 'beggar' and again before 'The route is.'",
     timing: "1 minute 10 seconds.",
-    fallback: "If time is tight, say: 'Twelve ships left. Odysseus reached Ithaca without his crew. Completion alone does not make a route good.'",
-    evidenceBoundary: "Do not use 600 as a Homeric denominator. Athena deliberately disguised Odysseus, so explain the unrecognized state rather than treating it as spontaneous.",
+    fallback: "If time is tight, say: 'Twelve ships and roughly 600 people started. Only Odysseus reached Ithaca, as a beggar. Completion is not the story. The route is.'",
+    evidenceBoundary: "Use roughly before 600. Homer gives 12 ships but not a clean 600-person denominator, so 600 is scale-setting tradition rather than an exact count.",
     sources: "Homer, Odyssey Books 9, 12, and 13\nPerseus Digital Library, Odyssey Book 13",
   },
   7: {
