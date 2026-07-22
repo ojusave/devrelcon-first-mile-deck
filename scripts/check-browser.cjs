@@ -47,6 +47,30 @@ function assert(condition, message) {
         await page.getByText("RESULTS VIEW IS NOT CONNECTED").waitFor();
         await page.getByText("Stage navigation skips this slide until the event results URL is added").waitFor();
       }
+      if (slideId === 8) {
+        const fakegptQr = page.locator('[data-qr-frame="fakegpt"] canvas');
+        await fakegptQr.waitFor();
+        const fakegptQrState = await fakegptQr.evaluate((canvas) => {
+          const frame = canvas.closest('[data-qr-frame="fakegpt"]');
+          const caption = document.querySelector('[data-qr-caption="fakegpt"]');
+          const canvasRect = canvas.getBoundingClientRect();
+          const frameRect = frame.getBoundingClientRect();
+          return {
+            label: canvas.getAttribute("aria-label"),
+            size: [canvas.width, canvas.height],
+            contained: canvasRect.left >= frameRect.left
+              && canvasRect.top >= frameRect.top
+              && canvasRect.right <= frameRect.right
+              && canvasRect.bottom <= frameRect.bottom,
+            captionFits: caption.scrollWidth <= caption.clientWidth && caption.scrollHeight <= caption.clientHeight,
+          };
+        });
+        assert(fakegptQrState.label === "QR code for CONFIG.fakegptUrl", `${viewport.name}: FakeGPT QR is not labeled`);
+        assert(fakegptQrState.size.join("x") === "512x512", `${viewport.name}: FakeGPT QR canvas is not 512px square`);
+        assert(fakegptQrState.contained, `${viewport.name}: FakeGPT QR canvas is clipped by its frame`);
+        assert(fakegptQrState.captionFits, `${viewport.name}: FakeGPT QR caption is clipped or wrapped`);
+        assert(await page.locator('[data-qr-caption="fakegpt"]').textContent() === "fakesaaspi.onrender.com/fakegpt", `${viewport.name}: FakeGPT QR caption is incorrect`);
+      }
       if (slideId === 23) {
         const creditQr = page.locator('[data-qr-frame="credits"] canvas');
         await creditQr.waitFor();
@@ -358,7 +382,7 @@ function assert(condition, message) {
 
   const requestContext = await request.newContext();
   for (const url of [
-    "https://fakesaaspi.onrender.com",
+    "https://fakesaaspi.onrender.com/fakegpt",
     "https://fakesaaspi.onrender.com/present",
     "https://github.com/ojusave/usecalibrate",
     "https://github.com/ojusave/fakesaaspi",

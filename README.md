@@ -49,7 +49,7 @@ The current collector owns its live aggregate in one process. Postgres can provi
 ## Open and use the workshop
 
 - [Live workshop deck](https://devrelcon.onrender.com/)
-- [FakeSaaSPI exercise](https://fakesaaspi.onrender.com/)
+- [FakeGPT workshop exercise](https://fakesaaspi.onrender.com/fakegpt)
 - [First-Mile Atlas](https://devrelcon-research.onrender.com/)
 - [Calibrate instrumentation project](https://github.com/ojusave/usecalibrate)
 - [Claim your Render credit code](https://credits-portal-mmdm.onrender.com/claim/devrelcon)
