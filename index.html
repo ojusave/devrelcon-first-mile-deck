@@ -97,7 +97,6 @@
 
         <section class="slide slide--exercise" data-slide="8" aria-label="Try the onboarding route" hidden>
           <div class="slide-heading">
-            <p class="eyebrow">8 MINUTES</p>
             <h1>Try to reach the first usable result.</h1>
           </div>
           <p class="exercise-route"><strong>WORKSHOP EXERCISE</strong> The QR opens FakeGPT. Give it one small thing you want to build, then follow the prompts.</p>
@@ -158,18 +157,19 @@
           </div>
         </section>
 
-        <section class="slide slide--gates slide--unified" data-slide="13" aria-label="Examples of documented gates" hidden>
+        <section class="slide slide--gates slide--unified" data-slide="13" aria-label="Documented gate types across the frozen Atlas snapshot" hidden>
           <div class="story-surface">
             <div class="surface-heading">
-              <p class="source-label">FOUR EXAMPLES FROM 205 ROUTES</p>
-              <h1>The setup work takes different forms.</h1>
+              <p class="source-label">ATLAS RELATION · 205 DOCUMENTED ROUTES</p>
+              <h1><span data-stat="gateCombination"></span> routes combined at least three documented gate types.</h1>
             </div>
             <div class="gate-grid">
-              <article><h2>Payments APIs</h2><p>Business email and sandbox account</p></article>
-              <article><h2>Cloud infrastructure</h2><p>SMS verification and payment method</p></article>
-              <article><h2>Data platforms</h2><p>Token scopes and resource selection</p></article>
-              <article><h2>Real-time messaging</h2><p>Capability choice and production credential warning</p></article>
+              <article><h2 data-stat="gateChoice"></h2><p>routes included a choice gate</p></article>
+              <article><h2 data-stat="gateAccount"></h2><p>routes included an account gate</p></article>
+              <article><h2 data-stat="gateCredential"></h2><p>routes included a credential gate</p></article>
+              <article><h2 data-stat="gateBilling"></h2><p>routes included a billing gate</p></article>
             </div>
+            <p class="method-boundary">Gate types describe documented requirements or transitions, not observed drop-off.</p>
           </div>
         </section>
 

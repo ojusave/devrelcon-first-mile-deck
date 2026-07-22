@@ -74,6 +74,30 @@ function assert(condition, message) {
         assert(fakegptQrState.captionFits, `${viewport.name}: FakeGPT QR caption is clipped or wrapped`);
         assert(await page.locator('[data-qr-caption="fakegpt"]').textContent() === "fakesaaspi.onrender.com/fakegpt", `${viewport.name}: FakeGPT QR caption is incorrect`);
       }
+      if (slideId === 18) {
+        const comparisonQr = page.locator('[data-qr-frame="comparison"] canvas');
+        await comparisonQr.waitFor();
+        const comparisonQrState = await comparisonQr.evaluate((canvas) => {
+          const frame = canvas.closest('[data-qr-frame="comparison"]');
+          const caption = document.querySelector('[data-qr-caption="comparison"]');
+          const canvasRect = canvas.getBoundingClientRect();
+          const frameRect = frame.getBoundingClientRect();
+          return {
+            label: canvas.getAttribute("aria-label"),
+            size: [canvas.width, canvas.height],
+            contained: canvasRect.left >= frameRect.left
+              && canvasRect.top >= frameRect.top
+              && canvasRect.right <= frameRect.right
+              && canvasRect.bottom <= frameRect.bottom,
+            captionFits: caption.scrollWidth <= caption.clientWidth && caption.scrollHeight <= caption.clientHeight,
+          };
+        });
+        assert(comparisonQrState.label === "QR code for CONFIG.takeaways.comparison", `${viewport.name}: Atlas QR is not labeled`);
+        assert(comparisonQrState.size.join("x") === "336x336", `${viewport.name}: Atlas QR canvas is not 336px square`);
+        assert(comparisonQrState.contained, `${viewport.name}: Atlas QR canvas is clipped by its frame`);
+        assert(comparisonQrState.captionFits, `${viewport.name}: Atlas QR caption is clipped or wrapped`);
+        assert(await page.locator('[data-qr-caption="comparison"]').textContent() === "developer-journey-atlas.onrender.com", `${viewport.name}: Atlas QR caption is incorrect`);
+      }
       if (slideId === 23) {
         const creditQr = page.locator('[data-qr-frame="credits"] canvas');
         await creditQr.waitFor();

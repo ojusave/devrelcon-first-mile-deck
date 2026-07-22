@@ -60,7 +60,6 @@ requireCondition(spokenWordCount >= 3900 && spokenWordCount <= 4500, `Speaker sc
 requireCondition(Object.values(parsedNotes).every((note) => note.script.includes("[")), "Every slide script needs at least one stage direction");
 
 for (const requiredText of [
-  "8 MINUTES",
   "It does not tell us why",
   "151 / 205",
   "records mention the workshop policy",
@@ -68,10 +67,13 @@ for (const requiredText of [
   "83 / 205",
   "122 / 205",
   "TRACKER SCOPE",
-  "Payments APIs",
-  "Cloud infrastructure",
-  "Data platforms",
-  "Real-time messaging",
+  "196 / 205",
+  "routes combined at least three documented gate types",
+  "routes included a choice gate",
+  "routes included an account gate",
+  "routes included a credential gate",
+  "routes included a billing gate",
+  "Gate types describe documented requirements or transitions, not observed drop-off",
   "ROUTE-SELECTION METHOD · 205 DOCUMENTED ROUTES",
   "SUCCESS SIGNALS · 205 DOCUMENTED ROUTES",
   "ONE STOPPING POINT, THREE QUESTIONS",

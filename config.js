@@ -25,6 +25,11 @@ const CONFIG = {
 
   // Counts reproduced from the frozen 205-record workshop snapshot on July 21, 2026.
   stats: {
+    gateCombination: "196 / 205",
+    gateChoice: "162",
+    gateAccount: "129",
+    gateCredential: "115",
+    gateBilling: "42",
     selectionPrimary: "151 / 205",
     selectionPolicy: "151",
     selectionDocs: "54",

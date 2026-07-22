@@ -340,16 +340,20 @@ This route was exaggerated. The ingredients were not invented from nowhere. I pu
     sources: "FakeSaaSPI event validation: packages/kit/src/event-validation.ts\nFakeSaaSPI tracker delivery: packages/kit/src/tracker.ts\nFakeSaaSPI deployment configuration: render.yaml",
   },
   13: {
-    purpose: "Connect the simulation to concrete setup conditions found in official documentation without implying frequency, causation, or ranking.",
-    script: `The FakeSaaSPI route is exaggerated, but its ingredients are recognizable.
+    purpose: "Connect the exaggerated workshop route to a reproducible relationship across the frozen Atlas snapshot without implying user behavior or causation.",
+    script: `The route you just tried exaggerated the sequence. It did not invent the categories.
 
-These four cards are examples from official-document records in the frozen 205-platform workshop corpus. They are not the worst four platforms, the most common blockers, or four measured causes of drop-off.
+In the frozen 205-record Atlas snapshot, 196 routes contain at least three distinct documented gate types.
 
-In a payments route, the record includes a business email and sandbox account. In a cloud infrastructure route, it includes SMS verification and a payment method. In a data-platform route, the developer chooses token scopes and resources. In a real-time messaging route, the docs include a capability choice and a warning about production credentials.
+The categories overlap inside the same route. Choice appears in 162 records. Account appears in 129. Credential appears in 115. Billing appears in 42.
 
-Some of those conditions are necessary. A payment method can protect expensive infrastructure. Scopes can protect customer data. The question is not 'Can we delete every gate?' The question is 'Can the developer understand why this condition appears here, what progress it enables, and what happens if it fails?'
+That is the relationship I want you to notice. The first mile is often not one bad screen. A selected documented route can combine several different classes of requirement before the developer reaches the first result.
 
-FakeSaaSPI is a tribute album of onboarding conditions. It is not a cover of one company's route.
+Some of those requirements are necessary. Credentials protect access. Billing can protect expensive infrastructure. A choice can be real product capability, not accidental clutter.
+
+This count does not say that 196 developers struggled. It does not say these gates caused abandonment. It says the documentation records several kinds of setup condition on the same selected route.
+
+FakeSaaSPI compressed those categories into one absurd trip so we could feel the coordination problem.
 
 [Pause.]
 
@@ -357,12 +361,12 @@ Also, nobody wants my legal strategy to be 'but the card was fictional.'
 
 [Advance]
 
-To compare records honestly, I need to define what one record actually represents.`,
-    roomCue: "Ask which category feels closest to one attendee's platform only if time permits. Do not invite a debate about whether a specific company is good or bad.",
-    timing: "1 minute 30 seconds.",
-    fallback: "If a named example is challenged, say the source record needs human review and keep the stage claim at the condition level. Offer the record after the session.",
-    evidenceBoundary: "These are documented setup examples. They do not measure prevalence, completion, frustration, product quality, or cause. Their shortest-route audits still need human judgment.",
-    sources: "Frozen platform corpus records for Airwallex, Akamai Cloud, Airtable, and Ably\nDeveloper Journey Atlas research method",
+Before I show another number, I need to define what one Atlas record represents.`,
+    roomCue: "Let the 196 of 205 relationship land before reading the four category counts. Do not turn a gate category into criticism of any named platform.",
+    timing: "1 minute 35 seconds.",
+    fallback: "If time is short, state only that 196 of 205 records contain at least three distinct documented gate types, then give the evidence boundary and advance.",
+    evidenceBoundary: "Gate types are researcher-coded documented requirements or transitions. Counts can overlap within a route. They do not measure prevalence among users, completion, frustration, product quality, drop-off, or cause.",
+    sources: "Frozen Atlas snapshot: platform-first-mile-kb commit dd23053647944efefc1bec68d1897a369b495055\nDerived from distinct frictionGates.type values in 205 platform_journey records\nDeveloper Journey Atlas research method",
   },
   14: {
     purpose: "Define the frozen research unit before any aggregate counts appear.",

@@ -18,9 +18,10 @@ The workshop does not grade onboarding by how short the quickstart looks. It ask
 
 ## What the research can support
 
-1. **In 151 of 205 source records, the selection basis says workshop policy affected route selection or normalization.** This is a research-method disclosure, not evidence that 151 platforms lacked a default route.
-2. **Eighty-three of 205 records classify the terminal as an explicitly named first-success milestone.** The other 122 classify it as a demonstrated terminal state without that milestone being named.
-3. **A stopping point is not a diagnosis.** Permissions, billing, an error, time, or another condition can produce the same recorded position. One more observation or question is required.
+1. **One hundred ninety-six of 205 routes contain at least three distinct documented gate types.** Choice, account, credential, and billing categories can overlap inside the same route. These are documented requirements or transitions, not observed drop-off.
+2. **In 151 of 205 source records, the selection basis says workshop policy affected route selection or normalization.** This is a research-method disclosure, not evidence that 151 platforms lacked a default route.
+3. **Eighty-three of 205 records classify the terminal as an explicitly named first-success milestone.** The other 122 classify it as a demonstrated terminal state without that milestone being named.
+4. **A stopping point is not a diagnosis.** Permissions, billing, an error, time, or another condition can produce the same recorded position. One more observation or question is required.
 
 These numbers describe a frozen documentation snapshot. They are not conversion data, developer sentiment, product rankings, or evidence that one platform is better than another.
 
